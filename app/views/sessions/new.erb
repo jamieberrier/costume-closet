@@ -1,0 +1,10 @@
+<h1>Login Here</h1>
+
+<%= form_for :dance_studio do |f| %>
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br>
+  <%= f.label :password %>:
+  <%= f.password_field :password %><br>
+
+  <%= f.submit "Sign In"%>
+<% end %>
