@@ -1,1 +1,17 @@
-<h1>Sign Up Here</h1>
+<h1>Register for Costume Closet</h1>
+
+<%= form_for @dance_studio do |f| %>
+  <%= f.label :studio_name %>
+  <%= f.text_field :studio_name %>
+
+  <%= f.label :owner_name %>
+  <%= f.text_field :owner_name %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Register Dance Studio" %>
+<% end %>
