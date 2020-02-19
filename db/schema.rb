@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_184333) do
+ActiveRecord::Schema.define(version: 2020_02_19_184701) do
+
+  create_table "costumes", force: :cascade do |t|
+    t.text "top_description"
+    t.text "bottoms_description"
+    t.text "onepiece_description"
+    t.string "picture"
+    t.string "hair_accessory"
+    t.integer "dance_studio_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "dance_studios", force: :cascade do |t|
     t.string "studio_name"
