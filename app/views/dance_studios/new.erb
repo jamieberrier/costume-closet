@@ -1,15 +1,15 @@
 <body>
-  <section class="section">
-    <div class="container">
-      <h1 class='title'>Register for Costume Closet</h1>
+  <section class='section has-background-light'>
+    <div class='container'>
+      <h1 class='title has-text-primary'>Register for Costume Closet</h1>
 
       <%= form_for @dance_studio do |f| %>
         <div class='field'>
           <%= f.label :studio_name, class: 'label' %>
           <div class='control has-icons-left'>
             <%= f.text_field :studio_name, class:'input', placeholder: 'Enter Studio Name' %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-school"></i>
+            <span class='icon is-small is-left'>
+              <i class='fas fa-school'></i>
             </span>
           </div>
         </div>
@@ -17,8 +17,8 @@
           <%= f.label :owner_name, class: 'label' %>
           <div class='control has-icons-left'>
             <%= f.text_field :owner_name, class:'input', placeholder: 'Enter Studio Owner' %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
+            <span class='icon is-small is-left'>
+              <i class='fas fa-user'></i>
             </span>
           </div>
         </div>
@@ -26,8 +26,8 @@
          <%= f.label :email, class: 'label' %>
          <div class='control has-icons-left'>
             <%= f.text_field :email, class:'input', placeholder: 'Enter Email' %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+            <span class='icon is-small is-left'>
+              <i class='fas fa-envelope'></i>
             </span>
           </div>
         </div>
@@ -35,14 +35,14 @@
           <%= f.label :password, class: 'label' %>
           <div class='control has-icons-left'>
             <%= f.password_field :password, class:'input', placeholder: 'Enter Password' %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
+            <span class='icon is-small is-left'>
+              <i class='fas fa-lock'></i>
             </span>
           </div>
         </div>
         <div class='field'>
           <div class='control'>
-            <%= f.submit "Register Dance Studio", class: 'button' %>
+            <%= f.submit 'Register Dance Studio', class: 'button is-primary' %>
           </div>
         </div>
       <% end %>
