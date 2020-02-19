@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :costume_assignments
   resources :costumes
   resources :dancers
-  resources :dance_studios, only: [:edit, :show, :update, :destroy]
+  resources :dance_studios, only: [:index, :edit, :show, :update, :destroy]
 
   get '/register' => 'dance_studios#new'
   post '/register' => 'dance_studios#create'
