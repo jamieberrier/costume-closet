@@ -1,0 +1,2 @@
+class DanceStudio < ApplicationRecord
+end
