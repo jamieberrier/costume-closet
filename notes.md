@@ -5,20 +5,38 @@
   - costume
   - costume assignments
 
-2. generate sessions controller
+2. add associations
 
-3. add sessions helper methods
+3. generate sessions controller
+
+4. add sessions helper methods
   - helpers/sessions_helper
   - controllers/application_controller
 
-4. 
+5. add root route and home page view
 
-#TODO
-- 
+6. add log in/log out functionality
+  - routes
+  - controller actions
+  - views: sessions/new, dance_studios/show
+
+7. seeded db
+
+8. add registration functionality
+  - routes
+  - controller actions
+  - view: dance_studios/new
+
+# TODO
+- add registration view functioanlity
+
+
+
+
 
 # URLs
 ## SIGNUP
-GET /signup
+GET /register
     present signup form
 POST /users
     create user in db
