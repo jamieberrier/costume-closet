@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       # @dance_studio.authenticated(params[:dance_studio][:password])
       if authenticated
         session[:user_id] = @dance_studio.id
-        redirect_to dance_studio_path(@dance_studio.id)
+        redirect_to dance_studio_path(@dance_studio.id), success: 'Successfully logged in!'
       else
         redirect_to login_path, info: 'Invalid Password'
       end
@@ -25,6 +25,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.destroy
-    redirect_to root_path
+    redirect_to root_path, success: 'Successfully logged out!'
   end
 end
