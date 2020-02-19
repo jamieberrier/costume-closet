@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :costume_assignments
   resources :costumes
   resources :dancers
   resources :dance_studios

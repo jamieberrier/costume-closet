@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_184701) do
+ActiveRecord::Schema.define(version: 2020_02_19_191651) do
+
+  create_table "costume_assignments", force: :cascade do |t|
+    t.integer "dancer_id"
+    t.integer "costume_id"
+    t.string "costume_condition"
+    t.string "costume_size"
+    t.string "song_name"
+    t.string "dance_season"
+    t.string "genre"
+    t.string "shoe"
+    t.string "tight"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "costumes", force: :cascade do |t|
     t.text "top_description"
