@@ -6,7 +6,12 @@
   - costume assignments
 
 2. generate sessions controller
-3. 
+
+3. add sessions helper methods
+  - helpers/sessions_helper
+  - controllers/application_controller
+
+4. 
 
 #TODO
 - 
