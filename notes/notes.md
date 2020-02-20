@@ -19,6 +19,7 @@
   - routes
   - controller actions
   - views: sessions/new, dance_studios/show
+  - authentication/validation
 
 7. seeded db
 
@@ -26,11 +27,12 @@
   - routes
   - controller actions
   - view: dance_studios/new
+  - authentication/validation
+
+9. 
 
 # TODO
-- add registration view functioanlity
-
-
+- omniauth
 
 
 
