@@ -2,17 +2,21 @@ class DanceStudiosController < ApplicationController
   before_action :require_logged_in, only: [:show]
   
   def new
-    @dance_studio = DanceStudio.new
+    if logged_in?
+      redirect_to dance_studio_path(current_user), info: "Logged In"
+    else
+      @dance_studio = DanceStudio.new
+    end
   end
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
-    return redirect_to new_dance_studio_path unless @dance_studio.save
+    return redirect_to new_dance_studio_path, danger: "Signup failure: #{@dance_studio.errors.full_messages.to_sentence}" unless @dance_studio.save
 
     session[:user_id] = @dance_studio.id
 
-    redirect_to dance_studio_path(@dance_studio.id)
+    redirect_to dance_studio_path(@dance_studio.id), success: 'Successfully Registered!'
   end
 
   def show
@@ -21,6 +25,6 @@ class DanceStudiosController < ApplicationController
   private
 
   def dance_studio_params
-    params.require(:dance_studio).permit(:email, :password, :studio_name, :owner_name)
+    params.require(:dance_studio).permit(:studio_name, :owner_name, :email, :password, :password_confirmation)
   end
 end
