@@ -2,7 +2,7 @@
   <section class='section has-background-light'>
     <div class='container'>
       <h1 class='title has-text-primary'>Register for Costume Closet</h1>
-
+      <!-- studio name -->
       <%= form_for @dance_studio do |f| %>
         <div class='field'>
           <%= f.label :studio_name, class: 'label' %>
@@ -13,6 +13,7 @@
             </span>
           </div>
         </div>
+        <!-- owner name -->
         <div class='field'>
           <%= f.label :owner_name, class: 'label' %>
           <div class='control has-icons-left'>
@@ -22,6 +23,7 @@
             </span>
           </div>
         </div>
+        <!-- email -->
         <div class='field'>
          <%= f.label :email, class: 'label' %>
          <div class='control has-icons-left'>
@@ -31,6 +33,7 @@
             </span>
           </div>
         </div>
+        <!-- password -->
         <div class='field'>
           <%= f.label :password, class: 'label' %>
           <div class='control has-icons-left'>
@@ -40,6 +43,17 @@
             </span>
           </div>
         </div>
+        <!-- password confirmation -->
+         <div class='field'>
+          <%= f.label :password_confirmation, class: 'label' %>
+          <div class='control has-icons-left'>
+            <%= f.password_field :password_confirmation, class:'input', placeholder: 'Re-enter Password' %>
+            <span class='icon is-small is-left'>
+              <i class='fas fa-lock'></i>
+            </span>
+          </div>
+        </div>
+        <!-- submit button -->
         <div class='field'>
           <div class='control'>
             <%= f.submit 'Register Dance Studio', class: 'button is-primary' %>
