@@ -16,11 +16,11 @@
 
   <body>
     <!-- Navigation Bar -->
-    <div class="tile is-ancestor">
-      <div class="tile">
-        <div class="tile is-parent">
-          <article class="tile is-child notification is-primary">
-            <% if logged_in? %>
+    <% if logged_in? %>
+      <div class="tile is-ancestor">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-primary">
               <nav class="level is-mobile">
                 <div class="level-item has-text-centered">
                     <div>
@@ -48,11 +48,11 @@
                     </div>
                 </div>
               </nav>
-            <% end %>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <!-- Display validation messages -->
     <section class='section'>
       <div class='container'>
