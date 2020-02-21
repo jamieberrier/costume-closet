@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_191651) do
+ActiveRecord::Schema.define(version: 2020_02_21_220123) do
 
   create_table "costume_assignments", force: :cascade do |t|
     t.integer "dancer_id"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_02_19_191651) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "google_token"
+    t.string "google_refresh_token"
   end
 
   create_table "dancers", force: :cascade do |t|
