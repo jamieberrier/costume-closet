@@ -8,23 +8,25 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   # Example of Custom Route:
-  #   get "students/:id/activate", to: "students#activate", as: "activate_student"
+  #   get "students/:id/activate" => "students#activate", as: "activate_student"
 
   root 'application#home'
 
-  resources :costume_assignments
-  resources :costumes
-  resources :dancers
-  resources :dance_studios, only: [:create, :index, :edit, :show, :update, :destroy]
+  resources :dance_studios do
+    resources :costumes
+    resources :dancers
+    resources :costume_assignments
+  end
 
+  # Routes for signing up
   get '/register' => 'dance_studios#new'
   get '/register/google' => 'dance_studios#googleAuth', as: 'google_register'
-  
+  # Routes for logging in
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
   # Routes for Google authentication
-  get "auth/:provider/callback", to: "sessions#googleAuth"
-  get "auth/failure", to: redirect('application#home')
+  get 'auth/:provider/callback', to: 'sessions#googleAuth'
+  get 'auth/failure', to: redirect('application#home')
 end
