@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         redirect_to login_path, danger: 'Incorrect Email'
       else # not be able to log in if password is incorrect
         if authenticated
-          log_in(@dance_studio)
+          log_in(@dance_studio, 'Successfully Logged In!')
         else
           redirect_to login_path, danger: 'Invalid Password'
         end
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
     @dance_studio = DanceStudio.from_omniauth(access_token)
     if @dance_studio.id
       @dance_studio.save
-      log_in(@dance_studio)
+      log_in(@dance_studio, 'Successfully Logged In!')
     else
       session[:dance_studio] = @dance_studio
       redirect_to google_register_path
