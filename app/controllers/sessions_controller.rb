@@ -16,7 +16,6 @@ class SessionsController < ApplicationController
       else # not be able to log in if password is incorrect
         if authenticated
           log_in(@dance_studio)
-          #redirect_to dance_studio_path(@dance_studio), success: 'Successfully logged in!'
         else
           redirect_to login_path, danger: 'Invalid Password'
         end
@@ -26,23 +25,15 @@ class SessionsController < ApplicationController
 
   def googleAuth
     # Get access tokens from the google server
+    # Access_token is used to authenticate request made from the rails application to the google server
     access_token = request.env["omniauth.auth"]
     @dance_studio = DanceStudio.from_omniauth(access_token)
-    # Access_token is used to authenticate request made from the rails application to the google server
-    # Only save the token if you are planning to use Google APIs (Calendar, Spreadsheet.. etc)
-    @dance_studio.google_token = access_token.credentials.token
-    # Refresh_token to request new access_token
-    # Note: Refresh_token is only sent once during the first request
-    refresh_token = access_token.credentials.refresh_token
-    @dance_studio.google_refresh_token = refresh_token if refresh_token.present?
-    # dance_studio.save
-    if @dance_studio.id.nil?
-      session[:dance_studio] = @dance_studio
-      redirect_to google_register_path
-    else
+    if @dance_studio.id
       @dance_studio.save
       log_in(@dance_studio)
-      #redirect_to dance_studio_path(@dance_studio), success: 'Successfully logged in!'
+    else
+      session[:dance_studio] = @dance_studio
+      redirect_to google_register_path
     end
   end
 
