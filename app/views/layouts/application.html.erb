@@ -17,41 +17,41 @@
   <body>
     <!-- Navigation Bar -->
     <% if logged_in? %>
-      <div class="tile is-ancestor">
-        <div class="tile">
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-primary">
-              <nav class="level is-mobile">
-                <div class="level-item has-text-centered">
-                    <div>
-                      <%= link_to "My Costume Closet", dance_studio_path(current_user), class: 'link is-info' %>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                      <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                  <div class="field has-addons">
-                    <p class="control">
-                      <input class="input" type="text" placeholder="Find a costume">
-                    </p>
-                    <p class="control">
-                      <button class="button">Search</button>
-                    </p>
-                  </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                      <%= link_to "Log Out", logout_path, class: 'link is-info', method: :post %>
-                    </div>
-                </div>
-              </nav>
-            </article>
+      <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="navbar-item has-icons">
+              <span class="fas fa-door-closed"></span>
+                <%= link_to "My Closet", dance_studio_path(current_user) %>
+            </div>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="nb">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="nb" class="navbar-menu">
+          <div class="navbar-start">
+            <div class="navbar-item">
+              <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
+            </div>
+            <div class="navbar-item">
+              <div class="field has-addons">
+                <p class="control">
+                  <input class="input" type="text" placeholder="Find a costume">
+                </p>
+                <p class="control">
+                  <button class="button">Search</button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <%= link_to "Log Out", logout_path, class: 'link is-info', method: :post %>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
     <% end %>
     <!-- Display validation messages -->
     <section class='section'>
