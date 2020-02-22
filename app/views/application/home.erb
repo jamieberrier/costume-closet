@@ -1,6 +1,8 @@
 <h1 class='title has-text-primary'>Costume Closet</h1>
 <h2 class='subtitle'>Welcome to Costume Closet!</h2>
 <div class="buttons">
-  <%= link_to 'Login', login_path, class: 'button is-success', method: :get %>
-  <%= link_to 'Register', register_path, class: 'button is-info', method: :get %>
+  <%= link_to 'Login with email', login_path, class: 'button is-success', method: :get %>
+  <%= link_to 'Login with Google', "/auth/google_oauth2", class: 'button is-success', method: :get %>
+  <%= link_to 'Register with email', register_path, class: 'button is-info', method: :get %>
+  <%= link_to 'Register with Google', "/auth/google_oauth2", class: 'button is-info', method: :get %>
 </div>
