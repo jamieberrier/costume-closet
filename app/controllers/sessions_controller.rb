@@ -41,9 +41,4 @@ class SessionsController < ApplicationController
     session.destroy
     redirect_to root_path, success: 'Successfully logged out!'
   end
-
-  def log_in(dance_studio)
-    session[:user_id] = dance_studio.id
-    redirect_to dance_studio_path(dance_studio), success: 'Successfully logged in!'
-  end
 end
