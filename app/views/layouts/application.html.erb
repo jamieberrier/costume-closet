@@ -24,12 +24,12 @@
               <nav class="level is-mobile">
                 <div class="level-item has-text-centered">
                     <div>
-                      <!--%= link_to "My Costume Closet", dance_studio_path(current_user.id), class: 'link is-info' %-->
+                      <%= link_to "My Costume Closet", dance_studio_path(current_user), class: 'link is-info' %>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
-                      <%= link_to "New Costume", new_costume_path, class: 'link is-info' %>
+                      <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
