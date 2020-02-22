@@ -9,6 +9,10 @@ class DanceStudiosController < ApplicationController
     end
   end
 
+  def googleAuth
+    @dance_studio = DanceStudio.new(session[:dance_studio])
+  end
+
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
