@@ -17,10 +17,11 @@ class DanceStudiosController < ApplicationController
     @dance_studio = DanceStudio.new(dance_studio_params)
 
     return redirect_to new_dance_studio_path, danger: "Signup failure: #{@dance_studio.errors.full_messages.to_sentence}" unless @dance_studio.save
+  
+    log_in(@dance_studio, 'Successfully Registered!')
+    #session[:user_id] = @dance_studio.id
 
-    session[:user_id] = @dance_studio.id
-
-    redirect_to dance_studio_path(@dance_studio.id), success: 'Successfully Registered!'
+    #redirect_to dance_studio_path(@dance_studio.id), success: 'Successfully Registered!'
   end
 
   def show
