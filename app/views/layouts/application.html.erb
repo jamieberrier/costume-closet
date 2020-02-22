@@ -55,12 +55,16 @@
     <% end %>
     <!-- Display validation messages -->
     <section class='section'>
-      <div class='container'>
+      <div class='container is-fluid'>
         <% flash.each do |name, msg| %>
           <div class='notification is-<%= name %>'>
             <%= msg %>
           </div>
         <% end %>
+      </div>
+    </section>
+    <section class='section'>
+      <div class='container is-fluid'>
         <%= yield %>
       </div>
     </section>
