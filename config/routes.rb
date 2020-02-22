@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :dance_studios, only: [:create, :index, :edit, :show, :update, :destroy]
 
   get '/register' => 'dance_studios#new'
+  get '/register/google' => 'dance_studios#googleAuth', as: 'google_register'
   
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
