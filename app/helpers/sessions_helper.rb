@@ -13,8 +13,8 @@ module SessionsHelper
     return redirect_to root_path unless logged_in?
   end
   # logs in user
-  def log_in(dance_studio)
+  def log_in(dance_studio, message)
     session[:user_id] = dance_studio.id
-    redirect_to dance_studio_path(dance_studio), success: 'You are logged in!'
+    redirect_to dance_studio_path(dance_studio), success: message
   end
 end
