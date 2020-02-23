@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   root 'application#home'
 
   resources :dance_studios do
-    resources :costumes
-    resources :dancers
+    resources :costumes, only: [:index, :show, :new, :edit]
+    resources :dancers, only: [:index, :show, :new, :edit]
     resources :costume_assignments
   end
+
+  resources :costumes
+  resources :dancers
 
   # Routes for signing up
   get '/register' => 'dance_studios#new'
