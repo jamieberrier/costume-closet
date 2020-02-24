@@ -33,6 +33,9 @@
             <div class="navbar-item">
               <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
             </div>
+            <div class="navbar-item">
+              <%= link_to "My Costumes", dance_studio_costumes_path(current_user), class: 'link is-info' %>
+            </div>
             <!--div class="navbar-item">
               <div class="field has-addons">
                 <p class="control">
