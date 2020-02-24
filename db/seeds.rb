@@ -11,8 +11,8 @@ Costume.destroy_all
 CostumeAssignment.destroy_all
 
 # DANCE STUDIOS
-toc = DanceStudio.create(studio_name: 'Touch of Class', owner_name: 'Linda Bush', email: 'owner@toc.com', password: 'test')
-ci = DanceStudio.create(studio_name: 'Classic Image', owner_name: 'Devin Moss', email: 'owner@ci.com', password: 'test')
+toc = DanceStudio.create(studio_name: 'Touch of Class', owner_name: 'Linda Bush', email: 'owner@toc.com', password: 'test', password_confirmation: 'test')
+ci = DanceStudio.create(studio_name: 'Classic Image', owner_name: 'Devin Moss', email: 'owner@ci.com', password: 'test', password_confirmation: 'test')
 
 # DANCERS
 ## toc
@@ -31,14 +31,14 @@ tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', birthdate: '09/05/2
 
 # COSTUMES
 ## toc
-blue = Costume.create(top_description: 'blue sequin puffy sleeved top', bottoms_description: 'blue sequin poofy skirt', picture: 'image1_url', hair_accessory: 'blue tear drop hat', dance_studio_id: toc.id)
-red = Costume.create(top_description: 'black sequin top, red sequin jacket', bottoms_description: 'black bussel shorts', picture: 'image2_url', hair_accessory: 'red sequin bow', dance_studio_id: toc.id)
-green = Costume.create(onepiece_description: 'sea foam green lace, one-shoulder, dress', picture: 'image3_url', hair_accessory: 'none', dance_studio_id: toc.id)
+blue = Costume.create(top_description: 'blue sequin puffy sleeved top', bottoms_description: 'blue sequin poofy skirt', picture: 'https://cdn1.discountdance.net/image/395x526/n7307c_1.jpg', hair_accessory: 'blue tear drop hat', dance_studio_id: toc.id)
+red = Costume.create(top_description: 'black sequin top, red sequin jacket', bottoms_description: 'black bussel shorts', picture: 'https://dqaecz4y0qq82.cloudfront.net/products/sq11469.jpg?preset=hero&404=y', hair_accessory: 'red sequin bow', dance_studio_id: toc.id)
+green = Costume.create(onepiece_description: 'sea foam green lace, one-shoulder, dress', picture: 'https://i.pinimg.com/originals/53/4c/ef/534cef292ac66ffdc410290707634bce.jpg', hair_accessory: 'none', dance_studio_id: toc.id)
 
 ## ci
-pink = Costume.create(top_description: 'pink sequin puffy sleeved top', bottoms_description: 'pink sequin poofy skirt', picture: 'image4_url', hair_accessory: 'pink tear drop hat', dance_studio_id: ci.id)
-white = Costume.create(top_description: 'black sequin top, white sequin jacket', bottoms_description: 'black bussel shorts', picture: 'image5_url', hair_accessory: 'white sequin bow', dance_studio_id: ci.id)
-yellow = Costume.create(onepiece_description: 'yellow green lace, one-shoulder, dress', picture: 'image6_url', hair_accessory: 'yellow bow', dance_studio_id: ci.id)
+pink = Costume.create(top_description: 'pink sequin puffy sleeved top', bottoms_description: 'pink sequin poofy skirt', picture: 'https://dqaecz4y0qq82.cloudfront.net/products/sq9601.jpg?preset=hero&404=y', hair_accessory: 'pink tear drop hat', dance_studio_id: ci.id)
+white = Costume.create(top_description: 'black sequin top, white sequin jacket', bottoms_description: 'black bussel shorts', picture: 'https://i.pinimg.com/originals/36/49/d8/3649d8e461a0a2f07f3bfb49b7f78494.jpg', hair_accessory: 'white sequin bow', dance_studio_id: ci.id)
+yellow = Costume.create(onepiece_description: 'yellow lace, one-shoulder, dress', picture: 'https://i.pinimg.com/originals/c8/13/78/c81378a8f16ad1aff716913a2167ebdb.jpg', hair_accessory: 'yellow bow', dance_studio_id: ci.id)
 
 # COSTUME ASSIGNMENTS
 ## toc
