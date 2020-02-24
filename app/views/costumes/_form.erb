@@ -1,39 +1,53 @@
-<%= form_for @costume do |f| %>
+<%= form_for [current_user, @costume] do |f| %>
   <%= f.hidden_field :dance_studio_id %>
   <!-- top description -->
-  <div class='field'>
-    <%= f.label :top_description, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :top_description, class:'input', placeholder: 'Enter description if costume has a top' %>
+  <div class='box'>
+    <h2 class='subtitle'>Two-Piece Costume</h2>
+    <div class='field'>
+      <%= f.label :top_description, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
+      </div>
     </div>
+    <!-- bottoms description -->
+    <div class='field'>
+      <%= f.label :bottoms_description, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
+      </div>
+    </div>
+    <p class='help is-danger'>Must fill out both for a two-piece costume</p>
   </div>
-  <!-- bottoms description -->
-  <div class='field'>
-    <%= f.label :bottoms_description, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description if costume has a bottoms' %>
+  <!-- onepiece description -->
+  <div class='box'>
+    <h2 class='subtitle'>One-Piece Costume</h2>
+    <div class='field'>
+      <%= f.label 'Description', class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
+      </div>
     </div>
-  </div>
-  <!-- onepiecce description -->
-  <div class='field'>
-    <%= f.label :onepiece_description, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description if costume is a onepiece' %>
-    </div>
+    <p class='help is-danger'>Must fill out for a one-piece costume</p>
   </div>
   <!-- hair accessory description -->
-  <div class='field'>
-    <%= f.label :hair_accessory, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :hair_accessory, class:'input', placeholder: 'Enter description if costume is has a hair accessory' %>
+  <div class='box'>
+    <div class='field'>
+      <%= f.label :hair_accessory, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :hair_accessory, class:'input', placeholder: 'Enter description if costume is has a hair accessory' %>
+      </div>
     </div>
+    <p class='help'>optional: can add later</p>
   </div>
   <!-- picture -->
-  <div class='field'>
-    <%= f.label :picture, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :picture, class:'input', placeholder: 'Enter picture url' %>
+  <div class='box'>
+    <div class='field'>
+      <%= f.label :picture, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :picture, class:'input', placeholder: 'Enter picture url' %>
+      </div>
     </div>
+    <p class='help'>optional: can add later</p>
   </div>
   <!-- submit button -->
   <div class='field'>
