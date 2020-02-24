@@ -1,3 +1,25 @@
 <div class='container is-fluid'>
   <h1 class='title has-text-primary'>Show Costume</h1>
+  <div class="columns">
+    <div class="column">
+      <%= image_tag @costume.picture %>
+    </div>
+    <% if @costume.onepiece_description.blank? %>
+      <div class="column">
+        <%= @costume.top_description %><br>
+        <%= @costume.bottoms_description %>
+      </div>
+    <% else %>
+      <div class="column">
+        <%= @costume.onepiece_description %>
+      </div>
+    <% end %>
+    <div class="column">
+      <%= @costume.hair_accessory %>
+    </div>
+  </div>
+  <div class="buttons">
+    <%= link_to 'Edit Costume', edit_dance_studio_costume_path(current_user.id, @costume), class: 'button is-success', method: :get %>
+    <%= link_to 'Delete Costume', dance_studio_costume_path(current_user.id, @costume), class: 'button is-info', method: :delete %>
+  </div>
 </div>
