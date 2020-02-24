@@ -5,7 +5,9 @@
   <div class="columns">
     <% @costumes.each do |costume| %>
       <div class="column">
-        <%= link_to image_tag(costume.picture, width: 100), dance_studio_costume_path(current_user.id, costume) %>
+        <figure class="image is-96x96">
+          <%= link_to image_tag(costume.picture, width: 100), dance_studio_costume_path(current_user.id, costume) %>
+        </figure>
       </div>
     <% end %>
   </div>
