@@ -6,16 +6,30 @@
     </div>
     <% if @costume.onepiece_description.blank? %>
       <div class="column">
-        <%= @costume.top_description %><br>
-        <%= @costume.bottoms_description %>
+        <div class='box'>
+          <h2 class='title is-4'>Top</h2>
+          <%= @costume.top_description %>
+        </div>
+      </div>
+      <div class="column">
+        <div class='box'>
+          <h2 class='title is-4'>Bottoms</h2>
+          <%= @costume.bottoms_description %>
+        </div>
       </div>
     <% else %>
       <div class="column">
-        <%= @costume.onepiece_description %>
+        <div class='box'>
+          <h2 class='title is-4'>One-Piece</h2>
+          <%= @costume.onepiece_description %>
+        </div>
       </div>
     <% end %>
     <div class="column">
-      <%= @costume.hair_accessory %>
+      <div class='box'>
+        <h2 class='title is-4'>Hair Accessory</h2>
+        <%= @costume.hair_accessory %>
+      </div>
     </div>
   </div>
   <div class="buttons">
