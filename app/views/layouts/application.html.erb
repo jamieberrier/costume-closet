@@ -19,10 +19,12 @@
     <% if logged_in? %>
       <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" role="button" href=<% dance_studio_path(current_user) %>>
-            <i class="fas fa-door-closed"></i>
+          <a class="navbar-item" href=<% dance_studio_path(current_user) %>>
+            <figure class="image is-24x24">
+              <%= link_to image_tag("https://image.flaticon.com/icons/svg/2088/2088729.svg"), dance_studio_path(current_user) %>
+            </figure>
           </a>
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nb">
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="nb">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -30,6 +32,8 @@
         </div>
         <div id="nb" class="navbar-menu">
           <div class="navbar-start">
+          </div>
+          <div class="navbar-end">
             <div class="navbar-item">
               <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
             </div>
@@ -46,14 +50,23 @@
                 </p>
               </div>
             </div-->
-          </div>
-          <div class="navbar-end">
             <div class="navbar-item">
               <%= link_to "Log Out", logout_path, class: 'link is-info', method: :post %>
             </div>
           </div>
         </div>
       </nav>
+      <script type="text/javascript">
+        (function () {
+          var burger = document.querySelector('.burger');
+          var nav = document.querySelector('#'+burger.dataset.target);
+
+          burger.addEventListener('click', function(){
+            burger.classList.toggle('is-active');
+            nav.classList.toggle('is-active');
+          });
+        })();
+      </script>
     <% end %>
     <!-- Display validation messages -->
     <section class='section'>
