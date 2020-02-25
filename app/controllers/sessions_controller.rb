@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
+  before_action :require_logged_in, only: [:destroy]
+
   def new
+    redirect_if_logged_in
   end
 
   def create

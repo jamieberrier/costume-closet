@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def home
-    redirect_to dance_studio_path(current_user), info: "You are already logged in" unless !logged_in?
+    redirect_if_logged_in
   end
 end
