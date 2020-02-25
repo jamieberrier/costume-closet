@@ -10,11 +10,15 @@ module SessionsHelper
   end
   # redirects to home page if user is not logged in
   def require_logged_in
-    return redirect_to root_path unless logged_in?
+    return redirect_to root_path, danger: "You are not logged in" unless logged_in?
   end
   # logs in user
   def log_in(dance_studio, message)
     session[:user_id] = dance_studio.id
     redirect_to dance_studio_path(dance_studio), success: message
+  end
+
+  def redirect_if_logged_in
+    redirect_to dance_studio_path(current_user), info: "You are already logged in" unless !logged_in?
   end
 end
