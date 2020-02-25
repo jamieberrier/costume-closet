@@ -31,7 +31,11 @@
 
 9. omniauth
 
+10. dancer registration and sign in functionality
+
 # TODO
+- 
+
 - User model
   - add owner :boolean column
 - RegistrationsController -- form to create user account 
