@@ -13,10 +13,10 @@ class SessionsController < ApplicationController
       @dance_studio = DanceStudio.find_by(email: params[:dance_studio][:email])
       # try is an ActiveSupport method: object.try(:some_method) means if object != nil then object.some_method else nil end.
       authenticated = @dance_studio.try(:authenticate, params[:dance_studio][:password])
-      # if no dance studio found, redirect to /login
-      if @dance_studio.nil?
+
+      if @dance_studio.nil? # if no dance studio found, redirect to /login
         redirect_to login_path, danger: 'Incorrect Email'
-      else # not be able to log in if password is incorrect
+      else # check for correct password & log in
         if authenticated
           log_in(@dance_studio, 'Successfully Logged In!')
         else
