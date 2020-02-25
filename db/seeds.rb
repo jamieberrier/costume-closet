@@ -16,18 +16,18 @@ ci = DanceStudio.create(studio_name: 'Classic Image', owner_name: 'Devin Moss', 
 
 # DANCERS
 ## toc
-maddie = Dancer.create(first_name: 'Madelyn', last_name: 'Berrier', birthdate: '09/07/2013', email: 'maddie@toc.com', phone_number: '619-555-5555', current_dancer: 1, dance_studio_id: toc.id)
-fifi = Dancer.create(first_name: 'Sophia', last_name: 'Kessler', birthdate: '04/01/2013', email: 'fifi@toc.com', phone_number: '619-555-5556', current_dancer: 1, dance_studio_id: toc.id)
-ainsley = Dancer.create(first_name: 'Ainsley', last_name: 'McKlees', birthdate: '01/06/2013', email: 'ainsley@toc.com', phone_number: '619-555-5557', current_dancer: 1, dance_studio_id: toc.id)
+maddie = Dancer.create(first_name: 'Madelyn', last_name: 'Berrier', email: 'maddie@toc.com', current_dancer: 1, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
+fifi = Dancer.create(first_name: 'Sophia', last_name: 'Kessler', email: 'fifi@toc.com', current_dancer: 1, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
+ainsley = Dancer.create(first_name: 'Ainsley', last_name: 'McKlees', email: 'ainsley@toc.com', current_dancer: 1, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
 
-mia = Dancer.create(first_name: 'Mia', last_name: 'Tomiselli', birthdate: '01/06/2010', email: 'mia@toc.com', phone_number: '619-555-5558', current_dancer: 1, dance_studio_id: toc.id)
-tori = Dancer.create(first_name: 'Tori', last_name: 'Taylor', birthdate: '10/09/2010', email: 'tori@toc.com', phone_number: '619-555-5559', current_dancer: 1, dance_studio_id: toc.id)
-zoey = Dancer.create(first_name: 'Zoey', last_name: 'Smith', birthdate: '17/01/2010', email: 'zoey@toc.com', phone_number: '619-555-5550', current_dancer: 0, dance_studio_id: toc.id)
+mia = Dancer.create(first_name: 'Mia', last_name: 'Tomiselli', email: 'mia@toc.com', current_dancer: 1, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
+tori = Dancer.create(first_name: 'Tori', last_name: 'Taylor', email: 'tori@toc.com', current_dancer: 1, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
+zoey = Dancer.create(first_name: 'Zoey', last_name: 'Smith', email: 'zoey@toc.com', current_dancer: 0, dance_studio_id: toc.id, password: 'test', password_confirmation: 'test')
 
 ## ci
-suzy = Dancer.create(first_name: 'Suzy', last_name: 'Smith', birthdate: '09/07/2008', email: 'suzy@ci.com', phone_number: '619-555-5555', current_dancer: 1, dance_studio_id: ci.id)
-polly = Dancer.create(first_name: 'Polly', last_name: 'Pocket', birthdate: '09/01/2013', email: 'maddie@ci.com', phone_number: '619-555-5555', current_dancer: 1, dance_studio_id: ci.id)
-tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', birthdate: '09/05/2009', email: 'maddie@ci.com', phone_number: '619-555-5555', current_dancer: 1, dance_studio_id: ci.id)
+suzy = Dancer.create(first_name: 'Suzy', last_name: 'Smith', email: 'suzy@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
+polly = Dancer.create(first_name: 'Polly', last_name: 'Pocket', email: 'maddie@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
+tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', email: 'maddie@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
 
 # COSTUMES
 ## toc
