@@ -1,5 +1,5 @@
 class CostumesController < ApplicationController
-  before_action :require_logged_in
+  before_action :require_logged_in!
 
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])

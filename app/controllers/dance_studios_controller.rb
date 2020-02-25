@@ -1,5 +1,5 @@
 class DanceStudiosController < ApplicationController
-  before_action :require_logged_in, only: [:show]
+  before_action :require_logged_in!, only: [:show]
   
   def new
     if logged_in?
