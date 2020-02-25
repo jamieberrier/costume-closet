@@ -3,7 +3,7 @@ class DanceStudiosController < ApplicationController
   
   def new
     if logged_in?
-      redirect_to dance_studio_path(current_user), info: "Logged In"
+      redirect_to dance_studio_path(current_user), info: "You are logged In"
     else
       @dance_studio = DanceStudio.new
     end
