@@ -29,11 +29,28 @@
   - view: dance_studios/new
   - authentication/validation
 
-9. 
+9. omniauth
 
 # TODO
-- omniauth
-
+- User model
+  - add owner :boolean column
+- RegistrationsController -- form to create user account 
+  - User signup
+  - User info updates
+  - User deletion
+    - resources :registrations, only: [:new, :create, :destroy]
+- SessionsController -- form to log user in/out
+  - User login
+  - User logout
+    - resources :sessions, only: [:new, :create, :destroy]
+- UsersController
+  - User show page (profile)
+  - Dancers page (admin view)
+- Helper methods
+  - is_admin?
+    - current_user.admin if current_user
+  - redirect_if_not_admin!
+    - redirect to movies_path if !is_admin?
 
 
 # URLs
