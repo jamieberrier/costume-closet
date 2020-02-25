@@ -33,31 +33,31 @@ class SessionsController < ApplicationController
       end
     end
   end
-=begin
-      if @dance_studio.nil? # if no dance studio found, redirect to /login
-        redirect_to login_path, danger: 'Incorrect Email'
-      else # check for correct password & log in
-        if authenticated
-          log_in(@dance_studio, 'Successfully Logged In!')
-        else
-          redirect_to login_path, danger: 'Invalid Password'
-        end
-      end
-=end
 
   def googleAuth
     # Get access tokens from the google server
     # Access_token is used to authenticate request made from the rails application to the google server
     access_token = request.env["omniauth.auth"]
-    # control for dancer vs owner
-    # binding.pry
+
     @dance_studio = DanceStudio.from_omniauth(access_token)
-    if @dance_studio.id
-      @dance_studio.save
-      log_in(@dance_studio, 'Successfully Logged In!')
-    else
-      session[:dance_studio] = @dance_studio
-      redirect_to dance_studio_google_register_path
+    @dancer = Dancer.from_omniauth(access_token)
+
+    if @dancer_studio
+      if @dance_studio.id
+        @dance_studio.save
+        log_in(@dance_studio, 'Successfully Logged In!')
+      else # if signing up
+        session[:dance_studio] = @dance_studio
+        redirect_to dance_studio_google_register_path
+      end
+    elsif @dancer
+      if @dancer.id
+        @dancer.save
+        log_in(@dancer, 'Successfully Logged In!')
+      else # if signing up
+        session[:dancer] = @dancer
+        redirect_to dancer_google_register_path
+      end
     end
   end
 
