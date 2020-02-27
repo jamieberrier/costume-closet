@@ -23,16 +23,16 @@ Rails.application.routes.draw do
 
   # Routes for signing up a dance studio
   get '/register/dance_studio' => 'registrations#new'
-  get '/register/dance_studio/google' => 'registrations#googleAuth', as: 'dance_studio_google_register'
+  get '/register/dance_studio/google' => 'registrations#google_auth', as: 'dance_studio_google_register'
   # Routes for signing up a dancer
   get '/register/dancer' => 'registrations#new'
-  get '/register/dancer/google' => 'registrations#googleAuth', as: 'dancer_google_register'
+  get '/register/dancer/google' => 'registrations#google_auth', as: 'dancer_google_register'
   # Routes for logging in
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
   # Routes for Google authentication
   get 'auth/google_oauth2', as: 'google_omniauth'
-  get 'auth/:provider/callback', to: 'sessions#googleAuth'
+  get 'auth/:provider/callback', to: 'sessions#google_auth'
   get 'auth/failure', to: redirect('application#home')
 end
