@@ -1,0 +1,8 @@
+<div class='container is-fluid'>
+  <h1 class='title has-text-primary'>Finish Signing Up with Google</h1>
+  <% if @dance_studio %>
+    <%= render "dance_studios/form" %>
+  <% else %>
+    <%= render "dancers/form" %>
+  <% end %>
+</div>
