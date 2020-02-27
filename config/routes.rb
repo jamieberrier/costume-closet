@@ -19,18 +19,20 @@ Rails.application.routes.draw do
     resources :costume_assignments
   end
 
-  resources :dancers, only: %i[new create]
+  resources :dancers, only: [:create]
 
-  # Routes for signing up dance studio
-  get '/register/dance_studio' => 'dance_studios#new'
-  get '/register/dance_studio/google' => 'dance_studios#googleAuth', as: 'dance_studio_google_register'
-  # Routes for signing up dancer via Google
-  get '/register/dancer/google' => 'dancers#googleAuth', as: 'dancer_google_register'
+  # Routes for signing up a dance studio
+  get '/register/dance_studio' => 'registrations#new'
+  get '/register/dance_studio/google' => 'registrations#googleAuth', as: 'dance_studio_google_register'
+  # Routes for signing up a dancer
+  get '/register/dancer' => 'registrations#new'
+  get '/register/dancer/google' => 'registrations#googleAuth', as: 'dancer_google_register'
   # Routes for logging in
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
   # Routes for Google authentication
+  get 'auth/google_oauth2', as: 'google_omniauth'
   get 'auth/:provider/callback', to: 'sessions#googleAuth'
   get 'auth/failure', to: redirect('application#home')
 end

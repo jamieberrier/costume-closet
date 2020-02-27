@@ -1,6 +1,6 @@
 <div class='container is-fluid'>
   <h1 class='title has-text-primary'>Costume Closet</h1>
-  <h2 class='subtitle'>Enter email & password or <%= link_to 'Sign In with Google', "/auth/google_oauth2", class: 'button is-success is-small', method: :get %></h2>
+  <h2 class='subtitle'>Enter email & password or <%= link_to 'Sign In with Google', google_omniauth_path(user_type: params[:user_type]), class: 'button is-success is-small', method: :get %></h2>
   <!-- sign in form -->
   <div class='box'>
     <%= form_for :user do |f| %>
