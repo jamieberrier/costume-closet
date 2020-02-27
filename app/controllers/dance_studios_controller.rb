@@ -1,27 +1,14 @@
 class DanceStudiosController < ApplicationController
-  before_action :require_logged_in!, only: [:show]
-  
-  def new
-    if logged_in?
-      redirect_to dance_studio_path(current_user), info: "You are logged In"
-    else
-      @dance_studio = DanceStudio.new
-    end
-  end
-
-  def googleAuth
-    @dance_studio = DanceStudio.new(session[:dance_studio])
-  end
+  before_action :require_logged_in!, :owner?, only: [:show]
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
-
-    return redirect_to new_dance_studio_path, danger: "Signup failure: #{@dance_studio.errors.full_messages.to_sentence}" unless @dance_studio.save
-    
+    redirect_if_signup_failure(@dance_studio)
     log_in(@dance_studio, 'Successfully Registered!')
   end
 
   def show
+
   end
 
   private
