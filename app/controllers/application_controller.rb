@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   
   add_flash_types :success, :danger, :warning, :info
 
-  include SessionsHelper
+  include SessionsHelper, RegistrationsHelper
 
   def home
-    redirect_if_logged_in
+    redirect_if_logged_in!
   end
 end
