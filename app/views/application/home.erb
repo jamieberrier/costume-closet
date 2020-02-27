@@ -11,8 +11,10 @@
     </div>
     <div class='buttons'>
       <%= link_to 'Register with email', register_dance_studio_path, class: 'button is-info', method: :get %>
-      <%= link_to 'Register via Google', "/auth/google_oauth2", class: 'button is-info', method: :get %>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), class: 'button is-info', method: :get %>
     </div>
+      <p>Already have a dance studio account?
+      <%= link_to 'Sign In', login_path(user_type: "dance_studio"), class: 'button is-success is-small', method: :get %></p>
   </div>
   <!-- Dancer New Account -->
   <div class='box'>
@@ -23,14 +25,11 @@
       </p>
     </div>
     <div class='buttons'>
-      <%= link_to 'Register with email', new_dancer_path, class: 'button is-info', method: :get %>
-      <%= link_to 'Register via Google', "/auth/google_oauth2", class: 'button is-info', method: :get %>
+      <%= link_to 'Register with email', register_dancer_path, class: 'button is-info', method: :get %>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), class: 'button is-info', method: :get %>
     </div>
-  </div>
-  <!-- Sign in -->
-  <div class='box'>
-    <p>Already have an account?
-    <%= link_to 'Sign In', login_path, class: 'button is-success is-small', method: :get %></p>
+      <p>Already have a dancer account?
+      <%= link_to 'Sign In', login_path(user_type: "dancer"), class: 'button is-success is-small', method: :get %></p>
   </div>
 </div>
   
