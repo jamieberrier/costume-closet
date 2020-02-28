@@ -27,7 +27,9 @@ module SessionsHelper
     if authenticated
       log_in(user, 'Successfully Logged In!')
     else
-      redirect_to login_path, danger: 'Invalid Password'
+      @user = user
+      flash.now[:warning] = 'Invalid Password'
+      render :new
     end
   end
   # checks if the user is an owner
