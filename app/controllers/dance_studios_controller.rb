@@ -3,7 +3,7 @@ class DanceStudiosController < ApplicationController
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
-    redirect_if_signup_failure(@dance_studio)
+    try_to_save(@dance_studio)
     log_in(@dance_studio, 'Successfully Registered!')
   end
 

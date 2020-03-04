@@ -3,7 +3,7 @@ class DancersController < ApplicationController
 
   def create
     @dancer = Dancer.new(dancer_params)
-    redirect_if_signup_failure(@dancer)
+    try_to_save(@dancer)
     log_in(@dancer, 'Successfully Registered!')
   end
 
