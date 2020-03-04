@@ -7,27 +7,23 @@ class SessionsController < ApplicationController
 
   def create
     # if email is blank, redirect to /login
-    if params[:user][:email].blank?
-      redirect_to_login(warning: 'Enter Email')
-    else # find dance studio or dancer
-      @dance_studio = DanceStudio.find_by(email: params[:user][:email])
-      @dancer = Dancer.find_by(email: params[:user][:email])
-      # try to authenticate password
-      if !!@dance_studio
-        try_to_authenticate(@dance_studio)
-      elsif !!@dancer
-        try_to_authenticate(@dancer)
-      else # no dance studio/dancer found, redirect to /login
-        redirect_to_login(danger: 'Incorrect Email')
-      end
+    return redirect_to_login(warning: 'Enter Email') if params[:user][:email].blank?
+
+    # find dance studio or dancer & try to authenticate password
+    if (@dance_studio = DanceStudio.find_by(email: params[:user][:email]))
+      try_to_authenticate(@dance_studio)
+    elsif (@dancer = Dancer.find_by(email: params[:user][:email]))
+      try_to_authenticate(@dancer)
+    else # no dance studio/dancer found, redirect to /login
+      redirect_to_login(danger: 'Incorrect Email')
     end
   end
 
   def google_auth
     # Get access tokens from the google server
     # Access_token is used to authenticate request made from the rails application to the google server
-    access_token = request.env["omniauth.auth"]
-    user_type = request.env["omniauth.params"]["user_type"]
+    access_token = request.env['omniauth.auth']
+    user_type = request.env['omniauth.params']['user_type']
     session[:dance_studio] = nil
     session[:dancer] = nil
 
@@ -36,7 +32,8 @@ class SessionsController < ApplicationController
     else
       @dancer = Dancer.from_omniauth(access_token)
     end
-    if !!@dance_studio
+
+    if @dance_studio
       if @dance_studio.id
         @dance_studio.save
         log_in(@dance_studio, 'Successfully logged in!')
