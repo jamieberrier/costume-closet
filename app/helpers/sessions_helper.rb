@@ -2,7 +2,7 @@ module SessionsHelper
   # keeps track of/find the user currently logged in
   def current_user
     # if @current_user is assigned, don't evaluate
-    if session[:class] == 'DanceStudio'
+    if session[:user_type] == 'DanceStudio'
       @current_user ||= DanceStudio.find_by(id: session[:user_id])
     else
       @current_user ||= Dancer.find_by(id: session[:user_id])
@@ -20,10 +20,11 @@ module SessionsHelper
   def redirect_to_login(message)
     redirect_to login_path, message
   end
-  # tries to authenticate password
+  # tries to authenticate password & logs user in if authenticated
   def try_to_authenticate(user)
     # try is an ActiveSupport method: object.try(:some_method) means if object != nil then object.some_method else nil end.
     authenticated = user.try(:authenticate, params[:user][:password])
+
     if authenticated
       log_in(user, 'Successfully Logged In!')
     else
@@ -34,19 +35,22 @@ module SessionsHelper
   end
   # checks if the user is an owner
   def owner?
-    current_user.class.name == 'DanceStudio' if current_user
+    session[:user_type] == 'DanceStudio' if current_user
   end
   # checks id the user is a dancer
   def dancer?
-    current_user.class.name == 'Dancer' if current_user
+    session[:user_type] == 'Dancer' if current_user
   end
   # logs in user and redirects based on type of user
   def log_in(user, message)
     session[:user_id] = user.id
-    session[:class] = user.class.name
+    session[:user_type] = user.class.name
 
-    redirect_to dance_studio_path(user), success: message if owner?
-    redirect_to dance_studio_dancer_path(user.dance_studio_id, user), success: message if dancer?
+    if owner?
+      redirect_to dance_studio_path(user), success: message
+    else
+      redirect_to dance_studio_dancer_path(user.dance_studio_id, user), success: message
+    end
   end
   # redirects to user show page based on type of user
   def redirect_if_logged_in!
@@ -60,10 +64,10 @@ module SessionsHelper
   end
 
   def redirect_if_not_owner!
-    redirect to dance_studio_dancer_path(current_user.dance_studio_id, current_user) if !owner?
+    redirect_to dance_studio_dancer_path(current_user.dance_studio_id, current_user) unless owner?
   end
 
   def redirect_if_not_dancer!
-    redirect to dance_studio_path(current_user) if !dancer?
+    redirect_to dance_studio_path(current_user) unless dancer?
   end
 end
