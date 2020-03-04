@@ -15,11 +15,9 @@ module RegistrationsHelper
     !!params[:dancer]
   end
 
-  def redirect_if_signup_failure(user)
-    if signing_up_as_dance_studio?
-      return redirect_to register_dance_studio_path, danger: "Signup failure: #{user.errors.full_messages.to_sentence}" unless user.save
-    else
-      return redirect_to register_dancer_path, danger: "Signup failure: #{user.errors.full_messages.to_sentence}" unless user.save
-    end
+  def try_to_save(user)
+    @user = user
+    flash.now[:danger] = "Signup failure: #{@user.errors.full_messages.to_sentence}" unless @user.save
+    render 'registrations/new'
   end
 end
