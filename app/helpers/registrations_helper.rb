@@ -1,6 +1,6 @@
 module RegistrationsHelper
   def create_empty_user
-    if request.env["REQUEST_PATH"].include?("dance_studio")
+    if request.env['REQUEST_PATH'].include?('dance_studio')
       @dance_studio = DanceStudio.new
     else
       @dancer = Dancer.new
@@ -17,7 +17,7 @@ module RegistrationsHelper
 
   def try_to_save(user)
     @user = user
-    flash.now[:danger] = "Signup failure: #{@user.errors.full_messages.to_sentence}" unless @user.save
-    render 'registrations/new'
+    flash.now[:danger] = "Signup failure: #{@user.errors.full_messages.to_sentence}"
+    render 'registrations/new' unless @user.save
   end
 end
