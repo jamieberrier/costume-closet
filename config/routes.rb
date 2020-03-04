@@ -19,7 +19,10 @@ Rails.application.routes.draw do
     resources :costume_assignments
   end
 
-  resources :dancers, only: [:create]
+  resources :dancers, only: [:create] do
+    get '/costume_assignments' => 'costume_assignments#index', as: 'costumes'
+    get '/costume_assignments/:id' => 'costume_assignments#show', as: 'costume'
+  end
 
   # Routes for signing up a dance studio
   get '/register/dance_studio' => 'registrations#new'
