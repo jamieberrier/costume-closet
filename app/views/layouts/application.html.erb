@@ -19,9 +19,13 @@
     <% if logged_in? %>
       <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href=<% dance_studio_path(current_user) %>>
+          <a class="navbar-item">
             <figure class="image is-24x24">
-              <%= link_to image_tag("https://image.flaticon.com/icons/svg/2088/2088729.svg"), dance_studio_path(current_user) %>
+              <%= 
+                link_to_if owner?, image_tag('hanger.svg'), dance_studio_path(current_user), class: 'has-text-grey-light' do |name|
+                  link_to name, dance_studio_dancer_path(current_user.dance_studio_id, current_user), class: 'has-text-grey-light'
+                end
+              %>
             </figure>
           </a>
           <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="nb">
@@ -35,10 +39,16 @@
           </div>
           <div class="navbar-end">
             <div class="navbar-item">
-              <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'link is-info' %>
+              <% if owner? %>
+                <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'has-text-grey' %>
+              <% end %>
             </div>
             <div class="navbar-item">
-              <%= link_to "My Costumes", dance_studio_costumes_path(current_user), class: 'link is-info' %>
+              <%= 
+                link_to_if owner?, "My Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey' do |name|
+                  link_to name, dancer_costumes_path(current_user), class: 'has-text-grey'
+                end
+              %>
             </div>
             <!--div class="navbar-item">
               <div class="field has-addons">
@@ -51,7 +61,7 @@
               </div>
             </div-->
             <div class="navbar-item">
-              <%= link_to "Log Out", logout_path, class: 'link is-info', method: :post %>
+              <%= link_to "Log Out", logout_path, class: 'has-text-grey', method: :post %>
             </div>
           </div>
         </div>
