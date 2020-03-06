@@ -3,6 +3,5 @@
     <h1 class='title is-1'><%= current_user.studio_name %></h1>
     <h2 class="subtitle is-3"><%= current_user.owner_name %></h2>
   </div>
-  <%= link_to "New Costume", new_dance_studio_costume_path(current_user) %><br>
-  <%= link_to "My Costumes", dance_studio_costumes_path(current_user), class: 'link is-info' %>
+  <%= link_to 'My Dancers', dance_studio_dancers_path(current_user) %>
 </div>
