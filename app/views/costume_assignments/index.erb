@@ -1,0 +1,33 @@
+<div class='container is-fluid'>
+  <% if @dancer %>
+    <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
+  <% else %>
+    <h1 class='title has-text-primary'>All Costume Assignments</h1>
+  <% end %>
+  <div class='table-container'>
+    <table class='table is-fullwidth is-striped is-hoverable'>
+      <thead class='has-text-weight-bold'>
+        <td>Season</td>
+        <td>Song Name</td>
+        <td>Genre</td>
+        <td>Condition</td>
+        <td>Size</td>
+        <td>Shoes</td>
+        <td>Tights</td>
+      </thead>
+      <tbody>
+      <% @costume_assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.dance_season %></td>
+          <td><%= assignment.song_name %></td>
+          <td><%= assignment.genre %></td>
+          <td><%= assignment.costume_condition %></td>
+          <td><%= assignment.costume_size %></td>
+          <td><%= assignment.shoe %></td>
+          <td><%= assignment.tight %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
