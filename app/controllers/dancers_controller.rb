@@ -13,7 +13,7 @@ class DancersController < ApplicationController
   end
 
   def edit
-
+    @dancer = Dancer.find(params[:id])
   end
 
   def index 
