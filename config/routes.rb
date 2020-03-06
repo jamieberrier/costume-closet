@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :dance_studios, only: %i[create show edit update destroy] do
     resources :costumes
-    resources :dancers, only: %i[show edit update destroy]
+    resources :dancers
     resources :costume_assignments
   end
 
