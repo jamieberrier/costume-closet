@@ -1,4 +1,6 @@
 <div class='container is-fluid'>
   <h1 class='title has-text-primary'><%= current_user.name %>'s Page</h1>
-  <%= link_to 'Edit Account', edit_dance_studio_dancer_path(current_user.dance_studio_id, current_user) %>
+  <div class='button'>
+    <%= link_to 'Edit Account', edit_dance_studio_dancer_path(current_user.dance_studio_id, current_user) %>
+  </div>
 </div>
