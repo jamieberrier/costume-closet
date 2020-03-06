@@ -17,4 +17,8 @@ class Dancer < ApplicationRecord
       user.last_name = auth.info.last_name
     end
   end
+
+  def name
+    first_name + ' ' + last_name
+  end
 end
