@@ -9,7 +9,7 @@
       <tbody>
         <% current_user.dancers.each do |dancer| %>
           <tr>
-            <td><%= link_to dancer.name, dancer_costumes_path(dancer) %></td>
+            <td><%= link_to dancer.name, dance_studio_dancer_costumes_path(dancer.dance_studio_id, dancer) %></td>
             <% if dancer.current_dancer %>
               <td>YES</td>
             <% else %>
