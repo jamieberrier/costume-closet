@@ -9,7 +9,7 @@ class DancersController < ApplicationController
   end
 
   def show
-
+    
   end
 
   def edit
@@ -25,6 +25,14 @@ class DancersController < ApplicationController
 
   def index 
 
+  end
+
+  def destroy
+    @dancer = Dancer.find(params[:id])
+    
+    @dancer.update_attribute(:current_dancer, false)
+    session.destroy
+    redirect_to root_path, success: 'Account Deactivated!'
   end
 
   private
