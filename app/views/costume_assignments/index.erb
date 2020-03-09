@@ -1,5 +1,7 @@
 <div class='container is-fluid'>
-  <% if @dancer %>
+  <% if session[:user_type] == 'Dancer' %>
+    <h1 class='title has-text-primary'><%= current_user.name %>'s Costume Assignments</h1>
+  <% elsif @dancer %>
     <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
   <% else %>
     <h1 class='title has-text-primary'>All Costume Assignments</h1>
