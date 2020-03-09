@@ -22,6 +22,13 @@ class DanceStudiosController < ApplicationController
     redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
   end
 
+  def destroy
+    @dance_studio = DanceStudio.find(params[:id])
+    @dance_studio.destroy
+    session.destroy
+    redirect_to root_path, success: 'Account Deleted!'
+  end
+
   private
 
   def dance_studio_params
