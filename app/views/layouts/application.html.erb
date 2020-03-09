@@ -45,7 +45,14 @@
             </div>
             <div class="navbar-item">
               <%= 
-                link_to_if owner?, "My Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey' do |name|
+                link_to_if owner?, "Current Costumes", dance_studio_current_costumes_path(current_user), class: 'has-text-grey' do |name|
+                  link_to name, dance_studio_current_costumes_path(current_user.dance_studio_id), class: 'has-text-grey'
+                end
+              %>
+            </div>
+            <div class="navbar-item">
+              <%= 
+                link_to_if owner?, "All Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey' do |name|
                   link_to name, dance_studio_costume_assignments_path(current_user), class: 'has-text-grey'
                 end
               %>
