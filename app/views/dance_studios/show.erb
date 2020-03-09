@@ -13,5 +13,8 @@
     <div class='button'>
       <%= link_to 'Edit Account Info', edit_dance_studio_path(current_user) %>
     </div>
+    <div class='button'>
+      <%= link_to 'Delete Account', dance_studio_path(current_user), method: :delete %>
+    </div>
   </div>
 </div>
