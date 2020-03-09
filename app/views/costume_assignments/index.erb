@@ -1,32 +1,42 @@
 <div class='container is-fluid'>
-  <% if session[:user_type] == 'Dancer' %>
-    <h1 class='title has-text-primary'><%= current_user.name %>'s Costume Assignments</h1>
-  <% elsif @dancer %>
-    <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
-  <% else %>
-    <h1 class='title has-text-primary'>All Costume Assignments</h1>
-  <% end %>
+  <div class="content">
+    <% if session[:user_type] == 'Dancer' %>
+      <h1 class='title has-text-primary'><%= current_user.name %>'s Costumes</h1>
+    <% elsif @dancer %>
+      <h1 class='title has-text-primary'><%= @dancer.name %>'s Costumes</h1>
+    <% else %>
+      <h1 class='title has-text-primary'>All Costume Assignments</h1>
+    <% end %>
+  </div>
   <div class='table-container'>
     <table class='table is-fullwidth is-striped is-hoverable'>
       <thead class='has-text-weight-bold'>
         <td>Season</td>
         <td>Song Name</td>
         <td>Genre</td>
-        <td>Condition</td>
-        <td>Size</td>
         <td>Shoes</td>
         <td>Tights</td>
+        <td>Dancer</td>
+        <td>Condition</td>
+        <td>Size</td>
       </thead>
       <tbody>
       <% @costume_assignments.each do |assignment| %>
         <tr>
           <td><%= assignment.dance_season %></td>
-          <td><%= assignment.song_name %></td>
+          <td>
+            <%= 
+              link_to_if owner?, assignment.song_name, dance_studio_costume_path(current_user, assignment.costume_id) do |name|
+                link_to name, dance_studio_costume_path(current_user.dance_studio_id, assignment.costume_id)
+              end
+            %>
+          </td>
           <td><%= assignment.genre %></td>
-          <td><%= assignment.costume_condition %></td>
-          <td><%= assignment.costume_size %></td>
           <td><%= assignment.shoe %></td>
           <td><%= assignment.tight %></td>
+          <td><%= link_to Dancer.find(assignment.dancer_id).name, dance_studio_dancer_costumes_path(current_user, assignment.dancer_id) %></td>
+          <td><%= assignment.costume_condition %></td>
+          <td><%= assignment.costume_size %></td>
         </tr>
       <% end %>
       </tbody>
