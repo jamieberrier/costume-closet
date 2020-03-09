@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get '/costume_assignments/:id' => 'costume_assignments#show', as: 'costume'
     end
     resources :costume_assignments
+    get '/current_costumes' => 'costume_assignments#current_assignments'
   end
   # Route for creating a dancer
   resources :dancers, only: [:create]
