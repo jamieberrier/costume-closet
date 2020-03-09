@@ -32,8 +32,15 @@
       </div>
     </div>
   </div>
-  <div class="buttons">
-    <%= link_to 'Edit Costume', edit_dance_studio_costume_path(current_user.id, @costume), class: 'button is-success', method: :get %>
-    <%= link_to 'Delete Costume', dance_studio_costume_path(current_user.id, @costume), class: 'button is-info', method: :delete %>
-  </div>
+  <% if owner? %>
+    <div class="buttons">
+      <%= link_to 'Edit Costume', edit_dance_studio_costume_path(current_user.id, @costume), class: 'button is-success', method: :get %>
+      <%= link_to 'Delete Costume', dance_studio_costume_path(current_user.id, @costume), class: 'button is-info', method: :delete %>
+    </div>
+  <% end %>
+  <% if dancer? %>
+    <div class='button'>
+      <%= link_to 'Back to Current Costumes', dance_studio_current_costumes_path(current_user.dance_studio_id) %>
+    </div>
+  <% end %>
 </div>
