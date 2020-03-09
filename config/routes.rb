@@ -10,19 +10,19 @@ Rails.application.routes.draw do
   # Example of Custom Route:
   #   get "students/:id/activate" => "students#activate", as: "activate_student"
 
-  # root route
+  # Root route
   root 'application#home'
 
   resources :dance_studios, only: %i[create show edit update destroy] do
     resources :costumes
-    resources :dancers
+    resources :dancers, only: %i[show index edit update destroy] do
+      get '/costume_assignments' => 'costume_assignments#index', as: 'costumes'
+      get '/costume_assignments/:id' => 'costume_assignments#show', as: 'costume'
+    end
     resources :costume_assignments
   end
-
-  resources :dancers, only: [:create] do
-    get '/costume_assignments' => 'costume_assignments#index', as: 'costumes'
-    get '/costume_assignments/:id' => 'costume_assignments#show', as: 'costume'
-  end
+  # Route for creating a dancer
+  resources :dancers, only: [:create]
 
   # Routes for signing up a dance studio
   get '/register/dance_studio' => 'registrations#new'
