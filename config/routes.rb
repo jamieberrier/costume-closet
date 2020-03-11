@@ -1,30 +1,33 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  # You can have the root of your site routed with "root"
-  #   root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of Custom Route:
-  #   get "students/:id/activate" => "students#activate", as: "activate_student"
-
   # Root route
   root 'application#home'
 
-  resources :dance_studios, only: %i[create show edit update destroy] do
+  # Shallow nested routes, nests: index create new
+  resources :dance_studios, only: %i[create show edit update destroy], shallow: true do
     resources :costumes
-    resources :dancers, only: %i[show index edit update destroy] do
-      get '/costume_assignments' => 'costume_assignments#index', as: 'costumes'
-      get '/costume_assignments/:id' => 'costume_assignments#show', as: 'costume'
-    end
+    resources :dancers, only: %i[index show edit update destroy]
     resources :costume_assignments
-    get '/current_costumes' => 'costume_assignments#current_assignments'
   end
-  # Route for creating a dancer
-  resources :dancers, only: [:create]
 
+  post '/dancers' => 'dancers#create'
+
+  # Routes for dancers to view their costume assignments
+  scope '/dancers/:id' do
+    get '/costume_assignments' => 'costume_assignments#index', as: 'dancer_costumes'
+    get '/costume_assignments/:id' => 'costume_assignments#show', as: 'dancer_costume'
+    # Route for dancer to view their current costumes
+    get '/current_costumes' => 'costume_assignments#current_assignments', as: 'dancer_current_costumes'
+  end
+  # Route for dance studios to view a costume's assignments
+  scope '/costumes/:id' do
+    get '/assignments' => 'costume_assignments#index', as: 'assigned_costume'
+  end
+  # Routes for dance studio to view their current costumes
+  scope '/dance_studios/:id' do
+    get '/current_costumes' => 'costume_assignments#current_assignments', as: 'studio_current_costumes'
+  end
   # Routes for signing up a dance studio
   get '/register/dance_studio' => 'registrations#new'
   get '/register/dance_studio/google' => 'registrations#google_auth', as: 'dance_studio_google_register'
@@ -40,3 +43,11 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#google_auth'
   get 'auth/failure', to: redirect('application#home')
 end
+# You can have the root of your site routed with "root"
+  #   root 'welcome#index'
+
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
+
+  # Example of Custom Route:
+  #   get "students/:id/activate" => "students#activate", as: "activate_student"

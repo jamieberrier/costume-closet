@@ -2,10 +2,10 @@
   <h1 class='title has-text-primary'><%= current_user.name %>'s Page</h1>
   <div class='buttons'>
     <div class='button'>
-      <%= link_to 'Edit Account', edit_dance_studio_dancer_path(current_user.dance_studio_id, current_user) %>
+      <%= link_to 'Edit Account', edit_dancer_path(current_user) %>
     </div>
     <div class='button'>
-      <%= link_to 'Deactivate Account', dance_studio_dancer_path(current_user.dance_studio_id, current_user), method: :delete %>
+      <%= link_to 'Deactivate Account', dancer_path(current_user), method: :delete %>
     </div>
   </div>
 </div>

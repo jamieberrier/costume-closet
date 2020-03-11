@@ -2,26 +2,28 @@
   <div class="content">
     <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
   </div>
-  <% if session[:user_type] == 'Dancer' %>
+  <% if dancer? %>
     <div class='table-container'>
       <table class='table is-fullwidth is-striped is-hoverable'>
         <thead class='has-text-weight-bold'>
+          <td>Costume</td>
           <td>Song Name</td>
           <td>Genre</td>
-          <td>Condition</td>
-          <td>Size</td>
           <td>Shoes</td>
           <td>Tights</td>
+          <td>Size</td>
+          <td>Condition</td>
         </thead>
         <tbody>
         <% @costume_assignments.each do |assignment| %>
           <tr>
-            <td><%= link_to assignment.song_name, dance_studio_costume_path(current_user.dance_studio_id, assignment.costume_id) %></td>
+            <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %></td>
+            <td><%= assignment.song_name %></td>
             <td><%= assignment.genre %></td>
-            <td><%= assignment.costume_condition %></td>
-            <td><%= assignment.costume_size %></td>
             <td><%= assignment.shoe %></td>
             <td><%= assignment.tight %></td>
+            <td><%= assignment.costume_size %></td>
+            <td><%= assignment.costume_condition %></td>
           </tr>
         <% end %>
         </tbody>
@@ -29,10 +31,10 @@
     </div>
   <% else %>
     <div class="columns">
-      <% @costume_assignments.each do |costume| %>
+      <% @costume_assignments.each do |assignment| %>
         <div class="column">
           <figure class="image is-96x96">
-            <%= link_to image_tag(costume.picture, width: 100), dance_studio_costume_assignment_path(current_user.id, costume.id) %>
+            <%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %>
           </figure>
         </div>
       <% end %>
