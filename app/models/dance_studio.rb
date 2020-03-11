@@ -1,6 +1,8 @@
 class DanceStudio < ApplicationRecord
   has_many :dancers
   has_many :costumes
+  has_many :costume_assignments, through: :costumes
+  has_many :costume_assignments, through: :dancers
 
   has_secure_password
 
