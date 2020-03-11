@@ -49,7 +49,7 @@ module SessionsHelper
     if owner?
       redirect_to dance_studio_path(user), success: message
     else
-      redirect_to dance_studio_dancer_path(user.dance_studio_id, user), success: message
+      redirect_to dancer_path(user), success: message
     end
   end
   # redirects to user show page based on type of user
@@ -59,12 +59,12 @@ module SessionsHelper
     if owner?
       redirect_to dance_studio_path(current_user), info: message if logged_in?
     else
-      redirect_to dance_studio_dancer_path(current_user.dance_studio_id, current_user), info: message if logged_in?
+      redirect_to dancer_path(current_user), info: message if logged_in?
     end
   end
 
   def redirect_if_not_owner!
-    redirect_to dance_studio_dancer_path(current_user.dance_studio_id, current_user) unless owner?
+    redirect_to dancer_path(current_user) unless owner?
   end
 
   def redirect_if_not_dancer!
