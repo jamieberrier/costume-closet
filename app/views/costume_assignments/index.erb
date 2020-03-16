@@ -1,6 +1,6 @@
 <div class='container is-fluid'>
   <div class="content">
-    <% if session[:user_type] == 'Dancer' %>
+    <% if dancer? %>
       <h1 class='title has-text-primary'><%= current_user.name %>'s Costumes</h1>
     <% elsif @dancer %>
       <h1 class='title has-text-primary'><%= @dancer.name %>'s Costumes</h1>
@@ -16,7 +16,7 @@
         <td>Genre</td>
         <td>Shoes</td>
         <td>Tights</td>
-        <% if owner? %>
+        <% if owner? && !@dancer %>
           <td>Dancer</td>
         <% end %>
         <td>Condition</td>
@@ -36,8 +36,8 @@
           <td><%= assignment.genre %></td>
           <td><%= assignment.shoe %></td>
           <td><%= assignment.tight %></td>
-          <% if owner? %>
-            <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id) %></td>
+          <% if owner? && !@dancer%>
+            <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
           <% end %>
           <td><%= assignment.costume_condition %></td>
           <td><%= assignment.costume_size %></td>
