@@ -11,87 +11,237 @@
 
 4. add sessions helper methods
   - helpers/sessions_helper
+    - current_user
+    - logged_in?
+    - require_logged_in!
+    - redirect_to_login(message)
+    - try_to_authenticate(user)
+    - owner?
+    - dancer?
+    - log_in(user, message)
+    - redirect_if_logged_in!
+    - redirect_if_not_owner!
+    - redirect_if_not_dancer!
   - controllers/application_controller
 
-5. add root route and home page view
-
-6. add log in/log out functionality
+5. add root route and home page view (ApplicationController)
   - routes
+    - root_path
+  - controller action
+    - home
+  - view
+    - home
+
+6. add log in/log out functionality (SessionsController)
+  - routes
+    - login_path, logout_path
   - controller actions
-  - views: sessions/new, dance_studios/show
+    - new, create, google_auth, destroy
+  - views
+    - _form, sessions/new
   - authentication/validation
 
 7. seeded db
 
-8. add registration functionality
+8. add registration functionality (RegistrationsController)
   - routes
+    - register_dance_studio_path, register_dancer_path, google_omniauth_path, dance_studio_google_register_path, dancer_google_register_path
   - controller actions
-  - view: dance_studios/new
+    - new, google_auth
+  - views
+    - new, google_auth
   - authentication/validation
 
-9. omniauth
+9. add registrations helper methods
+  - helpers/registrations_helper
+    - create_empty_user
+    - signing_up_as_dance_studio?
+    - signing_up_as_dancer?
+    - try_to_save(user)
+  - controllers/application_controller
 
-10. dancer registration and sign in functionality
+9. add omniauth - google
+
+10. add dance studio functionality (DanceStudiosController)
+  - routes
+    - dance_studios_path, edit_dance_studio_path, dance_studio_path
+  - controller actions
+    - create, show, edit, update, destroy
+  - views
+    - _form, edit, show
+  - validation
+    - validates :password, confirmation: { case_sensitive: false }
+    - validates :email, presence: true, uniqueness: { case_sensitive: false }
+    - validates :studio_name, :owner_name, :password_confirmation, presence: true
+  - authentication
+    - has_secure_password
+
+11. add dancer functionality (DancersController)
+  - routes
+    - dance_studio_dancers_path, edit_dancer_path, dancer_path, dancers_path
+  - controller actions
+    - create, show, index, edit, update, destroy
+  - views
+    - _form, edit, index, show
+  - validation
+    - validates :password, confirmation: { case_sensitive: false }
+    - validates :email, presence: true, uniqueness: { case_sensitive: false }
+    - validates :first_name, :last_name, :password_confirmation, presence: true
+  - authentication
+    - has_secure_password
+
+12. add costume functionality (CostumesController)
+  - routes
+    - dance_studio_costumes_path, new_dance_studio_costume_path, edit_costume_path, costume_path
+  - controller actions
+    - new, create, show, index, edit, update, destroy
+  - views
+    - _form, edit, index, new, show
+  - validation
+    - validates :onepiece_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :onepiece_costume?
+    - validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
+
+13. add costume assignments functionality
+  - routes
+    - dance_studio_costume_assignments_path, new_dance_studio_costume_assignment_path, edit_costume_assignment_path, costume_assignment_path, dancer_costumes_path, dancer_costume_path, assigned_costume_path, dancer_current_costumes_path, studio_current_costumes_path
+  - controller actions
+    - show, index, current_assignments
+  - views
+    - current_assignments, index, show
+  - validation
+
 
 # TODO
-- 
-
-- User model
-  - add owner :boolean column
-- RegistrationsController -- form to create user account 
-  - User signup
-  - User info updates
-  - User deletion
-    - resources :registrations, only: [:new, :create, :destroy]
-- SessionsController -- form to log user in/out
-  - User login
-  - User logout
-    - resources :sessions, only: [:new, :create, :destroy]
-- UsersController
-  - User show page (profile)
-  - Dancers page (admin view)
-- Helper methods
-  - is_admin?
-    - current_user.admin if current_user
-  - redirect_if_not_admin!
-    - redirect to movies_path if !is_admin?
+- costume assignments
+  - controller actions
+    - new, create, edit, update, destroy
+  - views
+    - _forn
+    - new
+    - edit
+  - validations
+  - update URLs
 
 
 # URLs
-## SIGNUP
-GET /register
-    present signup form
-POST /users
-    create user in db
+## REGISTRATION
+### DANCE STUDIOS
+#### google_auth
+GET /register/dance_studio
+  present signup form
+#### auth#google_oauth2
+GET "/auth/google_oauth2?user_type=dance_studio"
+  present google omniauth form
+POST /dance_studios
+  create dance studio in db and redirect
+### DANCERS
+#### google_auth
+GET /register/dancer
+  present signup form
+#### auth#google_oauth2
+GET "/auth/google_oauth2?user_type=dancer"
+  present google omniauth form
+POST /dancers
+  create dancer in db and redirect
 
-## LOGIN
+## SESSIONS
+### LOGIN
+#### new
 GET /login
-    present login form
+  present login form
+#### auth#google_oauth2
+GET /auth/google_oauth2?user_type=dance_studio
+  present google omniauth form
+#### auth#google_oauth2
+GET /auth/google_oauth2?user_type=dancer
+  present google omniauth form
+#### create
 POST /login
-    create session and redirect
+  create session and redirect
+### LOGOUT
+#### destroy
+POST /logout
+  destroy session
+
+## DANCE STUDIO
+### create
+POST /dance_studios
+  create dance studio in db and redirect
+### show
+GET /dance_studios/:id
+  show details of dance studio
+### edit
+GET /dance_studios/:id/edit
+  present form to edit details of dance studio
+### update
+PATCH /dance_studios/:id
+PUT /dance_studios/:id
+  take form data and update details of dance studio in db
+### destroy
+DELETE /dance_studios/:id
+  delete dance studio in db
+
+## DANCER
+### create
+POST /dancers
+  take form data and create dancer in db
+### index
+GET /dancers
+  show all dancers
+### show
+GET /dancers/:id
+  show details of individual dancer
+### edit
+GET /dancers/:id/edit
+  present form to edit details of dancer
+### update
+PATCH /dancers/:id
+PUT /dancers/:id
+  take form data and update details of dancer in db
+### destroy
+DELETE /dancers/:id
+  delete dancer in db
 
 ## COSTUME
 ### new
-GET /costumes/new
-    present form to create new costume
+GET /dance_studios/:dance_studio_id/costumes/new
+  present form to create new costume
 ### create
-POST /costumes
-    take form data and create costume in db
+POST /dance_studios/:dance_studio_id/costumes
+  take form data and create costume in db
+### index
+GET /dance_studios/:dance_studio_id/costumes
+  show all costumes
 ### show
-GET /costumes
-    show all costumes
 GET /costumes/:id
-    show details of individual costume
+  show details of individual costume
+### edit
+GET /costumes/:id/edit
+  present form to edit details of costume
+### update
+PATCH /costumes/:id
+PUT /costumes/:id
+  take form data and update details of costume in db
+### destroy
+DELETE /costumes/:id
+  delete costume in db
 
-## DANCER
+##COSTUME ASSIGNMENT
 ### new
-GET /dancers/new
-    present form to create new dancer
+GET /dance_studios/:dance_studio_id/costume_assignments/new
 ### create
-POST /dancers
-    take form data and create dancer in db
+POST /dance_studios/:dance_studio_id/costume_assignments
+### index
+GET /dance_studios/:dance_studio_id/costume_assignments
 ### show
-GET /dancers
-    show all dancers
-GET /dancers/:id
-    show details of individual dancer
+GET /costume_assignments/:id
+### edit
+GET /costume_assignments/:id/edit
+### update
+PATCH /costume_assignments/:id
+PUT /costume_assignments/:id
+### destroy
+DELETE /costume_assignments/:id
+### current_assignments
+GET /dancers/:id/current_costumes
+GET /dance_studios/:id/current_costumes
