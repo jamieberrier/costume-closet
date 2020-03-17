@@ -10,6 +10,9 @@
         <td>Genre</td>
         <td>Shoes</td>
         <td>Tights</td>
+        <% if owner? %>
+          <td>Dancer</td>
+        <% end %>
         <td>Size</td>
         <td>Condition</td>
       </thead>
@@ -21,6 +24,9 @@
           <td><%= assignment.genre %></td>
           <td><%= assignment.shoe %></td>
           <td><%= assignment.tight %></td>
+          <% if owner? %>
+            <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
+          <% end %>
           <td><%= assignment.costume_size %></td>
           <td><%= assignment.costume_condition %></td>
         </tr>
