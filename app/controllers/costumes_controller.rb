@@ -1,6 +1,5 @@
 class CostumesController < ApplicationController
-  before_action :require_logged_in!
-  before_action :redirect_if_not_owner!, only: %i[new create edit update]
+  before_action :redirect_if_not_owner!, except: %i[show index]
 
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])

@@ -1,5 +1,6 @@
 class DanceStudiosController < ApplicationController
-  before_action :require_logged_in!, :redirect_if_not_owner!, only: [:show]
+  before_action :redirect_if_not_owner!, except: :create
+  skip_before_action :require_logged_in!, only: :create
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)

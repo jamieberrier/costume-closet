@@ -1,6 +1,6 @@
 class DancersController < ApplicationController
-  before_action :require_logged_in!, only: %i[show edit update index]
-  before_action :dancer?, only: [:show]
+  skip_before_action :require_logged_in!, only: :create
+  # before_action :dancer?, only: :show
 
   def create
     @dancer = Dancer.new(dancer_params)
