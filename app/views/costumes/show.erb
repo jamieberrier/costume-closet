@@ -39,6 +39,11 @@
       <%= link_to 'Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
       <%= link_to 'Edit Costume', edit_costume_path(@costume, dance_studio_id: current_user.id), class: 'button is-success' %>
       <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
+      <% if request.env['HTTP_REFERER'].include?('current_costumes') %>
+        <%= link_to 'Back to Current Costumes', studio_current_costumes_path(current_user), class: 'button' %>
+      <% else %>
+        <%= link_to 'Back to Costumes', dance_studio_costumes_path(current_user), class: 'button' %>
+      <% end %>
     </div>
   <% end %>
   <% if dancer? %>
