@@ -9,7 +9,7 @@ class DancersController < ApplicationController
   end
 
   def show
-
+    @dancer = Dancer.find(params[:id])
   end
 
   def edit
