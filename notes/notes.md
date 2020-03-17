@@ -130,7 +130,7 @@
 GET /register/dance_studio
   present signup form
 #### auth#google_oauth2
-GET "/auth/google_oauth2?user_type=dance_studio"
+GET /auth/google_oauth2?user_type=dance_studio
   present google omniauth form
 POST /dance_studios
   create dance studio in db and redirect
@@ -139,7 +139,7 @@ POST /dance_studios
 GET /register/dancer
   present signup form
 #### auth#google_oauth2
-GET "/auth/google_oauth2?user_type=dancer"
+GET /auth/google_oauth2?user_type=dancer
   present google omniauth form
 POST /dancers
   create dancer in db and redirect
@@ -186,7 +186,7 @@ DELETE /dance_studios/:id
 POST /dancers
   take form data and create dancer in db
 ### index
-GET /dancers
+GET /dance_studios/:dance_studio_id/dancers
   show all dancers
 ### show
 GET /dancers/:id
