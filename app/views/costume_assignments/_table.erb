@@ -1,0 +1,38 @@
+<div class='table-container'>
+  <table class='table is-fullwidth is-striped is-hoverable'>
+    <thead class='has-text-weight-bold'>
+      <td>Season</td>
+      <td>Song Name</td>
+      <td>Genre</td>
+      <td>Shoes</td>
+      <td>Tights</td>
+      <% if owner? && !@dancer %>
+        <td>Dancer</td>
+      <% end %>
+      <td>Condition</td>
+      <td>Size</td>
+    </thead>
+    <tbody>
+    <% @costume_assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.dance_season %></td>
+        <td>
+          <%= 
+            link_to_if owner?, assignment.song_name, assigned_costume_path(assignment.costume_id, costume_id: assignment.costume_id) do |name|
+              link_to name, costume_path(assignment.costume_id)
+            end
+          %>
+        </td>
+        <td><%= assignment.genre %></td>
+        <td><%= assignment.shoe %></td>
+        <td><%= assignment.tight %></td>
+        <% if owner? && !@dancer%>
+          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
+        <% end %>
+        <td><%= assignment.costume_condition %></td>
+        <td><%= assignment.costume_size %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
