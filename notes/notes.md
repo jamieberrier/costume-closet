@@ -110,7 +110,6 @@
     - current_assignments, index, show
   - validation
 
-
 # TODO
 - costume assignments
   - controller actions
@@ -121,7 +120,19 @@
     - edit
   - validations
   - update URLs
+  - when assigning a costume for 2nd, 3rd, etc time...change condition to used
 
+# ?s
+  - dance studio add dancers?
+    - how dancers finish setting up their account?
+    - or dancers must create account first?
+  - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
+  - when dancer deletes their account
+    - keep data in db, but can't log in
+    - devise??
+  - edit forms
+    - icons not showing, unless refresh
+  - how to center image
 
 # URLs
 ## REGISTRATION
