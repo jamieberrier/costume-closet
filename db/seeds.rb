@@ -42,9 +42,13 @@ yellow = Costume.create(onepiece_description: 'yellow lace, one-shoulder, dress'
 
 # COSTUME ASSIGNMENTS
 ## toc
-CostumeAssignment.create(dancer_id: maddie.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
-CostumeAssignment.create(dancer_id: fifi.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
-CostumeAssignment.create(dancer_id: ainsley.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+CostumeAssignment.create(dancer_id: maddie.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2019', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+CostumeAssignment.create(dancer_id: fifi.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2019', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+CostumeAssignment.create(dancer_id: ainsley.id, costume_id: blue.id, costume_size: 'S', song_name: 'Blue Suede Shoes', costume_condition: 'new', dance_season: '2019', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+
+CostumeAssignment.create(dancer_id: maddie.id, costume_id: blue.id, costume_size: 'S', song_name: 'Rip It Up', costume_condition: 'used', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+CostumeAssignment.create(dancer_id: fifi.id, costume_id: blue.id, costume_size: 'S', song_name: 'Rip It Up', costume_condition: 'used', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
+CostumeAssignment.create(dancer_id: ainsley.id, costume_id: blue.id, costume_size: 'S', song_name: 'Rip It Up', costume_condition: 'used', dance_season: '2020', genre: 'tap', shoe: 'blue sequin tap', tight: 'tan footed')
 
 CostumeAssignment.create(dancer_id: maddie.id, costume_id: red.id, costume_size: 'S', song_name: 'Sophisticated Ladies', costume_condition: 'new', dance_season: '2020', genre: 'hip hop', shoe: 'red high top converse', tight: 'none')
 CostumeAssignment.create(dancer_id: fifi.id, costume_id: red.id, costume_size: 'S', song_name: 'Sophisticated Ladies', costume_condition: 'new', dance_season: '2020', genre: 'hip hop', shoe: 'red high top converse', tight: 'none')
