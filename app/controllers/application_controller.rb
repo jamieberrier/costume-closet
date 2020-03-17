@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper, RegistrationsHelper
 
+  before_action :require_logged_in!, except: :home
+
   def home
     redirect_if_logged_in!
   end
