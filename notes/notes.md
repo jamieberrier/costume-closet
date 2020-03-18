@@ -127,9 +127,6 @@
     - how dancers finish setting up their account?
     - or dancers must create account first?
   - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
-  - when dancer deletes their account
-    - keep data in db, but can't log in
-    - devise??
   - edit forms
     - icons not showing, unless refresh
   - how to center image
