@@ -14,17 +14,17 @@ class DanceStudiosController < ApplicationController
   end
 
   def edit
-    @dance_studio = DanceStudio.find(params[:id])
+    find_dance_studio
   end
 
   def update
-    @dance_studio = DanceStudio.find(params[:id])
-    @dance_studio.update(dance_studio_params)
+    find_dance_studio
+    @dance_studio.update!(dance_studio_params)
     redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
   end
 
   def destroy
-    @dance_studio = DanceStudio.find(params[:id])
+    find_dance_studio
     @dance_studio.destroy
     session.destroy
     redirect_to root_path, success: 'Account Deleted!'
