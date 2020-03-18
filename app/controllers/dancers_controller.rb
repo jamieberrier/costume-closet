@@ -1,6 +1,5 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in!, only: :create
-  # before_action :dancer?, only: :show
 
   def create
     @dancer = Dancer.new(dancer_params)
@@ -9,15 +8,15 @@ class DancersController < ApplicationController
   end
 
   def show
-    @dancer = Dancer.find(params[:id])
+    find_dancer
   end
 
   def edit
-    @dancer = Dancer.find(params[:id])
+    find_dancer
   end
 
   def update
-    @dancer = Dancer.find(params[:id])
+    find_dancer
     @dancer.update(dancer_params)
     redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
   end
@@ -27,10 +26,12 @@ class DancersController < ApplicationController
   end
 
   def destroy
-    @dancer = Dancer.find(params[:id])
-
-    @dancer.update_attribute(:current_dancer, false)
+    find_dancer
+    # set current_dancer to false & password/confirmation to "..."
+    @dancer.update(current_dancer: false, password: "...", password_confirmation: "...")
+    # destroy session
     session.destroy
+    # redirect to home page
     redirect_to root_path, success: 'Account Deactivated!'
   end
 
