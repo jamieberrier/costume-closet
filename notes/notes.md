@@ -129,6 +129,7 @@
   - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
   - edit forms
     - icons not showing, unless refresh
+    - password & password confirmation passing as blank
   - how to center image
 
 # URLs
