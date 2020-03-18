@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :require_logged_in!, only: %i[new google_auth]
+
   def new
     redirect_if_logged_in!
     create_empty_user
