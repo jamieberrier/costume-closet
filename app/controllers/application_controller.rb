@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include RegistrationsHelper
   include DancersHelper
+  include DanceStudiosHelper
 
   before_action :require_logged_in!, except: :home
 
