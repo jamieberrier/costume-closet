@@ -27,6 +27,8 @@ class CostumeAssignmentsController < ApplicationController
       @costume_assignments = CostumeAssignment.current_costumes(current_user)
     else
       @costume_assignments = CostumeAssignment.current_studio_costumes(current_user)
+      # can I deal wiht this in view instead?
+      @costumes = Costume.find_by_assignment(@costume_assignments)
     end
   end
 end
