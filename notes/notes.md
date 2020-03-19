@@ -254,3 +254,75 @@ DELETE /costume_assignments/:id
 ### current_assignments
 GET /dancers/:id/current_costumes
 GET /dance_studios/:id/current_costumes
+
+
+
+
+
+
+<% if @costume_assignments.nil? %>
+  <!-- no current costumes -->
+  <h2 class='subtitle'>No Costume Assignments For This Season</h2>
+<% else %>
+  <% displayed = 0 %>
+  <% @costume_assignments.each do |assignment| %>
+    <article class='media'>
+      <% if displayed == 0 %>
+        <% costume = Costume.find(assignment.costume_id) %>
+        <!-- costume picture -->
+        <figure class='media-left'>
+          <p class='image is-64x64'>
+            <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id) %>
+          </p>
+        </figure>
+        <div class='media-content'>
+          <!-- song name (genre) -->
+          <div class='content'>
+            <p>
+              <strong><%= assignment.song_name.upcase %></strong> (<%= assignment.genre %>)
+            </p>
+            <!-- shoes and tights -->
+            <p style='margin-left:3%;'>
+              <strong>Shoes:</strong> <%= assignment.shoe %>
+              <br>
+              <strong>Tights:</strong> <%= assignment.tight %>
+            </p>
+            <table class='table is-narrow'>
+              <!-- table of dancer name, their costume's size, and its condition -->
+              <thead>
+                <tr>
+                  <th>Dancer</th>
+                  <th>Size</th>
+                  <th>Condition</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <% displayed = 1 %>
+      <% end %>
+        <!-- nested media object -->
+        <article class='media'>
+          <!-- empty pic to indent -->
+          <figure class='media-left'>
+            <p class='image is-48x48'>
+            </p>
+          </figure>
+          <!-- nested media content -->
+          <div class='media-content'>
+            <div class='content'>
+              <table class='table is-narrow'>
+                <tbody>
+                  <tr>
+                    <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
+                    <td><%= assignment.costume_size %></td>
+                    <td><%= assignment.costume_condition %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div><!-- end nested media content -->
+        </article><!-- end nested media object -->
+      </div><!-- end media content -->
+    </article>
+  <% end %>
+<% end %>
