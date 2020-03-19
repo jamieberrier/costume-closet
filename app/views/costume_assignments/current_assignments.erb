@@ -17,7 +17,7 @@
           <td>Condition</td>
         </thead>
         <tbody>
-        <% @costume_assignments.each do |assignment| %>
+        <% @assignments.each do |assignment| %>
           <tr>
             <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %></td>
             <td><%= assignment.song_name %></td>

@@ -1,4 +1,4 @@
-<% if @costume_assignments.nil? %>
+<% if @assignments.nil? %>
   <!-- no current costumes -->
   <h2 class='subtitle'>No Costume Assignments For This Season</h2>
 <% else %>
@@ -46,7 +46,7 @@
                     <th>Condition</th>
                   </tr>
                 </thead>
-                <% @costume_assignments.each do |assignment| %>
+                <% @assignments.each do |assignment| %>
                   <!-- check if assigment's costume matches the costume (current iteration) -->
                   <% if costume.id == assignment.costume_id %>
                     <!-- display assignment info -->
