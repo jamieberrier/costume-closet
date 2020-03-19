@@ -13,4 +13,12 @@ class Costume < ApplicationRecord
   def twopiece_costume?
     onepiece_description.blank?
   end
+
+  def self.find_by_assignment(assignments)
+    costumes = []
+    assignments.each do |assignment|
+      costumes << Costume.find(assignment.costume_id)
+    end
+    costumes.uniq
+  end
 end
