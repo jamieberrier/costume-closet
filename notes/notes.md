@@ -118,7 +118,7 @@
     - _forn
     - new
     - edit
-  - validations
+  - add validations
   - update URLs
   - when assigning a costume for 2nd, 3rd, etc time...change condition to used
   - back buttons
