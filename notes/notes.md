@@ -122,6 +122,18 @@
   - update URLs
   - when assigning a costume for 2nd, 3rd, etc time...change condition to used
   - back buttons
+  - dancers#index
+    - add total number of costume assignments
+  - dancers#show
+    - add total number of costumes by season and if new/used
+    - add display costume assignments
+  - costumes#show
+    - add total number of dancers by season
+    - add display costume assignments
+  - dancestudio#show
+    - add total number of dancers
+    - add total number of costumes
+    - add total number of costumes by season
 
 # ?s
   - dance studio add dancers?
@@ -326,4 +338,45 @@ GET /dance_studios/:id/current_costumes
       </div><!-- end media content -->
     </article>
   <% end %>
+<% end %>
+
+## DOUBLE NESTED
+### models
+class Show < ApplicationRecord
+    has_many :seasons
+    accepts_nested_attributes_for :seasons
+end
+class Season < ApplicationRecord
+  belongs_to :show, optional: true
+  has_many :episodes
+  accepts_nested_attributes_for :episodes
+end
+class Episode < ApplicationRecord
+  belongs_to :season, optional: true
+end
+### shows_controller
+def show_params
+  params.require(:show).permit(:name, :seasons_attributes => [:number, :episodes_attributes => [:title]])
+end
+### _form
+<%= form_with(model: show, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <!-- Show name and label -->
+  <%= form.fields_for :seasons do |s| %>
+    <%= s.label :number %>
+    <%= s.number_field :number %>
+
+    <%= s.fields_for :episodes do |e| %>
+      <%= e.label :title %>
+      <%= e.text_field :title %>
+    <% end %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>
