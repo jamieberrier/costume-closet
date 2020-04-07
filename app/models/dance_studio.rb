@@ -1,8 +1,13 @@
 class DanceStudio < ApplicationRecord
+  # adds methods, ie: dancers, dancers<<, dancers.delete, dancers_ids=ids
   has_many :dancers
+  # adds methods, ie: costumes, costumes<<, costumes.delete, costumes_ids=ids
   has_many :costumes
+  # adds methods, ie: costume_assignment_ids=ids
   has_many :costume_assignments, through: :costumes
   has_many :costume_assignments, through: :dancers
+  # adds methods
+  accepts_nested_attributes_for :costumes, :costume_assignments
 
   has_secure_password
 
@@ -16,5 +21,9 @@ class DanceStudio < ApplicationRecord
       user.owner_name = auth.info.name
       user.email = auth.info.email
     end
+  end
+
+  def current_dancers
+    dancers.where(current_dancer: true)
   end
 end
