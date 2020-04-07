@@ -3,12 +3,16 @@ class CostumeAssignmentsController < ApplicationController
 
   def new
     @assignment = CostumeAssignment.new
+    @dance_studio = DanceStudio.find(params[:dance_studio_id])
   end
 
   def create
     @assignment = CostumeAssignment.new(assignment_params)
+
     flash.now[:danger] = "Creation failure: #{@assignment.errors.full_messages.to_sentence}"
     render 'costume_assignments/new' unless @assignment.save
+
+    redirect_to costume_assignment_path(@assignment)
   end
 
   def index
