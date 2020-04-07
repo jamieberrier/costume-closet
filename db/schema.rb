@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_181005) do
+ActiveRecord::Schema.define(version: 2020_04_07_214915) do
 
   create_table "costume_assignments", force: :cascade do |t|
     t.integer "dancer_id"
     t.integer "costume_id"
-    t.string "costume_condition"
+    t.string "costume_condition", default: "new"
     t.string "costume_size"
     t.string "song_name"
     t.string "dance_season"
