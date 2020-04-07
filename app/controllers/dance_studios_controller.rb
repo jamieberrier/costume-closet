@@ -30,9 +30,17 @@ class DanceStudiosController < ApplicationController
     redirect_to root_path, success: 'Account Deleted!'
   end
 
+  def assign_costume
+    
+  end
+
+  def assign
+    binding.pry
+  end
+
   private
 
   def dance_studio_params
-    params.require(:dance_studio).permit(:studio_name, :owner_name, :email, :password, :password_confirmation)
+    params.require(:dance_studio).permit(:studio_name, :owner_name, :email, :password, :password_confirmation, dance_studio_costume_assignments_attributes)
   end
 end
