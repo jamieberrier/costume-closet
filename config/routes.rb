@@ -24,8 +24,12 @@ Rails.application.routes.draw do
   scope '/costumes/:id' do
     get '/assignments' => 'costume_assignments#index', as: 'assigned_costume'
   end
-  # Routes for dance studio to view their current costumes
+  
   scope '/dance_studios/:id' do
+    # Routes for dance studio to assign a costume to dancers
+    get '/assign' => 'dance_studios#assign_costume', as: 'assign_costume'
+    post '/assign' => 'dance_studios#assign'
+    # Route for dance studio to view their current costumes
     get '/current_costumes' => 'costume_assignments#current_assignments', as: 'studio_current_costumes'
   end
   # Routes for signing up a dance studio
