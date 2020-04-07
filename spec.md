@@ -31,22 +31,35 @@ Specs:
         - validates :email, presence: true, uniqueness: { case_sensitive: false }
         - validates :studio_name, :owner_name, :password_confirmation, presence: true
     - Dancer
-        - 
+        - has_secure_password
+        - validates :password, confirmation: { case_sensitive: false }
+        - validates :email, presence: true, uniqueness: { case_sensitive: false }
+        - validates :first_name, :last_name, :password_confirmation, presence: true
     - Costume
-        - 
+        - validates :onepiece_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :onepiece_costume?
+        - validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
     - CostumeAssignment
         - 
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+    - Costume_Assignment.current_costumes
+    - /dance_studios/:id/current_costumes
+    - 
     - Dancer.current_dancers
-    - dance_studio/:id/dancers/current_dancers
-- [ ] Include signup (how e.g. Devise)
-- [ ] Include login (how e.g. Devise)
-- [ ] Include logout (how e.g. Devise)
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
+    - /dance_studios/:id/dancers/current_dancers
+- [x] Include signup (how e.g. Devise)
+    - form
+- [x] Include login (how e.g. Devise)
+    - session[:user_id]
+- [x] Include logout (how e.g. Devise)
+    - reset_session
+- [x] Include third party signup/login (how e.g. Devise/OmniAuth)
     - Omniauth - Google
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
+- [x] Include nested resource show or index (URL e.g. users/2/recipes)
+    - /dance_studios/1/dancers
+- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
+    - /dance_studios/1/costumes/new
 - [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+    - return redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
 
 Confirm:
 - [ ] The application is pretty DRY
