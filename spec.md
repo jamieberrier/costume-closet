@@ -41,8 +41,10 @@ Specs:
     - CostumeAssignment
         - 
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-    - Costume_Assignment.current_costumes
+    - DanceStudio.current_costumes
     - /dance_studios/:id/current_costumes
+    - Dancer.current_costumes
+    - /dancers/:id/current_costumes
     - 
     - Dancer.current_dancers
     - /dance_studios/:id/dancers/current_dancers
