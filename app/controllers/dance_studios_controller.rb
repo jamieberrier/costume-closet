@@ -30,6 +30,12 @@ class DanceStudiosController < ApplicationController
     redirect_to root_path, success: 'Account Deleted!'
   end
 
+  def current_assignments
+    @assignments = DanceStudio.current_studio_costumes(current_user)
+    # can I deal with this in view instead?
+    @costumes = Costume.find_by_assignment(@assignments)
+  end
+
   def assign_costume
     
   end
