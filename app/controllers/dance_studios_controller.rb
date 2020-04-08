@@ -31,13 +31,12 @@ class DanceStudiosController < ApplicationController
   end
 
   def current_assignments
-    @assignments = DanceStudio.current_studio_costumes(current_user)
-    # can I deal with this in view instead?
+    @assignments = DanceStudio.current_studio_assignments(current_user)
     @costumes = Costume.find_by_assignment(@assignments)
   end
 
   def current_costumes
-    
+    @costumes = DanceStudio.current_costumes(current_user)
   end
 
   def assign_costume
