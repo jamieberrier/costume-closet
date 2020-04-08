@@ -35,7 +35,9 @@ class CostumeAssignmentsController < ApplicationController
   def show
     find_assignment
   end
-
+  
+=begin
+  # copied and split in dancer and dancestudio controllers
   def current_assignments
     if dancer?
       @assignments = CostumeAssignment.current_costumes(current_user)
@@ -45,6 +47,7 @@ class CostumeAssignmentsController < ApplicationController
       @costumes = Costume.find_by_assignment(@assignments)
     end
   end
+=end
 
   private
 
