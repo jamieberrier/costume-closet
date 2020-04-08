@@ -36,6 +36,10 @@ class DanceStudiosController < ApplicationController
     @costumes = Costume.find_by_assignment(@assignments)
   end
 
+  def current_costumes
+    
+  end
+
   def assign_costume
     
   end
