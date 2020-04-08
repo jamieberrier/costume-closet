@@ -2,10 +2,10 @@
   <h1 class='title has-text-primary'><%= @dancer.name %>'s Page</h1>
   <div class='buttons'>
     <div class='button'>
-      <%= link_to 'Costume Assignments', dancer_costumes_path(@dancer) %>
+      <%= link_to 'All Costumes', dancer_costumes_path(@dancer) %>
     </div>
     <div class='button'>
-      <%= link_to 'Current Costumes', dancer_current_costumes_path(@dancer) %>
+      <%= link_to 'Current Costumes', dancer_current_assignments_path(@dancer) %>
     </div>
     <div class='button'>
       <%= link_to 'Edit Account', edit_dancer_path(@dancer) %>
