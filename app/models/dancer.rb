@@ -9,6 +9,7 @@ class Dancer < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, :password_confirmation, presence: true
 
+  # OmniAuth - Google
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
@@ -18,7 +19,13 @@ class Dancer < ApplicationRecord
     end
   end
 
+  # Concatenates a dancer's first and last name
   def name
     first_name + ' ' + last_name
+  end
+
+  # Gets current costume assignments for a dancer
+  def self.current_costumes(dancer)
+    CostumeAssignment.where(["dancer_id = '%s' and dance_season = '%s'", dancer.id, Time.now.year])
   end
 end
