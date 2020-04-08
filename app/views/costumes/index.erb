@@ -1,20 +1,4 @@
-<div class='container is-fluid'>
-  <div class='content'>
-    <h1 class='title'><%= current_user.studio_name %> Costumes</h1>
-  </div>
-  <div class="columns">
-    <% @costumes.each do |costume| %>
-      <div class="column">
-      <% if !costume.picture.blank? %>
-        <figure class="image is-96x96">
-          <%= link_to image_tag(costume.picture, width: 100), costume_path(costume) %>
-        </figure>
-      <% elsif !costume.onepiece_description.blank? %>
-        <%= link_to costume.onepiece_description, costume_path(costume) %>
-      <% else %>
-        <%= link_to costume.top_description + ' with ' + costume.bottoms_description, costume_path(costume) %>
-      <% end %>
-      </div>
-    <% end %>
-  </div>
+<div class='content'>
+  <h1 class='title'><%= current_user.studio_name %> Costumes</h1>
 </div>
+<%= render 'display' %>
