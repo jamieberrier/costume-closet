@@ -31,8 +31,9 @@ class CostumeAssignmentsController < ApplicationController
       @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
     end
   end
-
+  # am I using this?
   def show
+    binding.pry
     find_assignment
   end
   
@@ -53,9 +54,5 @@ class CostumeAssignmentsController < ApplicationController
 
   def assignment_params
     params.require(:costume_assignment).permit(:dancer_id, :costume_id, :costume_condition, :costume_size, :song_name, :genre, :dance_season, :shoe, :tight)
-  end
-
-  def find_assignment
-    @costume_assignment = CostumeAssignment.find(params[:id])
   end
 end
