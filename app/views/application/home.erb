@@ -1,55 +1,59 @@
-<div class='container is-fluid'>
+<div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Costume Closet</h1>
   <h2 class='subtitle'>Welcome to Costume Closet!</h2>
-  <!-- Dance Studio New Account -->
-  <div class='box'>
-    <div class=content>
-      <h2 class='subtitle'>Dance Studio Owners:</h2>
-      <p>
-        Create an account to manage and track your dance studio's costumes and costume assignments
-      </p>
-    </div>
-    <div class='buttons'>
-      <button class="button is-primary">
-        <span class="icon">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <%= link_to 'Register with email', register_dance_studio_path, method: :get, class: 'has-text-white' %>
-      </button>
-      <button class="button is-primary">
-        <span class="icon">
-          <i class="fab fa-google"></i>
-        </span>
-        <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), method: :get, class: 'has-text-white' %>
-      </button>
-    </div>
-      <p>Already have a dance studio account?
-      <%= link_to 'Sign In As A Dance Studio', login_path(user_type: "dance_studio"), class: 'button is-success is-small', method: :get %></p>
+</div>
+<!-- Dance Studio New Account -->
+<div class='box'>
+  <div class='content'>
+    <h2 class='subtitle has-text-primary'>Dance Studio Owners</h2>
+    <p>
+      Create an account to manage and track your dance studio's costumes and costume assignments
+    </p>
   </div>
-  <!-- Dancer New Account -->
-  <div class='box'>
-    <div class=content>
-      <h2 class='subtitle'>Dancers:</h2>
-      <p>
-        Create an account to view your costume assignments
-      </p>
-    </div>
-    <div class='buttons'>
-      <button class="button is-primary">
-        <span class="icon">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <%= link_to 'Register with email', register_dancer_path, method: :get, class: 'has-text-white' %>
-      </button>
-      <button class="button is-primary">
-        <span class="icon">
-          <i class="fab fa-google"></i>
-        </span>
-        <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), method: :get, class: 'has-text-white' %>
-      </button>
-    </div>
-      <p>Already have a dancer account?
-      <%= link_to 'Sign In As A Dancer', login_path(user_type: "dancer"), class: 'button is-success is-small', method: :get %></p>
+  <div class='buttons'>
+    <button class="button is-primary">
+      <span class="icon">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <%= link_to 'Register with email', register_dance_studio_path, method: :get, class: 'has-text-white' %>
+    </button>
+    <button class="button is-primary">
+      <span class="icon">
+        <i class="fab fa-google"></i>
+      </span>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), method: :get, class: 'has-text-white' %>
+    </button>
+  </div>
+  <div class='content has-text-right'>
+    <p>Already have a dance studio account?
+    <%= link_to 'Sign In As A Dance Studio', login_path(user_type: "dance_studio"), class: 'button is-success is-small', method: :get %></p>
+  </div>
+</div>
+<!-- Dancer New Account -->
+<div class='box'>
+  <div class='content'>
+    <h2 class='subtitle has-text-primary'>Dancers</h2>
+    <p>
+      Create an account to view your costume assignments
+    </p>
+  </div>
+  <div class='buttons'>
+    <button class="button is-primary">
+      <span class="icon">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <%= link_to 'Register with email', register_dancer_path, method: :get, class: 'has-text-white' %>
+    </button>
+    <button class="button is-primary">
+      <span class="icon">
+        <i class="fab fa-google"></i>
+      </span>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), method: :get, class: 'has-text-white' %>
+    </button>
+  </div>
+  <div class='content has-text-right'>
+    <p>Already have a dancer account?
+    <%= link_to 'Sign In As A Dancer', login_path(user_type: "dancer"), class: 'button is-success is-small', method: :get %></p>
   </div>
 </div>
   
