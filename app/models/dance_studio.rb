@@ -29,7 +29,12 @@ class DanceStudio < ApplicationRecord
   end
 
   # Gets current costume assignments for a dance studio
-  def self.current_studio_costumes(studio)
+  def self.current_studio_assignments(studio)
     studio.costume_assignments.where("dance_season = '%s'", Time.now.year)
+  end
+
+  # Gets current costumes for a dance studio
+  def self.current_costumes(studio)
+    Costume.find_by_assignment(studio.costume_assignments.where("dance_season = '%s'", Time.now.year))
   end
 end
