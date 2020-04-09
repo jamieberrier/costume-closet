@@ -1,0 +1,37 @@
+<div class='content has-text-centered'>
+  <h1 class='title has-text-primary'> Current Dancers at <%= current_user.studio_name %>s</h1>
+</div>
+<!-- Current Dancers -->
+<div class='box'>
+  <div class='table-container'>
+    <table class='table is-fullwidth is-striped is-hoverable'>
+      <thead class='has-text-weight-bold'>
+        <td>Name</td>
+        <td><%= Time.now.year %> Costume Assignments</td>
+        <td>All Costume Assignments</td>
+      </thead>
+      <tbody>
+      <% @dancers.each do |dancer| %>
+        <tr>
+          <td><%= link_to dancer.name, dancer_path(dancer) %></td>
+          <td><%= Dancer.current_costumes(dancer).count %></td>
+          <td><%= dancer.costume_assignments.count %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Count of Current Dancers-->
+<div class='columns'>
+  <div class='column'>
+    <div class='box has-text-centered'>
+      <h2 class='title is-4'><%= @dancers.count %> Dancers</h2>
+      </div>
+  </div>
+  <div class='column'>
+    <div class='box has-text-centered'>
+    <h2 class='title is-4'><%= DanceStudio.current_costumes(current_user).count %> Costumes</h2>
+    </div>
+  </div>
+</div>

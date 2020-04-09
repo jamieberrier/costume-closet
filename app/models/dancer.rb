@@ -28,4 +28,8 @@ class Dancer < ApplicationRecord
   def self.current_costumes(dancer)
     CostumeAssignment.where(["dancer_id = '%s' and dance_season = '%s'", dancer.id, Time.now.year])
   end
+  # Gets current dancers for a dance studio
+  def self.current_dancers(studio)
+    where(["dance_studio_id = '%s' and current_dancer = '%s'", studio.id, 1])
+  end
 end

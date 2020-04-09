@@ -34,9 +34,13 @@ class DancersController < ApplicationController
     # redirect to home page
     redirect_to root_path, success: 'Account Deactivated!'
   end
-  # Current costume assignments
+  # Gets current costume assignments
   def current_assignments
     @assignments = Dancer.current_costumes(current_user)
+  end
+  # Gets current dancers for a dance studio
+  def current_dancers
+    @dancers = Dancer.current_dancers(current_user)
   end
 
   private
