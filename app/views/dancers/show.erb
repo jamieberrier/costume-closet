@@ -1,17 +1,25 @@
-<div class='container is-fluid'>
-  <h1 class='title has-text-primary'><%= @dancer.name %>'s Page</h1>
-  <div class='buttons'>
-    <div class='button'>
-      <%= link_to 'All Costumes', dancer_costumes_path(@dancer) %>
+<div class='content has-text-centered'>
+  <h1 class='title has-text-primary'><%= @dancer.name %></h1>
+  <h2 class='subtitle'><%= @dancer.dance_studio.studio_name %></h2>
+</div>
+<!-- Costumes -->
+<div class='box'>
+  <div class=content>
+    <h2 class='subtitle is-5'>Costumes</h2>
+  </div>
+  <div class='buttons is-grouped'>
+    <%= link_to 'All Costumes', dancer_costumes_path(@dancer), class: 'button is-link is-light' %>
+    <%= link_to 'Current Costumes', dancer_current_assignments_path(@dancer), class: 'button is-link is-light' %>
+  </div>
+  </div>
+  <!-- Account -->
+  <div class='box'>
+    <div class=content>
+      <h2 class='subtitle is-5'>Account</h2>
     </div>
-    <div class='button'>
-      <%= link_to 'Current Costumes', dancer_current_assignments_path(@dancer) %>
-    </div>
-    <div class='button'>
-      <%= link_to 'Edit Account', edit_dancer_path(@dancer) %>
-    </div>
-    <div class='button'>
-      <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete %>
+    <div class='buttons is-grouped'>
+      <%= link_to 'Edit Account', edit_dancer_path(@dancer), class: 'button is-warning' %>
+      <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete, class: 'button is-danger' %>
     </div>
   </div>
 </div>

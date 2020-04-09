@@ -1,6 +1,8 @@
-<div class='container is-fluid'>
-  <h1 class='title has-text-primary'>Costume Closet</h1>
-  <h2 class='subtitle'>Enter email & password or 
+<div class='content has-text-centered'>
+  <div class='field'>
+    <h1 class='title has-text-primary'>Costume Closet</h1>
+  </div>
+  <h2 class='subtitle is-size-5'>Enter email & password or 
     <button class="button is-success is-small">
       <span class="icon">
         <i class="fab fa-google"></i>
@@ -8,5 +10,5 @@
       <%= link_to 'Sign In with Google', google_omniauth_path(user_type: params[:user_type]), method: :get, class: 'has-text-white' %>
     </button>
   </h2>
-  <%= render "form" %>
 </div>
+<%= render "form" %>
