@@ -112,6 +112,7 @@
 
 # TODO
 - costume assignments
+  - using show?
   - controller actions
     - new, create, edit, update, destroy
   - views
@@ -129,7 +130,10 @@
     - add display costume assignments
   - costumes#show
     - add total number of dancers by season
-    - add display costume assignments
+    - add 'Assign Costume' button 
+    - breaks when page refreshed
+      - if request.env['HTTP_REFERER'].include?('current_costumes')
+      - if request.env['HTTP_REFERER'].include?('costume_assignments') 
   - dancestudio#show
     - add total number of dancers
     - add total number of costumes
