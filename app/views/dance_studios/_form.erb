@@ -1,7 +1,7 @@
 <%= form_for @dance_studio do |f| %>
   <!-- studio name -->
   <div class='field'>
-    <%= f.label :studio_name, class: 'label' %>
+    <%= f.label :studio_name, 'Studio Name', class: 'label' %>
     <div class='control has-icons-left'>
       <%= f.text_field :studio_name, class:'input', placeholder: 'Enter Studio Name' %>
         <span class='icon is-small is-left'>
@@ -11,7 +11,7 @@
   </div>
   <!-- owner name -->
   <div class='field'>
-    <%= f.label :owner_name, class: 'label' %>
+    <%= f.label :owner_name, 'Owner Name', class: 'label' %>
     <div class='control has-icons-left'>
       <%= f.text_field :owner_name, class:'input', placeholder: 'Enter Studio Owner' %>
         <span class='icon is-small is-left'>
@@ -41,7 +41,7 @@
   </div>
   <!-- password confirmation -->
   <div class='field'>
-    <%= f.label :password_confirmation, class: 'label' %>
+    <%= f.label :password_confirmation, 'Password Confirmation', class: 'label' %>
     <div class='control has-icons-left'>
       <%= f.password_field :password_confirmation, class:'input', placeholder: 'Re-enter Password' %>
         <span class='icon is-small is-left'>
@@ -52,7 +52,7 @@
   <!-- submit button -->
   <div class='field'>
     <div class='control'>
-      <%= f.submit class: 'button is-primary' %>
+      <%= f.submit 'Register Dance Studio', class: 'button is-primary' %>
     </div>
   </div>
 <% end %>

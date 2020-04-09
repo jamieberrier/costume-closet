@@ -128,6 +128,8 @@
   - dancers#show
     - add total number of costumes by season and if new/used
     - add display costume assignments
+  - costumes
+    - display by season - already have current season (current_costumes)
   - costumes#show
     - add total number of dancers by season
     - add 'Assign Costume' button 
