@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     # Route for dance studio to view their current costume assignments
     get '/current_assignments' => 'dance_studios#current_assignments', as: 'studio_current_assignments'
     # Route for dance studio to view their current dancers
-    get '/current_dancers' => 'dancers#current_dancers', as: 'studio_current_dancers'
+    get '/dancers/current_dancers' => 'dancers#current_dancers', as: 'studio_current_dancers'
     # Route for dance studio to view the costumes currently in use
     get '/current_costumes' => 'dance_studios#current_costumes', as: 'studio_current_costumes'
   end
