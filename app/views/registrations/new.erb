@@ -1,10 +1,8 @@
-<div class='container is-fluid'>
-  <h1 class='title has-text-primary'>Register for Costume Closet</h1>
-  <div class='box'>
-    <% if @dancer %>
-      <%= render "dancers/form" %>
-    <% else %>
-      <%= render "dance_studios/form" %>
-    <% end %>
-  </div>
+<h1 class='title has-text-primary has-text-centered'>Register for Costume Closet</h1>
+<div class='box'>
+  <% if @dancer %>
+    <%= render "dancers/form" %>
+  <% else %>
+    <%= render "dance_studios/form" %>
+  <% end %>
 </div>

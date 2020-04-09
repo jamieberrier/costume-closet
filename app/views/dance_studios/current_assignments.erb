@@ -1,76 +1,74 @@
-<div class='container is-fluid'>
-  <div class="content">
-    <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
-  </div>
-  <!--%= render "studio" %-->
-  <% if @assignments.nil? %>
-    <!-- no current costumes -->
-    <h2 class='subtitle'>No Costume Assignments For This Season</h2>
-  <% else %>
-    <!-- Costume.find(@costume_assignments.first.costume_id) -->
-    <% @costumes.each do |costume| %>
-      <!-- get assignment info for costume -->
-      <% info = costume.costume_assignments.where("dance_season = '%s'", Time.now.year).first %>
-      <!-- display costume picture & assignment info if it's currently assigned-->
-      <article class='media'>
-        <!-- costume picture -->
-        <figure class='media-left'>
-          <p class='image is-64x64'>
-            <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id) %>
-          </p>
-        </figure>
-        <div class='media-content'>
-          <!-- song name (genre) -->
-          <div class='content'>
-            <p>
-              <strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)
-            </p>
-            <!-- shoes and tights -->
-            <p style='margin-left:3%;'>
-              <strong>Shoes:</strong> <%= info.shoe %> 
-              <br>
-              <strong>Tights:</strong> <%= info.tight %>
-            </p>
-          </div>
-          <!-- nested media object -->
-          <article class='media'>
-            <!-- empty pic to indent -->
-            <figure class='media-left'>
-              <p class='image is-48x48'>
-              </p>
-            </figure>
-            <!-- nested media content -->
-            <div class='media-content'>
-              <!--div class='content'--><!-- elongates table size -->
-                <table class='table is-narrow'>
-                  <!-- table of dancer name, their costume's size, and its condition -->
-                  <thead>
-                    <tr>
-                      <th>Dancer</th>
-                      <th>Size</th>
-                      <th>Condition</th>
-                    </tr>
-                  </thead>
-                  <% @assignments.each do |assignment| %>
-                    <!-- check if assigment's costume matches the costume (current iteration) -->
-                    <% if costume.id == assignment.costume_id %>
-                      <!-- display assignment info -->
-                      <tbody>
-                        <!-- Dancer Name, costume size, costume condition -->
-                        <tr>
-                          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
-                          <td><%= assignment.costume_size %></td>
-                          <td><%= assignment.costume_condition %></td>
-                        </tr>
-                      </tbody>
-                    <% end %><!-- end if -->
-                  <% end %><!-- @costume_assignments.each -->
-                </table>
-              <!--/div--><!-- end nested content -->
-            </div><!-- end nested media content -->
-          </article><!-- end nested media object -->
-        </div><!-- end media content -->
-      </article><!-- end article -->
-    <% end %><!-- end @costumes.each -->
-  <% end %>
+<div class='content has-text-centered'>
+  <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
 </div>
+<!--%= render "studio" %-->
+<% if @assignments.nil? %>
+  <!-- no current costumes -->
+  <h2 class='subtitle'>No Costume Assignments For This Season</h2>
+<% else %>
+  <!-- Costume.find(@costume_assignments.first.costume_id) -->
+  <% @costumes.each do |costume| %>
+    <!-- get assignment info for costume -->
+    <% info = costume.costume_assignments.where("dance_season = '%s'", Time.now.year).first %>
+    <!-- display costume picture & assignment info if it's currently assigned-->
+    <article class='media'>
+      <!-- costume picture -->
+      <figure class='media-left'>
+        <p class='image is-64x64'>
+          <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id) %>
+        </p>
+      </figure>
+      <div class='media-content'>
+        <!-- song name (genre) -->
+        <div class='content'>
+          <p>
+            <strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)
+          </p>
+          <!-- shoes and tights -->
+          <p style='margin-left:3%;'>
+            <strong>Shoes:</strong> <%= info.shoe %> 
+            <br>
+            <strong>Tights:</strong> <%= info.tight %>
+          </p>
+        </div>
+        <!-- nested media object -->
+        <article class='media'>
+          <!-- empty pic to indent -->
+          <figure class='media-left'>
+            <p class='image is-48x48'>
+            </p>
+          </figure>
+          <!-- nested media content -->
+          <div class='media-content'>
+            <!--div class='content'--><!-- elongates table size -->
+              <table class='table is-narrow'>
+                <!-- table of dancer name, their costume's size, and its condition -->
+                <thead>
+                  <tr>
+                    <th>Dancer</th>
+                    <th>Size</th>
+                    <th>Condition</th>
+                  </tr>
+                </thead>
+                <% @assignments.each do |assignment| %>
+                  <!-- check if assigment's costume matches the costume (current iteration) -->
+                  <% if costume.id == assignment.costume_id %>
+                    <!-- display assignment info -->
+                    <tbody>
+                      <!-- Dancer Name, costume size, costume condition -->
+                      <tr>
+                        <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
+                        <td><%= assignment.costume_size %></td>
+                        <td><%= assignment.costume_condition %></td>
+                      </tr>
+                    </tbody>
+                  <% end %><!-- end if -->
+                <% end %><!-- @costume_assignments.each -->
+              </table>
+            <!--/div--><!-- end nested content -->
+          </div><!-- end nested media content -->
+        </article><!-- end nested media object -->
+      </div><!-- end media content -->
+    </article><!-- end article -->
+  <% end %><!-- end @costumes.each -->
+<% end %>
