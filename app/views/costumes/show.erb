@@ -1,60 +1,62 @@
-<div class='container is-fluid'>
-  <div class='content'>
-    <h1 class='title has-text-primary'>Show Costume</h1>
+<div class='columns'>
+  <div class='column'>
+    <%= image_tag @costume.picture %>
   </div>
-  <div class="columns">
-    <div class="column">
-      <%= image_tag @costume.picture %>
-    </div>
-    <% if @costume.onepiece_description.blank? %>
-      <div class="column">
-        <div class='box'>
-          <h2 class='title is-4'>Top</h2>
-          <%= @costume.top_description %>
-        </div>
-      </div>
-      <div class="column">
-        <div class='box'>
-          <h2 class='title is-4'>Bottoms</h2>
-          <%= @costume.bottoms_description %>
-        </div>
-      </div>
-    <% else %>
-      <div class="column">
-        <div class='box'>
-          <h2 class='title is-4'>One-Piece</h2>
-          <%= @costume.onepiece_description %>
-        </div>
-      </div>
-    <% end %>
-    <div class="column">
+  <% if @costume.onepiece_description.blank? %>
+    <div class='column'>
       <div class='box'>
-        <h2 class='title is-4'>Hair Accessory</h2>
-        <%= @costume.hair_accessory %>
+        <h2 class='title is-4'>Top</h2>
+        <%= @costume.top_description %>
       </div>
+    </div>
+    <div class='column'>
+      <div class='box'>
+        <h2 class='title is-4'>Bottoms</h2>
+        <%= @costume.bottoms_description %>
+      </div>
+    </div>
+  <% else %>
+    <div class='column'>
+      <div class='box'>
+        <h2 class='title is-4'>One-Piece</h2>
+        <%= @costume.onepiece_description %>
+      </div>
+    </div>
+  <% end %>
+  <div class='column'>
+    <div class='box'>
+      <h2 class='title is-4'>Hair Accessory</h2>
+      <%= @costume.hair_accessory %>
     </div>
   </div>
-  <% if owner? %>
-    <div class="buttons">
-      <%= link_to 'Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
-      <%= link_to 'Edit Costume', edit_costume_path(@costume, dance_studio_id: current_user.id), class: 'button is-success' %>
-      <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
-      <% if request.env['HTTP_REFERER'].include?('current_costumes') %>
-        <%= link_to 'Back to Current Costumes', studio_current_costumes_path(current_user), class: 'button' %>
-      <% else %>
-        <%= link_to 'Back to Costumes', dance_studio_costumes_path(current_user), class: 'button' %>
-      <% end %>
+</div>
+<% if owner? %>
+  <div class='buttons is-grouped'>
+    <!-- TODO: breaks when page is refreshed -->
+    <% if request.env['HTTP_REFERER'].include?('current_costumes') %>
+      <%= link_to 'Back to Current Costumes', studio_current_costumes_path(current_user), class: 'button' %>
+    <% else %>
+      <%= link_to 'Back to Costumes', dance_studio_costumes_path(current_user), class: 'button' %>
+    <% end %>
+  </div>
+  <div class='buttons is-grouped'>
+    <%= link_to 'Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
+    <!-- TODO: add 'Assign Costume' button -->
+  </div>
+  <div class='buttons is-grouped'>
+    <%= link_to 'Edit Costume', edit_costume_path(@costume, dance_studio_id: current_user.id), class: 'button is-success' %>
+    <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
+  </div>
+<% end %>
+<% if dancer? %>
+  <!-- TODO: breaks when page is refreshed -->
+  <% if request.env['HTTP_REFERER'].include?('costume_assignments') %>
+    <div class='button'>
+      <%= link_to 'Back to Costumes', dancer_costumes_path(current_user) %>
+    </div>
+  <% else %>
+    <div class='button'>
+      <%= link_to 'Back to Current Costumes', dancer_current_costumes_path(current_user) %>
     </div>
   <% end %>
-  <% if dancer? %>
-    <% if request.env['HTTP_REFERER'].include?('costume_assignments') %>
-      <div class='button'>
-        <%= link_to 'Back to Costumes', dancer_costumes_path(current_user) %>
-      </div>
-    <% else %>
-      <div class='button'>
-        <%= link_to 'Back to Current Costumes', dancer_current_costumes_path(current_user) %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<% end %>
