@@ -19,11 +19,12 @@ class Costume < ApplicationRecord
   def twopiece_description
     top_description + ' with ' + bottoms_description
   end
-
+  # TODO: refactor
   def self.find_by_assignment(assignments)
     costumes = []
+
     assignments.each do |assignment|
-      costumes << Costume.find(assignment.costume_id)
+      costumes << find(assignment.costume_id)
     end
     costumes.uniq
   end
@@ -38,7 +39,7 @@ class Costume < ApplicationRecord
     assignments_hashes.each do |i, unique_attributes|
       # combine unique dancer data with shared data
       combined_attributes = unique_attributes.merge(shared_attributes)
-      self.costume_assignments.build(combined_attributes)
+      costume_assignments.build(combined_attributes)
     end
   end
 end
