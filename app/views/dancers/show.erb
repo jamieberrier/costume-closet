@@ -18,7 +18,9 @@
       <h2 class='subtitle is-5'>Account</h2>
     </div>
     <div class='buttons is-grouped'>
-      <%= link_to 'Edit Account', edit_dancer_path(@dancer), class: 'button is-warning' %>
+      <% if dancer? %>
+        <%= link_to 'Edit Account', edit_dancer_path(@dancer), class: 'button is-warning' %>
+      <% end %>
       <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete, class: 'button is-danger' %>
     </div>
   </div>
