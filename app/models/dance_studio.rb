@@ -14,9 +14,7 @@ class DanceStudio < ApplicationRecord
   validates :password, confirmation: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :studio_name, :owner_name, :password_confirmation, presence: true
-  # Gets current costumes for a dance studio
-  scope :current_studio_costumes, lambda { |studio| Costume.find_by_assignment(studio.costume_assignments.where("dance_season = '%s'", Time.now.year)) }
-  
+
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
@@ -24,11 +22,11 @@ class DanceStudio < ApplicationRecord
       user.email = auth.info.email
     end
   end
-  # Gets current costume assignments for a dance studio
+  # Gets the current costume assignments for a dance studio
   def current_studio_assignments
     costume_assignments.where("dance_season = '%s'", Time.now.year)
   end
-  # Gets current costumes for a dance studio
+  # Gets the current costumes for a dance studio
   def current_studio_costumes
     Costume.find_by_assignment(costume_assignments.where("dance_season = '%s'", Time.now.year))
   end

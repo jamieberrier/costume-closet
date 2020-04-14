@@ -29,14 +29,14 @@ class DanceStudiosController < ApplicationController
     session.destroy
     redirect_to root_path, success: 'Account Deleted!'
   end
-
+  # current costume assignments for a dance studio
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
   end
-
+  # current costumes for a dance studio
   def current_costumes
-    @costumes = DanceStudio.current_studio_costumes(current_user)
+    @costumes = current_user.current_studio_costumes
   end
   # better in costume assignments?
   def assign_costume
