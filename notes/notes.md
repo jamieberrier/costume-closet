@@ -142,6 +142,9 @@
     - add total number of costumes by season
 
 # ?s
+  - nested form
+    - can they be built off any model as long as it is associated to all other models in form?
+    - built off join model? creating new instances of it?
   - dance studio add dancers?
     - how dancers finish setting up their account?
     - or dancers must create account first?
