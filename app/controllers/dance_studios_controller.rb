@@ -31,12 +31,12 @@ class DanceStudiosController < ApplicationController
   end
 
   def current_assignments
-    @assignments = DanceStudio.current_studio_assignments(current_user)
+    @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
   end
 
   def current_costumes
-    @costumes = DanceStudio.current_costumes(current_user)
+    @costumes = DanceStudio.current_studio_costumes(current_user)
   end
   # better in costume assignments?
   def assign_costume
