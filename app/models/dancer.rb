@@ -11,8 +11,6 @@ class Dancer < ApplicationRecord
 
   # Gets current dancers for a dance studio
   scope :current_dancers, lambda { |studio| where(["dance_studio_id = '%s' and current_dancer = '%s'", studio.id, 1]) }
-  # Gets current costume assignments for a dancer
-  scope :current_costumes, lambda { |dancer| CostumeAssignment.where(["dancer_id = '%s' and dance_season = '%s'", dancer.id, Time.now.year]) }
 
   # OmniAuth - Google
   def self.from_omniauth(auth)

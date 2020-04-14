@@ -36,7 +36,7 @@ class DancersController < ApplicationController
   end
   # Gets current costume assignments
   def current_assignments
-    @assignments = Dancer.current_costumes(current_user)
+    @assignments = CostumeAssignment.current_dancer_costumes(current_user)
   end
   # Gets current dancers for a dance studio
   def current_dancers

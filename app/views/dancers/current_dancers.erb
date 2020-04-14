@@ -14,7 +14,7 @@
       <% @dancers.each do |dancer| %>
         <tr>
           <td><%= link_to dancer.name, dancer_path(dancer) %></td>
-          <td><%= Dancer.current_costumes(dancer).count %></td>
+          <td><%= CostumeAssignment.current_dancer_costumes(dancer).count %></td>
           <td><%= dancer.costume_assignments.count %></td>
         </tr>
       <% end %>
@@ -31,7 +31,7 @@
   </div>
   <div class='column'>
     <div class='box has-text-centered'>
-    <h2 class='title is-4'><%= DanceStudio.current_costumes(current_user).count %> Costumes</h2>
+    <h2 class='title is-4'><%= current_user.current_studio_costumes.count %> Costumes</h2>
     </div>
   </div>
 </div>
