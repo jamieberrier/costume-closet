@@ -40,12 +40,7 @@ Specs:
         - validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
     - CostumeAssignment
         - 
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-    - DanceStudio.current_costumes
-    - /dance_studios/:id/current_costumes
-    - Dancer.current_costumes
-    - /dancers/:id/current_costumes
-    - 
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
     - Dancer.current_dancers
     - /dance_studios/:id/dancers/current_dancers
 - [x] Include signup (how e.g. Devise)
