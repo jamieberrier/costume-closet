@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_214915) do
+ActiveRecord::Schema.define(version: 2020_04_14_212040) do
 
   create_table "costume_assignments", force: :cascade do |t|
     t.integer "dancer_id"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_214915) do
     t.text "bottoms_description"
     t.text "onepiece_description"
     t.string "picture"
-    t.string "hair_accessory", default: "none"
+    t.string "hair_accessory"
     t.integer "dance_studio_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
