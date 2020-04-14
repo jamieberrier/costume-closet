@@ -55,7 +55,7 @@ Specs:
     - /dance_studios/1/dancers
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
     - /dance_studios/1/costumes/new
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
     - return redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
 
 Confirm:
