@@ -9,6 +9,11 @@ class Dancer < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, :password_confirmation, presence: true
 
+  # Gets current dancers for a dance studio
+  scope :current_dancers, lambda { |studio| where(["dance_studio_id = '%s' and current_dancer = '%s'", studio.id, 1]) }
+  # Gets current costume assignments for a dancer
+  scope :current_costumes, lambda { |dancer| CostumeAssignment.where(["dancer_id = '%s' and dance_season = '%s'", dancer.id, Time.now.year]) }
+
   # OmniAuth - Google
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
@@ -22,14 +27,5 @@ class Dancer < ApplicationRecord
   # Concatenates a dancer's first and last name
   def name
     first_name + ' ' + last_name
-  end
-
-  # Gets current costume assignments for a dancer
-  def self.current_costumes(dancer)
-    CostumeAssignment.where(["dancer_id = '%s' and dance_season = '%s'", dancer.id, Time.now.year])
-  end
-  # Gets current dancers for a dance studio
-  def self.current_dancers(studio)
-    where(["dance_studio_id = '%s' and current_dancer = '%s'", studio.id, 1])
   end
 end
