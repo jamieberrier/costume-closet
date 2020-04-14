@@ -36,6 +36,14 @@ class CostumeAssignmentsController < ApplicationController
     binding.pry
     find_assignment
   end
+  # assign costume actions
+  def assign_costume
+
+  end
+
+  def assign
+
+  end
   
 =begin
   # copied and split in dancer and dancestudio controllers
