@@ -127,12 +127,12 @@
           </tr>
         </thead>
         <tbody>
-          <% current_user.current_dancers.count.times do %>
+          <% Dancer.current_dancers(current_user).count.times do %>
             <%= assignments_fields.fields_for :costume_assignments, current_user.costume_assignments.build do |dancers_fields| %>
               <tr>
                 <td>
                   <div class="select">
-                    <%= dancers_fields.collection_select(:dancer_id, current_user.current_dancers, :id, :name, {prompt: "Select A Dancer"}, {class: 'select'}) %>
+                    <%= dancers_fields.collection_select(:dancer_id, Dancer.current_dancers(current_user), :id, :name, {prompt: "Select A Dancer"}, {class: 'select'}) %>
                     <!--%= f.collection_check_boxes :dancer_id, @dance_studio.dancers, :id, :name, class: 'checkbox' %-->
                   </div>
                 </td>

@@ -6,7 +6,7 @@ class CostumesController < ApplicationController
     # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
     @assignment_info = @costume.costume_assignments.build
     # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
-    current_user.current_dancers.each do |dancer|
+    Dancer.current_dancers(current_user).each do |dancer|
       @costume.costume_assignments.build(dancer_id: dancer.id)
     end
   end
