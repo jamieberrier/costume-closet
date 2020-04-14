@@ -3,7 +3,6 @@ class CostumeAssignmentsController < ApplicationController
 
   def new
     @assignment = CostumeAssignment.new
-    @dance_studio = DanceStudio.find(params[:dance_studio_id])
   end
 
   def create

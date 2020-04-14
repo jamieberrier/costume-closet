@@ -1,11 +1,11 @@
 <!-- add an individual costume assignment -->
-<%= form_for [@dance_studio, @assignment], url: dance_studio_costume_assignments_path do |f| %>
+<%= form_for [current_user, @assignment], url: dance_studio_costume_assignments_path do |f| %>
   <!-- existing costume -->
   <div class='box'>
     <div class='field'>
       <%= f.label 'Select A Costume', class: 'subtitle' %>
       <div class='control'>
-        <%= f.collection_radio_buttons :costume_id, @dance_studio.costumes, :id, :picture do |b|
+        <%= f.collection_radio_buttons :costume_id, current_user.costumes, :id, :picture do |b|
           if !b.object.picture.blank?
             b.label(class: 'radio') { b.radio_button + image_tag(b.object.picture, width: 75) }
           elsif !b.object.onepiece_description.blank?
@@ -120,7 +120,7 @@
       <tr>
         <td>
           <div class="select">
-            <%= f.collection_select(:dancer_id, @dance_studio.current_dancers, :id, :name, {prompt: "Select A Dancer"}, {class: 'select'}) %>
+            <%= f.collection_select(:dancer_id, Dancer.current_dancers(current_user), :id, :name, {prompt: "Select A Dancer"}, {class: 'select'}) %>
           </div>
         </td>
         <td><%= f.text_field :costume_size, class:'input' %></td>
