@@ -38,11 +38,11 @@ class DanceStudiosController < ApplicationController
   def current_costumes
     @costumes = DanceStudio.current_costumes(current_user)
   end
-
+  # better in costume assignments?
   def assign_costume
     
   end
-
+  # better in costume assignments?
   def assign
     binding.pry
   end
