@@ -110,6 +110,10 @@
     - current_assignments, index, show
   - validation
 
+14. dance studio add dancers
+  - enter first name, last name, and email
+  - password & password confirmation are set for them
+
 # TODO
 - costume assignments
   - using show?
@@ -145,12 +149,8 @@
   - nested form
     - can they be built off any model as long as it is associated to all other models in form?
     - built off join model? creating new instances of it?
-  - dance studio add dancers?
-    - how dancers finish setting up their account?
-    - or dancers must create account first?
   - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
   - edit forms
-    - icons not showing, unless refresh
     - password & password confirmation passing as blank
   - how to center image
 
