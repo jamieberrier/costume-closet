@@ -1,29 +1,35 @@
-<div class="content has-text-centered">
-  <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
-</div>
-<div class='table-container'>
-  <table class='table is-fullwidth is-striped is-hoverable'>
-    <thead class='has-text-weight-bold'>
-      <td>Costume</td>
-      <td>Song Name</td>
-      <td>Genre</td>
-      <td>Shoes</td>
-      <td>Tights</td>
-      <td>Size</td>
-      <td>Condition</td>
-    </thead>
-    <tbody>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %></td>
-        <td><%= assignment.song_name %></td>
-        <td><%= assignment.genre %></td>
-        <td><%= assignment.shoe %></td>
-        <td><%= assignment.tight %></td>
-        <td><%= assignment.costume_size %></td>
-        <td><%= assignment.costume_condition %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+<% if @assignments.empty? %>
+  <div class="content has-text-centered">
+    <h1 class='title has-text-primary'>No <%= Time.now.year %> Costume Assignments</h1>
+  </div>
+<% else %>
+  <div class="content has-text-centered">
+    <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
+  </div>
+  <div class='table-container'>
+    <table class='table is-fullwidth is-striped is-hoverable'>
+      <thead class='has-text-weight-bold'>
+        <td>Costume</td>
+        <td>Song Name</td>
+        <td>Genre</td>
+        <td>Shoes</td>
+        <td>Tights</td>
+        <td>Size</td>
+        <td>Condition</td>
+      </thead>
+      <tbody>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %></td>
+          <td><%= assignment.song_name %></td>
+          <td><%= assignment.genre %></td>
+          <td><%= assignment.shoe %></td>
+          <td><%= assignment.tight %></td>
+          <td><%= assignment.costume_size %></td>
+          <td><%= assignment.costume_condition %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
