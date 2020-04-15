@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Shallow nested routes, nests: index create new
   resources :dance_studios, only: %i[create show edit update destroy], shallow: true do
     resources :costumes
-    resources :dancers, only: %i[index show edit update destroy]
+    resources :dancers, only: %i[new index show edit update destroy]
     resources :costume_assignments
   end
 

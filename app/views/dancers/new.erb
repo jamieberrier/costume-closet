@@ -1,0 +1,45 @@
+<!-- For a Dance Studio to create a dancer -->
+<h1 class='title has-text-primary has-text-centered'>Add New Dancer</h1>
+<div class='box'>
+  <%= form_for @dancer do |f| %>
+    <%= f.hidden_field :dance_studio_id %>
+    <%= f.hidden_field :password %>
+    <%= f.hidden_field :password_confirmation %>
+    <!-- first name -->
+    <div class='field'>
+      <%= f.label :first_name, 'First Name', class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :first_name, class:'input', placeholder: 'Enter First Name' %>
+          <span class='icon is-small is-left'>
+            <i class='fas fa-user'></i>
+          </span>
+      </div>
+    </div>
+    <!-- last name -->
+    <div class='field'>
+      <%= f.label :last_name, 'Last Name', class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :last_name, class:'input', placeholder: 'Enter Last Name' %>
+          <span class='icon is-small is-left'>
+            <i class='fas fa-user'></i>
+          </span>
+      </div>
+    </div>
+    <!-- email -->
+    <div class='field'>
+      <%= f.label :email, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.email_field :email, class:'input', placeholder: 'Enter Email' %>
+          <span class='icon is-small is-left'>
+            <i class='fas fa-envelope'></i>
+          </span>
+      </div>
+    </div>
+    <!-- submit button -->
+    <div class='field'>
+      <div class='control'>
+        <%= f.submit class: 'button is-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
