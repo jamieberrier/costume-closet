@@ -5,8 +5,13 @@ class DanceStudiosController < ApplicationController
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
-    try_to_save(@dance_studio)
-    log_in(@dance_studio, 'Successfully Registered!')
+    #try_to_save(@dance_studio)
+    if @dance_studio.save
+      log_in(@dance_studio, 'Successfully Registered!')
+    else
+      flash.now[:danger] = "Signup failure: #{@dance_studio.errors.full_messages.to_sentence}"
+      render 'registrations/new'
+    end
   end
 
   def show
@@ -50,6 +55,6 @@ class DanceStudiosController < ApplicationController
   private
 
   def dance_studio_params
-    params.require(:dance_studio).permit(:studio_name, :owner_name, :email, :password, :password_confirmation, dance_studio_costume_assignments_attributes)
+    params.require(:dance_studio).permit(:studio_name, :owner_name, :email, :password, :password_confirmation)
   end
 end
