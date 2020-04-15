@@ -36,11 +36,10 @@ Rails.application.routes.draw do
     # Route for dance studio to view the costumes currently in use
     get '/current_costumes' => 'dance_studios#current_costumes', as: 'studio_current_costumes'
   end
-  # Routes for signing up a dance studio
-  get '/register/dance_studio' => 'registrations#new'
+  # Route for signing up a user
+  get '/register' => 'registrations#new'
+  # Routes for signing up via google
   get '/register/dance_studio/google' => 'registrations#google_auth', as: 'dance_studio_google_register'
-  # Routes for signing up a dancer
-  get '/register/dancer' => 'registrations#new'
   get '/register/dancer/google' => 'registrations#google_auth', as: 'dancer_google_register'
   # Routes for logging in
   get '/login' => 'sessions#new'
