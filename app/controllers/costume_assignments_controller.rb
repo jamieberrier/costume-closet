@@ -4,7 +4,7 @@ class CostumeAssignmentsController < ApplicationController
   def index
     if owner?
       if params[:costume_id] # owner viewing a costume's assignments
-        @costume = Costume.find(params[:id])
+        find_costume
         @costume_assignments = CostumeAssignment.where(costume_id: @costume)
       elsif params[:id] # owner viewing a dancer's costume assignments
         find_dancer
