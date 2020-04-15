@@ -2,26 +2,18 @@ class DancersController < ApplicationController
   skip_before_action :require_logged_in!, only: :create
   # For Dance Studio to create a new dancer
   def new
-    @dancer = Dancer.new(dance_studio_id: current_user.id, password: 'test', password_confirmation: 'test')
+    @dancer = Dancer.new(dance_studio_id: current_user.id, password: 'password', password_confirmation: 'password')
   end
 
   def create
     @dancer = Dancer.new(dancer_params)
-    
-    if owner?
-      flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
-      render 'dancers/new' unless @dancer.save
 
-      redirect_to dance_studio_path(current_user), success: 'Dancer Added!'
+    if @dancer.save
+      redirect_to dance_studio_path(current_user), success: 'Dancer Added!' if owner?
+      log_in(@dancer, 'Successfully Registered!')
     else
-      #try_to_save(@dancer)
-      #log_in(@dancer, 'Successfully Registered!')
-      if @dancer.save
-        log_in(@dancer, 'Successfully Registered!')
-      else
-        flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
-        render 'registrations/new'
-      end
+      render_new_form && return if owner?
+      render_registration_form && return
     end
   end
 
@@ -58,11 +50,11 @@ class DancersController < ApplicationController
       redirect_to dance_studio_path(current_user), success: 'Account Deactivated!'
     end
   end
-  # Gets current costume assignments
+  # Displays dancer's current costume assignments with costume picture
   def current_assignments
     @assignments = CostumeAssignment.current_dancer_costumes(current_user)
   end
-  # Gets current dancers for a dance studio
+  # Displays the current dancers for a dance studio
   def current_dancers
     @dancers = Dancer.current_dancers(current_user)
   end
