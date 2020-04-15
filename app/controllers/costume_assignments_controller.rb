@@ -7,13 +7,13 @@ class CostumeAssignmentsController < ApplicationController
         @costume = Costume.find(params[:id])
         @costume_assignments = CostumeAssignment.where(costume_id: @costume)
       elsif params[:id] # owner viewing a dancer's costume assignments
-        @dancer = Dancer.find(params[:id])
+        find_dancer
         @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
       else # owner viewing its dance studio's costume assignments
         @costume_assignments = current_user.costume_assignments.order(dance_season: :desc)
       end
     else # dancer viewing his/her costume assignments
-      @dancer = Dancer.find(params[:id])
+      find_dancer
       @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
     end
   end
