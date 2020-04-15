@@ -137,9 +137,6 @@
   - costumes#show
     - add total number of dancers by season
     - add 'Assign Costume' button 
-    - breaks when page refreshed
-      - if request.env['HTTP_REFERER'].include?('current_costumes')
-      - if request.env['HTTP_REFERER'].include?('costume_assignments') 
   - dancestudio#show
     - add total number of dancers
     - add total number of costumes
