@@ -17,11 +17,16 @@
       <tr>
         <td><%= assignment.dance_season %></td>
         <td>
+        <!-- if owner viewing a costume's assignments, no link for song name -->
+        <% if params[:costume_id] %>
+          <%= assignment.song_name%>
+        <% else %> <!-- link for song name: if owner viewing a dancer's costume assignments/its dance studio's costume assignments, if dancer viewing his/her costume assignments -->
           <%= 
             link_to_if owner?, assignment.song_name, assigned_costume_path(assignment.costume_id, costume_id: assignment.costume_id) do |name|
               link_to name, costume_path(assignment.costume_id)
             end
           %>
+        <% end %>
         </td>
         <td><%= assignment.genre %></td>
         <td><%= assignment.shoe %></td>
