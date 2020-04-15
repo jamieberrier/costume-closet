@@ -71,3 +71,8 @@
     </div>
   <% end %>
 </div>
+<% if params[:action] == 'google_auth' %>
+  <%= link_to 'Cancel', root_path, class: 'button is-dark' %>
+<% else %>
+  <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Cancel</button>
+<% end %>
