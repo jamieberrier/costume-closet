@@ -1,7 +1,7 @@
 class Costume < ApplicationRecord
   belongs_to :dance_studio
   # adds methods, ie: costume_assignments, costume_assignments<<, costume_assignments.delete, costume_assignments_ids=ids
-  has_many :costume_assignments, dependent: :delete_all
+  has_many :costume_assignments, dependent: :delete_all # the join records will be removed when a costume is destroyed
   # adds methods, ie: dancer_ids=ids
   has_many :dancers, through: :costume_assignments
 
