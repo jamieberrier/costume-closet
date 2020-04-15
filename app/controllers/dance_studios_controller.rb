@@ -5,7 +5,6 @@ class DanceStudiosController < ApplicationController
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
-    #try_to_save(@dance_studio)
     if @dance_studio.save
       log_in(@dance_studio, 'Successfully Registered!')
     else
