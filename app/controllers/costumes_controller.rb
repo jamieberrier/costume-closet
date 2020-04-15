@@ -18,11 +18,11 @@ class CostumesController < ApplicationController
 
     return redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
 
-    redirect_to costume_path(@costume), success: "Costume Successfully Created!"
+    redirect_to_costume_path('Costume Successfully Created!')
   end
 
   def show
-    @costume = Costume.find(params[:id])
+    find_costume
   end
 
   def index
@@ -30,21 +30,21 @@ class CostumesController < ApplicationController
   end
 
   def edit
-    @costume = Costume.find(params[:id])
+    find_costume
   end
 
   def update
-    @costume = Costume.find(params[:id])
+    find_costume
 
     return redirect_to edit_costume_path(@costume, dance_studio: current_user), danger: "Edit failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.update(costume_params)
 
-    redirect_to costume_path(@costume), success: "Costume Updated!"
+    redirect_to_costume_path('Costume Updated!')
   end
 
   def destroy
-    @costume = Costume.find(params[:id])
+    find_costume
     @costume.destroy
-    redirect_to dance_studio_costumes_path(current_user), success: "Costume Deleted"
+    redirect_to dance_studio_costumes_path(current_user), success: 'Costume Deleted'
   end
 
   private
