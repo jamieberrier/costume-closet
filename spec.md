@@ -24,7 +24,7 @@ Specs:
     - genre
     - shoe
     - tight
-- [ ] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
+- [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
     - DanceStudio
         - has_secure_password
         - validates :password, confirmation: { case_sensitive: false }
@@ -39,10 +39,10 @@ Specs:
         - validates :onepiece_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :onepiece_costume?
         - validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
     - CostumeAssignment
-        - 
+        - validates :dancer_id, :costume_id, :dance_season, :song_name, presence: true
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
     - Dancer.current_dancers
-    - /dance_studios/:id/dancers/current_dancers
+        - /dance_studios/:id/dancers/current_dancers
 - [x] Include signup (how e.g. Devise)
     - form
 - [x] Include login (how e.g. Devise)
