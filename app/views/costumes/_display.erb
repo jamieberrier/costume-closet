@@ -1,15 +1,18 @@
 <div class="columns">
-    <% @costumes.each do |costume| %>
-      <div class="column">
-      <% if !costume.picture.blank? %>
-        <figure class="image is-96x96">
-          <%= link_to image_tag(costume.picture, width: 100), costume_path(costume) %>
-        </figure>
-      <% elsif !costume.onepiece_description.blank? %>
-        <%= link_to costume.onepiece_description, costume_path(costume) %>
-      <% else %>
-        <%= link_to costume.top_description + ' with ' + costume.bottoms_description, costume_path(costume) %>
-      <% end %>
-      </div>
+  <% @costumes.each do |costume| %>
+    <div class="column">
+    <% if !costume.picture.blank? %>
+      <figure class="image is-96x96">
+        <%= link_to image_tag(costume.picture, width: 100), costume_path(costume) %>
+      </figure>
+    <% elsif !costume.onepiece_description.blank? %>
+      <%= link_to costume.onepiece_description, costume_path(costume) %>
+    <% else %>
+      <%= link_to costume.top_description + ' with ' + costume.bottoms_description, costume_path(costume) %>
     <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
+<section class='section'>
+  <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+</section>
