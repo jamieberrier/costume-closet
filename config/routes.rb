@@ -15,14 +15,14 @@ Rails.application.routes.draw do
 
   # Routes for dancers to view their costume assignments
   scope '/dancers/:id' do
-    get '/costume_assignments' => 'costume_assignments#index', as: 'dancer_costumes'
+    get '/costume_assignments' => 'costume_assignments#dancer_assignments', as: 'dancer_costumes'
     get '/costume_assignments/:id' => 'costume_assignments#show', as: 'dancer_costume'
     # Route for dancer to view their current costume asignments
     get '/current_assignments' => 'dancers#current_assignments', as: 'dancer_current_assignments'
   end
   # Route for dance studios to view a costume's assignments
   scope '/costumes/:id' do
-    get '/assignments' => 'costume_assignments#index', as: 'assigned_costume'
+    get '/assignments' => 'costume_assignments#costume_assignments', as: 'assigned_costume'
   end
   
   scope '/dance_studios/:id' do
