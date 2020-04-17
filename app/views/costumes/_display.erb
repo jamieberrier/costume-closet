@@ -14,5 +14,5 @@
   <% end %>
 </div>
 <section class='section'>
-  <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+  <%= link_to 'Back', dance_studio_path(current_user), class: 'button is-dark' %>
 </section>

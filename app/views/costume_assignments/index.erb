@@ -27,4 +27,8 @@
 <% else %>
   <%= render "table"%>
 <% end %>
-<button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+<%= 
+  link_to_if owner?, 'Back', dance_studio_path(current_user), class: 'button is-dark' do |name|
+    link_to name, dancer_path(current_user), class: 'button is-dark'
+  end
+%>

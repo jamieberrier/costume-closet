@@ -8,8 +8,8 @@
     <h2 class='subtitle is-5'>Costumes</h2>
   </div>
   <div class='buttons is-grouped'>
+    <%= link_to 'Current Costume Assignments', dancer_current_assignments_path(@dancer), class: 'button is-link is-light' %>
     <%= link_to 'All Costumes', dancer_costumes_path(@dancer), class: 'button is-link is-light' %>
-    <%= link_to 'Current Costumes', dancer_current_assignments_path(@dancer), class: 'button is-link is-light' %>
   </div>
   </div>
   <!-- Account -->
@@ -24,4 +24,7 @@
       <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete, class: 'button is-danger' %>
     </div>
   </div>
+  <% if owner? %>
+    <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+  <% end %>
 </div>
