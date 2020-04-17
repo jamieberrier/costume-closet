@@ -1,0 +1,21 @@
+<div class='content has-text-centered'>
+  <% if !@costume.picture.blank? %>
+    <figure class="is-128x128">
+      <%= link_to image_tag(@costume.picture, width: 100), costume_path(@costume) %>
+    </figure>
+  <% elsif !@costume.onepiece_description.blank? %>
+    <%= link_to @costume.onepiece_description, costume_path(@costume) %>
+  <% else %>
+    <%= link_to @costume.top_description + ' with ' + @costume.bottoms_description, costume_path(@costume) %>
+  <% end %>
+</div>
+<!-- if costume assignment(s) exist, render table -->
+<% if @costume_assignments.empty? %>
+  <div class='content has-text-centered'>
+    <h2 class='subtitle'>No Assignments</h2>
+  </div>
+<% else %>
+  <%= render "table"%>
+<% end %>
+<!-- Back Button -->
+<%= link_to 'Back', dance_studio_costume_assignments_path(current_user), class: 'button is-dark' %>
