@@ -31,8 +31,9 @@
       </div>
     </div>
   </div>
+  <!-- Back Button: path == params[:back_page] - all costumes or current costumes -->
   <div class='buttons is-grouped'>
-    <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+    <%= link_to 'Back', params[:back_page], class: 'button is-dark'%>
   </div>
   <% if owner? %>
   <!-- Costume Assignments -->
