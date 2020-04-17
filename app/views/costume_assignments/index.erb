@@ -1,6 +1,6 @@
 <div class='content has-text-centered'>
-  <% if dancer? %>
-      <h1 class='title has-text-primary'><%= current_user.name %>'s Costumes</h1>
+  <!--% if dancer? %-->
+      <!--h1 class='title has-text-primary'><%#= current_user.name %>'s Costumes</h1-->
   <!--% elsif @costume %-->
     <!--% if !@costume.picture.blank? %-->
       <!--figure class="is-128x128"-->
@@ -11,13 +11,13 @@
     <!--% else %-->
       <%#= link_to @costume.top_description + ' with ' + @costume.bottoms_description, costume_path(@costume) %>
     <!--% end %-->
-  <% else %>
-      <% if @dancer %>
-        <h1 class='title has-text-primary'><%= link_to @dancer.name + "'s Costumes", dancer_path(@dancer) %></h1>
-      <% else %>
+  <!--% else %-->
+      <!--% if @dancer %-->
+        <!--h1 class='title has-text-primary'><%#= link_to @dancer.name + "'s Costumes", dancer_path(@dancer) %></h1-->
+      <!--% else %-->
         <h1 class='title has-text-primary'>All Costume Assignments</h1>
-      <% end %>
-  <% end %>
+      <!--% end %-->
+  <!--% end %-->
 </div>
 <!-- if costume assignment(s) exist, render table -->
 <% if @costume_assignments.empty? %>

@@ -1,0 +1,22 @@
+<div class='content has-text-centered'>
+  <% if dancer? %> <!-- a dancer viewing his/her costume assignments -->
+      <h1 class='title has-text-primary'><%= current_user.name %>'s Costumes</h1>
+    <% else %> <!-- owner viewing a dancer's costume assignmnts -->
+      <h1 class='title has-text-primary'><%= link_to @dancer.name + "'s Costumes", dancer_path(@dancer) %></h1>
+    <% end %>
+</div>
+<!-- if costume assignment(s) exist, render table -->
+<% if @costume_assignments.empty? %>
+  <div class='content has-text-centered'>
+    <h2 class='subtitle'>No Assignments</h2>
+  </div>
+<% else %>
+  <%= render "table"%>
+<% end %>
+<!-- Back Button -->
+<!-- TODO: button for owner depending on where came from -->
+<%= 
+  link_to_if dancer?, 'Back', dancer_path(current_user), class: 'button is-dark' do |name|
+    link_to name, dance_studio_path(current_user), class: 'button is-dark'
+  end
+%>
