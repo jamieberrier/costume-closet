@@ -44,4 +44,4 @@
     </div>
   <% end %>
 </div>
-<button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Cancel</button>
+<%= link_to 'Cancel', dance_studio_path(current_user), class: 'button is-dark' %>
