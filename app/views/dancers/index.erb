@@ -4,6 +4,7 @@
     <thead class='has-text-weight-bold'>
       <td>Name</td>
       <td>Current Dancer?</td>
+      <td>No. of Costumes</td>
     </thead>
     <tbody>
       <% current_user.dancers.each do |dancer| %>
@@ -14,6 +15,7 @@
           <% else %>
             <td>NO</td>
           <% end %>
+          <td><%= link_to dancer.costumes.count, dancer_costumes_path(dancer) %></td>
         </tr>
       <% end %>
     </tbody>
