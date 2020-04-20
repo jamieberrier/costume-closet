@@ -1,8 +1,8 @@
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'> Current Dancers at <%= current_user.studio_name %>s</h1>
 </div>
-<!-- Current Dancers -->
 <div class='box'>
+  <!-- Table of Current Dancers -->
   <div class='table-container'>
     <table class='table is-fullwidth is-striped is-hoverable'>
       <thead class='has-text-weight-bold'>
@@ -11,28 +11,29 @@
         <td>All Costume Assignments</td>
       </thead>
       <tbody>
-      <% @dancers.each do |dancer| %>
-        <tr>
-          <td><%= link_to dancer.name, dancer_path(dancer) %></td>
-          <td><%= CostumeAssignment.current_dancer_costumes(dancer).count %></td>
-          <td><%= dancer.costume_assignments.count %></td>
-        </tr>
-      <% end %>
+        <% @dancers.each do |dancer| %>
+          <tr>
+            <td><%= link_to dancer.name, dancer_path(dancer) %></td>
+            <td><%= CostumeAssignment.current_dancer_costumes(dancer).count %></td>
+            <td><%= dancer.costume_assignments.count %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
-</div>
-<!-- Count of Current Dancers-->
-<div class='columns'>
-  <div class='column'>
-    <div class='box has-text-centered'>
-      <h2 class='title is-4'><%= @dancers.count %> Dancers</h2>
+  <!-- Count of Current Dancers -->
+  <div class='columns'>
+    <div class='column'>
+      <div class='box has-text-centered'>
+        <h2 class='title is-4'><%= @dancers.count %> Dancers</h2>
       </div>
   </div>
+  <!-- Count of Current Costumes -->
   <div class='column'>
     <div class='box has-text-centered'>
-    <h2 class='title is-4'><%= current_user.current_studio_costumes.count %> Costumes</h2>
+      <h2 class='title is-4'><%= current_user.current_studio_costumes.count %> Costumes</h2>
     </div>
   </div>
 </div>
+<!-- Back Button -->
 <%= link_to 'Back', dance_studio_path(current_user), class: 'button is-dark' %>
