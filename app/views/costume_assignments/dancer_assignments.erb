@@ -14,9 +14,9 @@
   <%= render "table"%>
 <% end %>
 <!-- Back Button -->
-<!-- TODO: button for owner depending on where came from -->
-<%= 
-  link_to_if dancer?, 'Back', dancer_path(current_user), class: 'button is-dark' do |name|
-    link_to name, dance_studio_path(current_user), class: 'button is-dark'
-  end
-%>
+<!-- TODO: for owner, request.referer ok?" Or need button depending on where came from -->
+<% if dancer? %>
+<%= link_to 'Back', dancer_path(current_user), class: 'button is-dark' %>
+<% else %>
+  <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+<% end %>
