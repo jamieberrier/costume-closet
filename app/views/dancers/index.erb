@@ -1,24 +1,43 @@
-<h1 class='title has-text-primary'><%= current_user.studio_name %>'s Dancers</h1>
-<div class='table-container'>
-  <table class='table is-fullwidth is-striped is-hoverable'>
-    <thead class='has-text-weight-bold'>
-      <td>Name</td>
-      <td>Current Dancer?</td>
-      <td>No. of Costumes</td>
-    </thead>
-    <tbody>
-      <% current_user.dancers.each do |dancer| %>
-        <tr>
-          <td><%= link_to dancer.name, dancer_path(dancer) %></td>
-          <% if dancer.current_dancer %>
-            <td>YES</td>
-          <% else %>
-            <td>NO</td>
-          <% end %>
-          <td><%= link_to dancer.costumes.count, dancer_costumes_path(dancer) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class='content has-text-centered'> 
+  <h1 class='title has-text-primary'><%= current_user.studio_name %>'s Dancers</h1>
 </div>
+<div class='box'>
+  <!-- Table of Dancers -->
+  <div class='table-container'>
+    <table class='table is-fullwidth is-striped is-hoverable'>
+      <thead class='has-text-weight-bold'>
+        <td>Name</td>
+        <td>Current Dancer?</td>
+        <td>No. of Costumes</td>
+      </thead>
+      <tbody>
+        <% current_user.dancers.each do |dancer| %>
+          <tr>
+            <td><%= link_to dancer.name, dancer_path(dancer) %></td>
+            <% if dancer.current_dancer %>
+              <td>YES</td>
+            <% else %>
+              <td>NO</td>
+            <% end %>
+            <td><%= link_to dancer.costumes.count, dancer_costumes_path(dancer) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <!-- Count of Dancers -->
+  <div class='columns'>
+    <div class='column'>
+      <div class='box has-text-centered'>
+        <h2 class='title is-4'><%= current_user.dancers.count %> Dancers</h2>
+      </div>
+  </div>
+  <!-- Count of Costumes -->
+  <div class='column'>
+    <div class='box has-text-centered'>
+      <h2 class='title is-4'><%= current_user.costumes.count %> Costumes</h2>
+    </div>
+  </div>
+</div>
+<!-- Back Button -->
 <%= link_to 'Back', dance_studio_path(current_user), class: 'button is-dark' %>
