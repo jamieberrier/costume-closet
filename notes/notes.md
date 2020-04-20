@@ -126,11 +126,6 @@
   - add validations
   - update URLs
   - when assigning a costume for 2nd, 3rd, etc time...change condition to used
-  - dancers#index
-    - add total number of costume assignments
-  - dancers#show
-    - add total number of costumes by season and if new/used
-    - add display costume assignments
   - costumes
     - display by season - already have current season (current_costumes)
   - costumes#show
@@ -149,6 +144,10 @@
   - edit forms
     - password & password confirmation passing as blank
   - how to center image
+
+# STRETCH GOALS
+- dancers#show
+  - add total number of costumes by season and if new/used
 
 # URLs
 ## REGISTRATION
