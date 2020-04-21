@@ -8,10 +8,10 @@
     <h2 class='subtitle is-5'>Costumes</h2>
   </div>
   <div class='buttons'>
-    <%= link_to 'New Costume', new_dance_studio_costume_path(current_user), class: 'button is-link is-light' %>
-    <%= link_to 'All Costumes', dance_studio_costumes_path(current_user), class: 'button is-link is-light' %>
-    <%= link_to 'Current Costumes', studio_current_costumes_path(current_user), class: 'button is-link is-light' %>
-    <%= link_to 'Assign Costume', assign_costume_path(current_user), class: 'button' %>
+    <%= link_to 'Create New Costume', new_dance_studio_costume_path(current_user), class: 'button is-link is-light' %>
+    <%= link_to 'View All Costumes', dance_studio_costumes_path(current_user), class: 'button is-link is-light' %>
+    <%= link_to 'Current Season Costumes', studio_current_costumes_path(current_user), class: 'button is-link is-light' %>
+    <%= link_to 'Unassigned Costumes', unassigned_costumes_path(current_user), class: 'button is-link is-light' %>
   </div>
 <!-- Costume Assignments -->
 </div>
@@ -21,7 +21,6 @@
     </div>
     <div class='buttons'>
     <%= link_to 'Current Costume Assignments', studio_current_assignments_path(current_user), class: 'button is-success is-light' %>
-    <!--%#= link_to 'New Costume Assignment', new_dance_studio_costume_assignment_path(current_user), class: 'button is-success is-light' %-->
     <%= link_to 'All Costume Assignments', dance_studio_costume_assignments_path(current_user), class: 'button is-success is-light' %>
   </div>
 </div>
