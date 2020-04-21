@@ -1,87 +1,24 @@
-<!-- add an individual costume assignment -->
-<%= form_for [current_user, @assignment], url: dance_studio_costume_assignments_path do |f| %>
-  <!-- existing costume -->
-  <div class='box'>
-    <div class='field'>
-      <%= f.label 'Select A Costume', class: 'subtitle' %>
-      <div class='control'>
-        <%= f.collection_radio_buttons :costume_id, current_user.costumes, :id, :picture do |b|
-          if !b.object.picture.blank?
-            b.label(class: 'radio') { b.radio_button + image_tag(b.object.picture, width: 75) }
-          elsif !b.object.onepiece_description.blank?
-            b.label(class: 'radio') { b.radio_button + b.object.onepiece_description }
-          else
-            b.label(class: 'radio') { b.radio_button + b.object.twopiece_description }
-          end
-        end %>
-      </div>
-    </div>
-  </div>
-  <!-- create a new costume -->
-  <!--div class='box'>
-    <div class='field'-->
-      <!--%= f.label 'Or Create A New Costume', class: 'subtitle' %-->
-      <!--div class='control'-->
-        <!--%= f.fields_for :costume, @assignment.costume.build do |costumes_fields| %-->
-          <!-- top description -->
-          <!--div class='box'>
-            <h2 class='subtitle'>Two-Piece Costume</h2>
-            <div class='field'-->
-              <!--%= costumes_fields.label :top_description, class: 'label' %-->
-              <!--div class='control has-icons-left'-->
-                <!--%= costumes_fields.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %-->
-              <!--/div>
-            </div-->
-            <!-- bottoms description -->
-            <!--div class='field'-->
-              <!--%= costumes_fields.label :bottoms_description, class: 'label' %-->
-              <!--div class='control has-icons-left'-->
-                <!--%= costumes_fields.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %-->
-              <!--/div>
-            </div>
-            <p class='help is-danger'>Must fill out both for a two-piece costume</p>
-          </div-->
-          <!-- onepiece description -->
-          <!--div class='box'>
-            <h2 class='subtitle'>One-Piece Costume</h2>
-            <div class='field'-->
-              <!--%= costumes_fields.label 'Description', class: 'label' %-->
-              <!--div class='control has-icons-left'-->
-                <!--%= costumes_fields.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %-->
-              <!--/div>
-            </div>
-            <p class='help is-danger'>Must fill out for a one-piece costume</p>
-          </div>
-          <div class='box'-->
-            <!-- hair accessory description -->
-            <!--div class='field'-->
-              <!--%= costumes_fields.label :hair_accessory, class: 'label' %-->
-              <!--div class='control has-icons-left'-->
-                <!--%= costumes_fields.text_field :hair_accessory, class:'input', placeholder: 'Enter description if costume is has a hair accessory' %-->
-              <!--/div>
-            </div-->
-            <!-- picture -->
-            <!--div class='field'-->
-              <!--%= costumes_fields.label :picture, class: 'label' %-->
-              <!--div class='control has-icons-left'-->
-                <!--%= costumes_fields.text_field :picture, class:'input', placeholder: 'Enter picture url' %-->
-              <!--/div>
-            </div>
-          </div-->
-        <!--% end %-->
-      <!--/div>
-    </div>
-  </div-->
+<!-- add an multiple costume assignments -->
+<!-- costume picture -->
+<% if !@costume.picture.blank? %>
+  <%= image_tag @costume.picture, width: 100 %>
+<% elsif !@costume.onepiece_description.blank? %>
+  <%= @costume.onepiece_description %>
+<% else %>
+  <%= @costume.top_description + ' with ' + @costume.bottoms_description %>
+<% end %>
+<div class='box'>
+<%= form_for [current_user, @assignment_info] do |f| %>
   <!-- song name -->
   <div class='field'>
-    <%= f.label :song_name, class: 'label' %>
+    <%= f.label :song_name, 'Song Name', class: 'label' %>
     <div class='control'>
       <%= f.text_field :song_name, class:'input', placeholder: 'Enter Dance Song Name' %>
     </div>
   </div>
   <!-- dance season -->
   <div class='field'>
-    <%= f.label :dance_season, class: 'label' %>
+    <%= f.label :dance_season, 'Dance Season', class: 'label' %>
     <div class='control'>
       <%= f.text_field :dance_season, class:'input', placeholder: 'Enter Dance Season Year' %>
     </div>
@@ -107,51 +44,44 @@
       <%= f.text_field :tight, class:'input', placeholder: "Enter Tights or 'none'" %>
     </div>
   </div>
-  <!-- dancer -->
-  <table class='table is-bordered is-striped is-narrow is-hoverable is-fullwidth'>
-    <thead>
-      <tr>
-        <th>Dancer</th>
-        <th>Costume Size</th>
-        <th>Costume Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <div class="select">
-            <%= f.collection_select(:dancer_id, Dancer.current_dancers(current_user), :id, :name, {prompt: "Select A Dancer"}, {class: 'select'}) %>
-          </div>
-        </td>
-        <td><%= f.text_field :costume_size, class:'input' %></td>
-        <td>
-          <div class="select">
-            <%= f.select(:costume_condition, options_for_select([['New', 'New'], ['Used', 'Used']])) %>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Dancer(s) & Costume Size -->
+    <div class='box'>
+      <h2 class='subtitle'>Select Dancer(s) & Costume Size</h2>
+      <div class='columns'>
+        <% @costume.costume_assignments.each do |assignment| %>
+          <% if !assignment.dancer_id.nil? && assignment.dance_season.nil? %>
+            <div class='column'>
+              <!-- Dancer -->
+              <div class='field'>
+                <div class='control'>
+                  <%= f.check_box :dancer_id, {:checked => false, class: 'checkbox'}, assignment.dancer_id, "0" %>
+                  <%= f.label assignment.dancer.name,  assignment.dancer.name, class: 'checkbox has-text-weight-bold' %>   
+                </div>
+              </div>
+              <!-- Costume Size -->
+              <div class='field'>
+                <%= f.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <div class='select is-small'>
+                  <%= f.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']]), {prompt: 'Select Size'}) %>
+                </div>
+              </div>
+              <!-- Costume Condition -->
+              <div class='field'>
+                <%= f.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <div class='select is-small'>
+                  <%= f.select(:costume_condition, options_for_select([['New', 'New'], ['Used', 'Used']]), {prompt: "Select Condition"}) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   <!-- submit button -->
   <div class='field'>
     <div class='control'>
-      <%= f.submit class: 'button is-primary' %>
+      <%= f.submit 'Create Costume Assignments', class: 'button is-primary' %>
     </div>
   </div>
 <% end %>
-
-
-<!--% @dance_studio.dancers.each do |dancer| %-->
-        <!--tr>
-          <td-->
-            <!--%= f.check_box(:dancer_id, {}, dancer.id, "0") %-->
-            <!--%= f.label dancer.id, dancer.name %-->
-          <!--/td>
-          <td--><!--%= f.text_field :costume_size, class:'input' %></td-->
-          <!--td>
-            <div class="select"-->
-              <!--%= f.select(:costume_condition, options_for_select([['New', 1], ['Used', 2]])) %-->
-            <!--/div>
-          </td>
-        </tr-->
-      <!--% end %-->
+</div>
