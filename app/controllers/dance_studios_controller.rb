@@ -52,16 +52,6 @@ class DanceStudiosController < ApplicationController
     @costumes = current_user.unassigned_studio_costumes
   end
 
-  # better in costume assignments?
-  def assign_costume
-    
-  end
-
-  # better in costume assignments?
-  def assign
-    binding.pry
-  end
-
   private
 
   def dance_studio_params
