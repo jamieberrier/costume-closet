@@ -125,7 +125,6 @@
     - edit
   - add validations
   - update URLs
-  - when assigning a costume for 2nd, 3rd, etc time...change condition to used
 - costumes
   - display by season - already have current season (current_costumes)
 - costumes#show
@@ -146,6 +145,7 @@
   - add total number of costumes by season and if new/used
 - dancestudio#show
   - add total number of costumes by season
+- when assigning a costume for 2nd, 3rd, etc time...change condition to used
 
 # URLs
 ## REGISTRATION
