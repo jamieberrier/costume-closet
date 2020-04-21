@@ -37,12 +37,18 @@ class CostumesController < ApplicationController
 
   def update
     find_costume
-
     return redirect_to edit_costume_path(@costume, dance_studio: current_user), danger: "Edit failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.update(costume_params)
 
     redirect_to_costume_path('Costume Updated!')
   end
 
+  def destroy
+    find_costume
+    @costume.destroy
+    redirect_to dance_studio_costumes_path(current_user), success: 'Costume Deleted'
+  end
+
+  # Displays form to assign a costume
   def assign_costume
     find_costume
     @assignment_info = @costume.costume_assignments.build
@@ -52,16 +58,11 @@ class CostumesController < ApplicationController
     end
   end
 
+  # Receives data from costume assignment form
   def assign
     find_costume
     @costume.update(costume_params)
     redirect_to unassigned_costumes_path(current_user)
-  end
-
-  def destroy
-    find_costume
-    @costume.destroy
-    redirect_to dance_studio_costumes_path(current_user), success: 'Costume Deleted'
   end
 
   private
