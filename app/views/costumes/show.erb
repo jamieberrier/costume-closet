@@ -38,8 +38,10 @@
   <% if owner? %>
   <!-- Costume Assignments -->
     <div class='buttons is-grouped'>
-      <%= link_to 'Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
-      <!-- TODO: add 'Assign Costume' button -->
+      <%= link_to 'View Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
+      <% if unassigned? %>
+        <%= link_to 'Assign Costume', assign_costume_path(@costume), class: 'button is-success is-light' %>
+      <% end %>
     </div>
     <!-- Edit / Delete Costume -->
     <div class='buttons is-grouped'>
