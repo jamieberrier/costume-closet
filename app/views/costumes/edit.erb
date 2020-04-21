@@ -1,57 +1,61 @@
-<div class='content'>
+<div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Edit Costume Form</h1>
 </div>
-<%= form_for @costume do |f| %>
-  <%= f.hidden_field :dance_studio_id %>
-  <!-- top description -->
-  <div class='box'>
-    <h2 class='subtitle'>Two-Piece Costume</h2>
-    <div class='field'>
-      <%= f.label :top_description, 'Top Description', class: 'label' %>
-      <div class='control has-icons-left'>
-        <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
+<div class='box'>
+  <%= form_for @costume do |f| %>
+    <%= f.hidden_field :dance_studio_id %>
+    <!-- top description -->
+    <div class='box'>
+      <h2 class='subtitle'>Two-Piece Costume</h2>
+      <div class='field'>
+        <%= f.label :top_description, 'Top Description', class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
+        </div>
+      </div>
+      <!-- bottoms description -->
+      <div class='field'>
+        <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
+        </div>
+      </div>
+      <p class='help is-danger'>Must fill out both for a two-piece costume</p>
+    </div>
+    <!-- onepiece description -->
+    <div class='box'>
+      <h2 class='subtitle'>One-Piece Costume</h2>
+      <div class='field'>
+        <%= f.label 'Description', class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
+        </div>
+      </div>
+      <p class='help is-danger'>Must fill out for a one-piece costume</p>
+    </div>
+    <div class='box'>
+      <!-- hair accessory description -->
+      <div class='field'>
+        <%= f.label :hair_accessory, 'Hair Accessory', class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.text_field :hair_accessory, class:'input', placeholder: 'Enter description if costume is has a hair accessory' %>
+        </div>
+      </div>
+      <!-- picture -->
+      <div class='field'>
+        <%= f.label :picture, class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.text_field :picture, class:'input', placeholder: 'Enter picture url' %>
+        </div>
       </div>
     </div>
-    <!-- bottoms description -->
+    <!-- submit button -->
     <div class='field'>
-      <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
-      <div class='control has-icons-left'>
-        <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
+      <div class='control'>
+        <%= f.submit class: 'button is-primary' %>
       </div>
     </div>
-    <p class='help is-danger'>Must fill out both for a two-piece costume</p>
-  </div>
-  <!-- onepiece description -->
-  <div class='box'>
-    <h2 class='subtitle'>One-Piece Costume</h2>
-    <div class='field'>
-      <%= f.label 'Description', class: 'label' %>
-      <div class='control has-icons-left'>
-        <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
-      </div>
-    </div>
-    <p class='help is-danger'>Must fill out for a one-piece costume</p>
-  </div>
-  <div class='box'>
-    <!-- hair accessory description -->
-    <div class='field'>
-      <%= f.label :hair_accessory, 'Hair Accessory', class: 'label' %>
-      <div class='control has-icons-left'>
-        <%= f.text_field :hair_accessory, class:'input', placeholder: 'Enter description if costume is has a hair accessory' %>
-      </div>
-    </div>
-    <!-- picture -->
-    <div class='field'>
-      <%= f.label :picture, class: 'label' %>
-      <div class='control has-icons-left'>
-        <%= f.text_field :picture, class:'input', placeholder: 'Enter picture url' %>
-      </div>
-    </div>
-  </div>
-  <!-- submit button -->
-  <div class='field'>
-    <div class='control'>
-      <%= f.submit class: 'button is-primary' %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
+<!-- cancel button -->
+<%= link_to 'Cancel', costume_path(@costume), class: 'button is-dark'%>
