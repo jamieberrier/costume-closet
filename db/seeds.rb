@@ -34,6 +34,8 @@ tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', email: 'maddie@ci.c
 blue = Costume.create(top_description: 'blue sequin puffy sleeved top', bottoms_description: 'blue sequin poofy skirt', picture: 'https://cdn1.discountdance.net/image/395x526/n7307c_1.jpg', hair_accessory: 'blue tear drop hat', dance_studio_id: toc.id)
 red = Costume.create(top_description: 'black sequin top, red sequin jacket', bottoms_description: 'black bussel shorts', picture: 'https://dqaecz4y0qq82.cloudfront.net/products/sq11469.jpg?preset=hero&404=y', hair_accessory: 'red sequin bow', dance_studio_id: toc.id)
 green = Costume.create(onepiece_description: 'sea foam green lace, one-shoulder, dress', picture: 'https://i.pinimg.com/originals/53/4c/ef/534cef292ac66ffdc410290707634bce.jpg', hair_accessory: 'none', dance_studio_id: toc.id)
+teal = Costume.create(onepiece_description: 'light teal tutu', picture: 'https://assets.costumegallery.net/media/CACHE/images/product_images/19544-014-1/50ef5b559e64328453e6322c958c5ad6.jpg', hair_accessory: 'tiara', dance_studio_id: toc.id)
+purple = Costume.create(onepiece_description: 'purple mesh wrap dress', picture: 'https://dqaecz4y0qq82.cloudfront.net/products/d8423_wisteria.jpg?preset=hero', hair_accessory: 'none', dance_studio_id: toc.id)
 
 ## ci
 pink = Costume.create(top_description: 'pink sequin puffy sleeved top', bottoms_description: 'pink sequin poofy skirt', picture: 'https://dqaecz4y0qq82.cloudfront.net/products/sq9601.jpg?preset=hero&404=y', hair_accessory: 'pink tear drop hat', dance_studio_id: ci.id)
@@ -61,6 +63,14 @@ CostumeAssignment.create(dancer_id: zoey.id, costume_id: green.id, costume_size:
 CostumeAssignment.create(dancer_id: maddie.id, costume_id: green.id, costume_size: 'S', song_name: 'Imagine', costume_condition: 'used', dance_season: '2020', genre: 'lyrical', shoe: 'tan half sole', tight: 'none')
 CostumeAssignment.create(dancer_id: fifi.id, costume_id: green.id, costume_size: 'S', song_name: 'Imagine', costume_condition: 'used', dance_season: '2020', genre: 'lyrical', shoe: 'tan half sole', tight: 'none')
 CostumeAssignment.create(dancer_id: ainsley.id, costume_id: green.id, costume_size: 'S', song_name: 'Imagine', costume_condition: 'used', dance_season: '2020', genre: 'lyrical', shoe: 'tan half sole', tight: 'none')
+# Currently Unassigned
+CostumeAssignment.create(dancer_id: zoey.id, costume_id: teal.id, costume_size: 'M', song_name: 'Ice Queen', costume_condition: 'new', dance_season: '2019', genre: 'ballet', shoe: 'pink ballet', tight: 'pink footed')
+CostumeAssignment.create(dancer_id: tori.id, costume_id: purple.id, costume_size: 'M', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
+CostumeAssignment.create(dancer_id: mia.id, costume_id: purple.id, costume_size: 'M', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
+CostumeAssignment.create(dancer_id: zoey.id, costume_id: purple.id, costume_size: 'M', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
+CostumeAssignment.create(dancer_id: maddie.id, costume_id: purple.id, costume_size: 'S', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
+CostumeAssignment.create(dancer_id: fifi.id, costume_id: purple.id, costume_size: 'S', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
+CostumeAssignment.create(dancer_id: ainsley.id, costume_id: purple.id, costume_size: 'S', song_name: 'Whisper', costume_condition: 'new', dance_season: '2018', genre: 'contemporary', shoe: 'none', tight: 'none')
 
 ## ci
 CostumeAssignment.create(dancer_id: suzy.id, costume_id: pink.id, costume_size: 'S', song_name: 'Trouble', costume_condition: 'new', dance_season: '2020', genre: 'tap', shoe: 'tan buckle tap', tight: 'tan footed')
