@@ -43,6 +43,21 @@ class CostumesController < ApplicationController
     redirect_to_costume_path('Costume Updated!')
   end
 
+  def assign_costume
+    find_costume
+    @assignment_info = @costume.costume_assignments.build
+
+    Dancer.current_dancers(current_user).each do |dancer|
+      @costume.costume_assignments.build(dancer_id: dancer.id)
+    end
+  end
+
+  def assign
+    find_costume
+    @costume.update(costume_params)
+    redirect_to unassigned_costumes_path(current_user)
+  end
+
   def destroy
     find_costume
     @costume.destroy
