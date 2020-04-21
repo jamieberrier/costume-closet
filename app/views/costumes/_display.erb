@@ -2,10 +2,8 @@
   <% @costumes.each do |costume| %>
     <div class="column">
     <% if !costume.picture.blank? %>
-      <figure class="image is-96x96">
-        <!-- back_page: @back_page puts path for show page back button in params -->
-        <%= link_to image_tag(costume.picture, width: 100), costume_path(costume, back_page: @back_page) %>
-      </figure>
+      <!-- back_page: @back_page puts path for show page back button in params -->
+      <%= link_to image_tag(costume.picture, width: 100), costume_path(costume, back_page: @back_page) %>
     <% elsif !costume.onepiece_description.blank? %>
       <%= link_to costume.onepiece_description, costume_path(costume, back_page: @back_page) %>
     <% else %>
