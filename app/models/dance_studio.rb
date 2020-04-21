@@ -20,12 +20,19 @@ class DanceStudio < ApplicationRecord
       user.email = auth.info.email
     end
   end
+
   # Gets the current costume assignments for a dance studio
   def current_studio_assignments
     costume_assignments.where("dance_season = '%s'", Time.now.year)
   end
+
   # Gets the current costumes for a dance studio
   def current_studio_costumes
     Costume.find_by_assignment(costume_assignments.where("dance_season = '%s'", Time.now.year))
+  end
+
+  # Gets the currently unassigned costumes for a dance studio
+  def unassigned_studio_costumes
+    costumes.to_a.delete_if { |costume| current_studio_costumes.include?(costume) }
   end
 end
