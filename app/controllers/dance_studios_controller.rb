@@ -33,21 +33,30 @@ class DanceStudiosController < ApplicationController
     session.destroy
     redirect_to root_path, success: 'Account Deleted!'
   end
+
   # current costume assignments for a dance studio
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
   end
+
   # current costumes for a dance studio
   def current_costumes
     @costumes = current_user.current_studio_costumes
     # path for Back button on costume show page
     @back_page = studio_current_costumes_path(current_user)
   end
+
+  # currently unassigned costumes for a dance studio
+  def unassigned_costumes
+    @costumes = current_user.unassigned_studio_costumes
+  end
+
   # better in costume assignments?
   def assign_costume
     
   end
+
   # better in costume assignments?
   def assign
     binding.pry
