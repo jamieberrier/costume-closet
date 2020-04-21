@@ -18,17 +18,8 @@ class CostumeAssignmentsController < ApplicationController
     find_dancer
     @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
   end
-
-  # assign costume actions...new?
-  def assign_costume
-
-  end
-  # create?
-  def assign
-
-  end
 end
-  
+
 =begin
   def new
     @assignment = CostumeAssignment.new
@@ -42,6 +33,7 @@ end
 
     redirect_to costume_assignment_path(@assignment)
   end
+
   # am I using this?
   def show
     binding.pry
