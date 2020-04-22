@@ -16,6 +16,7 @@ class CostumeAssignmentsController < ApplicationController
   # dancer viewing all of his/her costume assignments / owner viewing a dancer's costume assignments -- params[:id]
   def dancer_assignments
     find_dancer
+    @back_page = dancer_costumes_path(current_user)
     @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
   end
 end

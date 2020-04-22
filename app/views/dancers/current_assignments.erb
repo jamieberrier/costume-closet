@@ -20,7 +20,7 @@
       <tbody>
       <% @assignments.each do |assignment| %>
         <tr>
-          <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id) %></td>
+          <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id, back_page: @back_page) %></td>
           <td><%= assignment.song_name %></td>
           <td><%= assignment.genre %></td>
           <td><%= assignment.shoe %></td>
@@ -33,4 +33,4 @@
     </table>
   </div>
 <% end %>
-<button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+<%= link_to 'Back', dancer_path(current_user), class: 'button is-dark'%>
