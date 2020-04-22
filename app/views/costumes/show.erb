@@ -3,13 +3,16 @@
     <div class='column'>
       <%= image_tag @costume.picture %>
     </div>
+    <!-- Two Piece Costume -->
     <% if @costume.onepiece_description.blank? %>
+      <!-- Top -->
       <div class='column'>
         <div class='box'>
           <h2 class='title is-4'>Top</h2>
           <%= @costume.top_description %>
         </div>
       </div>
+      <!-- Bottoms -->
       <div class='column'>
         <div class='box'>
           <h2 class='title is-4'>Bottoms</h2>
@@ -17,6 +20,7 @@
         </div>
       </div>
     <% else %>
+      <!-- One-Piece Costume -->
       <div class='column'>
         <div class='box'>
           <h2 class='title is-4'>One-Piece</h2>
@@ -24,6 +28,7 @@
         </div>
       </div>
     <% end %>
+    <!-- Hair Accessory -->
     <div class='column'>
       <div class='box'>
         <h2 class='title is-4'>Hair Accessory</h2>
@@ -31,12 +36,32 @@
       </div>
     </div>
   </div>
-  <!-- Back Button: path == params[:back_page] - all costumes or current costumes -->
-  <div class='buttons is-grouped'>
-    <%= link_to 'Back', params[:back_page], class: 'button is-dark'%>
-  </div>
   <% if owner? %>
-  <!-- Costume Assignments -->
+    <!-- No of dancers by season -->
+    <div class='columns'>
+      <div class='column is-narrow'>
+        <div class='box'>
+          <table class='table'>
+            <thead>
+              <tr>
+                <td><h2 class='subtitle'>Season</h2></td>
+                <td><h2 class='subtitle'>Dancers</h2></td>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- {"2019"=>3, "2020"=>3} -->
+              <% @costume.seasons.each do |season| %>
+                <tr>
+                  <td><%= season[0] %></td>
+                  <td><%= season[1] %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Costume Assignments -->
     <div class='buttons is-grouped'>
       <%= link_to 'View Costume Assignments', assigned_costume_path(@costume, costume_id: @costume), class: 'button is-primary' %>
       <% if unassigned? %>
@@ -49,4 +74,8 @@
       <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
     </div>
   <% end %>
+  <!-- Back Button: path == params[:back_page] - all costumes or current costumes -->
+  <div class='buttons is-grouped'>
+    <%= link_to 'Back', params[:back_page], class: 'button is-dark'%>
+  </div>
 </section>
