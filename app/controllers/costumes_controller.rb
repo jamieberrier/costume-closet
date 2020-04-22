@@ -23,6 +23,7 @@ class CostumesController < ApplicationController
 
   def show
     find_costume
+    @back_page = costume_path(@costume)
   end
 
   def index

@@ -1,8 +1,8 @@
 <div class='content has-text-centered'>
   <% if dancer? %> <!-- a dancer viewing his/her costume assignments -->
-      <h1 class='title has-text-primary'><%= current_user.name %>'s Costumes</h1>
+      <h1 class='title has-text-primary'><%= current_user.name %>'s Costume  Assignments</h1>
     <% else %> <!-- owner viewing a dancer's costume assignmnts -->
-      <h1 class='title has-text-primary'><%= link_to @dancer.name + "'s Costumes", dancer_path(@dancer) %></h1>
+      <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
     <% end %>
 </div>
 <!-- if costume assignment(s) exist, render table -->
@@ -14,9 +14,9 @@
   <%= render "table"%>
 <% end %>
 <!-- Back Button -->
-<!-- TODO: for owner, request.referer ok?" Or need button depending on where came from -->
+<!-- TODO: for owner, change from request.referer, need button depending on where came from -->
 <% if dancer? %>
   <%= link_to 'Back', dancer_path(current_user), class: 'button is-dark' %>
 <% else %>
-  <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
+  <%= link_to 'Back', params[:back_page], class: 'button is-dark' %>
 <% end %>

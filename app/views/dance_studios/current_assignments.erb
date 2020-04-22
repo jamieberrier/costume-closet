@@ -15,7 +15,7 @@
       <!-- costume picture -->
       <figure class='media-left'>
         <p class='image is-64x64'>
-          <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id) %>
+          <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id, back_page: @back_page) %>
         </p>
       </figure>
       <div class='media-content'>
@@ -57,7 +57,7 @@
                     <tbody>
                       <!-- Dancer Name, costume size, costume condition -->
                       <tr>
-                        <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
+                        <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_current_assignments_path(assignment.dancer_id) %></td>
                         <td><%= assignment.costume_size %></td>
                         <td><%= assignment.costume_condition %></td>
                       </tr>

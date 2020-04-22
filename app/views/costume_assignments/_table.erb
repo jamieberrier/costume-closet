@@ -32,7 +32,7 @@
         <td><%= assignment.shoe %></td>
         <td><%= assignment.tight %></td>
         <% if owner? && !@dancer%>
-          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
+          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id, back_page: @back_page) %></td>
         <% end %>
         <td><%= assignment.costume_condition %></td>
         <td><%= assignment.costume_size %></td>
