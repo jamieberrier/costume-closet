@@ -19,6 +19,7 @@ class Costume < ApplicationRecord
   def twopiece_description
     top_description + ' with ' + bottoms_description
   end
+  
   # TODO: refactor
   def self.find_by_assignment(assignments)
     costumes = []
@@ -41,5 +42,9 @@ class Costume < ApplicationRecord
       combined_attributes = unique_attributes.merge(shared_attributes)
       costume_assignments.build(combined_attributes)
     end
+  end
+
+  def seasons
+    costume_assignments.group(:dance_season).count
   end
 end
