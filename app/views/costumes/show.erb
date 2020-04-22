@@ -1,7 +1,13 @@
 <section class='section'>
   <div class='columns'>
     <div class='column'>
-      <%= image_tag @costume.picture %>
+      <% if !@costume.picture.blank? %>
+        <%= image_tag @costume.picture %>
+      <% elsif !@costume.onepiece_description.blank? %>
+        <%= @costume.onepiece_description %>
+      <% else %>
+        <%= @costume.twopiece_description %>
+      <% end %>
     </div>
     <!-- Two Piece Costume -->
     <% if @costume.onepiece_description.blank? %>
