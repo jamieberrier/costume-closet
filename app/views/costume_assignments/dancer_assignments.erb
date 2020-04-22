@@ -16,7 +16,7 @@
 <!-- Back Button -->
 <!-- TODO: for owner, request.referer ok?" Or need button depending on where came from -->
 <% if dancer? %>
-<%= link_to 'Back', dancer_path(current_user), class: 'button is-dark' %>
+  <%= link_to 'Back', dancer_path(current_user), class: 'button is-dark' %>
 <% else %>
   <button class='button is-dark' onclick="window.location.href = '<%= request.referer %>';">Back</button>
 <% end %>
