@@ -1,12 +1,12 @@
 <div class='content has-text-centered'>
   <% if !@costume.picture.blank? %>
     <figure class="is-128x128">
-      <%= link_to image_tag(@costume.picture, width: 100), costume_path(@costume) %>
+      <%= image_tag @costume.picture, width: 100 %>
     </figure>
   <% elsif !@costume.onepiece_description.blank? %>
-    <%= link_to @costume.onepiece_description, costume_path(@costume) %>
+    <%= @costume.onepiece_description %>
   <% else %>
-    <%= link_to @costume.top_description + ' with ' + @costume.bottoms_description, costume_path(@costume) %>
+    <%= @costume.twopiece_description %>
   <% end %>
 </div>
 <!-- if costume assignment(s) exist, render table -->
