@@ -23,7 +23,7 @@
         <% else %> <!-- link for song name: if owner viewing a dancer's costume assignments/its dance studio's costume assignments, if dancer viewing his/her costume assignments -->
           <%= 
             link_to_if owner?, assignment.song_name, season_assignments_path(assignment.costume_id, season: assignment.dance_season) do |name|
-              link_to name, costume_path(assignment.costume_id, back_page: @back_page)
+              link_to name, costume_path(assignment.costume_id)
             end
           %>
         <% end %>
@@ -32,7 +32,7 @@
         <td><%= assignment.shoe %></td>
         <td><%= assignment.tight %></td>
         <% if owner? && !@dancer%>
-          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id, back_page: @back_page) %></td>
+          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
         <% end %>
         <td><%= assignment.costume_condition %></td>
         <td><%= assignment.costume_size %></td>
