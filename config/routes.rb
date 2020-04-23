@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :dance_studios, only: %i[create show edit update destroy], shallow: true do
     resources :costumes
     resources :dancers, only: %i[new index show edit update destroy]
-    resources :costume_assignments, only: [:index]
+    resources :costume_assignments, only: %i[index]
   end
 
   post '/dancers' => 'dancers#create'
@@ -33,8 +33,10 @@ Rails.application.routes.draw do
     get '/unassigned_costumes' => 'dance_studios#unassigned_costumes', as: 'unassigned_costumes'
   end
   scope '/costumes/:id' do
-    # Route for a dance studio to view a costume's assignments
+    # Route for a dance studio to view all of a costume's assignments
     get '/assignments' => 'costume_assignments#costume_assignments', as: 'assigned_costume'
+    # Route for a dance studio to view a costume's assignments for a season
+    get '/season_assignments' => 'costume_assignments#season_assignments', as: 'season_assignments'
     # Routes for dance studio to assign a costume to dancers
     get '/assign' => 'costumes#assign_costume', as: 'assign_costume'
     patch '/assign' => 'costumes#assign'
