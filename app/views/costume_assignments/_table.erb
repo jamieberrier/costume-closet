@@ -22,7 +22,7 @@
           <%= assignment.song_name%>
         <% else %> <!-- link for song name: if owner viewing a dancer's costume assignments/its dance studio's costume assignments, if dancer viewing his/her costume assignments -->
           <%= 
-            link_to_if owner?, assignment.song_name, assigned_costume_path(assignment.costume_id, costume_id: assignment.costume_id) do |name|
+            link_to_if owner?, assignment.song_name, season_assignments_path(assignment.costume_id, season: assignment.dance_season) do |name|
               link_to name, costume_path(assignment.costume_id, back_page: @back_page)
             end
           %>
