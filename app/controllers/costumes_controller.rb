@@ -23,13 +23,11 @@ class CostumesController < ApplicationController
 
   def show
     find_costume
-    @back_page = costume_path(@costume)
   end
 
   def index
     @costumes = current_user.costumes
     # path for Back button on costume show page
-    @back_page = dance_studio_costumes_path(current_user)
   end
 
   def edit

@@ -58,7 +58,6 @@ class DancersController < ApplicationController
 
   # Displays dancer's current costume assignments with costume picture
   def current_assignments
-    @back_page = dancer_current_assignments_path(current_user)
     @assignments = CostumeAssignment.current_dancer_costumes(current_user)
   end
 
