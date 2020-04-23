@@ -8,6 +8,7 @@ class CostumeAssignmentsController < ApplicationController
     @back_page = dance_studio_costume_assignments_path(current_user)
   end
 
+  # TODO: should this be in costumes controller?
   # owner viewing a costume's assignments -- params[:costume_id]
   def costume_assignments
     find_costume
@@ -15,6 +16,7 @@ class CostumeAssignmentsController < ApplicationController
     @back_page = dance_studio_costume_assignments_path(current_user)
   end
 
+  # TODO: should this be in dancers controller?
   # dancer viewing all of his/her costume assignments / owner viewing a dancer's costume assignments -- params[:id]
   def dancer_assignments
     find_dancer
