@@ -16,6 +16,15 @@ class CostumeAssignmentsController < ApplicationController
     @back_page = dance_studio_costume_assignments_path(current_user)
   end
 
+  # owner viewing a costume's assignments for a season
+  # params[:season]
+  def season_assignments
+    find_costume
+    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, params[:season])
+    # where("dance_season = '%s'", Time.now.year)
+    @back_page = dance_studio_costume_assignments_path(current_user)
+  end
+
   # TODO: should this be in dancers controller?
   # dancer viewing all of his/her costume assignments / owner viewing a dancer's costume assignments -- params[:id]
   def dancer_assignments
