@@ -1,62 +1,64 @@
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Assign Costume Form</h1>
+  <!-- costume picture -->
+  <% if !@costume.picture.blank? %>
+    <%= image_tag @costume.picture, width: 100 %>
+  <% elsif !@costume.onepiece_description.blank? %>
+    <%= @costume.onepiece_description %>
+  <% else %>
+    <%= @costume.top_description + ' with ' + @costume.bottoms_description %>
+  <% end %>
 </div>
-<!-- costume picture -->
-<% if !@costume.picture.blank? %>
-  <%= image_tag @costume.picture, width: 100 %>
-<% elsif !@costume.onepiece_description.blank? %>
-  <%= @costume.onepiece_description %>
-<% else %>
-  <%= @costume.top_description + ' with ' + @costume.bottoms_description %>
-<% end %>
 <div class='box'>
   <%= form_for @costume, url: assign_path(@costume), method: :post do |f| %>
     <%= f.hidden_field :dance_studio_id %>
     <!-- Costume Assignment info -->
-    <h2 class='subtitle'>Enter Costume Assignment Details</h2>
-    <%= f.fields_for :costume_assignments do |assignment_builder| %>
-      <% if assignment_builder.object.dancer_id.nil? %>
-        <p>
-          <!-- Dance Season -->
-          <div class='field'>
-            <%= assignment_builder.label :dance_season, "Dance Season", class: 'label' %>
-            <div class='control'>
-              <%= assignment_builder.text_field :dance_season, class:'input', placeholder: 'e.g. 2020' %>
+    <div class='box'>
+      <h2 class='subtitle'>Enter Costume Assignment Details</h2>
+      <%= f.fields_for :costume_assignments do |assignment_builder| %>
+        <% if assignment_builder.object.dancer_id.nil? %>
+          <p>
+            <!-- Dance Season -->
+            <div class='field'>
+              <%= assignment_builder.label :dance_season, "Dance Season", class: 'label' %>
+              <div class='control'>
+                <%= assignment_builder.text_field :dance_season, class:'input', placeholder: 'e.g. 2020' %>
+              </div>
             </div>
-          </div>
-          <!-- Song Name -->
-          <div class='field'>
-            <%= assignment_builder.label :song_name, "Song Name", class: 'label' %>
-            <div class='control'>
-              <%= assignment_builder.text_field :song_name, class:'input' %>
+            <!-- Song Name -->
+            <div class='field'>
+              <%= assignment_builder.label :song_name, "Song Name", class: 'label' %>
+              <div class='control'>
+                <%= assignment_builder.text_field :song_name, class:'input' %>
+              </div>
             </div>
-          </div>
-          <!-- Genre -->
-          <div class='field'>
-            <%= assignment_builder.label :genre, class: 'label' %>
-            <div class='control'>
-              <%= assignment_builder.text_field :genre, class:'input', placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
+            <!-- Genre -->
+            <div class='field'>
+              <%= assignment_builder.label :genre, class: 'label' %>
+              <div class='control'>
+                <%= assignment_builder.text_field :genre, class:'input', placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
+              </div>
             </div>
-          </div>
-          <!-- Shoes -->
-          <div class='field'>
-            <%= assignment_builder.label :shoe, 'Shoes', class: 'label' %>
-            <div class='control'>
-              <%= assignment_builder.text_field :shoe, class:'input', placeholder: "If no shoes, enter 'none'" %>
+            <!-- Shoes -->
+            <div class='field'>
+              <%= assignment_builder.label :shoe, 'Shoes', class: 'label' %>
+              <div class='control'>
+                <%= assignment_builder.text_field :shoe, class:'input', placeholder: "If no shoes, enter 'none'" %>
+              </div>
             </div>
-          </div>
-          <!-- Tights -->
-          <div class='field'>
-            <%= assignment_builder.label :tight, 'Tights', class: 'label' %>
-            <!--label class="label" for="costume_costume_assignments_attributes_0_tight">Tight</label-->
-            <div class='control'>
-              <%= assignment_builder.text_field :tight, class:'input', placeholder: "If no tights, enter 'none'" %>
-              <!--input class="input" type="text" name="costume[costume_assignments_attributes][0][tight]" id="costume_costume_assignments_attributes_0_tight"-->
+            <!-- Tights -->
+            <div class='field'>
+              <%= assignment_builder.label :tight, 'Tights', class: 'label' %>
+              <!--label class="label" for="costume_costume_assignments_attributes_0_tight">Tight</label-->
+              <div class='control'>
+                <%= assignment_builder.text_field :tight, class:'input', placeholder: "If no tights, enter 'none'" %>
+                <!--input class="input" type="text" name="costume[costume_assignments_attributes][0][tight]" id="costume_costume_assignments_attributes_0_tight"-->
+              </div>
             </div>
-          </div>
-        </p>
+          </p>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
     <!-- Dancer(s) & Costume Size -->
     <div class='box'>
       <h2 class='subtitle'>Select Dancer(s) & Costume Size</h2>
@@ -100,6 +102,7 @@
           <% end %>
         <% end %>
       </div>
+      <p class='help is-danger'>Must select at least 1 dancer w/ costume size & costume condition</p>
     </div>
     <!-- submit button -->
     <div class='field'>
