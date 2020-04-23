@@ -13,10 +13,3 @@
 <% else %>
   <%= render "table"%>
 <% end %>
-<!-- Back Button -->
-<!-- TODO: for owner, change from request.referer, need button depending on where came from -->
-<% if dancer? %>
-  <%= link_to 'Back', dancer_path(current_user), class: 'button is-dark' %>
-<% else %>
-  <%= link_to 'Back', params[:back_page], class: 'button is-dark' %>
-<% end %>

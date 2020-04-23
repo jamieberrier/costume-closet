@@ -17,11 +17,3 @@
 <% else %>
   <%= render "table"%>
 <% end %>
-<!-- Back Button -->
-<%= 
-  # from costume show page
-  link_to_if params[:back_page], 'Back', params[:back_page], class: 'button is-dark' do |name|
-    # from all costume assignments page
-    link_to name, @back_page, class: 'button is-dark'
-  end
-%>

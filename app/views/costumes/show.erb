@@ -69,7 +69,7 @@
     </div>
     <!-- Costume Assignments -->
     <div class='buttons is-grouped'>
-      <%= link_to 'View Costume Assignments', assigned_costume_path(@costume, costume_id: @costume, back_page: @back_page), class: 'button is-primary' %>
+      <%= link_to 'View Costume Assignments', assigned_costume_path(@costume, costume_id: @costume.id, back_page: @back_page), class: 'button is-primary' %>
       <% if unassigned? %>
         <%= link_to 'Assign Costume', assign_costume_path(@costume), class: 'button is-success is-light' %>
       <% end %>
@@ -80,8 +80,4 @@
       <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
     </div>
   <% end %>
-  <!-- Back Button: path == params[:back_page] - all costumes or current costumes -->
-  <div class='buttons is-grouped'>
-    <%= link_to 'Back', params[:back_page], class: 'button is-dark' %>
-  </div>
 </section>
