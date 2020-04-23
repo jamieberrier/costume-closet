@@ -116,6 +116,8 @@
 
 # TODO
 - costume assignments
+  - should costume_assignments#dancer_assignments be in dancers controller?
+  - should costume_assignments#costume_assignments be in costumes controller?
   - update URLs
 
 # ?s
