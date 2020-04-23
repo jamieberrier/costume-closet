@@ -107,7 +107,7 @@
   - controller actions
     - show, index, current_assignments
   - views
-    - current_assignments, index, show
+    - _table, current_assignments, dancer_assignments, index
   - validation
 
 14. dance studio add dancers
@@ -116,19 +116,7 @@
 
 # TODO
 - costume assignments
-  - using show?
-  - controller actions
-    - new, create, edit, update, destroy
-  - views
-    - _forn
-    - new
-    - edit
-  - add validations
   - update URLs
-- costumes
-  - display by season - already have current season (current_costumes)
-- costumes#show
-  - add total number of dancers by season
 
 # ?s
   - nested form
@@ -145,6 +133,9 @@
 - dancestudio#show
   - add total number of costumes by season
 - when assigning a costume for 2nd, 3rd, etc time...change condition to used
+- costumes
+  - display by season - already have current season (current_costumes)
+- change hair accessory from costume to costume_assignments
 
 # URLs
 ## REGISTRATION
