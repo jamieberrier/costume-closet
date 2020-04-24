@@ -43,6 +43,7 @@ class DanceStudiosController < ApplicationController
   # current costumes for a dance studio
   def current_costumes
     @costumes = current_user.current_studio_costumes
+    @season = Time.now.year
   end
 
   # currently unassigned costumes for a dance studio
