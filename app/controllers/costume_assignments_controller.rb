@@ -19,7 +19,14 @@ class CostumeAssignmentsController < ApplicationController
   # params[:season]
   def season_assignments
     find_costume
-    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, params[:season])
+    @season = params[:season]
+    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+  end
+
+  def edit_season_assignments
+    find_costume
+    @season = params[:season]
+    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
   end
 
   # TODO: should this be in dancers controller?
