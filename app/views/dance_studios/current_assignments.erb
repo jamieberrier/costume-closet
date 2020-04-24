@@ -1,5 +1,5 @@
 <div class='content has-text-centered'>
-  <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
+  <h1 class='title has-text-primary'><%= @info.dance_season %> Costume Assignments</h1>
 </div>
 <!-- no current costumes -->
 <% if @assignments.nil? %>
@@ -7,29 +7,33 @@
 <% else %>
   <!-- Costume.find(@costume_assignments.first.costume_id) -->
   <% @costumes.each do |costume| %>
-    <!-- get assignment info for costume -->
-    <% info = costume.costume_assignments.where("dance_season = '%s'", Time.now.year).first %>
-    <!-- display costume picture & assignment info if it's currently assigned-->
+    <!-- display costume picture & assignment info -->
     <article class='media'>
-      <!-- costume picture -->
+      <!-- costume picture/description -->
       <figure class='media-left'>
         <p class='image is-64x64'>
-          <%= image_tag(costume.picture, width: 100) %>
+          <% if !costume.picture.blank? %>
+            <%= image_tag(costume.picture, width: 100) %>
+          <% elsif !costume.onepiece_description.blank? %>
+            <%= costume.onepiece_description %>
+          <% else %>
+            <%= costume.twopiece_description %>
+        <% end %>
         </p>
       </figure>
       <div class='media-content'>
         <!-- song name (genre) -->
         <div class='content'>
           <p>
-            <strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)
+            <strong><%= @info.song_name.upcase %></strong> (<%= @info.genre %>)
           </p>
           <!-- hair accessory, shoes, and tights -->
           <p style='margin-left:3%;'>
-            <strong>Hair Accessory:</strong> <%= info.hair_accessory %> 
+            <strong>Hair Accessory:</strong> <%= @info.hair_accessory %> 
             <br>
-            <strong>Shoes:</strong> <%= info.shoe %> 
+            <strong>Shoes:</strong> <%= @info.shoe %> 
             <br>
-            <strong>Tights:</strong> <%= info.tight %>
+            <strong>Tights:</strong> <%= @info.tight %>
           </p>
         </div>
         <!-- nested media object -->
