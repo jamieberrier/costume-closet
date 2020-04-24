@@ -51,6 +51,7 @@ class CostumesController < ApplicationController
   def assign_costume
     find_costume
     @assignment_info = @costume.costume_assignments.build
+    @season = Time.now.year
 
     Dancer.current_dancers(current_user).each do |dancer|
       @costume.costume_assignments.build(dancer_id: dancer.id)
@@ -67,6 +68,6 @@ class CostumesController < ApplicationController
   private
 
   def costume_params
-    params.require(:costume).permit(:top_description, :bottoms_description, :onepiece_description, :picture, :hair_accessory, :dance_studio_id, :costume_assignments_attributes => [:dancer_id, :song_name, :dance_season, :genre, :shoe, :tight, :costume_size, :costume_condition])
+    params.require(:costume).permit(:top_description, :bottoms_description, :onepiece_description, :picture, :dance_studio_id, :costume_assignments_attributes => [:dancer_id, :song_name, :dance_season, :genre, :hair_accessory, :shoe, :tight, :costume_size, :costume_condition])
   end
 end
