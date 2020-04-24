@@ -6,14 +6,14 @@
       <h2 class='subtitle'>Two-Piece Costume</h2>
       <div class='field'>
         <%= f.label :top_description, 'Top Description', class: 'label' %>
-        <div class='control has-icons-left'>
+        <div class='control'>
           <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
         </div>
       </div>
       <!-- bottoms description -->
       <div class='field'>
         <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
-        <div class='control has-icons-left'>
+        <div class='control'>
           <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
         </div>
       </div>
@@ -24,24 +24,17 @@
       <h2 class='subtitle'>One-Piece Costume</h2>
       <div class='field'>
         <%= f.label 'Description', class: 'label' %>
-        <div class='control has-icons-left'>
+        <div class='control'>
           <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
         </div>
       </div>
       <p class='help is-danger'>Must fill out for a one-piece costume</p>
     </div>
     <div class='box'>
-      <!-- hair accessory description -->
-      <div class='field'>
-        <%= f.label :hair_accessory, 'Hair Accessory', class: 'label' %>
-        <div class='control has-icons-left'>
-          <%= f.text_field :hair_accessory, class:'input', placeholder: "Enter description or 'none'" %>
-        </div>
-      </div>
       <!-- picture -->
       <div class='field'>
         <%= f.label :picture, class: 'label' %>
-        <div class='control has-icons-left'>
+        <div class='control'>
           <%= f.text_field :picture, class:'input', placeholder: 'If no picture, leave blank' %>
         </div>
       </div>
@@ -77,6 +70,13 @@
               <%= assignment_builder.label :genre, class: 'label' %>
               <div class='control'>
                 <%= assignment_builder.text_field :genre, class:'input', placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
+              </div>
+            </div>
+            <!-- hair accessory description -->
+            <div class='field'>
+              <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
+              <div class='control'>
+                <%= assignment_builder.text_field :hair_accessory, class:'input', placeholder: "Enter description or 'none'" %>
               </div>
             </div>
             <!-- Shoes -->
