@@ -1,7 +1,7 @@
 class CostumeAssignment < ApplicationRecord
   belongs_to :dancer
   belongs_to :costume
-  # costume_size, genre, shoe, tight, costume_condition
+  # costume_size, genre, hair_accessory, shoe, tight, costume_condition
   validates :dancer_id, :dance_season, :song_name, presence: true
 
   # Gets current costume assignments for a dancer
