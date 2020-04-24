@@ -4,6 +4,7 @@
       <td>Season</td>
       <td>Song Name</td>
       <td>Genre</td>
+      <td>Hair Accessory</td>
       <td>Shoes</td>
       <td>Tights</td>
       <% if owner? && !@dancer %>
@@ -29,6 +30,7 @@
         <% end %>
         </td>
         <td><%= assignment.genre %></td>
+        <td><%= assignment.hair_accessory %></td>
         <td><%= assignment.shoe %></td>
         <td><%= assignment.tight %></td>
         <% if owner? && !@dancer%>

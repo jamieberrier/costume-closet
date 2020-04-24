@@ -16,6 +16,7 @@
         <td>Costume</td>
         <td>Song Name</td>
         <td>Genre</td>
+        <td>Hair Accessory</td>
         <td>Shoes</td>
         <td>Tights</td>
         <td>Size</td>
@@ -27,6 +28,7 @@
           <td><%= link_to image_tag(Costume.find(assignment.costume_id).picture, width: 100), costume_path(assignment.costume_id, back_page: @back_page) %></td>
           <td><%= assignment.song_name %></td>
           <td><%= assignment.genre %></td>
+          <td><%= assignment.hair_accessory %></td>
           <td><%= assignment.shoe %></td>
           <td><%= assignment.tight %></td>
           <td><%= assignment.costume_size %></td>
