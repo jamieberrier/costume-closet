@@ -2,7 +2,7 @@
   <!-- Song Name -->
   <h1 class='title has-text-primary'><%= @costume_assignments.first.song_name%></h1>
   <!-- Dance Season -->
-  <h2 class='subtitle'><%= @costume_assignments.first.dance_season %></h2>
+  <h2 class='subtitle'><%= @season %></h2>
   <!-- Costume Picture -->
   <% if !@costume.picture.blank? %>
     <%= image_tag @costume.picture, width: 200 %>
@@ -61,3 +61,4 @@
     </div>
   </div>
 </div>
+<%= link_to 'Edit', edit_season_assignments_path(@costume, season: @season), class: 'button is-success'%>
