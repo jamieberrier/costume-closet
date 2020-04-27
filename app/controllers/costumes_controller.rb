@@ -78,13 +78,17 @@ class CostumesController < ApplicationController
   def edit_season_assignments
     find_costume
     @season = params[:season]
-    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
-    @assignment_info = @costume.costume_assignments.build(hair_accessory: @costume_assignments.first.hair_accessory, tight: @costume_assignments.first.tight, shoe: @costume_assignments.first.shoe, genre: @costume_assignments.first.genre, song_name: @costume_assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
+    @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+    @assignment_info = @costume.costume_assignments.build(hair_accessory: @assignments.first.hair_accessory, tight: @assignments.first.tight, shoe: @assignments.first.shoe, genre: @assignments.first.genre, song_name: @assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
+
+    Dancer.current_dancers(current_user).each do |dancer|
+     # build a record unless one with dancer's id already exists
+      @costume.costume_assignments.build(dancer_id: dancer.id) unless @assignments.exists?(dancer_id: dancer.id)
+    end
   end
 
   def update_season_assignments
     find_costume
-    #@season = params[:costume][:costume_assignments_attributes].values[0].values[0]
     @costume.update(costume_params)
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
