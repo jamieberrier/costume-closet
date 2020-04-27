@@ -36,9 +36,11 @@ Rails.application.routes.draw do
     # Route for a dance studio to view all of a costume's assignments
     get '/assignments' => 'costume_assignments#costume_assignments', as: 'assigned_costume'
     # Route for a dance studio to view a costume's assignments for a season
-    get '/season_assignments' => 'costume_assignments#season_assignments', as: 'season_assignments'
-    # Route for a dance studio to edit a costume's assignments for a season
-    get '/season_assignments/edit' => 'costume_assignments#edit_season_assignments', as: 'edit_season_assignments'
+    get '/season_assignments' => 'costumes#season_assignments', as: 'season_assignments'
+    # Routes for a dance studio to edit a costume's assignments for a season
+    get '/edit_season_assignments' => 'costumes#edit_season_assignments', as: 'edit_season_assignments'
+    patch '/edit_season_assignments' => 'costumes#update_season_assignments'
+    post '/edit_season_assignments' => 'costumes#update_season_assignments'
     # Routes for dance studio to assign a costume to dancers
     get '/assign' => 'costumes#assign_costume', as: 'assign_costume'
     patch '/assign' => 'costumes#assign'

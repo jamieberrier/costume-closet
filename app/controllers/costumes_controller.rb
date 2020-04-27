@@ -65,9 +65,34 @@ class CostumesController < ApplicationController
     redirect_to unassigned_costumes_path(current_user)
   end
 
+  # owner viewing a costume's assignments for a season
+  # params[:season]
+  def season_assignments
+    find_costume
+    @season = params[:season]
+    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+  end
+
+  # Displays form for owner to edit a costume's assignments for a season
+  # params[:season]
+  def edit_season_assignments
+    find_costume
+    @season = params[:season]
+    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+    @assignment_info = @costume.costume_assignments.build(hair_accessory: @costume_assignments.first.hair_accessory, tight: @costume_assignments.first.tight, shoe: @costume_assignments.first.shoe, genre: @costume_assignments.first.genre, song_name: @costume_assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
+  end
+
+  def update_season_assignments
+    find_costume
+    #@season = params[:costume][:costume_assignments_attributes].values[0].values[0]
+    @costume.update(costume_params)
+    redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
+  end
+
+
   private
 
   def costume_params
-    params.require(:costume).permit(:top_description, :bottoms_description, :onepiece_description, :picture, :dance_studio_id, :costume_assignments_attributes => [:dancer_id, :song_name, :dance_season, :genre, :hair_accessory, :shoe, :tight, :costume_size, :costume_condition])
+    params.require(:costume).permit(:top_description, :bottoms_description, :onepiece_description, :picture, :dance_studio_id, :costume_assignments_attributes => [:id, :dancer_id, :song_name, :dance_season, :genre, :hair_accessory, :shoe, :tight, :costume_size, :costume_condition])
   end
 end
