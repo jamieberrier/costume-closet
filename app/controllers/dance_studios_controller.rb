@@ -38,8 +38,7 @@ class DanceStudiosController < ApplicationController
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
-    # get assignment info for costume
-    @info = @assignments.first
+    @season = @assignments.first.dance_season
   end
 
   # current costumes for a dance studio
