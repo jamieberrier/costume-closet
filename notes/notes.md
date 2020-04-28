@@ -115,6 +115,7 @@
   - password & password confirmation are set for them
 
 # TODO
+- DRY up code
 - costumes
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
