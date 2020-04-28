@@ -61,4 +61,7 @@
     </div>
   </div>
 </div>
-<%= link_to 'Edit', edit_season_assignments_path(@costume, season: @season), class: 'button is-success'%>
+<!-- Edit Button -->
+<%= link_to 'Edit', edit_season_assignments_path(@costume, season: @season), class: 'button is-warning'%>
+<!-- Delete Button -->
+<%= link_to 'Delete', season_assignments_path(@costume, season: @season), class: 'button is-danger', method: :delete %>
