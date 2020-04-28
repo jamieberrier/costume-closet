@@ -4,7 +4,7 @@ class CostumeAssignmentsController < ApplicationController
 
   # owner viewing all of its dance studio's costume assignments
   def index
-    @costume_assignments = current_user.costume_assignments.order(dance_season: :desc)
+    @costume_assignments = current_user.costume_assignments.order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 
   # TODO: should this be in costumes controller?
@@ -19,6 +19,6 @@ class CostumeAssignmentsController < ApplicationController
   # dancer viewing all of his/her costume assignments / owner viewing a dancer's costume assignments -- params[:id]
   def dancer_assignments
     find_dancer
-    @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(:dance_season, :genre, :song_name)
+    @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 end
