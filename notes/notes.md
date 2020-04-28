@@ -116,6 +116,7 @@
 
 # TODO
 - costume assignments
+  - delete
   - should costume_assignments#dancer_assignments be in dancers controller?
   - should costume_assignments#costume_assignments be in costumes controller?
   - update URLs
@@ -127,7 +128,6 @@
   - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
   - edit forms
     - password & password confirmation passing as blank
-  - how to center image
 
 # STRETCH GOALS
 - dancers#show
