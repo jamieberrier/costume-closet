@@ -1,15 +1,9 @@
 <div class='content has-text-centered'>
-  <% if dancer? %> <!-- a dancer viewing his/her costume assignments -->
-      <h1 class='title has-text-primary'><%= current_user.name %>'s Costume  Assignments</h1>
-    <% else %> <!-- owner viewing a dancer's costume assignmnts -->
-      <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
-    <% end %>
-</div>
-<!-- if costume assignment(s) exist, render table -->
-<% if @costume_assignments.empty? %>
-  <div class='content has-text-centered'>
+  <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
+  <!-- if costume assignment(s) exist, render table -->
+  <% if @costume_assignments.exists? %>
+    <%= render "table"%>
+  <% else %>
     <h2 class='subtitle'>No Assignments</h2>
-  </div>
-<% else %>
-  <%= render "table"%>
-<% end %>
+  <% end %>
+</div>
