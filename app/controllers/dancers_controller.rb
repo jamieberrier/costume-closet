@@ -9,12 +9,14 @@ class DancersController < ApplicationController
   def create
     @dancer = Dancer.new(dancer_params)
 
-    if @dancer.save
-      redirect_to dance_studio_path(current_user), success: 'Dancer Added!' if owner?
+    if @dancer.save && owner?
+      redirect_to dance_studio_path(current_user), success: 'Dancer Added!'
+    elsif @dancer.save
       log_in(@dancer, 'Successfully Registered!')
+    elsif owner?
+      render_new_form
     else
-      render_new_form && return if owner?
-      render_registration_form && return
+      render_registration_form
     end
   end
 
@@ -28,7 +30,6 @@ class DancersController < ApplicationController
     find_dancer
   end
 
-  # Uses instance variable b/c dance_studio can also update
   def update
     find_dancer
     @dancer.update(dancer_params)
@@ -58,7 +59,8 @@ class DancersController < ApplicationController
 
   # Displays dancer's current costume assignments with costume picture
   def current_assignments
-    @assignments = CostumeAssignment.current_dancer_costumes(current_user)
+    find_dancer
+    @assignments = CostumeAssignment.current_dancer_costumes(@dancer)
   end
 
   # Displays the current dancers for a dance studio
