@@ -115,8 +115,9 @@
   - password & password confirmation are set for them
 
 # TODO
+- costumes
+  - should delete_season_assignments be in costume assignments controller?
 - costume assignments
-  - delete
   - should costume_assignments#dancer_assignments be in dancers controller?
   - should costume_assignments#costume_assignments be in costumes controller?
   - update URLs
