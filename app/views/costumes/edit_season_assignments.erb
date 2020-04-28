@@ -104,7 +104,6 @@
       <h2 class='subtitle'>Add Dancer(s)</h2>
       <div class='columns'>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
-        <!--% binding.pry %-->
           <% if !assignment_builder.object.dancer_id.nil? && !@assignments.exists?(dancer_id: assignment_builder.object.dancer_id) %>
             <div class='column'>
             <!-- Dancer -->
@@ -124,9 +123,17 @@
               <div class='field'>
                 <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
                 <div class='control'>
-                  <!--%#= assignment_builder.text_field :costume_size, class:'input is-small' %-->
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']]), {prompt: "Select Size"}) %>
+                  </div>
+                </div>
+              </div>
+              <!-- Costume Condition -->
+              <div class='field'>
+                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <div class='control'>
+                  <div class='select is-small'>
+                    <%= assignment_builder.select(:costume_condition, options_for_select([['New', 'New'], ['Used', 'Used']]), {prompt: "Select"}) %>
                   </div>
                 </div>
               </div>
