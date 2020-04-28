@@ -5,7 +5,7 @@
 <% else %>
   <div class="content has-text-centered">
     <% if owner? %>
-      <h1 class='title has-text-primary'><%= find_dancer.name %>'s <%= Time.now.year %> Costume Assignments</h1>
+      <h1 class='title has-text-primary'><%= @dancer.name %>'s <%= Time.now.year %> Costume Assignments</h1>
     <% else %>
         <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
     <% end %>
