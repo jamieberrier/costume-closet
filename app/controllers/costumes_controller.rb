@@ -62,7 +62,7 @@ class CostumesController < ApplicationController
   def assign
     find_costume
     @costume.update(costume_params)
-    redirect_to unassigned_costumes_path(current_user)
+    redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes]['0'][:dance_season])
   end
 
   # owner viewing a costume's assignments for a season
@@ -82,7 +82,7 @@ class CostumesController < ApplicationController
     @assignment_info = @costume.costume_assignments.build(hair_accessory: @assignments.first.hair_accessory, tight: @assignments.first.tight, shoe: @assignments.first.shoe, genre: @assignments.first.genre, song_name: @assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
 
     Dancer.current_dancers(current_user).each do |dancer|
-     # build a record unless one with dancer's id already exists
+      # build a record unless one with dancer's id already exists
       @costume.costume_assignments.build(dancer_id: dancer.id) unless @assignments.exists?(dancer_id: dancer.id)
     end
   end
@@ -93,6 +93,11 @@ class CostumesController < ApplicationController
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
 
+  # params[:season], params[:id] -> costume id
+  def delete_season_assignments
+    CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", params[:id], params[:season]).destroy_all
+    redirect_to costume_path(params[:id]), success: 'Assignments Deleted'
+  end
 
   private
 
