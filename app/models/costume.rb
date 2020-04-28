@@ -19,7 +19,7 @@ class Costume < ApplicationRecord
   def twopiece_description
     top_description + ' with ' + bottoms_description
   end
-  
+
   # TODO: refactor
   def self.find_by_assignment(assignments)
     costumes = []
@@ -62,19 +62,24 @@ edit season assignments
 =end
 
   def costume_assignments_attributes=(assignments_hashes)
-    # get shared data and remove from hash
+    # get shared data and remove from hash (song_name, genre, etc.)
     shared_attributes = assignments_hashes.shift.pop
-    # delete unselected dancers, where dancer_id == 0
-    assignments_hashes.delete_if { |key, value| value[:dancer_id] == '0' }
+    # delete unselected dancers
+    assignments_hashes.keep_if { |_i, unique_attributes| unique_attributes[:id] || unique_attributes[:dancer_id] != '0' }
 
-    assignments_hashes.each do |i, unique_attributes|
-      # combine unique dancer data with shared data
-      combined_attributes = unique_attributes.merge(shared_attributes)
-      # new
-      if combined_attributes[:id].nil?
-        costume_assignments.build(combined_attributes)
-      else # editing
-        costume_assignments.find(combined_attributes[:id]).update(combined_attributes)
+    assignments_hashes.each do |_i, unique_attributes|
+      if unique_attributes[:id] && unique_attributes[:dancer_id] == '0'
+        # edit: if dancer unselected, delete record in costume assignments
+        CostumeAssignment.find(unique_attributes[:id]).destroy
+      else # create or update record
+        # combine unique dancer data with shared data
+        combined_attributes = unique_attributes.merge(shared_attributes)
+        # new
+        if combined_attributes[:id].nil?
+          costume_assignments.build(combined_attributes)
+        else # editing
+          costume_assignments.find(combined_attributes[:id]).update(combined_attributes)
+        end
       end
     end
   end
