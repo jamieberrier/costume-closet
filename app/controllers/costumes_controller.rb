@@ -93,6 +93,7 @@ class CostumesController < ApplicationController
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
 
+  # TODO: better in costume assignments controller?
   # params[:season], params[:id] -> costume id
   def delete_season_assignments
     CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", params[:id], params[:season]).destroy_all
