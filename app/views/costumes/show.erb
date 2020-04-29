@@ -65,7 +65,7 @@
       <% if params[:season] %>
         <%= link_to "View #{Time.now.year} Costume Assignments", season_assignments_path(@costume, season: Time.now.year), class: 'button is-primary' %>
       <% else%>
-        <%= link_to 'View All Costume Assignments', assigned_costume_path(@costume, costume_id: @costume.id), class: 'button is-primary' %>
+        <%= link_to 'View All Costume Assignments', assigned_costume_path(@costume), class: 'button is-primary' %>
       <% end %>
       <!-- Assign an Unassigned Costume -->
       <% if unassigned? %>
