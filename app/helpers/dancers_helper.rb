@@ -1,18 +1,4 @@
 module DancersHelper
-  def redirect_if_not_studio_dancer!
-    if owner?
-      redirect_to root_path unless current_user.dancers.include?(params[:id])
-    else
-      redirect_to root_path unless current_user.id == params[:id].to_i
-    end
-  end
-
-  def redirect_if_not_studio_owner!
-    # nested
-    # new index current dancers -> params[:dance_studio_id]
-    redirect_to root_path unless owner? && current_user.id == params[:dance_studio_id].to_i
-  end
-
   def find_dancer
     @dancer = Dancer.find(params[:id])
   end
