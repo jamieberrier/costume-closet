@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :costumes
     resources :dancers, only: %i[new index show edit update destroy]
     resources :costume_assignments, only: %i[index]
+    # Route for dance studio to view their current dancers
+    get '/dancers/current_dancers' => 'dancers#current_dancers', as: 'current_dancers'
   end
 
   post '/dancers' => 'dancers#create'
@@ -25,8 +27,6 @@ Rails.application.routes.draw do
   scope '/dance_studios/:id' do
     # Route for dance studio to view their current costume assignments
     get '/current_assignments' => 'dance_studios#current_assignments', as: 'studio_current_assignments'
-    # Route for dance studio to view their current dancers
-    get '/dancers/current_dancers' => 'dancers#current_dancers', as: 'studio_current_dancers'
     # Route for dance studio to view the costumes currently in use
     get '/current_costumes' => 'dance_studios#current_costumes', as: 'studio_current_costumes'
     # Route for dance studio to view the costumes not currently in use
