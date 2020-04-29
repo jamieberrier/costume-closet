@@ -114,9 +114,23 @@
   - enter first name, last name, and email
   - password & password confirmation are set for them
 
+15. Verify actions protected
+  - Costume Assignments
+    - before_action :redirect_if_not_owner_assigned!, only: :costume_assignments
+    - before_action :redirect_if_not_studio_owner!, only: :index
+    - before_action :redirect_if_not_studio_dancer!, only: :dancer_assignments
+  - Registrations
+    - skip_before_action :require_logged_in!
+  - Sessions
+    - before_action :require_logged_in!, only: :destroy
+
 # TODO
-- costume assignments index validations
+- verify actions protected
+  - dancers
+  - dance studios
+  - costumes
 - DRY up code
+  - logout helper, pass message
 - costumes
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
