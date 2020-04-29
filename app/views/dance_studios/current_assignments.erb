@@ -1,10 +1,10 @@
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'><%= @season %> Costume Assignments</h1>
+  <!-- no current costume assignments -->
+  <% if @assignments.empty? %>
+    <h2 class='subtitle'>No Costume Assignments For This Season</h2>
+  <% else %>
 </div>
-<!-- no current costumes -->
-<% if @assignments.nil? %>
-  <h2 class='subtitle'>No Costume Assignments For This Season</h2>
-<% else %>
   <!-- Costume.find(@costume_assignments.first.costume_id) -->
   <% @costumes.each do |costume| %>
     <!-- display costume picture & assignment info -->
