@@ -1,5 +1,7 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in!, only: :create
+  before_action :redirect_if_not_studio_owner!, only: %i[new index current_dancers]
+  before_action :redirect_if_not_studio_dancer!, only: %i[show edit destroy current_assignments]
 
   # For Dance Studio to create a new dancer
   def new
@@ -32,8 +34,11 @@ class DancersController < ApplicationController
 
   def update
     find_dancer
-    @dancer.update(dancer_params)
-    redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
+    if @dancer.update(dancer_params)
+      redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
+    else
+      render_edit_form
+    end
   end
 
   # Only dance_studio can view
