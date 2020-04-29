@@ -1,6 +1,6 @@
 class DanceStudiosController < ApplicationController
-  before_action :redirect_if_not_owner!, except: :create
   skip_before_action :require_logged_in!, only: :create
+  before_action :redirect_if_not_dance_studio_owner!, except: :create
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
@@ -23,8 +23,15 @@ class DanceStudiosController < ApplicationController
 
   def update
     find_dance_studio
-    @dance_studio.update!(dance_studio_params)
-    redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
+
+    if @dance_studio.update(dance_studio_params)
+      redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
+    else
+      flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
+
+      render 'dance_studios/edit'
+    end
+
   end
 
   def destroy
@@ -38,7 +45,7 @@ class DanceStudiosController < ApplicationController
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
-    @season = @assignments.first.dance_season
+    @season = @assignments.first.dance_season unless @assignments.empty?
   end
 
   # current costumes for a dance studio
