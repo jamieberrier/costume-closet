@@ -1,5 +1,7 @@
 class CostumesController < ApplicationController
-  before_action :redirect_if_not_owner!, except: %i[show index]
+  before_action :redirect_if_not_owner!, except: :show
+  before_action :redirect_if_not_assigned!, except: %i[new create index]
+  before_action :redirect_if_not_studio!, only: %i[new create index]
 
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])
@@ -21,13 +23,13 @@ class CostumesController < ApplicationController
     redirect_to_costume_path('Costume Successfully Created!')
   end
 
+  # Dance Studio & Dancer can view
   def show
     find_costume
   end
 
   def index
     @costumes = current_user.costumes
-    # path for Back button on costume show page
   end
 
   def edit
