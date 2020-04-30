@@ -122,11 +122,15 @@
   - Registrations
     - skip_before_action :require_logged_in!
   - Sessions
-    - before_action :require_logged_in!, only: :destroy
+    - skip_before_action :require_logged_in!, except: :destroy
+  - Dancers
+    - skip_before_action :require_logged_in!, only: :create
 
 # TODO
 - verify actions protected
   - dancers
+    - before_action :redirect_if_not_studio_owner!, only: %i[new index current_dancers]
+    - before_action :redirect_if_not_studio_dancer!, only: %i[show edit update destroy current_assignments]
   - dance studios
   - costumes
 - DRY up code
@@ -134,7 +138,7 @@
 - costumes
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
-  - should costume_assignments#dancer_assignments be in dancers controller?
+  - should ostume_assignments#dancer_assignments be in dancers controller?
   - should costume_assignments#costume_assignments be in costumes controller?
   - update URLs
 
