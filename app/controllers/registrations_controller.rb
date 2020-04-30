@@ -1,8 +1,8 @@
 class RegistrationsController < ApplicationController
-  skip_before_action :require_logged_in!
+  skip_before_action :require_logged_in
 
   def new
-    redirect_if_logged_in!
+    redirect_if_logged_in
     create_empty_user
   end
 

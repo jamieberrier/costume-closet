@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-  before_action :require_logged_in!, only: :destroy
+  skip_before_action :require_logged_in, except: :destroy
 
   def new
-    redirect_if_logged_in!
+    redirect_if_logged_in('You are already logged in')
   end
 
   def create
@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
     else
       @dancer = Dancer.from_omniauth(access_token)
     end
-
     if @dance_studio
       if @dance_studio.id
         @dance_studio.save

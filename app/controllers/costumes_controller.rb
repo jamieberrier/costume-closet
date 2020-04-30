@@ -1,8 +1,8 @@
 class CostumesController < ApplicationController
   # can I delete redirect_if_not_owner ??
-  # before_action :redirect_if_not_owner!, except: :show
-  before_action :redirect_if_not_studio_owner!, only: %i[new create index]
-  before_action :redirect_if_not_assigned!, except: %i[new create index]
+  # before_action :redirect_if_not_owner, except: :show
+  before_action :redirect_if_not_studio_owner, only: %i[new create index]
+  before_action :redirect_if_not_assigned, except: %i[new create index]
 
   # Dance Studio & Dancer can view
   def show

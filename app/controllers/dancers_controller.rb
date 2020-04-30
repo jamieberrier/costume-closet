@@ -1,7 +1,7 @@
 class DancersController < ApplicationController
-  skip_before_action :require_logged_in!, only: :create
-  before_action :redirect_if_not_studio_owner!, only: %i[new index current_dancers]
-  before_action :redirect_if_not_studio_dancer!, only: %i[show edit update destroy current_assignments]
+  skip_before_action :require_logged_in, only: :create
+  before_action :redirect_if_not_studio_owner, only: %i[new index current_dancers]
+  before_action :redirect_if_not_studio_dancer, only: %i[show edit update destroy current_assignments]
 
   # Displays from for a Dance Studio to create a new dancer
   def new

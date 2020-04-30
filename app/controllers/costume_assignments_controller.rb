@@ -1,7 +1,7 @@
 class CostumeAssignmentsController < ApplicationController
-  before_action :redirect_if_not_owner_assigned!, only: :costume_assignments
-  before_action :redirect_if_not_studio_owner!, only: :index
-  before_action :redirect_if_not_studio_dancer!, only: :dancer_assignments
+  before_action :redirect_if_not_owner_assigned, only: :costume_assignments
+  before_action :redirect_if_not_studio_owner, only: :index
+  before_action :redirect_if_not_studio_dancer, only: :dancer_assignments
 
   # nested --> params[:dance_studio_id]
   # url: dance_studios/1/costume_assignments

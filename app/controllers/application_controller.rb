@@ -10,9 +10,11 @@ class ApplicationController < ActionController::Base
   include CostumesHelper
   include CostumeAssignmentsHelper
 
-  before_action :require_logged_in!, except: :home
+  before_action :require_logged_in, except: :home
 
   def home
-    redirect_if_logged_in!
+    message = 'You are already logged in' unless params[:message]
+
+    redirect_if_logged_in(message)
   end
 end

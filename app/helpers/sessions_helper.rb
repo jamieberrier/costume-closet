@@ -13,7 +13,7 @@ module SessionsHelper
     !!current_user
   end
   # redirects to home page if user is not logged in
-  def require_logged_in!
+  def require_logged_in
     return redirect_to login_path, danger: 'You are not logged in' unless logged_in?
   end
   # redirects to login path if login failure
@@ -53,21 +53,21 @@ module SessionsHelper
     end
   end
   # redirects to user show page based on type of user
-  def redirect_if_logged_in!
-    message = 'You are already logged in'
+  def redirect_if_logged_in(message)
+    @message = message
 
     if owner?
-      redirect_to dance_studio_path(current_user), info: message if logged_in?
+      redirect_to dance_studio_path(current_user), info: @message if logged_in?
     else
-      redirect_to dancer_path(current_user), info: message if logged_in?
+      redirect_to dancer_path(current_user), info: @message if logged_in?
     end
   end
 
-  def redirect_if_not_owner!
+  def redirect_if_not_owner
     redirect_to dancer_path(current_user) unless owner?
   end
 
-  def redirect_if_not_dancer!
+  def redirect_if_not_dancer
     redirect_to dance_studio_path(current_user) unless dancer?
   end
 end
