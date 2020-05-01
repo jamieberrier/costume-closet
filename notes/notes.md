@@ -135,11 +135,16 @@
 
 # TODO
 - pass message with before_action helpers
-- change preset password
 - costume show page - only show season/dancers if previously assigned
 - current dancers - make no. costume assignments links
 - DRY up code
   - logout helper, pass message
+  - not working: try_to_save(user) -> registrations helper
+  - using?
+    - registrations helper
+      def signing_up_as_dancer?
+        params[:user_type] == 'dancer'
+      end
 - costumes
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
