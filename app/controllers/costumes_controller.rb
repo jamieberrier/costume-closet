@@ -1,7 +1,7 @@
 class CostumesController < ApplicationController
   before_action :require_dance_studio_owner, only: %i[new create index]
   before_action :require_costume_ownership, only: %i[show]
-  before_action :require_belongs_to_studio, except: %i[new create index show]
+  before_action :require_studio_costume, except: %i[new create index show]
 
   # Dance Studio & Dancer can view
   # url: /costumes/3
@@ -70,6 +70,13 @@ class CostumesController < ApplicationController
     find_costume
     @costume.update(costume_params)
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes]['0'][:dance_season])
+  end
+
+  # owner viewing all of a costume's assignments
+  # url: /costumes/3/assignments
+  def costume_assignments
+    find_costume
+    @costume_assignments = CostumeAssignment.where(costume_id: @costume)
   end
 
   # owner viewing a costume's assignments for a season

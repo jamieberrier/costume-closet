@@ -1,7 +1,7 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in, only: :create
   before_action :require_dance_studio_owner, only: %i[new index current_dancers]
-  before_action :require_studio_dancer, only: %i[show edit update destroy current_assignments]
+  before_action :require_studio_dancer, only: %i[show edit update destroy dancer_assignments current_assignments]
 
   # Owner
   # Displays from for a Dance Studio to create a new dancer
@@ -49,6 +49,13 @@ class DancersController < ApplicationController
     else
       render_edit_form
     end
+  end
+
+  # dancer viewing all costume assignments / owner viewing a dancer's costume assignments
+  # url: /dancers/3/costume_assignments
+  def dancer_assignments
+    find_dancer
+    @costume_assignments = CostumeAssignment.where(dancer_id: @dancer).order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 
   # Displays dancer's current costume assignments with costume picture
