@@ -134,9 +134,6 @@
     - before_action :require_studio_costume, except: %i[new create index show]
 
 # TODO
-- pass message with before_action helpers
-- costume show page - only show season/dancers if previously assigned
-- current dancers - make no. costume assignments links
 - DRY up code
   - logout helper, pass message
   - not working: try_to_save(user) -> registrations helper
