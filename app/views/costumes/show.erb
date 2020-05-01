@@ -37,29 +37,31 @@
   </div>
   <% if owner? %>
     <!-- No of dancers by season -->
-    <div class='columns'>
-      <div class='column is-narrow'>
-        <div class='box'>
-          <table class='table'>
-            <thead>
-              <tr>
-                <td><h2 class='subtitle'>Season</h2></td>
-                <td><h2 class='subtitle'>Dancers</h2></td>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- {"2019"=>3, "2020"=>3} -->
-              <% @costume.seasons.each do |season| %>
+    <% if !@costume.seasons.empty?%>
+      <div class='columns'>
+        <div class='column is-narrow'>
+          <div class='box'>
+            <table class='table'>
+              <thead>
                 <tr>
-                  <td><%= season[0] %></td>
-                  <td><%= season[1] %></td>
+                  <td><h2 class='subtitle'>Season</h2></td>
+                  <td><h2 class='subtitle'>Dancers</h2></td>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <!-- {"2019"=>3, "2020"=>3} -->
+                <% @costume.seasons.each do |season| %>
+                  <tr>
+                    <td><%= season[0] %></td>
+                    <td><%= season[1] %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <!-- View All/Current Costume Assignments -->
     <div class='buttons is-grouped'>
       <% if params[:season] %>
