@@ -116,23 +116,32 @@
 
 15. Verify actions protected
   - Costume Assignments
-    - before_action :redirect_if_not_owner_assigned!, only: :costume_assignments
-    - before_action :redirect_if_not_studio_owner!, only: :index
-    - before_action :redirect_if_not_studio_dancer!, only: :dancer_assignments
+    - before_action :redirect_if_not_owner_assigned, only: :costume_assignments
+    - before_action :redirect_if_not_studio_owner, only: :index
+    - before_action :redirect_if_not_studio_dancer, only: :dancer_assignments
   - Registrations
-    - skip_before_action :require_logged_in!
+    - skip_before_action :require_logged_in
   - Sessions
-    - skip_before_action :require_logged_in!, except: :destroy
+    - skip_before_action :require_logged_in, except: :destroy
   - Dancers
-    - skip_before_action :require_logged_in!, only: :create
+    - skip_before_action :require_logged_in, only: :create
+    - before_action :redirect_if_not_studio_owner, only: %i[new index current_dancers]
+    - before_action :redirect_if_not_studio_dancer, only: %i[show edit update destroy current_assignments]
+  - Dance Studios
+    - skip_before_action :require_logged_in, only: :create
+    - before_action :redirect_if_not_dance_studio_owner, except: :create
+  - Costumes
+    - before_action :redirect_if_not_studio_owner, only: %i[new create index]
+    - before_action :redirect_if_not_assigned, only: %i[show]
+    - before_action :redirect_if_not_owner_assigned, except: %i[new create index show]
 
 # TODO
-- verify actions protected
-  - dancers
-    - before_action :redirect_if_not_studio_owner!, only: %i[new index current_dancers]
-    - before_action :redirect_if_not_studio_dancer!, only: %i[show edit update destroy current_assignments]
-  - dance studios
-  - costumes
+- rename before action helpers
+- pass message with ^ helpers
+- move costume_asignments & dancer_assignments to costumes and dancers
+- change preset password
+- costume show page - only show season/dancers if previously assigned
+- current dancers - make no. costume assignments links
 - DRY up code
   - logout helper, pass message
 - costumes
