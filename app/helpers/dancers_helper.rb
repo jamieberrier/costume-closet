@@ -20,4 +20,14 @@ module DancersHelper
 
     render 'dancers/edit'
   end
+
+  # Owner & Dancer: params[:id] -> dancer id
+  # dancers -- show edit update destroy dancer_assignments current_assignments
+  def require_studio_dancer
+    if owner? # check if dancer belongs to studio
+      redirect_to root_path unless current_user.dancers.include?(find_dancer)
+    else # check if dancer is current user
+      redirect_to root_path unless current_user.id == params[:id].to_i
+    end
+  end
 end
