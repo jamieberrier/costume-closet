@@ -14,6 +14,7 @@ module RegistrationsHelper
   def signing_up_as_dancer?
     params[:user_type] == 'dancer'
   end
+
 =begin
   # not working...
   def try_to_save(user)
