@@ -51,10 +51,6 @@ Rails.application.routes.draw do
 
   # Route for signing up a user (dance_studio & dancer)
   get '/register' => 'registrations#new'
-  # Route for signing up as a dance_studio via google
-  get '/register/dance_studio/google' => 'registrations#google_auth', as: 'dance_studio_google_register'
-  # Route for signing up as a dancer via google
-  get '/register/dancer/google' => 'registrations#google_auth', as: 'dancer_google_register'
 
   # Routes for logging in
   get '/login' => 'sessions#new'
