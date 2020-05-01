@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # Routes for a dancer
   scope '/dancers/:id' do
     # Route for dancers to view all their costume assignments
-    get '/costume_assignments' => 'costume_assignments#dancer_assignments', as: 'dancer_costumes'
+    get '/costume_assignments' => 'dancers#dancer_assignments', as: 'dancer_costumes'
     # Route for dancer to view their current costume asignments
     get '/current_assignments' => 'dancers#current_assignments', as: 'dancer_current_assignments'
   end
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   end
   scope '/costumes/:id' do
     # Route for a dance studio to view all of a costume's assignments
-    get '/assignments' => 'costume_assignments#costume_assignments', as: 'assigned_costume'
+    get '/assignments' => 'costumes#costume_assignments', as: 'assigned_costume'
     # Route for a dance studio to view a costume's season assignments
     get '/season_assignments' => 'costumes#season_assignments', as: 'season_assignments'
     # Route for a dance studio to delete a costume's season assignments
