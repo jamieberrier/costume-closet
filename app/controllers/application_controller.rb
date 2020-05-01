@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
   before_action :require_logged_in, except: :home
 
   def home
-    message = 'You are already logged in' unless params[:message]
+    if params[:message]
+      message = params[:message]
+    else
+      message = 'You are already logged in'
+    end
 
     redirect_if_logged_in(message)
   end

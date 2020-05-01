@@ -14,6 +14,6 @@ module CostumeAssignmentsHelper
   # costumes -- new create index
   # costume assignments -- index
   def require_dance_studio_owner
-    redirect_to root_path unless owner? && current_user.id == params[:dance_studio_id].to_i
+    redirect_to root_path(message: 'Only studio owner can access') unless owner? && current_user.id == params[:dance_studio_id].to_i
   end
 end
