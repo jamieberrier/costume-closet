@@ -1,10 +1,10 @@
 class CostumeAssignmentsController < ApplicationController
-  before_action :redirect_if_not_owner_assigned, only: :costume_assignments
-  before_action :redirect_if_not_studio_owner, only: :index
-  before_action :redirect_if_not_studio_dancer, only: :dancer_assignments
+  before_action :require_belongs_to_studio, only: :costume_assignments
+  before_action :require_dance_studio_owner, only: :index
+  before_action :require_studio_dancer, only: :dancer_assignments
 
   # nested --> params[:dance_studio_id]
-  # url: dance_studios/1/costume_assignments
+  # url: /dance_studios/1/costume_assignments
   # owner viewing all of its dance studio's costume assignments
   def index
     @costume_assignments = current_user.costume_assignments.order(dance_season: :desc, genre: :asc, song_name: :asc)

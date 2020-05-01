@@ -1,9 +1,11 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in, only: :create
-  before_action :redirect_if_not_studio_owner, only: %i[new index current_dancers]
-  before_action :redirect_if_not_studio_dancer, only: %i[show edit update destroy current_assignments]
+  before_action :require_dance_studio_owner, only: %i[new index current_dancers]
+  before_action :require_studio_dancer, only: %i[show edit update destroy current_assignments]
 
+  # Owner
   # Displays from for a Dance Studio to create a new dancer
+  # url: /dance_studios/1/dancers/new
   def new
     @dancer = Dancer.new(dance_studio_id: current_user.id, password: 'password', password_confirmation: 'password')
   end
@@ -26,12 +28,14 @@ class DancersController < ApplicationController
 
   # Display dancer's show page
   # dancer & dance studio can view
+  # url: /dancers/1
   def show
     find_dancer
   end
 
   # Displays form to edit dancer's account info
   # dancer & dance studio can edit
+  # url: /dancers/1/edit
   def edit
     find_dancer
   end
@@ -47,10 +51,28 @@ class DancersController < ApplicationController
     end
   end
 
+  # Displays dancer's current costume assignments with costume picture
+  # dancer & dance studio can view
+  # url: /dancers/1/current_assignments
+  def current_assignments
+    find_dancer
+    @assignments = CostumeAssignment.current_dancer_costumes(@dancer)
+  end
+
+  # Owner
   # Displays all dancers for a dance studio
   # only dance_studio can view
+  # url: /dance_studios/1/dancers
   def index
     # all dancers at a dance_studio
+  end
+
+  # Owner
+  # Displays the current dancers for a dance studio
+  # only dance studio can view
+  # url: /dance_studios/1/dancers/current_dancers
+  def current_dancers
+    @dancers = Dancer.current_dancers(current_user)
   end
 
   # Deactivates dancer's account to keep costume assignment data
@@ -69,19 +91,6 @@ class DancersController < ApplicationController
       # redirect to studio page
       redirect_to dance_studio_path(current_user), success: 'Account Deactivated'
     end
-  end
-
-  # Displays dancer's current costume assignments with costume picture
-  # dancer & dance studio can view
-  def current_assignments
-    find_dancer
-    @assignments = CostumeAssignment.current_dancer_costumes(@dancer)
-  end
-
-  # Displays the current dancers for a dance studio
-  # only dance studio can view
-  def current_dancers
-    @dancers = Dancer.current_dancers(current_user)
   end
 
   private

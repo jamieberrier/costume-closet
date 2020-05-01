@@ -1,14 +1,15 @@
 class CostumesController < ApplicationController
-  # can I delete redirect_if_not_owner ??
-  # before_action :redirect_if_not_owner, except: :show
-  before_action :redirect_if_not_studio_owner, only: %i[new create index]
-  before_action :redirect_if_not_assigned, except: %i[new create index]
+  before_action :require_dance_studio_owner, only: %i[new create index]
+  before_action :require_costume_ownership, only: %i[show]
+  before_action :require_belongs_to_studio, except: %i[new create index show]
 
   # Dance Studio & Dancer can view
+  # url: /costumes/3
   def show
     find_costume
   end
 
+  # url: /dance_studios/1/costumes/new
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])
     # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
@@ -29,11 +30,12 @@ class CostumesController < ApplicationController
     redirect_to_costume_path('Costume Successfully Created!')
   end
 
+  # url: /dance_studios/1/costumes
   def index
     @costumes = current_user.costumes
   end
 
-  # can edit studio id in url
+  # url: /costumes/3/edit
   def edit
     find_costume
   end
@@ -52,6 +54,7 @@ class CostumesController < ApplicationController
   end
 
   # Displays form to assign a costume
+  # url: /costumes/5/assign
   def assign_costume
     find_costume
     @assignment_info = @costume.costume_assignments.build
@@ -71,6 +74,7 @@ class CostumesController < ApplicationController
 
   # owner viewing a costume's assignments for a season
   # params[:season]
+  # url: /costumes/1/season_assignments?season=2020
   def season_assignments
     find_costume
     @season = params[:season]
@@ -79,6 +83,7 @@ class CostumesController < ApplicationController
 
   # Displays form for owner to edit a costume's assignments for a season
   # params[:season]
+  # url: /costumes/1/edit_season_assignments?season=2020
   def edit_season_assignments
     find_costume
     @season = params[:season]

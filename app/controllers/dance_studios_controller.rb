@@ -1,6 +1,6 @@
 class DanceStudiosController < ApplicationController
   skip_before_action :require_logged_in, only: :create
-  before_action :redirect_if_not_dance_studio_owner, except: :create
+  before_action :require_studio_ownership, except: :create
 
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
@@ -13,10 +13,12 @@ class DanceStudiosController < ApplicationController
     end
   end
 
+  # url: /dance_studios/1
   def show
 
   end
 
+  # url: /dance_studios/1/edit
   def edit
     find_dance_studio
   end
@@ -31,7 +33,6 @@ class DanceStudiosController < ApplicationController
 
       render 'dance_studios/edit'
     end
-
   end
 
   def destroy
@@ -42,6 +43,7 @@ class DanceStudiosController < ApplicationController
   end
 
   # current costume assignments for a dance studio
+  # url: /dance_studios/1/current_assignments
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = Costume.find_by_assignment(@assignments)
@@ -49,12 +51,14 @@ class DanceStudiosController < ApplicationController
   end
 
   # current costumes for a dance studio
+  # url: /dance_studios/1/current_costumes
   def current_costumes
     @costumes = current_user.current_studio_costumes
     @season = Time.now.year
   end
 
   # currently unassigned costumes for a dance studio
+  # url: /dance_studios/1/unassigned_costumes
   def unassigned_costumes
     @costumes = current_user.unassigned_studio_costumes
   end
