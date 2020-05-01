@@ -74,7 +74,7 @@
     </div>
     <!-- Edit / Delete Costume -->
     <div class='buttons is-grouped'>
-      <%= link_to 'Edit Costume', edit_costume_path(@costume, dance_studio_id: current_user.id), class: 'button is-success' %>
+      <%= link_to 'Edit Costume', edit_costume_path(@costume), class: 'button is-success' %>
       <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
     </div>
   <% end %>
