@@ -86,8 +86,8 @@ class DancersController < ApplicationController
   # dancer & dance studio can deactivate
   def destroy
     find_dancer
-    # set current_dancer to false & password/confirmation to "..."
-    @dancer.update(current_dancer: false, password: "...", password_confirmation: "...")
+    # set current_dancer to false & password/confirmation to 'dancer'
+    @dancer.update(current_dancer: false, password: 'dancer', password_confirmation: 'dancer')
 
     if dancer?
       # reset session
