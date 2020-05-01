@@ -1,12 +1,12 @@
 <div class="content has-text-centered">
-  <% if @assignments.empty? %>
-    <h1 class='title has-text-primary'>No <%= Time.now.year %> Costume Assignments</h1>
+  <% if owner? %>
+    <h1 class='title has-text-primary'><%= @dancer.name %>'s <%= Time.now.year %> Costume Assignments</h1>
   <% else %>
-    <% if owner? %>
-      <h1 class='title has-text-primary'><%= @dancer.name %>'s <%= Time.now.year %> Costume Assignments</h1>
-    <% else %>
-        <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
-    <% end %>
+      <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
+  <% end %>
+  <% if @assignments.empty? %>
+    <h2 class='subtitle'>No Assignments</h1>
+  <% else %>
     <div class='table-container'>
       <table class='table is-fullwidth is-striped is-hoverable'>
         <thead class='has-text-weight-bold'>
