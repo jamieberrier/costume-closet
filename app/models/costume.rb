@@ -20,15 +20,13 @@ class Costume < ApplicationRecord
     top_description + ' with ' + bottoms_description
   end
 
-  # TODO: refactor
+  # Gets the assigned costumes to display in dance_studios/current_assignments
   def self.find_by_assignment(assignments)
-    costumes = []
-
-    assignments.each do |assignment|
-      costumes << find(assignment.costume_id)
+    assignments.group(:costume_id).collect do |x|
+      find(x.costume_id)
     end
-    costumes.uniq
   end
+
 =begin
 edit season assignments
   assignments_hashes
@@ -60,7 +58,6 @@ edit season assignments
  "10"=>{"dancer_id"=>"0", "costume_size"=>""},
  "11"=>{"dancer_id"=>"0", "costume_size"=>""}}
 =end
-
   def costume_assignments_attributes=(assignments_hashes)
     # get shared data and remove from hash (song_name, genre, etc.)
     shared_attributes = assignments_hashes.shift.pop
