@@ -9,12 +9,6 @@ module DancersHelper
     render 'dancers/new'
   end
 
-  def render_registration_form
-    flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
-
-    render 'registrations/new'
-  end
-
   def render_edit_form
     flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
 

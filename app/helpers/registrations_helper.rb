@@ -15,6 +15,12 @@ module RegistrationsHelper
     params[:user_type] == 'dancer'
   end
 
+  def render_registration_form(new_user)
+    flash.now[:danger] = "Signup failure: #{new_user.errors.full_messages.to_sentence}"
+
+    render 'registrations/new'
+  end
+
 =begin
   # not working...
   def try_to_save(user)
