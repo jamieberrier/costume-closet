@@ -22,7 +22,7 @@ class DancersController < ApplicationController
     elsif owner?
       render_new_form
     else
-      render_registration_form
+      render_registration_form(@dancer)
     end
   end
 

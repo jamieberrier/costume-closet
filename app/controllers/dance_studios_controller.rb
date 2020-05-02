@@ -8,8 +8,7 @@ class DanceStudiosController < ApplicationController
     if @dance_studio.save
       log_in(@dance_studio, 'Successfully Registered!')
     else
-      flash.now[:danger] = "Signup failure: #{@dance_studio.errors.full_messages.to_sentence}"
-      render 'registrations/new'
+      render_registration_form(@dance_studio)
     end
   end
 
