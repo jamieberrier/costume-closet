@@ -136,6 +136,9 @@
 # TODO
 - DRY up code
   - logout helper, pass message
+  - dance studio model
+    - used more than once
+      - costume_assignments.where("dance_season = '%s'", Time.now.year)
   - not working: try_to_save(user) -> registrations helper
   - using?
     - registrations helper
@@ -145,8 +148,6 @@
 - costumes
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
-  - should ostume_assignments#dancer_assignments be in dancers controller?
-  - should costume_assignments#costume_assignments be in costumes controller?
   - update URLs
 
 # ?s
