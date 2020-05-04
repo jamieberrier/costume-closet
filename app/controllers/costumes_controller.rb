@@ -25,7 +25,11 @@ class CostumesController < ApplicationController
 
     return redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
 
-    redirect_to_costume_path('Costume Successfully Created!')
+    if @costume.costume_assignments.empty?
+      redirect_to_costume_path('Costume Successfully Created!')
+    else
+      redirect_to_costume_path('Costume Successfully Created & Assigned!')
+    end
   end
 
   # url: /dance_studios/1/costumes
@@ -57,17 +61,21 @@ class CostumesController < ApplicationController
   def assign_costume
     find_costume
     build_shared_assignment_info
-    @season = Time.now.year
-
     build_assignments_with_dancer_id
   end
 
   # Receives data from costume assignment form
   def assign
     find_costume
-    update_costume
+    updated = update_costume
 
-    redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season)
+    if updated && @costume.costume_assignments.empty?
+      redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition'
+    elsif updated
+      redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season)
+    else
+      redirect_to assign_costume_path(@costume), danger: "Assignment failure: #{@costume.errors.full_messages.to_sentence}"
+    end
   end
 
   # owner viewing all of a costume's assignments
