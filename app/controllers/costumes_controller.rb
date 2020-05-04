@@ -13,11 +13,9 @@ class CostumesController < ApplicationController
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])
     # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
-    @assignment_info = @costume.costume_assignments.build
+    build_shared_assignment_info
     # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
-    Dancer.current_dancers(current_user).each do |dancer|
-      @costume.costume_assignments.build(dancer_id: dancer.id)
-    end
+    build_assignments_with_dancer_id
   end
 
   def create
@@ -42,7 +40,7 @@ class CostumesController < ApplicationController
 
   def update
     find_costume
-    return redirect_to edit_costume_path(@costume, dance_studio: current_user), danger: "Edit failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.update(costume_params)
+    return redirect_to edit_costume_path(@costume, dance_studio: current_user), danger: "Edit failure: #{@costume.errors.full_messages.to_sentence}" unless update_costume
 
     redirect_to_costume_path('Costume Updated!')
   end
@@ -50,6 +48,7 @@ class CostumesController < ApplicationController
   def destroy
     find_costume
     @costume.destroy
+
     redirect_to dance_studio_costumes_path(current_user), success: 'Costume Deleted'
   end
 
@@ -57,19 +56,18 @@ class CostumesController < ApplicationController
   # url: /costumes/5/assign
   def assign_costume
     find_costume
-    @assignment_info = @costume.costume_assignments.build
+    build_shared_assignment_info
     @season = Time.now.year
 
-    Dancer.current_dancers(current_user).each do |dancer|
-      @costume.costume_assignments.build(dancer_id: dancer.id)
-    end
+    build_assignments_with_dancer_id
   end
 
   # Receives data from costume assignment form
   def assign
     find_costume
-    @costume.update(costume_params)
-    redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes]['0'][:dance_season])
+    update_costume
+
+    redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season)
   end
 
   # owner viewing all of a costume's assignments
@@ -85,7 +83,7 @@ class CostumesController < ApplicationController
   def season_assignments
     find_costume
     @season = params[:season]
-    @costume_assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+    find_season_costume_assignments
   end
 
   # Displays form for owner to edit a costume's assignments for a season
@@ -94,18 +92,18 @@ class CostumesController < ApplicationController
   def edit_season_assignments
     find_costume
     @season = params[:season]
-    @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+    find_season_costume_assignments
     @assignment_info = @costume.costume_assignments.build(hair_accessory: @assignments.first.hair_accessory, tight: @assignments.first.tight, shoe: @assignments.first.shoe, genre: @assignments.first.genre, song_name: @assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
-
+    # build a costume_assignments record unless one with dancer's id already exists
     Dancer.current_dancers(current_user).each do |dancer|
-      # build a record unless one with dancer's id already exists
       @costume.costume_assignments.build(dancer_id: dancer.id) unless @assignments.exists?(dancer_id: dancer.id)
     end
   end
 
   def update_season_assignments
     find_costume
-    @costume.update(costume_params)
+    update_costume
+
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
 

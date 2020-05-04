@@ -7,6 +7,26 @@ module CostumesHelper
     redirect_to costume_path(@costume), success: message
   end
 
+  # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
+  def build_assignments_with_dancer_id
+    Dancer.current_dancers(current_user).each do |dancer|
+      @costume.costume_assignments.build(dancer_id: dancer.id)
+    end
+  end
+
+  def find_season_costume_assignments
+    @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+  end
+
+  def update_costume
+    @costume.update(costume_params)
+  end
+
+  # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
+  def build_shared_assignment_info
+    @assignment_info = @costume.costume_assignments.build
+  end
+
   # Owner
   # no dance studio id, params[:id] -> costume id
   # costumes -- edit update destroy assign_costume assign costume_assignments season_assignments edit_eason_assignments update_season_assignments delete_season_assignments
