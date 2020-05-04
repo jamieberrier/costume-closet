@@ -8,6 +8,9 @@ class Costume < ApplicationRecord
   validates :onepiece_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :onepiece_costume?
   validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
 
+  # Gets assigned costumes to display in dance_studios/:id/current_assignments
+  scope :find_by_assignment, lambda { |assignments| assignments.group(:costume_id).collect { |x| find(x.costume_id) } }
+
   def onepiece_costume?
     top_description.blank? && bottoms_description.blank?
   end
@@ -20,11 +23,8 @@ class Costume < ApplicationRecord
     top_description + ' with ' + bottoms_description
   end
 
-  # Gets the assigned costumes to display in dance_studios/current_assignments
-  def self.find_by_assignment(assignments)
-    assignments.group(:costume_id).collect do |x|
-      find(x.costume_id)
-    end
+  def seasons
+    costume_assignments.group(:dance_season).count
   end
 
 =begin
@@ -79,9 +79,5 @@ edit season assignments
         end
       end
     end
-  end
-
-  def seasons
-    costume_assignments.group(:dance_season).count
   end
 end
