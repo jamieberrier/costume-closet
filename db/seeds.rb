@@ -26,8 +26,8 @@ zoey = Dancer.create(first_name: 'Zoey', last_name: 'Smith', email: 'zoey@toc.co
 
 ## ci
 suzy = Dancer.create(first_name: 'Suzy', last_name: 'Smith', email: 'suzy@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
-polly = Dancer.create(first_name: 'Polly', last_name: 'Pocket', email: 'maddie@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
-tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', email: 'maddie@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
+polly = Dancer.create(first_name: 'Polly', last_name: 'Pocket', email: 'polly@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
+tina = Dancer.create(first_name: 'Tina', last_name: 'Twerk', email: 'tina@ci.com', current_dancer: 1, dance_studio_id: ci.id, password: 'test', password_confirmation: 'test')
 
 # COSTUMES
 ## toc
