@@ -135,7 +135,6 @@
 
 # TODO
 - DRY up code
-  - logout helper, pass message
   - dance studio model
     - used more than once
       - costume_assignments.where("dance_season = '%s'", Time.now.year)
