@@ -28,9 +28,7 @@ class DanceStudiosController < ApplicationController
     if @dance_studio.update(dance_studio_params)
       redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
     else
-      flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
-
-      render 'dance_studios/edit'
+      render_edit_studio_form
     end
   end
 
