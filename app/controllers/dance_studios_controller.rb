@@ -37,8 +37,7 @@ class DanceStudiosController < ApplicationController
   def destroy
     find_dance_studio
     @dance_studio.destroy
-    session.destroy
-    redirect_to root_path, success: 'Account Deleted!'
+    logout('Account Deleted!')
   end
 
   # current costume assignments for a dance studio

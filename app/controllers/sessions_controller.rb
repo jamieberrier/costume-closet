@@ -39,9 +39,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # reset session
-    reset_session
-    # redirect to home page
-    redirect_to root_path, success: 'Successfully logged out!'
+    logout('Successfully logged out!')
   end
 end
