@@ -76,4 +76,11 @@ module SessionsHelper
   def redirect_if_not_dancer
     redirect_to dance_studio_path(current_user) unless dancer?
   end
+
+  def logout(message)
+    # reset session
+    reset_session
+    # redirect to home page
+    redirect_to root_path, success: message
+  end
 end
