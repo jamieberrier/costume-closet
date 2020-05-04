@@ -3,13 +3,13 @@ module DancersHelper
     @dancer = Dancer.find(params[:id])
   end
 
-  def render_new_form
+  def render_new_dancer_form
     flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
 
     render 'dancers/new'
   end
 
-  def render_edit_form
+  def render_edit_dancer_form
     flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
 
     render 'dancers/edit'

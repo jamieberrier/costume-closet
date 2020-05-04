@@ -20,7 +20,7 @@ class DancersController < ApplicationController
     elsif @dancer.save
       log_in(@dancer, 'Successfully Registered!')
     elsif owner?
-      render_new_form
+      render_new_dancer_form
     else
       render_registration_form(@dancer)
     end
@@ -47,7 +47,7 @@ class DancersController < ApplicationController
     if @dancer.update(dancer_params)
       redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
     else
-      render_edit_form
+      render_edit_dancer_form
     end
   end
 
