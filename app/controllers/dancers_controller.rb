@@ -16,7 +16,7 @@ class DancersController < ApplicationController
     @dancer = Dancer.new(dancer_params)
 
     if @dancer.save && owner?
-      redirect_to dance_studio_path(current_user), success: 'Dancer Added!'
+      redirect_to_dance_studio_page('Dancer Added!')
     elsif @dancer.save
       log_in(@dancer, 'Successfully Registered!')
     elsif owner?
@@ -90,13 +90,9 @@ class DancersController < ApplicationController
     @dancer.update(current_dancer: false, password: 'dancer', password_confirmation: 'dancer')
 
     if dancer?
-      # reset session
-      reset_session
-      # redirect to home page
-      redirect_to root_path, success: 'Account Deactivated!'
+      logout('Account Deactivated!')
     else # if studio owner deactivating a dancer account
-      # redirect to studio page
-      redirect_to dance_studio_path(current_user), success: 'Account Deactivated'
+      redirect_to_dance_studio_page('Account Deactivated')
     end
   end
 
