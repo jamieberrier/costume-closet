@@ -5,18 +5,28 @@ class Costume < ApplicationRecord
   # adds methods, ie: dancer_ids=ids
   has_many :dancers, through: :costume_assignments
 
-  validates :onepiece_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :onepiece_costume?
-  validates :top_description, :bottoms_description, presence: { message: "must enter a onepiece description if one piece costume OR a top & bottoms description if two piece costume" }, if: :twopiece_costume?
+  validates :onepiece_description, presence: { message: 'Must enter a onepiece description if one-piece costume' }, if: :twopiece_blank?
+  validates :top_description, :bottoms_description, presence: { message: 'Must enter a top AND bottoms description if two-piece costume' }, if: :onepiece_blank?
+  validates :onepiece_description, absence: { message: 'One-piece description must be blank if Two-piece costume' }, if: :twopiece_costume?
+  validates :top_description, :bottoms_description, absence: { message: 'Two-piece description must be blank if One-piece costume' }, if: :onepiece_costume?
 
   # Gets assigned costumes to display in dance_studios/:id/current_assignments
   scope :find_by_assignment, lambda { |assignments| assignments.group(:costume_id).collect { |x| find(x.costume_id) } }
 
-  def onepiece_costume?
+  def onepiece_blank?
+    onepiece_description.blank?
+  end
+
+  def twopiece_blank?
     top_description.blank? && bottoms_description.blank?
   end
 
+  def onepiece_costume?
+    onepiece_description.present?
+  end
+
   def twopiece_costume?
-    onepiece_description.blank?
+    top_description.present? && bottoms_description.present?
   end
 
   def twopiece_description
