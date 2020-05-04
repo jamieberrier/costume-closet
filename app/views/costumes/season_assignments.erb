@@ -1,6 +1,6 @@
 <div class='content has-text-centered'>
   <!-- Song Name -->
-  <h1 class='title has-text-primary'><%= @costume_assignments.first.song_name%></h1>
+  <h1 class='title has-text-primary'><%= @assignments.first.song_name%></h1>
   <!-- Dance Season -->
   <h2 class='subtitle'><%= @season %></h2>
   <!-- Costume Picture -->
@@ -18,22 +18,22 @@
       <!-- Genre -->
       <div class='column'>
         <h2 class='title is-4'>Genre</h2>
-        <%= @costume_assignments.first.genre %>
+        <%= @assignments.first.genre %>
       </div>
       <!-- hair accessory -->
       <div class='column'>
         <h2 class='title is-4'>Hair Accessory</h2>
-        <%= @costume_assignments.first.hair_accessory %>
+        <%= @assignments.first.hair_accessory %>
       </div>
       <!-- Shoes -->
       <div class='column'>
         <h2 class='title is-4'>Shoes</h2>
-        <%= @costume_assignments.first.shoe %>
+        <%= @assignments.first.shoe %>
       </div>
       <!-- Tights -->
       <div class='column'>
         <h2 class='title is-4'>Tights</h2>
-        <%= @costume_assignments.first.tight %>
+        <%= @assignments.first.tight %>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @costume_assignments.each do |assignment| %>
+          <% @assignments.each do |assignment| %>
           <tr>
             <td><%= assignment.dancer.name %></td>
             <td><%= assignment.costume_size %></td>
