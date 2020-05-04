@@ -3,6 +3,10 @@ module DanceStudiosHelper
     @dance_studio = DanceStudio.find(params[:id])
   end
 
+  def redirect_to_dance_studio_page(message)
+    redirect_to dance_studio_path(current_user), success: message
+  end
+
   # Owner
   # unnested, params[:id] -> dance studio id
   # dance_studios -- show edit update destroy current_assignments current_costumes unassigned_costumes
