@@ -7,6 +7,12 @@ module DanceStudiosHelper
     redirect_to dance_studio_path(current_user), success: message
   end
 
+  def render_edit_studio_form
+    flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
+
+    render 'dance_studios/edit'
+  end
+
   # Owner
   # unnested, params[:id] -> dance studio id
   # dance_studios -- show edit update destroy current_assignments current_costumes unassigned_costumes
