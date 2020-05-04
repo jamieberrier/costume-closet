@@ -1,39 +1,48 @@
 <div class='box'>
   <%= form_for [current_user, @costume] do |f| %>
     <%= f.hidden_field :dance_studio_id %>
-    <!-- top description -->
-    <div class='box'>
-      <h2 class='subtitle'>Two-Piece Costume</h2>
       <div class='field'>
-        <%= f.label :top_description, 'Top Description', class: 'label' %>
-        <div class='control'>
-          <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
+        <div class='control has-text-centered'>
+          <h2 class='title has-text-primary is-size-4'>Costume Description</h2>
+        </div> 
+      </div>
+      <!-- twopiece description -->
+      <div class='box'>
+        <h2 class='subtitle'>Two-Piece Costume
+          <p class='help is-danger'>Must fill out both fields for a two-piece costume</p>
+        </h2>
+        <!-- top description -->
+        <div class='field'>
+          <%= f.label :top_description, 'Top Description', class: 'label' %>
+          <div class='control'>
+            <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
+          </div>
+        </div>
+        <!-- bottoms description -->
+        <div class='field'>
+          <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
+          <div class='control'>
+            <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
+          </div>
         </div>
       </div>
-      <!-- bottoms description -->
-      <div class='field'>
-        <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
-        <div class='control'>
-          <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
+      <!-- onepiece description -->
+      <div class='box'>
+        <h2 class='subtitle'>One-Piece Costume
+          <p class='help is-danger'>Must fill out for a one-piece costume</p>
+        </h2>
+        <div class='field'>
+          <%= f.label 'Description', class: 'label' %>
+          <div class='control'>
+            <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
+          </div>
         </div>
       </div>
-      <p class='help is-danger'>Must fill out both for a two-piece costume</p>
-    </div>
-    <!-- onepiece description -->
+    <!-- picture -->
     <div class='box'>
-      <h2 class='subtitle'>One-Piece Costume</h2>
+      <h2 class='subtitle'>Picture</h2>
       <div class='field'>
-        <%= f.label 'Description', class: 'label' %>
-        <div class='control'>
-          <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
-        </div>
-      </div>
-      <p class='help is-danger'>Must fill out for a one-piece costume</p>
-    </div>
-    <div class='box'>
-      <!-- picture -->
-      <div class='field'>
-        <%= f.label :picture, class: 'label' %>
+        <%= f.label :picture, 'Picture URL', class: 'label' %>
         <div class='control'>
           <%= f.text_field :picture, class:'input', placeholder: 'If no picture, leave blank' %>
         </div>
@@ -43,11 +52,15 @@
     <!-- Costume Assignment info -->
     <div class='field'>
       <div class='control has-text-centered'>
-        <h2 class='title has-text-primary is-size-4'>Assign Costume</h2>
+        <h2 class='title has-text-primary is-size-4'>Assign Costume
+          <p class='help is-danger'>Optional: can assign details & dancer(s) after creating costume</p>
+        </h2>
       </div> 
     </div>
     <div class='box'>
-      <h2 class='subtitle'>Enter Costume Assignment Details</h2>
+      <h2 class='subtitle'>Enter Costume Assignment Details
+        <p class='help is-danger'>If assigning costume, must enter the dance season & song name</p>
+      </h2>
       <%= f.fields_for :costume_assignments do |assignment_builder| %>
         <% if assignment_builder.object.dancer_id.nil? %>
           <p>
@@ -55,14 +68,16 @@
             <div class='field'>
               <%= assignment_builder.label :dance_season, "Dance Season", class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :dance_season, class:'input', placeholder: 'e.g. 2020' %>
+                <%= assignment_builder.text_field :dance_season, class:'input is-danger', placeholder: 'e.g. 2020' %>
+                <p class='help is-danger'>Required, if assigning costume</p>
               </div>
             </div>
             <!-- Song Name -->
             <div class='field'>
               <%= assignment_builder.label :song_name, "Song Name", class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :song_name, class:'input' %>
+                <%= assignment_builder.text_field :song_name, class:'input is-danger' %>
+                <p class='help is-danger'>Required, if assigning costume</p>
               </div>
             </div>
             <!-- Genre -->
@@ -98,11 +113,12 @@
           </p>
         <% end %>
       <% end %>
-      <p class='help is-danger'>Must fill out all fields</p>
     </div>
     <!-- Dancer(s) & Costume Size -->
     <div class='box'>
-      <h2 class='subtitle'>Select Dancer(s) & Costume Size</h2>
+      <h2 class='subtitle'>Select Dancer(s)
+        <p class='help is-danger'>If assigning costume, must select at least 1 dancer w/ costume size</p>
+      </h2>
       <div class='columns'>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if !assignment_builder.object.dancer_id.nil? %>
@@ -134,7 +150,6 @@
           <% end %>
         <% end %>
       </div>
-      <p class='help is-danger'>Must select at least 1 dancer w/ costume size</p>
     </div>
     <!-- submit button -->
     <div class='field'>
