@@ -11,7 +11,7 @@
         <td>No. of Costumes</td>
       </thead>
       <tbody>
-        <% current_user.dancers.each do |dancer| %>
+        <% @dancers.each do |dancer| %>
           <tr>
             <td><%= link_to dancer.name, dancer_path(dancer) %></td>
             <% if dancer.current_dancer %>
@@ -29,7 +29,7 @@
   <div class='columns'>
     <div class='column'>
       <div class='box has-text-centered'>
-        <h2 class='title is-4'><%= current_user.dancers.count %> Dancers</h2>
+        <h2 class='title is-4'><%= @dancers.count %> Dancers</h2>
       </div>
   </div>
   <!-- Count of Costumes -->
