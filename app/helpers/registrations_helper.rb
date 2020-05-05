@@ -20,14 +20,4 @@ module RegistrationsHelper
 
     render 'registrations/new'
   end
-
-=begin
-  # not working...
-  def try_to_save(user)
-    @user = user
-
-    flash.now[:danger] = "Signup failure: #{@user.errors.full_messages.to_sentence}"
-    render 'registrations/new' unless @user.save
-  end
-=end
 end
