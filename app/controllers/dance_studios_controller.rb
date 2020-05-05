@@ -5,11 +5,9 @@ class DanceStudiosController < ApplicationController
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
-    if @dance_studio.save
-      log_in(@dance_studio, 'Successfully Registered!')
-    else
-      render_registration_form(@dance_studio)
-    end
+    return render_registration_form(@dance_studio) unless @dance_studio.save
+
+    log_in(@dance_studio, 'Successfully Registered!')
   end
 
   # url: /dance_studios/1
@@ -25,11 +23,9 @@ class DanceStudiosController < ApplicationController
   def update
     find_dance_studio
 
-    if @dance_studio.update(dance_studio_params)
-      redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
-    else
-      render_edit_studio_form
-    end
+    return render_edit_studio_form unless @dance_studio.update(dance_studio_params)
+
+    redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
   end
 
   def destroy
