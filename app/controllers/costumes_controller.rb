@@ -82,7 +82,7 @@ class CostumesController < ApplicationController
   # url: /costumes/3/assignments
   def costume_assignments
     find_costume
-    @costume_assignments = CostumeAssignment.where(costume_id: @costume)
+    @assignments = CostumeAssignment.where(costume_id: @costume)
   end
 
   # owner viewing a costume's assignments for a season
