@@ -21,28 +21,29 @@
             <div class='field'>
               <%= assignment_builder.label :song_name, 'Song Name', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :song_name, class:'input', value: @assignment_info.song_name %>
+                <%= assignment_builder.text_field :song_name, class:'input is-danger', value: @assignment_info.song_name %>
+                <p class='help is-danger'>Required</p>
               </div>
             </div>
             <!-- Genre -->
             <div class='field'>
               <%= assignment_builder.label :genre, class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :genre, class:'input', value: @assignment_info.genre %>
+                <%= assignment_builder.text_field :genre, class:'input', value: @assignment_info.genre, placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
               </div>
             </div>
             <!-- hair accessory description -->
             <div class='field'>
               <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :hair_accessory, class:'input', value: @assignment_info.hair_accessory %>
+                <%= assignment_builder.text_field :hair_accessory, class:'input', value: @assignment_info.hair_accessory, placeholder: "Enter description or 'none'" %>
               </div>
             </div>
             <!-- Shoes -->
             <div class='field'>
               <%= assignment_builder.label :shoe, 'Shoes', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :shoe, class:'input', value: @assignment_info.shoe %>
+                <%= assignment_builder.text_field :shoe, class:'input', value: @assignment_info.shoe, placeholder: "If no shoes, enter 'none'" %>
               </div>
             </div>
             <!-- Tights -->
@@ -50,7 +51,7 @@
               <%= assignment_builder.label :tight, 'Tights', class: 'label' %>
               <!--label class="label" for="costume_costume_assignments_attributes_0_tight">Tight</label-->
               <div class='control'>
-                <%= assignment_builder.text_field :tight, class:'input', value: @assignment_info.tight %>
+                <%= assignment_builder.text_field :tight, class:'input', value: @assignment_info.tight, placeholder: "If no tights, enter 'none'" %>
                 <!--input class="input" type="text" name="costume[costume_assignments_attributes][0][tight]" id="costume_costume_assignments_attributes_0_tight"-->
               </div>
             </div>
@@ -83,9 +84,9 @@
                 <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
                 <div class='control'>
                   <%= assignment_builder.text_field :costume_size, class:'input is-small' %>
-                  <!--div class='select is-small'-->
-                    <%#= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']])) %>
-                  <!--/div-->
+                  <div class='select is-small'>
+                    <%= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']])) %>
+                  </div>
                 </div>
               </div>
               <!-- Costume Condition -->
@@ -104,36 +105,47 @@
       <h2 class='subtitle'>Add Dancer(s)</h2>
       <div class='columns'>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
-          <% if !assignment_builder.object.dancer_id.nil? && !@assignments.exists?(dancer_id: assignment_builder.object.dancer_id) %>
+          <% if assignment_builder.object.dance_season.nil? %>
             <div class='column'>
             <!-- Dancer -->
               <div class='field'>
                 <div class='control'>
                   <%= assignment_builder.check_box :dancer_id, {:checked => false, class: 'checkbox'}, assignment_builder.object.dancer_id, "0" %>
-                  <!--input name="costume[costume_assignments_attributes][7][dancer_id]" type="hidden" value="0"-->
-                  <!--input class="checkbox" type="checkbox" value="1" name="costume[costume_assignments_attributes][7][dancer_id]" id="costume_costume_assignments_attributes_7_dancer_id"-->
-                  <!-- next dancer -->
-                  <!--input name="costume[costume_assignments_attributes][8][dancer_id]" type="hidden" value="0"-->
-                  <!--input class="checkbox" type="checkbox" value="2" name="costume[costume_assignments_attributes][8][dancer_id]" id="costume_costume_assignments_attributes_8_dancer_id"-->
+                  <!--input name="costume[costume_assignments_attributes][27][dancer_id]" type="hidden" value="0"-->
+                  <!--input class="checkbox" type="checkbox" value="4" name="costume[costume_assignments_attributes][27][dancer_id]" id="costume_costume_assignments_attributes_27_dancer_id"-->
                   <%= assignment_builder.label assignment_builder.object.dancer.name,  assignment_builder.object.dancer.name, class: 'checkbox has-text-weight-bold' %>
-                  <!--label class="checkbox" for="costume_costume_assignments_attributes_7_Madelyn Berrier">Madelyn Berrier</label-->              
+                  <!--label class="checkbox has-text-weight-bold" for="costume_costume_assignments_attributes_27_Mia Tomiselli">Mia Tomiselli</label-->            
                 </div>
               </div>
               <!-- Costume Size -->
               <div class='field'>
                 <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <!--label class="label is-size-7" for="costume_costume_assignments_attributes_27_costume_size">Costume Size</label-->
                 <div class='control'>
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']]), {prompt: "Select Size"}) %>
+                    <!--select name="costume[costume_assignments_attributes][27][costume_size]" id="costume_costume_assignments_attributes_27_costume_size">
+                      <option value="">Select Size</option>
+                      <option value="XS">XS</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                    </select-->
                   </div>
                 </div>
               </div>
               <!-- Costume Condition -->
               <div class='field'>
                 <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <!--label class="label is-size-7" for="costume_costume_assignments_attributes_27_costume_condition">Costume Condition</label-->
                 <div class='control'>
                   <div class='select is-small'>
-                    <%= assignment_builder.select(:costume_condition, options_for_select([['New', 'New'], ['Used', 'Used']]), {prompt: "Select"}) %>
+                    <%= assignment_builder.select(:costume_condition, options_for_select([['Select Condition', ""], ['New', 'New'], ['Used', 'Used']])) %>
+                    <!--select name="costume[costume_assignments_attributes][27][costume_condition]" id="costume_costume_assignments_attributes_27_costume_condition">
+                      <option value="">Select Condition</option>
+                      <option value="New">New</option>
+                      <option value="Used">Used</option>
+                    </select-->
                   </div>
                 </div>
               </div>
