@@ -132,13 +132,20 @@
     - before_action :require_dance_studio_owner, only: %i[new create index]
     - before_action :require_costume_ownership, only: %i[show]
     - before_action :require_studio_costume, except: %i[new create index show]
+16. DRY up
+  - controllers
+    - dancers
+  - views
+  - models
+  - helpers
 
 # TODO
 - DRY up code
+  - controllers
+    - turn variable assignments into before_actions
   - dance studio model
     - used more than once
       - costume_assignments.where("dance_season = '%s'", Time.now.year)
-  - not working: try_to_save(user) -> registrations helper
   - using?
     - registrations helper
       def signing_up_as_dancer?
