@@ -1,6 +1,7 @@
 <div class='content has-text-centered'>
+  <!-- costume picture/description -->
   <% if !@costume.picture.blank? %>
-    <figure class="is-128x128">
+    <figure class='is-128x128'>
       <%= image_tag @costume.picture, width: 100 %>
     </figure>
   <% elsif !@costume.onepiece_description.blank? %>
@@ -8,12 +9,10 @@
   <% else %>
     <%= @costume.twopiece_description %>
   <% end %>
-</div>
-<!-- if costume assignment(s) exist, render table -->
-<% if @assignments.empty? %>
-  <div class='content has-text-centered'>
+  <!-- if costume assignment(s) exist, render table -->
+  <% if @assignments.exists? %>
+    <%= render 'costume_assignments/table' %>
+  <% else %>
     <h2 class='subtitle'>No Assignments</h2>
-  </div>
-<% else %>
-  <%= render "costume_assignments/table"%>
-<% end %>
+  <% end %>
+</div>
