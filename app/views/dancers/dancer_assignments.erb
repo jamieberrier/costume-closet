@@ -2,7 +2,7 @@
   <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
   <!-- if costume assignment(s) exist, render table -->
   <% if @assignments.exists? %>
-    <%= render "costume_assignments/table"%>
+    <%= render 'costume_assignments/table' %>
   <% else %>
     <h2 class='subtitle'>No Assignments</h2>
   <% end %>
