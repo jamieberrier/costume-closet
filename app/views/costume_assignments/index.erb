@@ -1,11 +1,9 @@
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'>All Costume Assignments</h1>
-</div>
-<!-- if costume assignment(s) exist, render table -->
-<% if @costume_assignments.empty? %>
-  <div class='content has-text-centered'>
+  <!-- if costume assignment(s) exist, render table -->
+  <% if @assignments.exists? %>
+    <%= render 'table' %>
+  <% else %>
     <h2 class='subtitle'>No Assignments</h2>
-  </div>
-<% else %>
-  <%= render "table"%>
-<% end %>
+  <% end %>
+</div>
