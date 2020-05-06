@@ -38,6 +38,16 @@ class Costume < ApplicationRecord
   end
 
 =begin
+assign
+  assignments_hashes
+=> {"1"=>{"song_name"=>"test", "dance_season"=>"2020", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""},
+ "10"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"},
+ "11"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"},
+ "12"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"},
+ "13"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"},
+ "14"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"},
+ "15"=>{"dancer_id"=>"0", "costume_size"=>"", "costume_condition"=>"New"}}
+
 edit season assignments
   assignments_hashes
 => {"5"=>
