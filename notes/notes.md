@@ -135,6 +135,7 @@
 16. DRY up
   - controllers
     - dancers
+    - costumes
   - views
   - models
   - helpers
