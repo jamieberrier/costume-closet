@@ -3,7 +3,7 @@ class CostumesController < ApplicationController
   before_action :require_costume_ownership, only: %i[show]
   before_action :require_studio_costume, except: %i[new create index show]
   before_action :find_costume, except: %i[new create index delete_season_assignments]
-  before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments]
+  before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
 
   # Dance Studio & Dancer can view
   # url: /costumes/3
@@ -61,9 +61,9 @@ class CostumesController < ApplicationController
 
   # Receives data from costume assignment form
   def assign
-    # gets the paramater for key '1'
-    assignment_info = params[:costume][:costume_assignments_attributes].fetch('1')
-    # => <ActionController::Parameters {"dance_season"=>"2020", "song_name"=>"test", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""} permitted: false>
+    # gets shared assignment info
+    assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
+    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
 
     # checks if the dance_season or song_name value is empty
     return redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if assignment_info[:dance_season].empty? || assignment_info[:song_name].empty?
