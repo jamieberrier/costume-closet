@@ -5,6 +5,6 @@ class CostumeAssignmentsController < ApplicationController
   # url: /dance_studios/1/costume_assignments
   # owner viewing all of its dance studio's costume assignments
   def index
-    @costume_assignments = current_user.costume_assignments.order(dance_season: :desc, genre: :asc, song_name: :asc)
+    @assignments = current_user.costume_assignments.order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 end
