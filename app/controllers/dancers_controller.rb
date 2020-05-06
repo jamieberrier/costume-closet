@@ -1,7 +1,8 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in, only: :create
   before_action :require_dance_studio_owner, only: %i[new index current_dancers]
-  before_action :require_studio_dancer, only: %i[show edit update destroy dancer_assignments current_assignments]
+  before_action :require_studio_dancer, except: %i[new create index current_dancers]
+  before_action :find_dancer, except: %i[new create index current_dancers]
 
   # Owner
   # Displays from for a Dance Studio to create a new dancer
@@ -29,22 +30,16 @@ class DancersController < ApplicationController
   # Dancer & Owner
   # Display dancer's show page
   # url: /dancers/1
-  def show
-    find_dancer
-  end
+  def show; end
 
   # Dancer
   # Displays form to edit dancer's account info
   # url: /dancers/1/edit
-  def edit
-    find_dancer
-  end
+  def edit; end
 
   # Dancer
   # Receives data from edit form
   def update
-    find_dancer
-
     return render_edit_dancer_form unless @dancer.update(dancer_params)
 
     redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
@@ -54,7 +49,6 @@ class DancersController < ApplicationController
   # Displays all of dancer's costume assignments
   # url: /dancers/3/costume_assignments
   def dancer_assignments
-    find_dancer
     @assignments = CostumeAssignment.where(dancer_id: @dancer).order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 
@@ -62,7 +56,6 @@ class DancersController < ApplicationController
   # Displays dancer's current costume assignments with costume picture
   # url: /dancers/1/current_assignments
   def current_assignments
-    find_dancer
     @assignments = CostumeAssignment.current_dancer_costumes(@dancer)
   end
 
@@ -83,7 +76,6 @@ class DancersController < ApplicationController
   # Dancer & Owner
   # Deactivates dancer's account to keep costume assignment data
   def destroy
-    find_dancer
     # set current_dancer to false & password/confirmation to 'dancer'
     @dancer.update(current_dancer: false, password: 'dancer', password_confirmation: 'dancer')
 
