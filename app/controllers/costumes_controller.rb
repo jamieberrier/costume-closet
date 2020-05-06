@@ -22,14 +22,18 @@ class CostumesController < ApplicationController
     # params[:costume] -> {"dance_studio_id"=>"1", top_description"=>"", "bottoms_description"=>"", "onepiece_description"=>"nvkdsn;kbv", "hair_accessory"=>"none", "picture"=>"", "costume_assignments_attributes"=>{"0"=>{"dance_season"=>"2020", "song_name"=>"test", "genre"=>"lyrical", "shoe"=>"none", "tight"=>"none"}, "7"=>{"dancer_id"=>"1", "costume_size"=>"S"}, "8"=>{"dancer_id"=>"2", "costume_size"=>"M"}, "9"=>{"dancer_id"=>"3", "costume_size"=>"M"}, "10"=>{"dancer_id"=>"0", "costume_size"=>""}, "11"=>{"dancer_id"=>"0", "costume_size"=>""}}} permitted: false>
     # params[:costume][:costume_assignments_attributes] -> {"0"=>{"dance_season"=>"2020", "song_name"=>"test", "genre"=>"lyrical", "shoe"=>"none", "tight"=>"none"}, "7"=>{"dancer_id"=>"1", "costume_size"=>"S"}, "8"=>{"dancer_id"=>"2", "costume_size"=>"M"}, "9"=>{"dancer_id"=>"3", "costume_size"=>"M"}, "10"=>{"dancer_id"=>"0", "costume_size"=>""}, "11"=>{"dancer_id"=>"0", "costume_size"=>""}} permitted: false>
     @costume = Costume.new(costume_params)
+    # get shared assignment info
+    fetch_shared_info
 
-    return redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
+    redirect_if_validation_error && return
+    # check if all shared assignment info fields empty
+    redirect_if_not_assigning && return
+    # check if the dance_season or song_name value is empty
+    redirect_if_required_values_empty && return
 
-    if @costume.costume_assignments.empty?
-      redirect_to_costume_path('Costume Successfully Created!')
-    else
-      redirect_to_costume_path('Costume Successfully Created & Assigned!')
-    end
+    redirect_if_no_assignments && return
+
+    redirect_to_costume_path('Costume Successfully Created & Assigned!')
   end
 
   # url: /dance_studios/1/costumes
@@ -61,22 +65,20 @@ class CostumesController < ApplicationController
 
   # Receives data from costume assignment form
   def assign
-    # gets shared assignment info
-    assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
-    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
-
-    # checks if the dance_season or song_name value is empty
-    return redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if assignment_info[:dance_season].empty? || assignment_info[:song_name].empty?
-
-    count = @costume.costume_assignments.count # gets no. of assignments before updating
-    updated = update_costume # try to persist to db
-
+    # get shared assignment info
+    fetch_shared_info
+    # check if the dance_season or song_name value is empty
+    redirect_if_required_values_empty && return
+    # try to persist to db
+    @updated = update_costume
     # check that if updates, @costume.costume_assignments.count is now greater than count
-    return redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if updated && count == @costume.costume_assignments.count
-    return redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season) if updated
-
+    redirect_if_updated_with_same_assignment_count && return
+    # redirect if updated correctly
+    redirect_if_updated && return
+    # redirect if costume assignments are invalid
     redirect_to assign_costume_path(@costume), danger: "Assignment failure: #{@costume.errors.full_messages.to_sentence}"
   end
+
 
   # owner viewing all of a costume's assignments
   # url: /costumes/3/assignments

@@ -35,6 +35,52 @@ module CostumesHelper
     @assignment_info = @costume.costume_assignments.build
   end
 
+  def redirect_to_new_costume_form(message)
+    redirect_to new_dance_studio_costume_path(current_user.id), message
+  end
+
+  ## create action helpers
+  def redirect_if_validation_error
+    redirect_to new_dance_studio_costume_path(current_user.id), danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}" unless @costume.save
+  end
+
+  def redirect_if_not_assigning
+    redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
+  end
+
+  def redirect_if_no_assignments
+    redirect_to_new_costume_form(danger: 'dancer info failure') if @costume.costume_assignments.empty?
+  end
+
+  ## create & assign action helpers
+  # gets shared assignment info
+  def fetch_shared_info
+    @assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
+    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
+    @dance_season_empty = @assignment_info[:dance_season].empty?
+    @song_name_empty = @assignment_info[:song_name].empty?
+    @count = @costume.costume_assignments.count # gets no. of assignments before updating
+  end
+  # checks if the dance_season or song_name value is empty
+  def redirect_if_required_values_empty
+    if params[:action] == 'create'
+      redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
+    else
+      redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
+    end
+  end
+
+  ## assign action helpers
+  # check that if updates, @costume.costume_assignments.count is now greater than count
+  def redirect_if_updated_with_same_assignment_count
+    redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @count == @costume.costume_assignments.count
+  end
+
+  # redirect if updated correctly
+  def redirect_if_updated
+    redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season) if @updated
+  end
+
   # Owner
   # no dance studio id, params[:id] -> costume id
   # costumes -- edit update destroy assign_costume assign costume_assignments season_assignments edit_eason_assignments update_season_assignments delete_season_assignments
