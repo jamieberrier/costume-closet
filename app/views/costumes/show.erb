@@ -71,7 +71,12 @@
       <% end %>
       <!-- Assign an Unassigned Costume -->
       <% if unassigned? %>
-        <%= link_to 'Assign Costume', assign_costume_path(@costume), class: 'button is-success is-light' %>
+        <!-- if previously assigned, pass last season costume was assigned -->
+        <%= 
+          link_to_if @costume.seasons.empty?, 'Assign Costume', assign_costume_path(@costume), class: 'button is-success is-light' do |name|
+            link_to name, assign_costume_path(@costume, season: @costume.seasons.to_a.pop[0]), class: 'button is-success is-light'
+          end
+        %>
       <% end %>
     </div>
     <!-- Edit / Delete Costume -->
