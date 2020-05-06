@@ -14,7 +14,15 @@ module CostumesHelper
     end
   end
 
+  # build a costume_assignments record unless one with dancer's id already exists
+  def build_assignments_unless_exists
+    Dancer.current_dancers(current_user).each do |dancer|
+      @costume.costume_assignments.build(dancer_id: dancer.id) unless @assignments.exists?(dancer_id: dancer.id)
+    end
+  end
+
   def find_season_costume_assignments
+    @season = params[:season]
     @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
   end
 
