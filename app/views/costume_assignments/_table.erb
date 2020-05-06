@@ -7,39 +7,34 @@
       <td>Hair Accessory</td>
       <td>Shoes</td>
       <td>Tights</td>
-      <% if owner? && !@dancer %>
+      <% if owner? && !@dancer %><!-- don't display for dancer's assignments -->
         <td>Dancer</td>
       <% end %>
       <td>Condition</td>
       <td>Size</td>
     </thead>
     <tbody>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= assignment.dance_season %></td>
-        <td>
-        <!-- if owner viewing a costume's assignments, no link for song name -->
-        <% if params[:costume_id] %>
-          <%= assignment.song_name%>
-        <% else %> <!-- link for song name: if owner viewing a dancer's costume assignments/its dance studio's costume assignments, if dancer viewing his/her costume assignments -->
-          <%= 
-            link_to_if owner?, assignment.song_name, season_assignments_path(assignment.costume_id, season: assignment.dance_season) do |name|
-              link_to name, costume_path(assignment.costume_id)
-            end
-          %>
-        <% end %>
-        </td>
-        <td><%= assignment.genre %></td>
-        <td><%= assignment.hair_accessory %></td>
-        <td><%= assignment.shoe %></td>
-        <td><%= assignment.tight %></td>
-        <% if owner? && !@dancer%>
-          <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
-        <% end %>
-        <td><%= assignment.costume_condition %></td>
-        <td><%= assignment.costume_size %></td>
-      </tr>
-    <% end %>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.dance_season %></td>
+          <td>
+            <%= 
+              link_to_if owner?, assignment.song_name, season_assignments_path(assignment.costume_id, season: assignment.dance_season) do |name|
+                link_to name, costume_path(assignment.costume_id)
+              end
+            %>
+          </td>
+          <td><%= assignment.genre %></td>
+          <td><%= assignment.hair_accessory %></td>
+          <td><%= assignment.shoe %></td>
+          <td><%= assignment.tight %></td>
+          <% if owner? && !@dancer %><!-- don't display for dancer's assignments -->
+            <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
+          <% end %>
+          <td><%= assignment.costume_condition %></td>
+          <td><%= assignment.costume_size %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </div>
