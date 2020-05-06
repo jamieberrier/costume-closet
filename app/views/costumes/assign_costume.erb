@@ -10,6 +10,34 @@
   <% end %>
 </div>
 <div class='box'>
+  <!-- if previously assigned, display shared info -->
+  <% if !@season.nil? %>
+    <div class='box'>
+      <h2 class='subtitle is-4 has-text-centered'>Last Assigned in <%= @season %></h2>
+      <div class='columns has-text-grey has-text-centered'>
+        <!-- Genre -->
+        <div class='column'>
+          <h2 class='subtitle'>Genre</h2>
+          <%= @assignments.first.genre %>
+        </div>
+        <!-- hair accessory -->
+        <div class='column'>
+          <h2 class='subtitle'>Hair Accessory</h2>
+          <%= @assignments.first.hair_accessory %>
+        </div>
+        <!-- Shoes -->
+        <div class='column'>
+          <h2 class='subtitle'>Shoes</h2>
+          <%= @assignments.first.shoe %>
+        </div>
+        <!-- Tights -->
+        <div class='column'>
+          <h2 class='subtitle'>Tights</h2>
+          <%= @assignments.first.tight %>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <%= form_for @costume, url: assign_path(@costume), method: :post do |f| %>
     <!-- Costume Assignment info -->
     <div class='box'>
@@ -67,6 +95,34 @@
         <% end %>
       <% end %>
     </div>
+    <!-- if previously assigned, display dancer info -->
+    <% if !@season.nil? %>
+      <div class='box'>
+        <h2 class='subtitle is-4 has-text-centered'><%= @assignments.count %> Costumes Assigned in <%= @season %></h2>
+        <div class='content has-text-centered'>
+          <div class='table-container'>
+            <table class='table is-narrow is-striped is-hoverable'>
+              <thead class='has-text-weight-bold'>
+                <tr>
+                  <td>Dancer</td>
+                  <td>Costume Size</td>
+                  <td>Costume Condition</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% @assignments.each do |assignment| %>
+                <tr>
+                  <td><%= assignment.dancer.name %></td>
+                  <td><%= assignment.costume_size %></td>
+                  <td><%= assignment.costume_condition %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <!-- Dancer(s), Costume Size & Condition -->
     <div class='box'>
       <h2 class='subtitle'>Select Dancer(s)
