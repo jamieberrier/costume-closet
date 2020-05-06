@@ -143,6 +143,8 @@
 - DRY up code
   - controllers
     - turn variable assignments into before_actions
+  - views
+    - partial for season_assignments and assign_costume
   - dance studio model
     - used more than once
       - costume_assignments.where("dance_season = '%s'", Time.now.year)
