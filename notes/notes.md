@@ -136,25 +136,45 @@
   - controllers
     - dancers
     - costumes
-  - views
+    - dance studios
+    - costume assignments
+    - registrations
   - models
+    - dance studio
+    - dancer
+    - costume assignment
   - helpers
+    - costume assignments
+    - costumes
+    - dance studios
+    - dancers
+    - registrations
+   - views
 
 # TODO
 - DRY up code
   - controllers
     - turn variable assignments into before_actions
+    - sessions
   - views
     - partial for season_assignments and assign_costume
   - dance studio model
     - used more than once
       - costume_assignments.where("dance_season = '%s'", Time.now.year)
-  - using?
-    - registrations helper
-      def signing_up_as_dancer?
-        params[:user_type] == 'dancer'
-      end
+- render vs redirect for form errors
+  - def render_edit_studio_form
+      flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
+
+      render 'dance_studios/edit'
+    end
+- using?
+  - registrations helper
+    def signing_up_as_dancer?
+      params[:user_type] == 'dancer'
+    end
 - costumes
+  - costume_assignments_attributes=(assignments_hashes)
+    - ABC too high / too many lines
   - should delete_season_assignments be in costume assignments controller?
 - costume assignments
   - update URLs
