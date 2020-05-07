@@ -5,9 +5,18 @@ class Dancer < ApplicationRecord
 
   has_secure_password
 
+  validate :email_not_taken, on: :create
+  validate :email_not_taken, on: :update
+
   validates :password, confirmation: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, :password_confirmation, presence: true
+
+  def email_not_taken
+    DanceStudio.all.each do |studio|
+      errors.add(:email, 'is taken') if studio.downcase.email == email.downcase
+    end
+  end
 
   # Gets current dancers for a dance studio
   scope :current_dancers, lambda { |studio| where(["dance_studio_id = '%s' and current_dancer = '%s'", studio.id, 1]) }
