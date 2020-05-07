@@ -53,11 +53,16 @@ module SessionsHelper
     session[:user_id] = user.id
     session[:user_type] = user.class.name
 
-    if owner?
-      redirect_to dance_studio_path(user), success: message
-    else
-      redirect_to dancer_path(user), success: message
-    end
+    redirect_owner_after_login(user, message) && return
+    redirect_dancer_after_login(user, message)
+  end
+
+  def redirect_owner_after_login(user, message)
+    redirect_to dance_studio_path(user), success: message if owner?
+  end
+
+  def redirect_dancer_after_login(user, message)
+    redirect_to dancer_path(user), success: message if dancer?
   end
 
   # redirects to user show page based on type of user
