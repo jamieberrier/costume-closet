@@ -5,7 +5,12 @@ class CostumesController < ApplicationController
   before_action :find_costume, except: %i[new create index delete_season_assignments]
   before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
 
-  # Dance Studio & Dancer can view
+  # url: /dance_studios/1/costumes
+  def index
+    @costumes = current_user.costumes
+  end
+
+  # Studio & Dancer can view
   # url: /costumes/3
   def show; end
 
@@ -17,6 +22,9 @@ class CostumesController < ApplicationController
     # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
     build_assignments_with_dancer_id
   end
+
+  # url: /costumes/3/edit
+  def edit; end
 
   def create
     # params[:costume] -> {"dance_studio_id"=>"1", top_description"=>"", "bottoms_description"=>"", "onepiece_description"=>"nvkdsn;kbv", "hair_accessory"=>"none", "picture"=>"", "costume_assignments_attributes"=>{"0"=>{"dance_season"=>"2020", "song_name"=>"test", "genre"=>"lyrical", "shoe"=>"none", "tight"=>"none"}, "7"=>{"dancer_id"=>"1", "costume_size"=>"S"}, "8"=>{"dancer_id"=>"2", "costume_size"=>"M"}, "9"=>{"dancer_id"=>"3", "costume_size"=>"M"}, "10"=>{"dancer_id"=>"0", "costume_size"=>""}, "11"=>{"dancer_id"=>"0", "costume_size"=>""}}} permitted: false>
@@ -36,16 +44,8 @@ class CostumesController < ApplicationController
     redirect_to_costume_path('Costume Successfully Created & Assigned!')
   end
 
-  # url: /dance_studios/1/costumes
-  def index
-    @costumes = current_user.costumes
-  end
-
-  # url: /costumes/3/edit
-  def edit; end
-
   def update
-    return redirect_to edit_costume_path(@costume, dance_studio: current_user), danger: "Edit failure: #{@costume.errors.full_messages.to_sentence}" unless update_costume
+    return render_edit_costume_form unless update_costume
 
     redirect_to_costume_path('Costume Updated!')
   end
@@ -79,19 +79,18 @@ class CostumesController < ApplicationController
     redirect_to assign_costume_path(@costume), danger: "Assignment failure: #{@costume.errors.full_messages.to_sentence}"
   end
 
-
-  # owner viewing all of a costume's assignments
+  # Studio viewing all of a costume's assignments
   # url: /costumes/3/assignments
   def costume_assignments
     @assignments = CostumeAssignment.where(costume_id: @costume)
   end
 
-  # owner viewing a costume's assignments for a season
+  # Studio viewing a costume's assignments for a season
   # params[:season]
   # url: /costumes/1/season_assignments?season=2020
   def season_assignments; end
 
-  # Displays form for owner to edit a costume's assignments for a season
+  # Displays form for studio to edit a costume's assignments for a season
   # params[:season]
   # url: /costumes/1/edit_season_assignments?season=2020
   def edit_season_assignments
