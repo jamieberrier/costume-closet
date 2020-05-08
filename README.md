@@ -10,7 +10,16 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
             * Create, view, edit, and delete costumes
             * View their dancers (all and current) and add/deactivate dancers
             * Assign costumes to dancers
-            * View, edit, and delete dancer costume assignments
+            * View, edit, and delete dancer costume assignments, including: 
+                * dance season
+                * song name
+                * dance genre
+                * hair accessory
+                * shoes
+                * tights
+                * costume size
+                * costume condition (new/used)
+            * Edit and delete their account
 * Dancers
     * Create an account to view their assigned costumes
         * Dancers can:
