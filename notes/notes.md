@@ -115,6 +115,8 @@
   - password & password confirmation are set for them
 
 15. Verify actions protected
+  - Application
+    - before_action :require_logged_in, except: :home
   - Registrations
     - skip_before_action :require_logged_in
   - Sessions
@@ -124,14 +126,19 @@
   - Dancers
     - skip_before_action :require_logged_in, only: :create
     - before_action :require_dance_studio_owner, only: %i[new index current_dancers]
-    - before_action :require_studio_dancer, only: %i[show edit update destroy dancer_assignments current_assignments]
+    - before_action :require_studio_dancer, except: %i[new create index current_dancers]
+    - before_action :find_dancer, except: %i[new create index current_dancers]
   - Dance Studios
     - skip_before_action :require_logged_in, only: :create
     - before_action :require_studio_ownership, except: :create
+    - before_action :find_dance_studio, only: %i[show edit update destroy]
   - Costumes
     - before_action :require_dance_studio_owner, only: %i[new create index]
     - before_action :require_costume_ownership, only: %i[show]
     - before_action :require_studio_costume, except: %i[new create index show]
+    - before_action :find_costume, except: %i[new create index delete_season_assignments]
+    - before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
+
 16. DRY up
   - controllers
     - dancers
@@ -139,6 +146,7 @@
     - dance studios
     - costume assignments
     - registrations
+    - application
   - models
     - dance studio
     - dancer
@@ -149,24 +157,19 @@
     - dance studios
     - dancers
     - registrations
+    - application
    - views
 
 # TODO
+- add search
 - DRY up code
   - controllers
     - turn variable assignments into before_actions
     - sessions
+  - helpers
+    - sessions
   - views
     - partial for season_assignments and assign_costume
-  - dance studio model
-    - used more than once
-      - costume_assignments.where("dance_season = '%s'", Time.now.year)
-- render vs redirect for form errors
-  - def render_edit_studio_form
-      flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
-
-      render 'dance_studios/edit'
-    end
 - using?
   - registrations helper
     def signing_up_as_dancer?
