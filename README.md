@@ -56,9 +56,6 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
     ```
     $ rake db:seed
     ```
-
-## Usage
-
 * In your terminal, run the server
 
     ```
@@ -69,6 +66,9 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
     ```
     $ http://localhost:3000/
     ```
+
+## Usage
+
 * Once the welcome page loads, either:
     * Click on **Sign In As A Dance Studio** or **Sign In As A Dancer** to log in as an existing dance studio/dancer from the dance studios and dancers in 'db/seeds.rb'
     * Click on **Register with email** or **Register via Google** under **Dance Studio Owners** to create a new dance studio account and login
