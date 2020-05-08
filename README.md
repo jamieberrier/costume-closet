@@ -73,7 +73,7 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
     * Click on **Sign In As A Dance Studio** or **Sign In As A Dancer** to log in as an existing dance studio/dancer from the dance studios and dancers in 'db/seeds.rb'
     * Click on **Register with email** or **Register via Google** under **Dance Studio Owners** to create a new dance studio account and login
         * The Dance Studio account must exist before a dancer can create an account
-        * Once a dance studio account exists, click **Register with email** or **Register via Google** under **Dancers** to create a new dance studio account and login
+        * Once a dance studio account exists, click on **Register with email** or **Register via Google** under **Dancers** to create a new dancer account and login
     
 
 ## Contributing
