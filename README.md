@@ -10,22 +10,27 @@ A web application designed for users to... Login and signup include Omniauth thr
 ## Installation & Set Up
 
 * First `git clone` the repo to your machine
+
     ```
     $ git clone git@github.com:jamieberrier/costume-closet.git
     ```
 * Then, cd into the file
+
     ```
     $ cd costume-closet
     ```
 * Run `bundle install`
+
     ```
     $ bundle install
     ```
 * Run the migrations
+
     ```
     $ rake db:migrate
     ```
 * (Optional) Load seed data
+
     ```
     $ rake db:seed
     ```
