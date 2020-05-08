@@ -7,7 +7,7 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
 * Dance Studios
     * Create an account to manage and track their dance studio's costumes and costume assignments
 * Dancers
-    * Create an account to view their costume assignments
+    * Create an account to view their costume assignments  
 *Login and signup include Omniauth through Google*
 
 > A Flatiron School Rails Portfolio Project: created with Ruby 2.6.1, Rails 6.0.2.1, and sqlite3 1.4.
