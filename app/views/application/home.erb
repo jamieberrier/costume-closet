@@ -1,63 +1,74 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<div class='level'>
+  <div class='level-item has-text-centered'>
+    <figure class='image is-128x128'>
+      <%= image_tag 'hanger-black.svg' %>
+    </figure>
+  </div>
+</div>
 <div class='content has-text-centered'>
-  <h1 class='title has-text-primary'>Costume Closet</h1>
-  <h2 class='subtitle'>Welcome!</h2>
+  <h1 class='heading is-size-2 has-text-primary'>Costume Closet</h1>
+  <h2 class='heading is-size-3'>Welcome!</h2>
 </div>
 <!-- Dance Studio -->
 <div class='box'>
   <div class='content'>
-    <h2 class='subtitle has-text-primary'>Dance Studio Owners</h2>
-    <p>Create an account to manage and track your dance studio's costumes and costume assignments</p>
+    <h2 class='heading is-size-3 has-text-primary'>Dance Studio Owners</h2>
+    <p class='heading is-size-6'>Create an account to manage and track your dance studio's costumes and costume assignments</p>
   </div>
   <!-- New Account -->
   <div class='buttons'>
-    <button class="button is-primary">
-      <span class="icon">
-        <i class="fas fa-envelope"></i>
+    <button class='button is-primary'>
+      <span class='icon'>
+        <i class='fas fa-envelope'></i>
       </span>
-      <%= link_to 'Register with email', register_path(user_type: "dance_studio"), class: 'has-text-white' %>
+      <%= link_to 'Register with email', register_path(user_type: "dance_studio"), class: 'heading is-size-6 has-text-white' %>
     </button>
-    <button class="button is-primary">
-      <span class="icon">
-        <i class="fab fa-google"></i>
+    <button class='button is-primary'>
+      <span class='icon'>
+        <i class='fab fa-google'></i>
       </span>
-      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), class: 'has-text-white' %>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), class: 'heading is-size-6 has-text-white' %>
     </button>
   </div>
   <!-- Sign In -->
   <div class='content has-text-right'>
-    <p>
-      Already have a dance studio account?
-      <%= link_to 'Sign In As A Dance Studio', login_path(user_type: "dance_studio"), class: 'button is-success is-small' %>
+    <p class='heading is-size-6'>
+      Have a dance studio account?
+    </p>
+    <p class='heading'>
+      <%= link_to 'Sign In As A Dance Studio', login_path(user_type: "dance_studio"), class: 'button is-primary is-outlined' %>
     </p>
   </div>
 </div>
 <!-- Dancer -->
 <div class='box'>
   <div class='content'>
-    <h2 class='subtitle has-text-primary'>Dancers</h2>
-    <p>Create an account to view your assigned costumes</p>
+    <h2 class='heading is-size-3 has-text-primary'>Dancers</h2>
+    <p class='heading is-size-6'>Create an account to view your assigned costumes</p>
   </div>
   <!-- New Account -->
   <div class='buttons'>
-    <button class="button is-primary">
-      <span class="icon">
-        <i class="fas fa-envelope"></i>
+    <button class='button is-primary'>
+      <span class='icon'>
+        <i class='fas fa-envelope'></i>
       </span>
-      <%= link_to 'Register with email', register_path(user_type: "dancer"), class: 'has-text-white' %>
+      <%= link_to 'Register with email', register_path(user_type: "dancer"), class: 'heading is-size-6 has-text-white' %>
     </button>
-    <button class="button is-primary">
-      <span class="icon">
-        <i class="fab fa-google"></i>
+    <button class='button is-primary'>
+      <span class='icon'>
+        <i class='fab fa-google'></i>
       </span>
-      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), class: 'has-text-white' %>
+      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), class: 'heading is-size-6 has-text-white' %>
     </button>
   </div>
   <!-- Sign In -->
   <div class='content has-text-right'>
-    <p>
-      Already have a dancer account?
-      <%= link_to 'Sign In As A Dancer', login_path(user_type: "dancer"), class: 'button is-success is-small' %>
+    <p class='heading heading is-size-6'>
+      Have a dancer account?
+    </p>
+    <p class='heading'>
+      <%= link_to 'Sign In As A Dancer', login_path(user_type: "dancer"), class: 'button is-primary is-outlined' %>
     </p>
   </div>
 </div>
