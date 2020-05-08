@@ -38,10 +38,12 @@ A web application designed for users to... Login and signup include Omniauth thr
 ## Usage
 
 * In your terminal, run the server
+
     ```
     $ rails s
     ```
 * In your web browser, go to localhost
+
     ```
     $ http://localhost:3000/
     ```
