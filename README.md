@@ -25,7 +25,7 @@ A web application designed for 2 types of users, Dance Studio Owners and their D
         * View their costume assignment history
         * Edit and deactivate their account
 
-*Login and signup include Omniauth through Google*
+*Signup and login include Omniauth through Google*
 
 > A Flatiron School Rails Portfolio Project: created with Ruby 2.6.1, Rails 6.0.2.1, and sqlite3 1.4.
 
