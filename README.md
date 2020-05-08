@@ -4,28 +4,26 @@ README
 # Costume Closet
 
 A web application designed for 2 types of users, Dance Studios and their Dancers, to manage their dance costumes.
-* Dance Studios
-    * Create an account to manage and track their dance studio's costumes and costume assignments
-        * Dance Studios can:
-            * Create, view, edit, and delete costumes
-            * View their dancers (all and current) and add/deactivate dancers
-            * Assign costumes to dancers
-            * View, edit, and delete dancer costume assignments, including: 
-                * dance season
-                * song name
-                * dance genre
-                * hair accessory
-                * shoes
-                * tights
-                * costume size
-                * costume condition (new/used)
-            * Edit and delete their account
-* Dancers
-    * Create an account to view their assigned costumes
-        * Dancers can:
-            * View their assigned costumes for the current season
-            * View their costume assignment history
-            * Edit and deactivate their account
+* Dance Studios -- Create an account to manage and track their dance studio's costumes and costume assignments
+    * Dance Studios can:
+        * Create, view, edit, and delete costumes
+        * View their dancers (all and current) and add/deactivate dancers
+        * Assign costumes to dancers
+        * View, edit, and delete dancer costume assignments, including: 
+            * dance season
+            * song name
+            * dance genre
+            * hair accessory
+            * shoes
+            * tights
+            * costume size
+            * costume condition (new/used)
+        * Edit and delete their account
+* Dancers -- Create an account to view their assigned costumes
+    * Dancers can:
+        * View their assigned costumes for the current season
+        * View their costume assignment history
+        * Edit and deactivate their account
 
 *Login and signup include Omniauth through Google*
 
