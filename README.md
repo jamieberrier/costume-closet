@@ -41,8 +41,8 @@ A web application designed for users to... Login and signup include Omniauth thr
     $ http://localhost:3000/
     ```
 * Once the welcome page loads, either:
-    * click **Register with email** or **Register via Google** under dance studio or dancer to create a new account and login
-    * click **Sign In As A Dance Studio** or **Sign In As A Dancer** to log in as an existing dance studio/dancer from the dance studios and dancers in 'db/seeds.rb'
+    1. click **Register with email** or **Register via Google** under dance studio or dancer to create a new account and login
+    2. click **Sign In As A Dance Studio** or **Sign In As A Dancer** to log in as an existing dance studio/dancer from the dance studios and dancers in 'db/seeds.rb'
 
 ## Contributing
 
