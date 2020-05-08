@@ -3,7 +3,7 @@ README
 
 # Costume Closet
 
-A web application designed for 2 types of users, Dance Studio Owners and their Dancers, to manage their dance costumes.
+A web application designed for 2 types of users, Dance Studio Owners and their Dancers, to manage their dance costumes. :dancers:
 * Dance Studio Owners -- Create an account to manage and track their dance studio's costumes and costume assignments
     * Dance Studio Owners can:
         * Create, view, edit, and delete costumes
