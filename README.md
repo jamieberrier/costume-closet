@@ -5,7 +5,7 @@ README
 
 A web application designed for users to... Login and signup include Omniauth through Google.
 
-    > A Flatiron School Rails Portfolio Project, created with Ruby 2.6.1, Rails 6.0.2.1, and sqlite3 1.4.
+> A Flatiron School Rails Portfolio Project, created with Ruby 2.6.1, Rails 6.0.2.1, and sqlite3 1.4.
 
 ## Installation & Set Up
 
