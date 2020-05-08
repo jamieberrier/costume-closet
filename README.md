@@ -31,7 +31,7 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
 
 ## Installation & Set Up
 
-* First `git clone` the repo to your machine
+* First, `git clone` the repo to your machine
 
     ```
     $ git clone git@github.com:jamieberrier/costume-closet.git
@@ -70,8 +70,11 @@ A web application designed for 2 types of users, Dance Studios and their Dancers
     $ http://localhost:3000/
     ```
 * Once the welcome page loads, either:
-    * click **Register with email** or **Register via Google** under dance studio or dancer to create a new account and login
     * click **Sign In As A Dance Studio** or **Sign In As A Dancer** to log in as an existing dance studio/dancer from the dance studios and dancers in 'db/seeds.rb'
+    * click **Register with email** or **Register via Google** under **Dance Studio Owners** to create a new dance studio account and login
+        * The Dance Studio account must exist before a dancer can create an account
+        * Once a dance studio account exists, click **Register with email** or **Register via Google** under **Dancers** to create a new dance studio account and login
+    
 
 ## Contributing
 
