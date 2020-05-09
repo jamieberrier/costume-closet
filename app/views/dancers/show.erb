@@ -1,11 +1,11 @@
 <div class='content has-text-centered'>
-  <h1 class='title has-text-primary'><%= @dancer.name %></h1>
-  <h2 class='subtitle'><%= @dancer.dance_studio.studio_name %></h2>
+  <h1 class='title'><%= @dancer.name %></h1>
+  <h2 class='subtitle heading has-text-primary'><%= @dancer.dance_studio.studio_name %></h2>
 </div>
 <!-- Costumes -->
 <div class='box'>
   <div class=content>
-    <h2 class='subtitle is-5'>Costumes</h2>
+    <h2 class='heading is-size-5'>Costumes</h2>
   </div>
   <div class='buttons is-grouped'>
     <%= link_to 'Current Costume Assignments', dancer_current_assignments_path(@dancer), class: 'button is-link is-light' %>
@@ -15,13 +15,13 @@
   <!-- Account -->
   <div class='box'>
     <div class=content>
-      <h2 class='subtitle is-5'>Account</h2>
+      <h2 class='heading is-size-5'>Account</h2>
     </div>
     <div class='buttons is-grouped'>
       <% if dancer? %>
-        <%= link_to 'Edit Account', edit_dancer_path(@dancer), class: 'button is-warning' %>
+        <%= link_to 'Edit Account', edit_dancer_path(@dancer), class: 'button is-warning is-light' %>
       <% end %>
-      <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete, class: 'button is-danger' %>
+      <%= link_to 'Deactivate Account', dancer_path(@dancer), method: :delete, class: 'button is-danger is-light' %>
     </div>
   </div>
 </div>

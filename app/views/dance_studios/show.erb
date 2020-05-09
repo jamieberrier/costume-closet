@@ -1,11 +1,11 @@
 <div class="content has-text-centered">
-  <h1 class='title is-1 has-text-primary'><%= current_user.studio_name %></h1>
+  <h1 class='title heading is-1 has-text-primary'><%= current_user.studio_name %></h1>
   <h2 class="subtitle is-3"><%= current_user.owner_name %></h2>
 </div>
 <!-- Costumes -->
 <div class='box'>
   <div class=content>
-    <h2 class='subtitle is-5'>Costumes</h2>
+    <h2 class='heading is-size-5'>Costumes</h2>
   </div>
   <div class='buttons'>
     <%= link_to 'Create New Costume', new_dance_studio_costume_path(current_user), class: 'button is-link is-light' %>
@@ -17,31 +17,31 @@
 </div>
   <div class='box'>
     <div class=content>
-      <h2 class='subtitle is-5'>Costume Assignments</h2>
+      <h2 class='heading is-size-5'>Costume Assignments</h2>
     </div>
     <div class='buttons'>
-    <%= link_to 'Current Costume Assignments', studio_current_assignments_path(current_user), class: 'button is-success is-light' %>
-    <%= link_to 'All Costume Assignments', dance_studio_costume_assignments_path(current_user), class: 'button is-success is-light' %>
+    <%= link_to 'Current Costume Assignments', studio_current_assignments_path(current_user), class: 'button is-primary is-light' %>
+    <%= link_to 'All Costume Assignments', dance_studio_costume_assignments_path(current_user), class: 'button is-primary is-light' %>
   </div>
 </div>
 <!-- Dancers -->
 <div class='box'>
   <div class=content>
-    <h2 class='subtitle is-5'>Dancers</h2>
+    <h2 class='heading is-size-5'>Dancers</h2>
   </div>
   <div class='buttons'>
-    <%= link_to 'All My Dancers', dance_studio_dancers_path(current_user), class: 'button is-primary is-outlined' %>
-    <%= link_to 'Current Dancers', dance_studio_current_dancers_path(current_user), class: 'button is-primary is-outlined' %>
-    <%= link_to 'Add New Dancer', new_dance_studio_dancer_path(current_user), class: 'button is-primary is-outlined' %>
+    <%= link_to 'All My Dancers', dance_studio_dancers_path(current_user), class: 'button is-success is-light' %>
+    <%= link_to 'Current Dancers', dance_studio_current_dancers_path(current_user), class: 'button is-success is-light' %>
+    <%= link_to 'Add New Dancer', new_dance_studio_dancer_path(current_user), class: 'button is-success is-light' %>
   </div>
 </div>
 <!-- Account -->
 <div class='box'>
   <div class=content>
-    <h2 class='subtitle is-5'>Account</h2>
+    <h2 class='heading is-size-5'>Account</h2>
   </div>
   <div class='buttons'>
-    <%= link_to 'Edit Account Info', edit_dance_studio_path(current_user), class: 'button is-warning' %>
-    <%= link_to 'Delete Account', dance_studio_path(current_user), method: :delete, class: 'button is-danger' %>
+    <%= link_to 'Edit Account Info', edit_dance_studio_path(current_user), class: 'button is-warning is-light' %>
+    <%= link_to 'Delete Account', dance_studio_path(current_user), method: :delete, class: 'button is-danger is-light' %>
   </div>
 </div>
