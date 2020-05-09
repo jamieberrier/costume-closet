@@ -22,8 +22,8 @@
           <a class="navbar-item">
             <figure class="image is-24x24">
               <%= 
-                link_to_if owner?, image_tag('hanger.svg'), dance_studio_path(current_user), class: 'has-text-grey-light' do |name|
-                  link_to name, dancer_path(current_user), class: 'has-text-grey-light'
+                link_to_if owner?, image_tag('hanger.svg'), dance_studio_path(current_user) do |name|
+                  link_to name, dancer_path(current_user)
                 end
               %>
             </figure>
@@ -40,23 +40,23 @@
             </div>
             <% if owner? %>
               <div class="navbar-item">
-                <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'has-text-grey' %>
+                <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'has-text-grey-dark' %>
               </div>
               <div class="navbar-item">
-                <%= link_to "Unassigned Costumes", unassigned_costumes_path(current_user), class: 'has-text-grey' %>
+                <%= link_to "Unassigned Costumes", unassigned_costumes_path(current_user), class: 'has-text-grey-dark' %>
               </div>
             <% end %>
             <div class="navbar-item">
               <%= 
-                link_to_if owner?, "Current Costume Assignments", studio_current_assignments_path(current_user), class: 'has-text-grey' do |name|
-                  link_to name, dancer_current_assignments_path(current_user), class: 'has-text-grey'
+                link_to_if owner?, "Current Costume Assignments", studio_current_assignments_path(current_user), class: 'has-text-grey-dark' do |name|
+                  link_to name, dancer_current_assignments_path(current_user), class: 'has-text-grey-dark'
                 end
               %>
             </div>
             <div class="navbar-item">
               <%= 
-                link_to_if owner?, "All Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey' do |name|
-                  link_to name, dancer_costumes_path(current_user), class: 'has-text-grey'
+                link_to_if owner?, "All Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey-dark' do |name|
+                  link_to name, dancer_costumes_path(current_user), class: 'has-text-grey-dark'
                 end
               %>
             </div>
@@ -73,7 +73,7 @@
               </div>
             </div-->
             <div class="navbar-item">
-              <%= link_to "Log Out", logout_path, class: 'has-text-grey', method: :post %>
+              <%= link_to "Log Out", logout_path, class: 'has-text-grey-dark', method: :post %>
             </div>
           </div>
         </div>
