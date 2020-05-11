@@ -16,12 +16,6 @@ class DanceStudio < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :studio_name, :owner_name, :password_confirmation, presence: true
 
-  def email_not_taken
-    Dancer.all.each do |dancer|
-      errors.add(:email, 'is taken') if dancer.email.downcase == email.downcase
-    end
-  end
-
   # Omniauth - google
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
@@ -31,14 +25,21 @@ class DanceStudio < ApplicationRecord
     end
   end
 
+  # Checks if the email is not already used by a dancer
+  def email_not_taken
+    Dancer.all.each do |dancer|
+      errors.add(:email, 'is taken') if dancer.email.downcase == email.downcase
+    end
+  end
+
   # Gets the current costume assignments for a dance studio
   def current_studio_assignments
-    costume_assignments.where("dance_season = '%s'", Time.now.year)
+    costume_assignments.current_assignments
   end
 
   # Gets the current costumes for a dance studio
   def current_studio_costumes
-    Costume.find_by_assignment(current_studio_assignments)
+    current_studio_assignments.find_costumes
   end
 
   # Gets the currently unassigned costumes for a dance studio
