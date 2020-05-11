@@ -74,14 +74,14 @@ class DancersController < ApplicationController
   # Displays dancer's current costume assignments with costume picture
   # url: /dancers/1/current_assignments
   def current_assignments
-    @assignments = CostumeAssignment.current_dancer_costumes(@dancer)
+    @assignments = @dancer.costume_assignments.current_assignments
   end
 
   # Studio
   # Displays the current dancers for a dance studio
   # url: /dance_studios/1/dancers/current_dancers
   def current_dancers
-    @dancers = Dancer.current_dancers(current_user).order(:last_name, :first_name)
+    @dancers = current_user.dancers.current_dancers.order(:last_name, :first_name)
   end
 
   private
