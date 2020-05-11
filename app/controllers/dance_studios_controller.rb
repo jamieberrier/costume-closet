@@ -32,7 +32,7 @@ class DanceStudiosController < ApplicationController
   # url: /dance_studios/1/current_assignments
   def current_assignments
     @assignments = current_user.current_studio_assignments
-    @costumes = Costume.find_by_assignment(@assignments)
+    @costumes = @assignments.find_costumes
     @season = @assignments.first.dance_season unless @assignments.empty?
   end
 
