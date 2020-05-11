@@ -14,7 +14,7 @@
         <% @dancers.each do |dancer| %>
           <tr>
             <td><%= link_to dancer.name, dancer_path(dancer) %></td>
-            <td><%= link_to CostumeAssignment.current_dancer_costumes(dancer).count, dancer_current_assignments_path(dancer) %></td>
+            <td><%= link_to dancer.costume_assignments.current_assignments.count, dancer_current_assignments_path(dancer) %></td>
             <td><%= link_to dancer.costume_assignments.count, dancer_costumes_path(dancer) %></td>
           </tr>
         <% end %>
