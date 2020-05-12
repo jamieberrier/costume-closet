@@ -119,10 +119,10 @@
       <h2 class='subtitle'>Select Dancer(s)
         <p class='help is-danger'>If assigning costume, must select at least 1 dancer w/ costume size</p>
       </h2>
-      <div class='columns'>
+      <div class='columns is-desktop'>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if !assignment_builder.object.dancer_id.nil? %>
-            <div class='column'>
+            <div class='column is-narrow'>
             <!-- Dancer -->
               <div class='field'>
                 <div class='control'>
