@@ -15,9 +15,7 @@ module RegistrationsHelper
     end
   end
 
-  def render_registration_form(new_user)
-    flash.now[:danger] = "Signup failure: #{new_user.errors.full_messages.to_sentence}"
-
+  def render_registration_form
     render 'registrations/new'
   end
 end
