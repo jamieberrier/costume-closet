@@ -12,7 +12,7 @@ class DanceStudiosController < ApplicationController
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
-    return render_registration_form(@dance_studio) unless @dance_studio.save
+    return render_registration_form unless @dance_studio.save
 
     log_in(@dance_studio, 'Successfully Registered!')
   end
