@@ -1,6 +1,6 @@
 <!-- sign in form -->
 <div class='box'>
-  <%= form_for :user do |f| %>
+  <%= form_with url: login_path do |f| %>
     <div class='field'>
       <%= f.label :email, class: 'heading label' %>
       <div class='control has-icons-left'>
