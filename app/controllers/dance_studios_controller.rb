@@ -18,7 +18,7 @@ class DanceStudiosController < ApplicationController
   end
 
   def update
-    return render_edit_studio_form unless @dance_studio.update(dance_studio_params)
+    return render :edit unless @dance_studio.update(dance_studio_params)
 
     redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
   end
