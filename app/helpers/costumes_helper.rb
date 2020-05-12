@@ -29,7 +29,7 @@ module CostumesHelper
 
   # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
   def build_assignments_with_dancer_id
-    Dancer.current_dancers(current_user).each do |dancer|
+    current_user.dancers.current_dancers.each do |dancer|
       @costume.costume_assignments.build(dancer_id: dancer.id)
     end
   end
