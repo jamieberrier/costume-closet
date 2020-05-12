@@ -13,10 +13,4 @@ module DanceStudiosHelper
   def redirect_to_dance_studio_page(message)
     redirect_to dance_studio_path(current_user), success: message
   end
-
-  def render_edit_studio_form
-    flash.now[:danger] = "Edit failure: #{@dance_studio.errors.full_messages.to_sentence}"
-
-    render 'dance_studios/edit'
-  end
 end
