@@ -13,12 +13,6 @@ module DancersHelper
     @dancer = Dancer.find(params[:id])
   end
 
-  def render_new_dancer_form
-    flash.now[:danger] = "Signup failure: #{@dancer.errors.full_messages.to_sentence}"
-
-    render 'dancers/new'
-  end
-
   ## create action helpers
   def redirect_studio_if_saved
     redirect_to_dance_studio_page('Dancer Added!') if @saved && owner?
@@ -26,16 +20,5 @@ module DancersHelper
 
   def log_in_dancer_if_saved
     log_in(@dancer, 'Successfully Registered!') if @saved
-  end
-
-  def redirect_studio_if_error
-    render_new_dancer_form if owner?
-  end
-
-  # Renders dancer edit form if error
-  def render_edit_dancer_form
-    flash.now[:danger] = "Edit failure: #{@dancer.errors.full_messages.to_sentence}"
-
-    render 'dancers/edit'
   end
 end
