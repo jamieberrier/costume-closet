@@ -1,3 +1,15 @@
+<% if @dancer.errors.any? %>
+  <section class='section'>
+    <div class='container is-fluid has-text-centered'>
+      <div id='error_explanation' class='notification is-danger'>
+        <h2>
+          <%= pluralize(@dancer.errors.count, "error") %>
+          prohibited this dancer from being saved!
+        </h2>
+      </div>
+    </div>
+  </section>
+<% end %>
 <div class='box'>
   <%= form_for @dancer do |f| %>
     <!-- dance studio -->
@@ -12,6 +24,9 @@
           <i class='fas fa-school'></i>
         </div>
       </div>
+      <% if @dancer.errors[:dance_studio].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:dance_studio).to_sentence %></p>
+      <% end %>
     </div>
     <!-- first name -->
     <div class='field'>
@@ -22,6 +37,9 @@
             <i class='fas fa-user'></i>
           </span>
       </div>
+      <% if @dancer.errors[:first_name].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:first_name).to_sentence %></p>
+      <% end %>
     </div>
     <!-- last name -->
     <div class='field'>
@@ -32,6 +50,9 @@
             <i class='fas fa-user'></i>
           </span>
       </div>
+      <% if @dancer.errors[:last_name].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:last_name).to_sentence %></p>
+      <% end %>
     </div>
     <!-- email -->
     <div class='field'>
@@ -42,6 +63,9 @@
             <i class='fas fa-envelope'></i>
           </span>
       </div>
+      <% if @dancer.errors[:email].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:email).to_sentence %></p>
+      <% end %>
     </div>
     <!-- password -->
     <div class='field'>
@@ -52,6 +76,9 @@
             <i class='fas fa-lock'></i>
           </span>
       </div>
+      <% if @dancer.errors[:password].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:password).to_sentence %></p>
+      <% end %>
     </div>
     <!-- password confirmation -->
     <div class='field'>
@@ -62,6 +89,9 @@
             <i class='fas fa-lock'></i>
           </span>
       </div>
+      <% if @dancer.errors[:password_confirmation].any? %>
+        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:password_confirmation).to_sentence %></p>
+      <% end %>
     </div>
     <!-- submit button -->
     <div class='field'>
