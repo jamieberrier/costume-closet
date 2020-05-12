@@ -7,15 +7,14 @@ class SessionsController < ApplicationController
 
   def create
     # if email is blank, redirect to /login
-    return redirect_to_login(warning: 'Enter Email') if params[:user][:email].blank?
+    return redirect_to_login(warning: 'Enter Email') if params[:email].blank?
 
-    # find dance studio or dancer & try to authenticate password
-    if (@dance_studio = DanceStudio.find_by(email: params[:user][:email]))
-      try_to_authenticate(@dance_studio)
-    elsif (@dancer = Dancer.find_by(email: params[:user][:email]))
-      try_to_authenticate(@dancer)
-    else # no dance studio/dancer found, redirect to /login
-      redirect_to_login(danger: 'Incorrect Email')
+    @user = DanceStudio.find_by(email: params[:email]) || Dancer.find_by(email: params[:email])
+
+    if @user
+      try_to_authenticate(@user)
+    else
+      redirect_to_login(warning: 'Invalid Email')
     end
   end
 
