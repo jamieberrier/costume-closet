@@ -27,14 +27,12 @@ module SessionsHelper
   # tries to authenticate password & logs user in if authenticated
   def try_to_authenticate(user)
     # try is an ActiveSupport method: object.try(:some_method) means if object != nil then object.some_method else nil end.
-    authenticated = user.try(:authenticate, params[:user][:password])
+    authenticated = user.try(:authenticate, params[:password])
 
     if authenticated
       log_in(user, 'Successfully Logged In!')
     else
-      @user = user
-      flash.now[:warning] = 'Invalid Password'
-      render :new
+      redirect_to_login(warning: 'Invalid Password')
     end
   end
 
