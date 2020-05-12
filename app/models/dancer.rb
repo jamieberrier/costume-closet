@@ -28,7 +28,7 @@ class Dancer < ApplicationRecord
   # Checks if the email is not already used by a dance studio
   def email_not_taken
     DanceStudio.all.each do |studio|
-      errors.add(:email, 'is taken') if studio.downcase.email == email.downcase
+      errors.add(:email, 'is taken') if studio.email.downcase == email.downcase
     end
   end
 
