@@ -39,15 +39,15 @@ class DancersController < ApplicationController
 
     log_in_dancer_if_saved && return
 
-    redirect_studio_if_error && return
+    return render :new if owner?
 
-    render_registration_form(@dancer)
+    render_registration_form
   end
 
   # Dancer
   # Receives data from edit form
   def update
-    return render_edit_dancer_form unless @dancer.update(dancer_params)
+    return render :edit unless @dancer.update(dancer_params)
 
     redirect_to dancer_path(@dancer), success: 'Account Info Updated!'
   end
