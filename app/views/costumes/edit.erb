@@ -14,6 +14,14 @@
 <!-- Form Title -->
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Edit Costume Form</h1>
+  <!-- Costume Picture -->
+  <% if !@costume.picture.blank? %>
+    <%= image_tag @costume.picture, width: 200 %>
+  <% elsif !@costume.onepiece_description.blank? %>
+    <%= @costume.onepiece_description %>
+  <% else %>
+    <%= @costume.twopiece_description %>
+  <% end %>
 </div>
 <!-- Edit Costume Form -->
 <div class='box'>
