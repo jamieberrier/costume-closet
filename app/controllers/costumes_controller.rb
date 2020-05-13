@@ -33,13 +33,14 @@ class CostumesController < ApplicationController
     # get shared assignment info
     fetch_shared_info
 
-    redirect_if_validation_error && return
-    # check if all shared assignment info fields empty
-    redirect_if_not_assigning && return
-    # check if the dance_season or song_name value is empty
-    redirect_if_required_values_empty && return
+    redirect_if_validation_error and return
 
-    redirect_if_no_assignments && return
+    # check if all shared assignment info fields empty
+    redirect_if_not_assigning and return
+    # check if the dance_season or song_name value is empty
+    redirect_if_required_values_empty and return
+
+    redirect_if_no_assignments and return
 
     redirect_to_costume_path('Costume Successfully Created & Assigned!')
   end
@@ -68,13 +69,13 @@ class CostumesController < ApplicationController
     # get shared assignment info
     fetch_shared_info
     # check if the dance_season or song_name value is empty
-    redirect_if_required_values_empty && return
+    redirect_if_required_values_empty and return
     # try to persist to db
     @updated = update_costume
     # check that if updates, @costume.costume_assignments.count is now greater than count
-    redirect_if_updated_with_same_assignment_count && return
+    redirect_if_updated_with_same_assignment_count and return
     # redirect if updated correctly
-    redirect_if_updated && return
+    redirect_if_updated and return
     # redirect if costume assignments are invalid
     redirect_to assign_costume_path(@costume), danger: "Assignment failure: #{@costume.errors.full_messages.to_sentence}"
   end
