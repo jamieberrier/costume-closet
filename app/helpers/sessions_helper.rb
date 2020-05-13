@@ -21,7 +21,7 @@ module SessionsHelper
 
   # redirects to login path if login failure
   def redirect_to_login(message)
-    redirect_to login_path, message
+    redirect_to login_path, warning: message
   end
 
   # tries to authenticate password & logs user in if authenticated
@@ -32,7 +32,7 @@ module SessionsHelper
     if authenticated
       log_in(user, 'Successfully Logged In!')
     else
-      redirect_to_login(warning: 'Invalid Password')
+      redirect_to_login('Invalid Password')
     end
   end
 
