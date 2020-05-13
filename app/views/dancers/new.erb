@@ -1,6 +1,6 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <!-- For a Dance Studio to create a dancer -->
-<h1 class='title has-text-primary has-text-centered'>Add New Dancer</h1>
+<!-- Validation Error(s) Message -->
 <% if @dancer.errors.any? %>
   <section class='section'>
     <div class='container is-fluid has-text-centered'>
@@ -13,13 +13,16 @@
     </div>
   </section>
 <% end %>
+<!-- Form Title -->
+<h1 class='title has-text-primary has-text-centered'>Add New Dancer</h1>
+<!-- New Dancer Form -->
 <div class='box'>
   <%= form_for @dancer do |f| %>
     <%= f.hidden_field :dance_studio_id %>
     <%= f.hidden_field :password %>
     <%= f.hidden_field :password_confirmation %>
     <div class='box'>
-      <!-- first name -->
+      <!-- First Name -->
       <div class='field'>
         <%= f.label :first_name, 'First Name', class: 'label' %>
         <div class='control has-icons-left'>
@@ -32,7 +35,7 @@
           <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:first_name).to_sentence %></p>
         <% end %>
       </div>
-      <!-- last name -->
+      <!-- Last Name -->
       <div class='field'>
         <%= f.label :last_name, 'Last Name', class: 'label' %>
         <div class='control has-icons-left'>
@@ -45,7 +48,7 @@
           <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:last_name).to_sentence %></p>
         <% end %>
       </div>
-      <!-- email -->
+      <!-- Email -->
       <div class='field'>
         <%= f.label :email, class: 'label' %>
         <div class='control has-icons-left'>
@@ -60,7 +63,7 @@
       </div>
     <p class='help is-danger'>Must fill out all fields</p>
     </div>
-    <!-- submit button -->
+    <!-- Submit Button -->
     <div class='field'>
       <div class='control'>
         <%= f.submit class: 'button is-primary' %>
@@ -68,4 +71,5 @@
     </div>
   <% end %>
 </div>
+<!-- Cancel Button -->
 <%= link_to 'Cancel', dance_studio_path(current_user), class: 'button is-dark' %>
