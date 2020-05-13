@@ -174,7 +174,6 @@
 - update forms with field_with_errors
   - assign costume
   - edit season assignments
-- partial for displaying costume picture/description
 - fix select dancer(s) on 
   - new costume
   - assign costume
