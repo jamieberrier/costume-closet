@@ -168,9 +168,9 @@
   - new dancer
   - edit costume
   - new session form (form_with url)
-  - new costume (form_with model)
-  - assign costume (form_with model)
-  - edit season assignments (form_with model)
+  - new costume (form_with model, nested)
+  - assign costume (form_with model, nested)
+  - edit season assignments (form_with model, nested)
 
 # TODO 
 - fix select dancer(s) on 
