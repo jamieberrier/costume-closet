@@ -1,13 +1,7 @@
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Assign Costume Form</h1>
-  <!-- costume picture -->
-  <% if !@costume.picture.blank? %>
-    <%= image_tag @costume.picture, width: 100 %>
-  <% elsif !@costume.onepiece_description.blank? %>
-    <%= @costume.onepiece_description %>
-  <% else %>
-    <%= @costume.top_description + ' with ' + @costume.bottoms_description %>
-  <% end %>
+  <!-- Costume Picture -->
+  <%= render 'picture' %>
 </div>
 <div class='box'>
   <!-- if previously assigned, display shared info -->

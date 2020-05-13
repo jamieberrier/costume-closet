@@ -4,13 +4,7 @@
   <!-- Dance Season -->
   <h2 class='subtitle'><%= @season %></h2>
   <!-- Costume Picture -->
-  <% if !@costume.picture.blank? %>
-    <%= image_tag @costume.picture, width: 200 %>
-  <% elsif !@costume.onepiece_description.blank? %>
-    <%= @costume.onepiece_description %>
-  <% else %>
-    <%= @costume.twopiece_description %>
-  <% end %>
+  <%= render 'picture' %>
 </div>
 <div class='content has-text-centered'>
   <div class='box'>
