@@ -169,11 +169,10 @@
   - edit costume
   - new session form (form_with url)
   - new costume (form_with model)
+  - assign costume (form_with model)
+  - edit season assignments (form_with model)
 
-# TODO
-- update forms with field_with_errors
-  - assign costume
-  - edit season assignments
+# TODO 
 - fix select dancer(s) on 
   - new costume
   - assign costume
