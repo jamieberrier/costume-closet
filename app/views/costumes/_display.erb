@@ -1,17 +1,17 @@
-<div class="columns">
+<div class='columns'>
   <% @costumes.each do |costume| %>
     <% if @season %>
       <% costume_path = costume_path(costume, season: @season) %>
     <% else %>
       <% costume_path = costume_path(costume) %>
     <% end %>
-    <div class="column">
+    <div class='column'>
     <% if !costume.picture.blank? %>
       <%= link_to image_tag(costume.picture, width: 100), costume_path %>
     <% elsif !costume.onepiece_description.blank? %>
       <%= link_to costume.onepiece_description, costume_path %>
     <% else %>
-      <%= link_to costume.top_description + ' with ' + costume.bottoms_description, costume_path %>
+      <%= link_to costume.twopiece_description, costume_path %>
     <% end %>
     </div>
   <% end %>
