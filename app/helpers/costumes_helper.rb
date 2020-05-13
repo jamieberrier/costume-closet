@@ -38,12 +38,6 @@ module CostumesHelper
     redirect_to costume_path(@costume), success: message
   end
 
-  def render_edit_costume_form
-    flash.now[:danger] = "Edit failure: #{@costume.errors.full_messages.to_sentence}"
-
-    render 'costumes/edit'
-  end
-
   # build a costume_assignments record unless one with dancer's id already exists
   def build_assignments_unless_exists
     Dancer.current_dancers(current_user).each do |dancer|
