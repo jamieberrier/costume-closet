@@ -45,7 +45,7 @@ class CostumesController < ApplicationController
   end
 
   def update
-    return render_edit_costume_form unless update_costume
+    return render :edit unless update_costume
 
     redirect_to_costume_path('Costume Updated!')
   end
