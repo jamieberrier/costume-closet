@@ -160,20 +160,21 @@
     - application
    - views
 
-17. field_with_errors
+17. field_with_errors (form_for)
   - dance studio registration form
   - edit dance studio
   - dancer registration form
   - edit dancer
   - new dancer
-  - new session form (form_with)
+  - edit costume
+  - new session form (form_with url)
+  - new costume (form_with model)
 
 # TODO
 - update forms with field_with_errors
-  - new costume
-  - edit costume
   - assign costume
   - edit season assignments
+- partial for displaying costume picture/description
 - fix select dancer(s) on 
   - new costume
   - assign costume
