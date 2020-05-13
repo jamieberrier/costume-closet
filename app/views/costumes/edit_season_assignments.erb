@@ -4,7 +4,7 @@
   <%= render 'picture' %>
 </div>
 <div class='box'>
-  <%= form_for @costume, url: edit_season_assignments_path do |f| %>
+  <%= form_with model: @costume, url: edit_season_assignments_path do |f| %>
     <div class='box'>
       <h2 class='subtitle'>Costume Assignment Details</h2>
       <%= f.fields_for :costume_assignments do |assignment_builder| %>

@@ -32,7 +32,7 @@
       </div>
     </div>
   <% end %>
-  <%= form_for @costume, url: assign_path(@costume), method: :post do |f| %>
+  <%= form_with model: @costume, url: assign_path do |f| %>
     <!-- Costume Assignment info -->
     <div class='box'>
       <h2 class='subtitle'>Enter Costume Assignment Details</h2>
