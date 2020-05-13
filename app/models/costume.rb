@@ -5,10 +5,10 @@ class Costume < ApplicationRecord
   # adds methods, ie: dancer_ids=ids
   has_many :dancers, through: :costume_assignments
 
-  validates :onepiece_description, presence: { message: 'Must enter a onepiece description if one-piece costume' }, if: :twopiece_blank?
-  validates :top_description, :bottoms_description, presence: { message: 'Must enter a top AND bottoms description if two-piece costume' }, if: :onepiece_blank?
-  validates :onepiece_description, absence: { message: 'One-piece description must be blank if Two-piece costume' }, if: :twopiece_costume?
-  validates :top_description, :bottoms_description, absence: { message: 'Two-piece description must be blank if One-piece costume' }, if: :onepiece_costume?
+  validates :onepiece_description, presence: { message: '- Must enter a onepiece description if one-piece costume' }, if: :twopiece_blank?
+  validates :top_description, :bottoms_description, presence: { message: '- Must enter a top AND bottoms description if two-piece costume' }, if: :onepiece_blank?
+  validates :onepiece_description, absence: { message: '- One-piece description must be blank if Two-piece costume' }, if: :twopiece_costume?
+  validates :top_description, :bottoms_description, absence: { message: '- Two-piece description must be blank if One-piece costume' }, if: :onepiece_costume?
 
   # Returns true if onepiece_description is blank
   def onepiece_blank?
