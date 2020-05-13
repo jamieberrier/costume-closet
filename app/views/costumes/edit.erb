@@ -26,7 +26,6 @@
 <!-- Edit Costume Form -->
 <div class='box'>
   <%= form_for @costume do |f| %>
-    <%= f.hidden_field :dance_studio_id %>
     <!-- Top Description -->
     <div class='box'>
       <h2 class='subtitle'>
@@ -69,8 +68,9 @@
         <% end %>
       </div>
     </div>
+    <!-- Picture -->
     <div class='box'>
-      <!-- Picture -->
+      <h2 class='subtitle'>Picture</h2>
       <div class='field'>
         <%= f.label :picture, 'Picture URL', class: 'label' %>
         <div class='control has-icons-left'>
