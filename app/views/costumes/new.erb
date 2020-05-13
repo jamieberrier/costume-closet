@@ -3,7 +3,7 @@
 </div>
 <!-- New Costume Form -->
 <div class='box'>
-  <%= form_for [current_user, @costume] do |f| %>
+  <%= form_with model: @costume, url: dance_studio_costumes_path do |f| %>
     <%= f.hidden_field :dance_studio_id %>
       <div class='field'>
         <div class='control has-text-centered'>
@@ -36,7 +36,7 @@
           <p class='help is-danger'>Must fill out for a one-piece costume</p>
         </h2>
         <div class='field'>
-          <%= f.label 'Description', class: 'label' %>
+          <%= f.label :onepiece_description, 'Description', class: 'label' %>
           <div class='control'>
             <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
           </div>
