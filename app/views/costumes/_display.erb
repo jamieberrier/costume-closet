@@ -8,7 +8,7 @@
       <% costume_path = costume_path(costume) %>
     <% end %>
     <div class='column is-2 is-narrow-desktop'>
-      <% if count == 6 || count == 12 || count == 18 %>
+      <% if count.multiple_of?(6) %>
         </div>
         </div>
         <div class='columns is-desktop'>

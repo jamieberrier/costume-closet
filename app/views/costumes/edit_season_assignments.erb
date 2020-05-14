@@ -99,7 +99,7 @@
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if assignment_builder.object.dance_season.nil? %>
             <div class='column is-narrow'>
-              <% if count == 6 || count == 12 || count == 18 %>
+              <% if count.multiple_of?(6) %>
                 </div>
                 </div>
                 <div class='columns is-desktop'>
