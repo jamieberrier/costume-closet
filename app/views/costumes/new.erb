@@ -123,10 +123,17 @@
         <p class='help is-danger'>If assigning costume, must select at least 1 dancer w/ costume size</p>
       </h2>
       <div class='columns is-desktop'>
+        <% count = 0 %>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if !assignment_builder.object.dancer_id.nil? %>
             <div class='column is-narrow'>
-            <!-- Dancer -->
+              <% if count == 6 || count == 12 || count == 18 %>
+                </div>
+                </div>
+                <div class='columns is-desktop'>
+                <div class='column is-2 is-narrow-desktop'>
+              <% end %>
+              <!-- Dancer -->
               <div class='field'>
                 <div class='control'>
                   <%= assignment_builder.check_box :dancer_id, {:checked => false, class: 'checkbox'}, assignment_builder.object.dancer_id, "0" %>
@@ -151,6 +158,7 @@
               </div>
             </div>
           <% end %>
+          <% count += 1 %>
         <% end %>
       </div>
     </div>
