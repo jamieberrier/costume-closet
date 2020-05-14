@@ -173,12 +173,13 @@
   - edit season assignments (form_with model, nested)
 
 # TODO 
-- fix select dancer(s) on 
-  - new costume
-  - assign costume
-  - edit season assignments
+- fix select dancer(s) on:
+  - assign costume - no of dancers previously assigned affects count
+  - edit season assignments - no of dancers assigned affects count
 - add search
 - DRY up code
+  - if ternary
+    - test-expression ? if-true-expression : if-false-expression
   - controllers
     - turn variable assignments into before_actions
     - sessions
