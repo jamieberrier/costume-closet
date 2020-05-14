@@ -117,7 +117,7 @@
         <% end %>
       <% end %>
     </div>
-    <!-- Dancer(s) & Costume Size -->
+    <!-- Dancer(s), Costume Size & Condition -->
     <div class='box'>
       <h2 class='subtitle'>Select Dancer(s)
         <p class='help is-danger'>If assigning costume, must select at least 1 dancer w/ costume size</p>
@@ -153,6 +153,15 @@
                   <!--%#= assignment_builder.text_field :costume_size, class:'input is-small' %-->
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']]), {prompt: "Select Size"}) %>
+                  </div>
+                </div>
+              </div>
+              <!-- Costume Condition -->
+              <div class='field'>
+                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <div class='control'>
+                  <div class='select is-small'>
+                    <%= assignment_builder.select(:costume_condition, options_for_select([['Select Condition', ""], ['New', 'New'], ['Used', 'Used']])) %>
                   </div>
                 </div>
               </div>
