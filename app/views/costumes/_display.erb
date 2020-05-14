@@ -1,6 +1,6 @@
 <div class='container is-fluid has-text-centered'>
-<% count = 0 %>
 <div class='columns is-desktop'>
+  <% count = 0 %>
   <% @costumes.each do |costume| %>
     <% if @season %>
       <% costume_path = costume_path(costume, season: @season) %>
