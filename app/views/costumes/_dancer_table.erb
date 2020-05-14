@@ -1,0 +1,20 @@
+<div class='table-container'>
+  <table class='table is-narrow is-striped is-hoverable'>
+    <thead class='has-text-weight-bold'>
+      <tr>
+        <td>Dancer</td>
+        <td>Costume Size</td>
+        <td>Costume Condition</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.dancer.name %></td>
+        <td><%= assignment.costume_size %></td>
+        <td><%= assignment.costume_condition %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
