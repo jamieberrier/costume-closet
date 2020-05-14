@@ -185,8 +185,6 @@
     - sessions
   - helpers
     - sessions
-  - views
-    - partial for season_assignments and assign_costume
 - using?
   - registrations helper
     def signing_up_as_dancer?
