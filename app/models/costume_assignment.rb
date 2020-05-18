@@ -10,4 +10,9 @@ class CostumeAssignment < ApplicationRecord
   # Gets the costumes to display
   # dance_studios/:id/current_assignments & dance_studios/:id/current_costumes
   scope :find_costumes, -> { group(:costume_id).collect { |x| Costume.find(x.costume_id) } }
+
+  # Gets the season's assignments for a costume
+  def self.season_assignments(params)
+    where("costume_id = '%s' and dance_season = '%s'", params[:id], params[:season])
+  end
 end
