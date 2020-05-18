@@ -29,11 +29,7 @@ module SessionsHelper
     # try is an ActiveSupport method: object.try(:some_method) means if object != nil then object.some_method else nil end.
     authenticated = user.try(:authenticate, params[:password])
 
-    if authenticated
-      log_in(user, 'Successfully Logged In!')
-    else
-      redirect_to_login('Invalid Password')
-    end
+    authenticated ? log_in(user, 'Successfully Logged In!') : redirect_to_login('Invalid Password')
   end
 
   # checks if the user is an owner
