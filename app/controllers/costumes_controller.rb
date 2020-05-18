@@ -30,15 +30,14 @@ class CostumesController < ApplicationController
     # params[:costume] -> {"dance_studio_id"=>"1", top_description"=>"", "bottoms_description"=>"", "onepiece_description"=>"nvkdsn;kbv", "hair_accessory"=>"none", "picture"=>"", "costume_assignments_attributes"=>{"0"=>{"dance_season"=>"2020", "song_name"=>"test", "genre"=>"lyrical", "shoe"=>"none", "tight"=>"none"}, "7"=>{"dancer_id"=>"1", "costume_size"=>"S"}, "8"=>{"dancer_id"=>"2", "costume_size"=>"M"}, "9"=>{"dancer_id"=>"3", "costume_size"=>"M"}, "10"=>{"dancer_id"=>"0", "costume_size"=>""}, "11"=>{"dancer_id"=>"0", "costume_size"=>""}}} permitted: false>
     # params[:costume][:costume_assignments_attributes] -> {"0"=>{"dance_season"=>"2020", "song_name"=>"test", "genre"=>"lyrical", "shoe"=>"none", "tight"=>"none"}, "7"=>{"dancer_id"=>"1", "costume_size"=>"S"}, "8"=>{"dancer_id"=>"2", "costume_size"=>"M"}, "9"=>{"dancer_id"=>"3", "costume_size"=>"M"}, "10"=>{"dancer_id"=>"0", "costume_size"=>""}, "11"=>{"dancer_id"=>"0", "costume_size"=>""}} permitted: false>
     @costume = Costume.new(costume_params)
-    # get shared assignment info
-    fetch_shared_info
-
-    redirect_if_validation_error and return
-
+    # get shared assignment info to check if assigning costume/assignment errors
+    fetch_shared_assignment_info
+    # redirect to new costume form if costume validation error(s)
+    redirect_if_costume_validation_error and return
     # check if all shared assignment info fields empty
     redirect_if_not_assigning and return
     # check if the dance_season or song_name value is empty
-    redirect_if_required_values_empty and return
+    redirect_if_required_fields_empty and return
 
     redirect_if_no_assignments and return
 
@@ -67,9 +66,9 @@ class CostumesController < ApplicationController
   # Receives data from costume assignment form
   def assign
     # get shared assignment info
-    fetch_shared_info
+    fetch_shared_assignment_info
     # check if the dance_season or song_name value is empty
-    redirect_if_required_values_empty and return
+    redirect_if_required_fields_empty and return
     # try to persist to db
     @updated = update_costume
     # check that if updates, @costume.costume_assignments.count is now greater than count
