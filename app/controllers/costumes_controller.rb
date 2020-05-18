@@ -18,9 +18,9 @@ class CostumesController < ApplicationController
   def new
     @costume = Costume.new(dance_studio_id: params[:dance_studio_id])
     # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
-    build_shared_assignment_info
+    @assignment_info = @costume.build_shared_assignment_info
     # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
-    build_assignments_with_dancer_id
+    @costume.build_assignments_with_dancer_id(current_user)
   end
 
   # url: /costumes/3/edit
@@ -34,19 +34,21 @@ class CostumesController < ApplicationController
     fetch_shared_assignment_info
     # redirect to new costume form if costume validation error(s)
     return redirect_to_new_costume_form(danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}") unless @costume.save
-    # check if all shared assignment info fields empty
-    return redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
 
+    ## costume saved - check if assigning costume
+    # check if not assigning costume - all shared assignment info fields empty
+    redirect_to_costume_path_if_not_assigning and return
+    ## assigning costume - validate assignment(s)
     # check if the dance_season or song_name value is empty
-    redirect_if_required_fields_empty and return
-
-    return redirect_to_new_costume_form(danger: 'dancer info failure') if @costume.costume_assignments.empty?
-
+    redirect_to_form_if_required_fields_empty and return
+    # check if dancer info empty
+    redirect_to_form_if_assignment_incomplete and return
+    # valid assignment(s)
     redirect_to_costume_path('Costume Successfully Created & Assigned!')
   end
 
   def update
-    return render :edit unless update_costume
+    return render :edit unless @costume.update(costume_params)
 
     redirect_to_costume_path('Costume Updated!')
   end
@@ -60,8 +62,8 @@ class CostumesController < ApplicationController
   # Displays form to assign a costume
   # url: /costumes/5/assign
   def assign_costume
-    build_shared_assignment_info
-    build_assignments_with_dancer_id
+    @assignment_info = @costume.build_shared_assignment_info
+    @costume.build_assignments_with_dancer_id(current_user)
   end
 
   # Receives data from costume assignment form
@@ -69,13 +71,14 @@ class CostumesController < ApplicationController
     # get shared assignment info
     fetch_shared_assignment_info
     # check if the dance_season or song_name value is empty
-    redirect_if_required_fields_empty and return
+    redirect_to_form_if_required_fields_empty and return
     # try to persist to db
-    @updated = update_costume
+    @updated = @costume.update(costume_params)
     # check that if updates, @costume.costume_assignments.count is now greater than count
-    redirect_if_updated_with_same_assignment_count and return
+    return redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @count == @costume.costume_assignments.count
+
     # redirect if updated correctly
-    redirect_if_updated and return
+    redirect_to_season_assignments_path_if_updated and return
     # redirect if costume assignments are invalid
     redirect_to assign_costume_path(@costume), danger: "Assignment failure: #{@costume.errors.full_messages.to_sentence}"
   end
@@ -95,17 +98,19 @@ class CostumesController < ApplicationController
   # params[:season]
   # url: /costumes/1/edit_season_assignments?season=2020
   def edit_season_assignments
-    @assignment_info = @costume.costume_assignments.build(hair_accessory: @assignments.first.hair_accessory, tight: @assignments.first.tight, shoe: @assignments.first.shoe, genre: @assignments.first.genre, song_name: @assignments.first.song_name, costume_id: @costume.id, dance_season: @season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
+    @assignment_info = @costume.shared_assignment_info(@assignments.first)
 
-    build_assignments_unless_exists
+    @costume.build_assignments_unless_exists(current_user, @assignments)
   end
 
+  # Receives info from edit_season_assignments form
   def update_season_assignments
-    update_costume
+    @costume.update(costume_params)
 
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
 
+  # Deletes a costume's assignments for a season
   # params[:season], params[:id] -> costume id
   def delete_season_assignments
     @assignments.destroy_all
@@ -114,20 +119,6 @@ class CostumesController < ApplicationController
   end
 
   private
-
-  # Studio & Dancer: params[:id] -> costume id
-  # costumes -- show
-  def require_costume_ownership
-    # check if costume belongs to studio or assigned to dancer
-    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(set_costume)
-  end
-
-  # Studio
-  # no dance studio id, params[:id] -> costume id
-  # costumes -- edit update destroy assign_costume assign costume_assignments season_assignments edit_eason_assignments update_season_assignments delete_season_assignments
-  def require_studio_costume
-    redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(set_costume)
-  end
 
   def set_costume
     @costume = Costume.find(params[:id])
@@ -138,36 +129,23 @@ class CostumesController < ApplicationController
     @assignments = CostumeAssignment.season_assignments(params)
   end
 
-  # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
-  def build_shared_assignment_info
-    @assignment_info = @costume.costume_assignments.build
-  end
-
-  # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
-  def build_assignments_with_dancer_id
-    current_user.dancers.current_dancers.each do |dancer|
-      @costume.costume_assignments.build(dancer_id: dancer.id)
-    end
-  end
-
   def redirect_to_costume_path(message)
     redirect_to costume_path(@costume), success: message
-  end
-
-  # build a costume_assignments record unless one with dancer's id already exists
-  def build_assignments_unless_exists
-    current_user.dancers.current_dancers.each do |dancer|
-      @costume.costume_assignments.build(dancer_id: dancer.id) unless @assignments.exists?(dancer_id: dancer.id)
-    end
-  end
-
-  def update_costume
-    @costume.update(costume_params)
   end
 
   ## create action helpers
   def redirect_to_new_costume_form(message)
     redirect_to new_dance_studio_costume_path(current_user.id), message
+  end
+
+  # check if all shared assignment info fields empty
+  def redirect_to_costume_path_if_not_assigning
+    redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
+  end
+
+  # check if dancer info empty
+  def redirect_to_form_if_assignment_incomplete
+    redirect_to_new_costume_form(danger: 'Must select at least 1 dancer w/ costume size & costume condition') if @costume.costume_assignments.empty?
   end
 
   ## create & assign action helpers
@@ -181,7 +159,7 @@ class CostumesController < ApplicationController
   end
 
   # checks if the dance_season or song_name value is empty
-  def redirect_if_required_fields_empty
+  def redirect_to_form_if_required_fields_empty
     if params[:action] == 'create'
       redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
     else
@@ -189,14 +167,9 @@ class CostumesController < ApplicationController
     end
   end
 
-  ## assign action helpers
-  # check that if updates, @costume.costume_assignments.count is now greater than count
-  def redirect_if_updated_with_same_assignment_count
-    redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @count == @costume.costume_assignments.count
-  end
-
+  ## assign action helper
   # redirect if updated correctly
-  def redirect_if_updated
+  def redirect_to_season_assignments_path_if_updated
     redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season) if @updated
   end
 

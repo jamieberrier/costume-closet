@@ -40,6 +40,31 @@ class Costume < ApplicationRecord
     costume_assignments.group(:dance_season).count
   end
 
+  # instanstiates an empty instance of costume assignment to collect the shared data for the assignments
+  def build_shared_assignment_info
+    costume_assignments.build
+  end
+
+  # instanstiates an instance of costume assignment for each current dancer w/ the dancer's id
+  def build_assignments_with_dancer_id(studio)
+    studio.dancers.current_dancers.each do |dancer|
+      costume_assignments.build(dancer_id: dancer.id)
+    end
+  end
+
+  # build a costume_assignments record unless one with dancer's id already exists
+  def build_assignments_unless_exists(studio, assignments)
+    studio.dancers.current_dancers.each do |dancer|
+      costume_assignments.build(dancer_id: dancer.id) unless assignments.exists?(dancer_id: dancer.id)
+    end
+  end
+
+  # instanstiates an instance of costume assignment with shared assignment info to edit
+  # edit_season_assignments action
+  def shared_assignment_info(assignment)
+    costume_assignments.build(hair_accessory: assignment.hair_accessory, tight: assignment.tight, shoe: assignment.shoe, genre: assignment.genre, song_name: assignment.song_name, costume_id: id, dance_season: assignment.dance_season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
+  end
+
   def costume_assignments_attributes=(assignments_hashes)
     # get shared data and remove from hash (song_name, genre, etc.)
     shared_attributes = assignments_hashes.shift.pop
