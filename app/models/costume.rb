@@ -53,12 +53,8 @@ class Costume < ApplicationRecord
       else # create or update record
         # combine unique dancer data with shared data
         combined_attributes = unique_attributes.merge(shared_attributes)
-        # new
-        if combined_attributes[:id].nil?
-          costume_assignments.build(combined_attributes)
-        else # editing
-          costume_assignments.find(combined_attributes[:id]).update(combined_attributes)
-        end
+        # if new, else editing
+        combined_attributes[:id].nil? ? costume_assignments.build(combined_attributes) : costume_assignments.find(combined_attributes[:id]).update(combined_attributes)
       end
     end
   end
