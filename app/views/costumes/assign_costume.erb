@@ -12,7 +12,7 @@
     </div>
   <% end %>
   <!-- Costume Assignment Form -->
-  <%= form_with model: @costume, url: assign_path do |f| %>
+  <%= form_with model: @costume, url: assign_path, local: true do |f| %>
     <!-- Shared Assignment info -->
     <div class='box'>
       <h2 class='subtitle'>Enter Costume Assignment Details</h2>
