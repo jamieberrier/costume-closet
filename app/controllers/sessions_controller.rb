@@ -11,11 +11,7 @@ class SessionsController < ApplicationController
 
     @user = DanceStudio.find_by(email: params[:email]) || Dancer.find_by(email: params[:email])
 
-    if @user
-      try_to_authenticate(@user)
-    else
-      redirect_to_login('Invalid Email')
-    end
+    @user ? try_to_authenticate(@user) : redirect_to_login('Invalid Email')
   end
 
   def google_auth
