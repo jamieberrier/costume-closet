@@ -86,18 +86,12 @@ class DancersController < ApplicationController
 
   private
 
-  # Studio & Dancer: params[:id] -> dancer id
-  # dancers -- show edit update destroy dancer_assignments current_assignments
-  def require_studio_dancer
-    if owner? # check if dancer belongs to studio
-      redirect_to root_path(message: "Only the dancer's studio can access") unless current_user.dancers.include?(find_dancer)
-    else # check if dancer is current user
-      redirect_to root_path(message: 'Denied access') unless current_user.id == params[:id].to_i
-    end
-  end
-
   def set_dancer
     @dancer = Dancer.find(params[:id])
+  end
+
+  def redirect_to_dance_studio_page(message)
+    redirect_to dance_studio_path(current_user), success: message
   end
 
   ## create action helpers
