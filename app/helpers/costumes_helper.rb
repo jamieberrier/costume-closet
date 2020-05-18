@@ -13,11 +13,11 @@ module CostumesHelper
     redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(find_costume)
   end
 
-  def find_costume
+  def set_costume
     @costume = Costume.find(params[:id])
   end
 
-  def find_season_costume_assignments
+  def set_season_costume_assignments
     @season = params[:season]
     @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
   end
