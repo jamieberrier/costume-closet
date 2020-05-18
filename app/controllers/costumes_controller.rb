@@ -3,7 +3,7 @@ class CostumesController < ApplicationController
   before_action :require_costume_ownership, only: %i[show]
   before_action :require_studio_costume, except: %i[new create index show]
   before_action :set_costume, except: %i[new create index delete_season_assignments]
-  before_action :set_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
+  before_action :set_season_costume_assignments, only: %i[season_assignments edit_season_assignments delete_season_assignments assign_costume]
 
   # url: /dance_studios/1/costumes
   def index
@@ -33,13 +33,14 @@ class CostumesController < ApplicationController
     # get shared assignment info to check if assigning costume/assignment errors
     fetch_shared_assignment_info
     # redirect to new costume form if costume validation error(s)
-    redirect_if_costume_validation_error and return
+    return redirect_to_new_costume_form(danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}") unless @costume.save
     # check if all shared assignment info fields empty
-    redirect_if_not_assigning and return
+    return redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
+
     # check if the dance_season or song_name value is empty
     redirect_if_required_fields_empty and return
 
-    redirect_if_no_assignments and return
+    return redirect_to_new_costume_form(danger: 'dancer info failure') if @costume.costume_assignments.empty?
 
     redirect_to_costume_path('Costume Successfully Created & Assigned!')
   end
@@ -82,7 +83,7 @@ class CostumesController < ApplicationController
   # Studio viewing all of a costume's assignments
   # url: /costumes/3/assignments
   def costume_assignments
-    @assignments = CostumeAssignment.where(costume_id: @costume)
+    @assignments = @costume.costume_assignments
   end
 
   # Studio viewing a costume's assignments for a season
@@ -105,10 +106,9 @@ class CostumesController < ApplicationController
     redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
   end
 
-  # TODO: better in costume assignments controller?
   # params[:season], params[:id] -> costume id
   def delete_season_assignments
-    CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", params[:id], params[:season]).destroy_all
+    @assignments.destroy_all
 
     redirect_to costume_path(params[:id]), success: 'Assignments Deleted'
   end
@@ -135,7 +135,7 @@ class CostumesController < ApplicationController
 
   def set_season_costume_assignments
     @season = params[:season]
-    @assignments = CostumeAssignment.where("costume_id = '%s' and dance_season = '%s'", @costume.id, @season)
+    @assignments = CostumeAssignment.season_assignments(params)
   end
 
   # instanstiates an empty instance of costume assignment - to collect the shared data for the assignments
@@ -168,18 +168,6 @@ class CostumesController < ApplicationController
   ## create action helpers
   def redirect_to_new_costume_form(message)
     redirect_to new_dance_studio_costume_path(current_user.id), message
-  end
-
-  def redirect_if_costume_validation_error
-    redirect_to_new_costume_form(danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}") unless @costume.save
-  end
-
-  def redirect_if_not_assigning
-    redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
-  end
-
-  def redirect_if_no_assignments
-    redirect_to_new_costume_form(danger: 'dancer info failure') if @costume.costume_assignments.empty?
   end
 
   ## create & assign action helpers
