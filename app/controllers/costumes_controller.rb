@@ -119,14 +119,14 @@ class CostumesController < ApplicationController
   # costumes -- show
   def require_costume_ownership
     # check if costume belongs to studio or assigned to dancer
-    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(find_costume)
+    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(set_costume)
   end
 
   # Studio
   # no dance studio id, params[:id] -> costume id
   # costumes -- edit update destroy assign_costume assign costume_assignments season_assignments edit_eason_assignments update_season_assignments delete_season_assignments
   def require_studio_costume
-    redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(find_costume)
+    redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(set_costume)
   end
 
   def set_costume
@@ -163,11 +163,6 @@ class CostumesController < ApplicationController
 
   def update_costume
     @costume.update(costume_params)
-  end
-
-  # return true if @costume has no rows w/ 2020 dance season in CostumeAssignments table
-  def unassigned?
-    current_user.unassigned_studio_costumes.include?(@costume)
   end
 
   ## create action helpers
