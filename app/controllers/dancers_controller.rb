@@ -2,7 +2,7 @@ class DancersController < ApplicationController
   skip_before_action :require_logged_in, only: :create
   before_action :require_dance_studio_owner, only: %i[new index current_dancers]
   before_action :require_studio_dancer, except: %i[new create index current_dancers]
-  before_action :find_dancer, except: %i[new create index current_dancers]
+  before_action :set_dancer, except: %i[new create index current_dancers]
 
   # Studio
   # Displays all dancers for a dance studio
