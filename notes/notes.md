@@ -174,7 +174,6 @@
 
 # TODO 
 - app/helpers
-  - move helpers to controllers
   - add view helpers
     - Whenever you have logic that produces bits of HTML.
       - Usually, this falls into one of two categories, one is string formatting & the other is conditional page elements.
@@ -201,7 +200,6 @@
   - if ternary
     - test-expression ? if-true-expression : if-false-expression
   - controllers
-    - turn variable assignments into before_actions
     - sessions
   - helpers
     - sessions
@@ -213,7 +211,6 @@
 - costumes
   - costume_assignments_attributes=(assignments_hashes)
     - ABC too high / too many lines
-  - should delete_season_assignments be in costume assignments controller?
 - costume assignments
   - update URLs
 
