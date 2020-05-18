@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   root 'application#home'
 
   # Shallow nested routes, nests: index create new
-  resources :dance_studios, only: %i[create show edit update destroy], shallow: true do
+  resources :dance_studios, except: %i[new index], shallow: true do
     resources :costumes
-    resources :dancers, only: %i[new index show edit update destroy]
+    resources :dancers, except: %i[create]
     resources :costume_assignments, only: %i[index]
     # Route for dance studio to view their current dancers
     get '/dancers/current_dancers' => 'dancers#current_dancers', as: 'current_dancers'
