@@ -8,11 +8,7 @@ module RegistrationsHelper
   end
 
   def create_empty_user
-    if signing_up_as_dance_studio?
-      @dance_studio = DanceStudio.new
-    else
-      @dancer = Dancer.new
-    end
+    signing_up_as_dance_studio? ? @dance_studio = DanceStudio.new : @dancer = Dancer.new
   end
 
   def render_registration_form
