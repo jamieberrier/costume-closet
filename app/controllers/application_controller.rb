@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
     redirect_if_logged_in(message)
   end
 
+  private
+
   # keeps track of/find the user currently logged in
   def current_user
     # if @current_user is assigned, don't evaluate
@@ -80,19 +82,50 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, success: message
   end
 
-  private
+  ####### private
 
   # redirects to home page if user is not logged in
   def require_logged_in
     return redirect_to root_path, danger: 'You are not logged in' unless logged_in?
   end
 
-  # Owner
+  # Studio
   # nested, params[:dance_studio_id] -> dance studio id
   # dancers -- new index current dancers
   # costumes -- new create index
   # costume assignments -- index
   def require_dance_studio_owner
     redirect_to root_path(message: 'Only studio owner can access') unless owner? && current_user.id == params[:dance_studio_id].to_i
+  end
+
+  # Studio
+  # unnested, params[:id] -> dance studio id
+  # dance_studios -- show edit update destroy current_assignments current_costumes unassigned_costumes
+  def require_studio_ownership
+    redirect_to root_path(message: 'Only dance studio owner can access') unless owner? && current_user.id == params[:id].to_i
+  end
+
+  # Studio & Dancer: params[:id] -> dancer id
+  # dancers -- show edit update destroy dancer_assignments current_assignments
+  def require_studio_dancer
+    if owner? # check if dancer belongs to studio
+      redirect_to root_path(message: "Only the dancer's studio can access") unless current_user.dancers.include?(set_dancer)
+    else # check if dancer is current user
+      redirect_to root_path(message: 'Denied access') unless current_user.id == params[:id].to_i
+    end
+  end
+
+  # Studio & Dancer: params[:id] -> costume id
+  # costumes -- show
+  def require_costume_ownership
+    # check if costume belongs to studio or assigned to dancer
+    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(set_costume)
+  end
+
+  # Studio
+  # no dance studio id, params[:id] -> costume id
+  # costumes -- edit update destroy assign_costume assign costume_assignments season_assignments edit_eason_assignments update_season_assignments delete_season_assignments
+  def require_studio_costume
+    redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(set_costume)
   end
 end
