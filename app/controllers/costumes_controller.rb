@@ -2,8 +2,8 @@ class CostumesController < ApplicationController
   before_action :require_dance_studio_owner, only: %i[new create index]
   before_action :require_costume_ownership, only: %i[show]
   before_action :require_studio_costume, except: %i[new create index show]
-  before_action :find_costume, except: %i[new create index delete_season_assignments]
-  before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
+  before_action :set_costume, except: %i[new create index delete_season_assignments]
+  before_action :set_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
 
   # url: /dance_studios/1/costumes
   def index
