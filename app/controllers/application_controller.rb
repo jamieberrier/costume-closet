@@ -14,11 +14,7 @@ class ApplicationController < ActionController::Base
   before_action :require_logged_in, except: :home
 
   def home
-    if params[:message]
-      message = params[:message]
-    else
-      message = 'You are already logged in'
-    end
+    params[:message] ? message = params[:message] : message = 'You are already logged in'
 
     redirect_if_logged_in(message)
   end
@@ -26,11 +22,7 @@ class ApplicationController < ActionController::Base
   # keeps track of/find the user currently logged in
   def current_user
     # if @current_user is assigned, don't evaluate
-    if session[:user_type] == 'DanceStudio'
-      @current_user ||= DanceStudio.find_by(id: session[:user_id])
-    else
-      @current_user ||= Dancer.find_by(id: session[:user_id])
-    end
+    session[:user_type] == 'DanceStudio' ? @current_user ||= DanceStudio.find_by(id: session[:user_id]) : @current_user ||= Dancer.find_by(id: session[:user_id])
   end
 
   # checks if the user is logged in
@@ -97,8 +89,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-   # redirects to home page if user is not logged in
-   def require_logged_in
+  # redirects to home page if user is not logged in
+  def require_logged_in
     return redirect_to root_path, danger: 'You are not logged in' unless logged_in?
   end
 
