@@ -16,7 +16,7 @@ module SessionsHelper
 
   # redirects to home page if user is not logged in
   def require_logged_in
-    return redirect_to login_path, danger: 'You are not logged in' unless logged_in?
+    return redirect_to root_path, danger: 'You are not logged in' unless logged_in?
   end
 
   # redirects to login path if login failure
@@ -47,15 +47,8 @@ module SessionsHelper
     session[:user_id] = user.id
     session[:user_type] = user.class.name
 
-    redirect_owner_after_login(user, message) && return
-    redirect_dancer_after_login(user, message)
-  end
+    return redirect_to dance_studio_path(user), success: message if owner?
 
-  def redirect_owner_after_login(user, message)
-    redirect_to dance_studio_path(user), success: message if owner?
-  end
-
-  def redirect_dancer_after_login(user, message)
     redirect_to dancer_path(user), success: message if dancer?
   end
 
