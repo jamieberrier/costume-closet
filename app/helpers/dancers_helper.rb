@@ -9,7 +9,7 @@ module DancersHelper
     end
   end
 
-  def find_dancer
+  def set_dancer
     @dancer = Dancer.find(params[:id])
   end
 
