@@ -173,6 +173,26 @@
   - edit season assignments (form_with model, nested)
 
 # TODO 
+- app/helpers
+  - move helpers to controllers
+  - add view helpers
+    - Whenever you have logic that produces bits of HTML.
+      - Usually, this falls into one of two categories, one is string formatting & the other is conditional page elements.
+        - # wrong way
+          def eat_healthy
+            @fruit.eat
+          end
+          # do this instead
+          def eat_healthy(fruit)
+            fruit.eat
+          end
+    - View helper methods are a way to take a particular bit of complex,
+      usually conditional, view logic and move it out of your eRb code,
+      replacing it with a single method call. While you can use it to
+      construct several lines of eRb code, doing so simply makes no sense
+      to me. Where I tend to use helpers is when I’ve got a form control,
+      usually a button, that only needs to display (or display in a certain
+      way) based on the logged in user, or some other programmatic setting.
 - fix select dancer(s) on:
   - assign costume - no of dancers previously assigned affects count
   - edit season assignments - no of dancers assigned affects count
