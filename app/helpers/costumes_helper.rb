@@ -59,7 +59,7 @@ module CostumesHelper
     redirect_to new_dance_studio_costume_path(current_user.id), message
   end
 
-  def redirect_if_validation_error
+  def redirect_if_costume_validation_error
     redirect_to_new_costume_form(danger: "Creation failure: #{@costume.errors.full_messages.to_sentence}") unless @costume.save
   end
 
@@ -73,7 +73,7 @@ module CostumesHelper
 
   ## create & assign action helpers
   # gets shared assignment info
-  def fetch_shared_info
+  def fetch_shared_assignment_info
     @assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
     # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
     @dance_season_empty = @assignment_info[:dance_season].empty?
@@ -82,7 +82,7 @@ module CostumesHelper
   end
 
   # checks if the dance_season or song_name value is empty
-  def redirect_if_required_values_empty
+  def redirect_if_required_fields_empty
     if params[:action] == 'create'
       redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
     else
