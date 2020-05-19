@@ -1,7 +1,7 @@
 class DanceStudiosController < ApplicationController
   skip_before_action :require_logged_in, only: :create
   before_action :require_studio_ownership, except: :create
-  before_action :find_dance_studio, only: %i[show edit update destroy]
+  before_action :set_dance_studio, only: %i[show edit update destroy]
 
   # url: /dance_studios/1
   def show; end
@@ -51,12 +51,8 @@ class DanceStudiosController < ApplicationController
 
   private
 
-  def find_dance_studio
+  def set_dance_studio
     @dance_studio = DanceStudio.find(params[:id])
-  end
-
-  def redirect_to_dance_studio_page(message)
-    redirect_to dance_studio_path(current_user), success: message
   end
 
   def dance_studio_params
