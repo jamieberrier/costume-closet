@@ -12,7 +12,20 @@ class ApplicationController < ActionController::Base
     redirect_if_logged_in(message)
   end
 
+  # redirects to home page if user is not logged in
+  def require_logged_in
+    return redirect_to root_path, danger: 'You are not logged in' unless logged_in?
+  end
+
   private
+
+  def render_registration_form
+    render 'registrations/new'
+  end
+
+  def redirect_to_dance_studio_page(message)
+    redirect_to dance_studio_path(current_user), success: message
+  end
 
   # keeps track of/find the user currently logged in
   def current_user
@@ -83,11 +96,6 @@ class ApplicationController < ActionController::Base
   end
 
   ####### private
-
-  # redirects to home page if user is not logged in
-  def require_logged_in
-    return redirect_to root_path, danger: 'You are not logged in' unless logged_in?
-  end
 
   # Studio
   # nested, params[:dance_studio_id] -> dance studio id
