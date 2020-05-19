@@ -19,8 +19,4 @@ class RegistrationsController < ApplicationController
   def create_empty_user
     signing_up_as_dance_studio? ? @dance_studio = DanceStudio.new : @dancer = Dancer.new
   end
-
-  def render_registration_form
-    render 'registrations/new'
-  end
 end
