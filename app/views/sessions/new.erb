@@ -4,13 +4,14 @@
     <h1 class='heading is-size-2 has-text-primary'>Costume Closet</h1>
   </div>
   <h2 class='heading is-size-4'>Enter email & password or
+    <!-- Sign In via Google -->
     <button class='button is-primary is-outlined is-small'>
       <span class='icon'>
         <i class='fab fa-google'></i>
       </span>
-      <%= link_to 'Sign In with Google', google_omniauth_path(user_type: params[:user_type]), method: :get, class: 'has-text-primary' %>
+      <%= sign_in_via_google(params[:user_type]) %>
     </button>
   </h2>
 </div>
 <%= render "form" %>
-<%= link_to 'Cancel', root_path, class: 'button is-dark'%>
+<%= cancel_button(root_path) %>
