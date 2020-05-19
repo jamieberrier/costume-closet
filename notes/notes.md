@@ -194,14 +194,15 @@
     - show
     - unassigned_costumes
   - dancers
+    - error_notification
     - _form
     - current_assignments
     - current_dancers
+    - dancer_assignments
     - edit
     - index
     - new
-    - 
-    - 
+    - show
   - costumes
 
 # TODO 
