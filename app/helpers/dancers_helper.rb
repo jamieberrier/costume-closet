@@ -8,6 +8,10 @@ module DancersHelper
     Costume.find(assignment.costume_id)
   end
 
+  def current?(dancer)
+    dancer.current_dancer ? 'YES' : 'NO'
+  end
+
   def current_assignments_count(dancer)
     dancer.costume_assignments.current_assignments.count
   end
@@ -18,5 +22,9 @@ module DancersHelper
 
   def current_studio_costumes_count
     current_user.current_studio_costumes.count
+  end
+
+  def costumes_count(user_type)
+    user_type.costumes.count
   end
 end
