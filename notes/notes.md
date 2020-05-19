@@ -173,17 +173,19 @@
   - edit season assignments (form_with model, nested)
 
 18. add view helpers
-  - registrations
+  - application
+    - home
   - sessions
     - new
     - _form
+  - registrations
+    - new
+    - google_auth
   - layouts
   - dancers
   - dance_studios
   - costumes
   - costume_assignments
-  - application
-    - home
 
 # TODO 
 - app/helpers
