@@ -188,7 +188,7 @@
     - _table
   - dance_studios
     - _form
-    - 
+    - current_assignments
     - 
     - 
     - 
