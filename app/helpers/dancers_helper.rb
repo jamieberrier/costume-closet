@@ -4,6 +4,10 @@ module DancersHelper
     dancer.first_name + ' ' + dancer.last_name
   end
 
+  def dancer_studio_name(dancer)
+    dancer.dance_studio.studio_name
+  end
+
   def assignment_costume(assignment)
     Costume.find(assignment.costume_id)
   end
