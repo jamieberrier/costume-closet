@@ -1,8 +1,8 @@
 <div class="content has-text-centered">
   <% if owner? %>
-    <h1 class='title has-text-primary'><%= full_name(@dancer) %>'s <%= Time.now.year %> Costume Assignments</h1>
+    <h1 class='title has-text-primary'><%= full_name(@dancer) %>'s <%= current_year %> Costume Assignments</h1>
   <% else %>
-      <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
+      <h1 class='title has-text-primary'><%= current_year %> Costume Assignments</h1>
   <% end %>
   <% if @assignments.empty? %>
     <h2 class='subtitle'>No Assignments</h1>
