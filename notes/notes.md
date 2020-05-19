@@ -172,6 +172,17 @@
   - assign costume (form_with model, nested)
   - edit season assignments (form_with model, nested)
 
+18. add view helpers
+  - registrations
+  - sessions
+  - layouts
+  - dancers
+  - dance_studios
+  - costumes
+  - costume_assignments
+  - application
+    - home
+
 # TODO 
 - app/helpers
   - add view helpers
