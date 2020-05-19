@@ -21,15 +21,15 @@
         </thead>
         <tbody>
         <% @assignments.each do |assignment| %>
-          <% costume = Costume.find(assignment.costume_id) %>
+          <% costume = assignment_costume(assignment) %>
           <tr>
             <td>
               <% if !costume.picture.blank? %>
-                <%= link_to image_tag(costume.picture, width: 100), costume_path(costume) %>
+                <%= picture_link_to_costume_path(costume) %>
               <% elsif !costume.onepiece_description.blank? %>
-                <%= link_to costume.onepiece_description, costume_path(costume) %>
+                <%= onepiece_link_to_costume_path(costume) %>
               <% else %>
-                <%= link_to costume.twopiece_description, costume_path(costume) %>
+                <%= twopiece_link_to_costume_path(costume) %>
               <% end %>
             </td>
             <td><%= assignment.song_name %></td>
