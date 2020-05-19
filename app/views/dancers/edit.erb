@@ -1,7 +1,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <div class='content has-text-centered'>
-  <h1 class='title has-text-primary'>Update <%= @dancer.name %>'s Account Info</h1>
+  <h1 class='title has-text-primary'>Update <%= full_name(@dancer) %>'s Account Info</h1>
   <h3 class='subtitle is-size-6 has-text-danger'><u>Must enter password AND password confirmation to make changes</u></h3>
 </div>
 <%= render "form" %>
-<%= link_to 'Cancel', dancer_path(current_user), class: 'button is-dark' %>
+<%= cancel_button(dancer_path(current_user)) %>
