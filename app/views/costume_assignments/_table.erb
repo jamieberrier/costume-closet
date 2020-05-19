@@ -17,19 +17,13 @@
       <% @assignments.each do |assignment| %>
         <tr>
           <td><%= assignment.dance_season %></td>
-          <td>
-            <%= 
-              link_to_if owner?, assignment.song_name, season_assignments_path(assignment.costume_id, season: assignment.dance_season) do |name|
-                link_to name, costume_path(assignment.costume_id)
-              end
-            %>
-          </td>
+          <td><%= song_name_link(assignment) %></td>
           <td><%= assignment.genre %></td>
           <td><%= assignment.hair_accessory %></td>
           <td><%= assignment.shoe %></td>
           <td><%= assignment.tight %></td>
           <% if owner? && !@dancer %><!-- don't display for dancer's assignments -->
-            <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_costumes_path(assignment.dancer_id, dancer_id: assignment.dancer_id) %></td>
+            <td><%= dancer_name_link(assignment)%></td>
           <% end %>
           <td><%= assignment.costume_condition %></td>
           <td><%= assignment.costume_size %></td>
