@@ -189,7 +189,7 @@
   - dance_studios
     - _form
     - current_assignments
-    - 
+    - current_costumes
     - 
     - 
     - 
