@@ -1,20 +1,9 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <!-- For a Dance Studio to create a dancer -->
-<!-- Validation Error(s) Message -->
-<% if @dancer.errors.any? %>
-  <section class='section'>
-    <div class='container is-fluid has-text-centered'>
-      <div id='error_explanation' class='notification is-danger'>
-        <h2>
-          <%= pluralize(@dancer.errors.count, "error") %>
-          prohibited this dancer from being saved!
-        </h2>
-      </div>
-    </div>
-  </section>
-<% end %>
 <!-- Form Title -->
 <h1 class='title has-text-primary has-text-centered'>Add New Dancer</h1>
+<!-- Validation Error(s) Notification -->
+<%= render "error_notification" %>
 <!-- New Dancer Form -->
 <div class='box'>
   <%= form_for @dancer do |f| %>
@@ -24,28 +13,28 @@
     <div class='box'>
       <!-- First Name -->
       <div class='field'>
-        <%= f.label :first_name, 'First Name', class: 'label' %>
+        <%= f.label :first_name, class: 'label is-capitalized' %>
         <div class='control has-icons-left'>
           <%= f.text_field :first_name, class:'input', placeholder: 'Enter First Name' %>
             <span class='icon is-small is-left'>
               <i class='fas fa-user'></i>
             </span>
         </div>
-        <% if @dancer.errors[:first_name].any? %>
-          <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:first_name).to_sentence %></p>
+        <% if any_field_errors(@dancer, :first_name) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :first_name) %></p>
         <% end %>
       </div>
       <!-- Last Name -->
       <div class='field'>
-        <%= f.label :last_name, 'Last Name', class: 'label' %>
+        <%= f.label :last_name, class: 'label is-capitalized' %>
         <div class='control has-icons-left'>
           <%= f.text_field :last_name, class:'input', placeholder: 'Enter Last Name' %>
             <span class='icon is-small is-left'>
               <i class='fas fa-user'></i>
             </span>
         </div>
-        <% if @dancer.errors[:last_name].any? %>
-          <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:last_name).to_sentence %></p>
+        <% if any_field_errors(@dancer, :last_name) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :last_name) %></p>
         <% end %>
       </div>
       <!-- Email -->
@@ -57,8 +46,8 @@
               <i class='fas fa-envelope'></i>
             </span>
         </div>
-        <% if @dancer.errors[:email].any? %>
-          <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:email).to_sentence %></p>
+        <% if any_field_errors(@dancer, :email) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :email) %></p>
         <% end %>
       </div>
     <p class='help is-danger'>Must fill out all fields</p>
@@ -72,4 +61,4 @@
   <% end %>
 </div>
 <!-- Cancel Button -->
-<%= link_to 'Cancel', dance_studio_path(current_user), class: 'button is-dark' %>
+<%= cancel_button(dance_studio_path(current_user)) %>
