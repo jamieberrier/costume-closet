@@ -191,8 +191,8 @@
     - current_assignments
     - current_costumes
     - edit
-    - 
-    - 
+    - show
+    - unassigned_costumes
   - dancers
     - _form
   - costumes
