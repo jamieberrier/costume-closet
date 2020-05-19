@@ -182,6 +182,7 @@
     - new
     - google_auth
   - layouts
+    - application
   - dancers
   - dance_studios
   - costumes
