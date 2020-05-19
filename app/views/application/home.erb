@@ -10,66 +10,66 @@
   <h1 class='heading is-size-2 has-text-primary'>Costume Closet</h1>
   <h2 class='heading is-size-3'>Welcome!</h2>
 </div>
-<!-- Dance Studio -->
+<!-- DANCE STUDIO -->
 <div class='box'>
   <div class='content'>
     <h2 class='heading is-size-3 has-text-primary'>Dance Studio Owners</h2>
-    <p class='heading is-size-6'>Create an account to manage and track your dance studio's costumes and costume assignments</p>
+    <p class='heading is-size-6'>
+      Create an account to manage and track your dance studio's costumes and costume assignments
+    </p>
   </div>
   <!-- New Account -->
   <div class='buttons'>
+    <!-- Register with Email -->
     <button class='button is-primary'>
       <span class='icon'>
         <i class='fas fa-envelope'></i>
       </span>
-      <%= link_to 'Register with email', register_path(user_type: "dance_studio"), class: 'heading is-size-6 has-text-white' %>
+      <%= register_with_email_button('dance_studio') %>
     </button>
+    <!-- Register via Google -->
     <button class='button is-primary'>
       <span class='icon'>
         <i class='fab fa-google'></i>
       </span>
-      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dance_studio"), class: 'heading is-size-6 has-text-white' %>
+      <%= register_via_google_button('dance_studio') %>
     </button>
   </div>
   <!-- Sign In -->
   <div class='content has-text-right'>
-    <p class='heading is-size-6'>
-      Have a dance studio account?
-    </p>
-    <p class='heading'>
-      <%= link_to 'Sign In As A Dance Studio', login_path(user_type: "dance_studio"), class: 'button is-primary is-outlined' %>
-    </p>
+    <p class='heading is-size-6'>Have a dance studio account?</p>
+    <p class='heading'><%= sign_in_button('dance_studio') %></p>
   </div>
 </div>
-<!-- Dancer -->
+<!-- DANCER -->
 <div class='box'>
   <div class='content'>
     <h2 class='heading is-size-3 has-text-primary'>Dancers</h2>
-    <p class='heading is-size-6'>Create an account to view your assigned costumes</p>
+    <p class='heading is-size-6'>
+      Create an account to view your assigned costumes
+    </p>
   </div>
   <!-- New Account -->
   <div class='buttons'>
+    <!-- Register with Email -->
     <button class='button is-primary'>
       <span class='icon'>
         <i class='fas fa-envelope'></i>
       </span>
-      <%= link_to 'Register with email', register_path(user_type: "dancer"), class: 'heading is-size-6 has-text-white' %>
+      <%= register_with_email_button('dancer') %>
     </button>
+    <!-- Register via Google -->
     <button class='button is-primary'>
       <span class='icon'>
         <i class='fab fa-google'></i>
       </span>
-      <%= link_to 'Register via Google', google_omniauth_path(user_type: "dancer"), class: 'heading is-size-6 has-text-white' %>
+      <%= register_via_google_button('dancer') %>
     </button>
   </div>
   <!-- Sign In -->
   <div class='content has-text-right'>
-    <p class='heading heading is-size-6'>
-      Have a dancer account?
-    </p>
-    <p class='heading'>
-      <%= link_to 'Sign In As A Dancer', login_path(user_type: "dancer"), class: 'button is-primary is-outlined' %>
-    </p>
+    <p class='heading heading is-size-6'>Have a dancer account?</p>
+    <p class='heading'><%= sign_in_button('dancer') %></p>
   </div>
 </div>
   
