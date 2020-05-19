@@ -9,7 +9,7 @@
       <article class='media'>
         <!-- costume picture/description -->
         <figure class='media-left'>
-          <p class='image is-64x64'>
+          <p class='image is-96x96'>
             <%= show_costume(costume, season_assignments_path(costume, season: @season)) %>
           </p>
         </figure>
@@ -18,7 +18,7 @@
         <div class='media-content'>
           <div class='content'>
             <!-- song name (genre) -->
-            <p><strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)</p>
+            <p><strong><%= uppercase_song_name(info) %></strong> (<%= info.genre %>)</p>
             <!-- hair accessory, shoes, and tights -->
             <p style='margin-left:3%;'>
               <strong>Hair Accessory:</strong> <%= info.hair_accessory %> <br>
