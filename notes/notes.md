@@ -196,7 +196,7 @@
   - dancers
     - _form
     - current_assignments
-    - 
+    - current_dancers
     - 
     - 
     - 
