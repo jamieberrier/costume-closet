@@ -1,9 +1,9 @@
-<% if @dance_studio.errors.any? %>
+<% if any_validation_errors(@dance_studio) %>
   <section class='section'>
     <div class='container is-fluid has-text-centered'>
       <div id='error_explanation' class='notification is-danger'>
         <h2>
-          <%= pluralize(@dance_studio.errors.count, "error") %>
+          <%= error_count(@dance_studio) %>
           prohibited this dance studio from being saved!
         </h2>
       </div>
@@ -14,27 +14,27 @@
   <%= form_for @dance_studio do |f| %>
     <!-- studio name -->
     <div class='field'>
-      <%= f.label :studio_name, 'Studio Name', class: 'label' %>
+      <%= f.label :studio_name, class: 'label is-capitalized' %>
       <div class='control has-icons-left'>
         <%= f.text_field :studio_name, class:'input', placeholder: 'Enter Studio Name' %>
           <span class='icon is-small is-left'>
             <i class='fas fa-school'></i>
           </span>
       </div>
-      <% if @dance_studio.errors[:studio_name].any? %>
+      <% if any_field_errors(@dance_studio, :studio_name) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :studio_name) %></p>
       <% end %>
     </div>
     <!-- owner name -->
     <div class='field'>
-      <%= f.label :owner_name, 'Owner Name', class: 'label' %>
+      <%= f.label :owner_name, class: 'label is-capitalized' %>
       <div class='control has-icons-left'>
         <%= f.text_field :owner_name, class:'input', placeholder: 'Enter Studio Owner' %>
           <span class='icon is-small is-left'>
             <i class='fas fa-user'></i>
           </span>
       </div>
-      <% if @dance_studio.errors[:owner_name].any? %>
+      <% if any_field_errors(@dance_studio, :owner_name) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :owner_name) %></p>
       <% end %>
     </div>
@@ -47,7 +47,7 @@
             <i class='fas fa-envelope'></i>
           </span>
       </div>
-      <% if @dance_studio.errors[:email].any? %>
+      <% if any_field_errors(@dance_studio, :email) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :email) %></p>
       <% end %>
     </div>
@@ -60,27 +60,27 @@
             <i class='fas fa-lock'></i>
           </span>
       </div>
-      <% if @dance_studio.errors[:password].any? %>
+      <% if any_field_errors(@dance_studio, :password) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :password) %></p>
       <% end %>
     </div>
     <!-- password confirmation -->
     <div class='field'>
-      <%= f.label :password_confirmation, 'Password Confirmation', class: 'label' %>
+      <%= f.label :password_confirmation, class: 'label is-capitalized' %>
       <div class='control has-icons-left'>
         <%= f.password_field :password_confirmation, class:'input', placeholder: 'Re-enter Password' %>
           <span class='icon is-small is-left'>
             <i class='fas fa-lock'></i>
           </span>
       </div>
-      <% if @dance_studio.errors[:password_confirmation].any? %>
+      <% if any_field_errors(@dance_studio, :password_confirmation) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :password_confirmation) %></p>
       <% end %>
     </div>
     <!-- submit button -->
     <div class='field'>
       <div class='control'>
-        <%= f.submit class: 'button is-primary' %>
+        <%= f.submit class: 'button is-primary is-capitalized' %>
       </div>
     </div>
   <% end %>
