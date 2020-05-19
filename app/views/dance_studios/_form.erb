@@ -1,3 +1,4 @@
+<!-- Validation Error(s) Notification -->
 <% if any_validation_errors(@dance_studio) %>
   <section class='section'>
     <div class='container is-fluid has-text-centered'>
@@ -11,6 +12,7 @@
   </section>
 <% end %>
 <div class='box'>
+  <!-- Dance Studio Form -->
   <%= form_for @dance_studio do |f| %>
     <!-- studio name -->
     <div class='field'>
