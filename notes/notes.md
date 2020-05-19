@@ -175,6 +175,8 @@
 18. add view helpers
   - registrations
   - sessions
+    - new
+    - _form
   - layouts
   - dancers
   - dance_studios
