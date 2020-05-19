@@ -4,4 +4,4 @@
   <h3 class='subtitle is-size-6 has-text-danger'><u>Must enter password AND password confirmation to make changes</u></h3>
 </div>
 <%= render "form" %>
-<%= link_to 'Cancel', dance_studio_path(current_user), class: 'button is-dark' %>
+<%= cancel_button(dance_studio_path(current_user)) %>
