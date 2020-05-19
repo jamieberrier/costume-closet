@@ -195,6 +195,13 @@
     - unassigned_costumes
   - dancers
     - _form
+    - current_assignments
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
   - costumes
 
 # TODO 
