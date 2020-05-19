@@ -1,8 +1,8 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <h1 class='title has-text-primary has-text-centered'>Register for Costume Closet</h1>
-<% if @dancer %>
-  <%= render "dancers/form" %>
-<% else %>
+<% if @dance_studio %>
   <%= render "dance_studios/form" %>
+<% else %>
+  <%= render "dancers/form" %>
 <% end %>
-<%= link_to 'Cancel', root_path, class: 'button is-dark' %>
+<%= cancel_button(root_path) %>
