@@ -1,6 +1,6 @@
 <div class="content has-text-centered">
   <% if owner? %>
-    <h1 class='title has-text-primary'><%= @dancer.name %>'s <%= Time.now.year %> Costume Assignments</h1>
+    <h1 class='title has-text-primary'><%= full_name(@dancer) %>'s <%= Time.now.year %> Costume Assignments</h1>
   <% else %>
       <h1 class='title has-text-primary'><%= Time.now.year %> Costume Assignments</h1>
   <% end %>
@@ -23,15 +23,7 @@
         <% @assignments.each do |assignment| %>
           <% costume = assignment_costume(assignment) %>
           <tr>
-            <td>
-              <% if !costume.picture.blank? %>
-                <%= picture_link_to_costume_path(costume) %>
-              <% elsif !costume.onepiece_description.blank? %>
-                <%= onepiece_link_to_costume_path(costume) %>
-              <% else %>
-                <%= twopiece_link_to_costume_path(costume) %>
-              <% end %>
-            </td>
+            <td><%= show_costume(costume, costume_path(costume)) %></td>
             <td><%= assignment.song_name %></td>
             <td><%= assignment.genre %></td>
             <td><%= assignment.hair_accessory %></td>
