@@ -183,10 +183,19 @@
     - google_auth
   - layouts
     - application
-  - dancers
-  - dance_studios
-  - costumes
   - costume_assignments
+    - index
+    - _table
+  - dance_studios
+    - _form
+    - 
+    - 
+    - 
+    - 
+    - 
+  - dancers
+    - _form
+  - costumes
 
 # TODO 
 - app/helpers
