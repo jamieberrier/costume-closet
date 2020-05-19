@@ -90,10 +90,6 @@ class DancersController < ApplicationController
     @dancer = Dancer.find(params[:id])
   end
 
-  def redirect_to_dance_studio_page(message)
-    redirect_to dance_studio_path(current_user), success: message
-  end
-
   ## create action helpers
   def redirect_studio_if_saved
     redirect_to_dance_studio_page('Dancer Added!') if @saved && owner?
