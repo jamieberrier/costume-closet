@@ -1,10 +1,14 @@
 module DanceStudiosHelper
   def link_to_dancer_current_assignments(assignment)
-    link_to Dancer.find(assignment.dancer_id).name, dancer_current_assignments_path(assignment.dancer_id)
+    link_to full_name(Dancer.find(assignment.dancer_id)), dancer_current_assignments_path(assignment.dancer_id)
   end
 
   def assignment_info(costume)
     costume.costume_assignments.first
+  end
+
+  def uppercase_song_name(info)
+    info.song_name.upcase
   end
 
   def costume_match(costume, assignment)
