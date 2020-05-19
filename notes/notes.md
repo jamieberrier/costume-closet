@@ -199,7 +199,7 @@
     - current_dancers
     - edit
     - index
-    - 
+    - new
     - 
     - 
   - costumes
