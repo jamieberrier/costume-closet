@@ -25,7 +25,7 @@
         </div>
       </div>
       <% if @dancer.errors[:dance_studio].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:dance_studio).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :dance_studio) %></p>
       <% end %>
     </div>
     <!-- first name -->
@@ -38,7 +38,7 @@
           </span>
       </div>
       <% if @dancer.errors[:first_name].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:first_name).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :first_name) %></p>
       <% end %>
     </div>
     <!-- last name -->
@@ -51,7 +51,7 @@
           </span>
       </div>
       <% if @dancer.errors[:last_name].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:last_name).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :last_name) %></p>
       <% end %>
     </div>
     <!-- email -->
@@ -64,7 +64,7 @@
           </span>
       </div>
       <% if @dancer.errors[:email].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:email).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :email) %></p>
       <% end %>
     </div>
     <!-- password -->
@@ -77,7 +77,7 @@
           </span>
       </div>
       <% if @dancer.errors[:password].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:password).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :password) %></p>
       <% end %>
     </div>
     <!-- password confirmation -->
@@ -90,7 +90,7 @@
           </span>
       </div>
       <% if @dancer.errors[:password_confirmation].any? %>
-        <p class='helper has-text-danger'><%= @dancer.errors.full_messages_for(:password_confirmation).to_sentence %></p>
+        <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :password_confirmation) %></p>
       <% end %>
     </div>
     <!-- submit button -->
