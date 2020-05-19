@@ -31,9 +31,4 @@ class Dancer < ApplicationRecord
       errors.add(:email, 'is taken') if studio.email.downcase == email.downcase
     end
   end
-
-  # Concatenates a dancer's first and last name
-  def name
-    first_name + ' ' + last_name
-  end
 end
