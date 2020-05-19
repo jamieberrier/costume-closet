@@ -2,11 +2,7 @@
   <div class='columns is-desktop'>
     <% count = 0 %>
     <% @costumes.each do |costume| %>
-      <% if @season %>
-        <% costume_path = costume_path(costume, season: @season) %>
-      <% else %>
-        <% costume_path = costume_path(costume) %>
-      <% end %>
+      <% costume_path = set_costume_path(costume, @season) %>
       <div class='column is-2 is-narrow-desktop'>
         <% if count.multiple_of?(6) %>
           </div>
@@ -15,13 +11,7 @@
             <div class='column is-2 is-narrow-desktop'>
         <% end %>
         <div class='box'>
-          <% if !costume.picture.blank? %>
-            <%= link_to image_tag(costume.picture, width: 100), costume_path %>
-          <% elsif !costume.onepiece_description.blank? %>
-            <p><%= link_to costume.onepiece_description, costume_path %></p>
-          <% else %>
-            <p><%= link_to costume.twopiece_description, costume_path %></p>
-          <% end %>
+          <%= show_costume(costume, costume_path) %>
         </div>
       </div>
       <% count += 1 %>
