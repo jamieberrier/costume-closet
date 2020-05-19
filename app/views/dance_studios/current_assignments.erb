@@ -10,29 +10,19 @@
         <!-- costume picture/description -->
         <figure class='media-left'>
           <p class='image is-64x64'>
-            <% if !costume.picture.blank? %>
-              <%= picture_link_to_costume_season_assignments(costume, @season) %>
-            <% elsif !costume.onepiece_description.blank? %>
-              <%= onepiece_link_to_costume_season_assignments(costume, @season) %>
-            <% else %>
-              <%= twopiece_link_to_costume_season_assignments(costume, @season) %>
-          <% end %>
+            <%= show_costume(costume, season_assignments_path(costume, season: @season)) %>
           </p>
         </figure>
         <!-- get assignment info for costume -->
         <% info = assignment_info(costume) %>
         <div class='media-content'>
-          <!-- song name (genre) -->
           <div class='content'>
-            <p>
-              <strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)
-            </p>
+            <!-- song name (genre) -->
+            <p><strong><%= info.song_name.upcase %></strong> (<%= info.genre %>)</p>
             <!-- hair accessory, shoes, and tights -->
             <p style='margin-left:3%;'>
-              <strong>Hair Accessory:</strong> <%= info.hair_accessory %> 
-              <br>
-              <strong>Shoes:</strong> <%= info.shoe %> 
-              <br>
+              <strong>Hair Accessory:</strong> <%= info.hair_accessory %> <br>
+              <strong>Shoes:</strong> <%= info.shoe %> <br>
               <strong>Tights:</strong> <%= info.tight %>
             </p>
           </div>
@@ -40,13 +30,12 @@
           <article class='media'>
             <!-- empty pic to indent -->
             <figure class='media-left'>
-              <p class='image is-48x48'>
-              </p>
+              <p class='image is-48x48'></p>
             </figure>
             <!-- nested media content -->
             <div class='media-content'>
+              <!-- table of dancer name, their costume's size, and its condition -->
               <table class='table is-narrow'>
-                <!-- table of dancer name, their costume's size, and its condition -->
                 <thead>
                   <tr>
                     <th>Dancer</th>
