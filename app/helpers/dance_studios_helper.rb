@@ -14,4 +14,8 @@ module DanceStudiosHelper
   def costume_match(costume, assignment)
     costume.id == assignment.costume_id
   end
+
+  def current_year
+    Time.now.year
+  end
 end
