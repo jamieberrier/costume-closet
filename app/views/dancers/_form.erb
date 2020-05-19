@@ -1,16 +1,7 @@
-<% if any_validation_errors(@dancer) %>
-  <section class='section'>
-    <div class='container is-fluid has-text-centered'>
-      <div id='error_explanation' class='notification is-danger'>
-        <h2>
-          <%= error_count(@dancer) %>
-          prohibited this dancer from being saved!
-        </h2>
-      </div>
-    </div>
-  </section>
-<% end %>
+<!-- Validation Error(s) Notification -->
+<%= render "dancers/error_notification" %>
 <div class='box'>
+  <!-- Dancer Form -->
   <%= form_for @dancer do |f| %>
     <!-- dance studio -->
     <div class='field'>
