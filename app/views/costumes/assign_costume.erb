@@ -88,7 +88,7 @@
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if !assignment_builder.object.dancer_id.nil? && assignment_builder.object.dance_season.nil? %>
             <div class='column is-narrow'>
-              <% if count.multiple_of?(7) %>
+              <% if count.multiple_of?(6) %>
                 </div>
                 </div>
                 <div class='columns is-desktop'>
@@ -103,7 +103,7 @@
                   <!-- next dancer -->
                   <!--input name="costume[costume_assignments_attributes][8][dancer_id]" type="hidden" value="0"-->
                   <!--input class="checkbox" type="checkbox" value="2" name="costume[costume_assignments_attributes][8][dancer_id]" id="costume_costume_assignments_attributes_8_dancer_id"-->
-                  <%= assignment_builder.label assignment_builder.object.dancer.name,  assignment_builder.object.dancer.name, class: 'checkbox has-text-weight-bold' %>
+                  <%= assignment_builder.label full_name(assignment_builder.object.dancer),  full_name(assignment_builder.object.dancer), class: 'checkbox has-text-weight-bold' %>
                   <!--label class="checkbox" for="costume_costume_assignments_attributes_7_Madelyn Berrier">Madelyn Berrier</label-->              
                 </div>
               </div>   

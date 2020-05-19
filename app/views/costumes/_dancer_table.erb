@@ -10,7 +10,7 @@
     <tbody>
       <% @assignments.each do |assignment| %>
       <tr>
-        <td><%= assignment.dancer.name %></td>
+        <td><%= full_name(assignment.dancer) %></td>
         <td><%= assignment.costume_size %></td>
         <td><%= assignment.costume_condition %></td>
       </tr>

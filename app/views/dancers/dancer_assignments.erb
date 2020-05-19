@@ -1,5 +1,5 @@
 <div class='content has-text-centered'>
-  <h1 class='title has-text-primary'><%= @dancer.name %>'s Costume Assignments</h1>
+  <h1 class='title has-text-primary'><%= full_name(@dancer) %>'s Costume Assignments</h1>
   <!-- if costume assignment(s) exist, render table -->
   <% if @assignments.exists? %>
     <%= render 'costume_assignments/table' %>
