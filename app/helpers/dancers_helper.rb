@@ -7,4 +7,16 @@ module DancersHelper
   def assignment_costume(assignment)
     Costume.find(assignment.costume_id)
   end
+
+  def current_assignments_count(dancer)
+    dancer.costume_assignments.current_assignments.count
+  end
+
+  def all_assignments_count(dancer)
+    dancer.costume_assignments.count
+  end
+
+  def current_studio_costumes_count
+    current_user.current_studio_costumes.count
+  end
 end
