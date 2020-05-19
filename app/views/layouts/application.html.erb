@@ -13,55 +13,47 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <!-- Navigation Bar -->
     <% if logged_in? %>
-      <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <figure class="image is-24x24">
-              <%= 
-                link_to_if owner?, image_tag('hanger.svg'), dance_studio_path(current_user) do |name|
-                  link_to name, dancer_path(current_user)
-                end
-              %>
+      <nav class='navbar is-primary' role='navigation' aria-label='main navigation'>
+        <div class='navbar-brand'>
+          <!-- link to Dance Studio/Dancer Show View -->
+          <a class='navbar-item'>
+            <figure class='image is-24x24'>
+              <%= hanger_link_to_show_view %>
             </figure>
           </a>
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="nb">
+          <!-- hamburger menu -->
+          <a role='button' class='navbar-burger burger' aria-label='menu' aria-expanded='false' data-target='nb'>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-        <div id="nb" class="navbar-menu">
-          <div class="navbar-start">
-            <div class="navbar-item">
+        <div id='nb' class='navbar-menu'>
+          <div class='navbar-start'>
+            <div class='navbar-item'>
             </div>
+            <!-- Dance Studio Only: link to New Costume & Unassigned Costumes -->
             <% if owner? %>
-              <div class="navbar-item">
-                <%= link_to "New Costume", new_dance_studio_costume_path(current_user), class: 'has-text-grey-dark' %>
+              <div class='navbar-item'>
+                <%= link_to_new_costume %>
               </div>
-              <div class="navbar-item">
-                <%= link_to "Unassigned Costumes", unassigned_costumes_path(current_user), class: 'has-text-grey-dark' %>
+              <div class='navbar-item'>
+                <%= link_to_unassigned_costumes %>
               </div>
             <% end %>
-            <div class="navbar-item">
-              <%= 
-                link_to_if owner?, "Current Costume Assignments", studio_current_assignments_path(current_user), class: 'has-text-grey-dark' do |name|
-                  link_to name, dancer_current_assignments_path(current_user), class: 'has-text-grey-dark'
-                end
-              %>
+            <!-- link to Current Costume Assignments -->
+            <div class='navbar-item'>
+              <%= link_to_current_costume_assignments %>
             </div>
-            <div class="navbar-item">
-              <%= 
-                link_to_if owner?, "All Costumes", dance_studio_costumes_path(current_user), class: 'has-text-grey-dark' do |name|
-                  link_to name, dancer_costumes_path(current_user), class: 'has-text-grey-dark'
-                end
-              %>
+            <!-- link to All Costumes -->
+            <div class='navbar-item'>
+              <%= link_to_all_costumes %>
             </div>
           </div>
-          <div class="navbar-end">
+          <div class='navbar-end'>
             <!--div class="navbar-item">
               <div class="field has-addons">
                 <p class="control">
@@ -72,13 +64,15 @@
                 </p>
               </div>
             </div-->
-            <div class="navbar-item">
-              <%= link_to "Log Out", logout_path, class: 'has-text-grey-dark', method: :post %>
+            <!-- link to Log Out -->
+            <div class='navbar-item'>
+              <%= link_to_log_out %>
             </div>
           </div>
         </div>
       </nav>
-      <script type="text/javascript">
+      <!-- js for hamburger menu -->
+      <script type='text/javascript'>
         (function () {
           var burger = document.querySelector('.burger');
           var nav = document.querySelector('#'+burger.dataset.target);
@@ -105,10 +99,10 @@
       </div>
     </section>
   </body>
-  <footer class="branding">
-    <div class="content has-text-centered">
-      <p>
-      </p>
+  <!-- footer -->
+  <footer class='branding'>
+    <div class='content has-text-centered'>
+      <p></p>
     </div>
   </footer>
 </html>
