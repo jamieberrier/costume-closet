@@ -210,7 +210,8 @@
     - _display_shared_assignment_info
     - _display
     - _picture
-    -
+    - edit
+    - _error_notification
     -
     -
     -
