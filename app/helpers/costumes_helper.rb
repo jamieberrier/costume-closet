@@ -44,4 +44,12 @@ module CostumesHelper
   def costume_seasons(costume)
     costume.seasons
   end
+
+  def collecting_shared_info?(assignment_builder)
+    assignment_builder.object.dancer_id.nil?
+  end
+
+  def collecting_dancer_info?(assignment_builder)
+    !assignment_builder.object.dancer_id.nil? && assignment_builder.object.dance_season.nil?
+  end
 end
