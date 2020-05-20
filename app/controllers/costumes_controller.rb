@@ -40,7 +40,7 @@ class CostumesController < ApplicationController
     redirect_to_costume_path_if_not_assigning and return
     ## assigning costume - validate assignment(s)
     # check if the dance_season or song_name value is empty
-    redirect_to_form_if_required_fields_empty and return
+    redirect_to_new_costume_form_if_required_fields_empty and return
     # check if dancer info empty
     redirect_to_new_costume_form_if_assignment_incomplete and return
     # valid assignment(s)
@@ -74,7 +74,7 @@ class CostumesController < ApplicationController
   def assign
     @count = @costume.costume_assignments.count # gets no. of assignments before updating
     # check if the dance_season or song_name value is empty
-    redirect_to_form_if_required_fields_empty and return
+    redirect_to_assign_costume_form_if_required_fields_empty and return
     # try to persist to db
     @updated = @costume.update(costume_params)
     # check that if updates, @costume.costume_assignments.count is now greater than count
@@ -111,12 +111,17 @@ class CostumesController < ApplicationController
     redirect_to new_dance_studio_costume_path(current_user.id), message
   end
 
-  # check if all shared assignment info fields empty
+  # checks if all shared assignment info fields empty
   def redirect_to_costume_path_if_not_assigning
     redirect_to_costume_path('Costume Successfully Created!') if @assignment_info.values.all?('')
   end
 
-  # check if dancer info empty
+  # checks if either the dance_season or song_name value is empty
+  def redirect_to_new_costume_form_if_required_fields_empty
+    redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
+  end
+
+  # checks if dancer info empty
   def redirect_to_new_costume_form_if_assignment_incomplete
     redirect_to_new_costume_form(danger: 'Must select at least 1 dancer w/ costume size & costume condition') if @costume.costume_assignments.empty?
   end
@@ -130,22 +135,22 @@ class CostumesController < ApplicationController
     @song_name_empty = @assignment_info[:song_name].empty?
   end
 
-  # checks if the dance_season or song_name value is empty
-  def redirect_to_form_if_required_fields_empty
-    if params[:action] == 'create'
-      redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
-    else
+  ## assign action helper
+  # checks if either the dance_season or song_name value is empty
+  def redirect_to_assign_costume_form_if_required_fields_empty
+    if @costume.costume_assignments.empty?
       redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
+    else
+      redirect_to assign_costume_path(@costume, season: @costume.costume_assignments.last.dance_season), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
     end
   end
 
-  ## assign action helper
-  # redirect if updated correctly
+  # redirects if updated correctly
   def redirect_to_season_assignments_path_if_updated
     redirect_to season_assignments_path(@costume, season: @costume.costume_assignments.last.dance_season) if @updated
   end
 
-  # check that if updates, @costume.costume_assignments.count is now greater than count
+  # checks that if updates, @costume.costume_assignments.count is now greater than count
   def redirect_to_assign_costume_form_if_assignment_incomplete
     redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @count == @costume.costume_assignments.count
   end
