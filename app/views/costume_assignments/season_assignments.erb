@@ -1,17 +1,17 @@
 <div class='content has-text-centered'>
   <!-- Song Name -->
-  <h1 class='title has-text-primary'><%= @assignments.first.song_name%></h1>
+  <h1 class='title has-text-primary'><%= @shared_info.song_name%></h1>
   <!-- Dance Season -->
   <h2 class='subtitle'><%= @season %></h2>
   <!-- Costume Picture -->
-  <%= render 'picture' %>
+  <%= render 'costumes/picture' %>
   <!-- Shared Assignment Info -->
   <div class='box'>
-    <%= render 'display_shared_assignment_info'%>
+    <%= render 'costumes/display_shared_assignment_info'%>
   </div>
   <!-- Dancer(s), Costume Size & Costume Condition -->
   <div class='box'>
-    <%= render 'dancer_table'%>
+    <%= render 'costumes/dancer_table'%>
   </div>
 </div>
 <!-- Edit Button -->

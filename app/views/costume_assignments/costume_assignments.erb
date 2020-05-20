@@ -1,11 +1,11 @@
 <div class='content has-text-centered'>
   <!-- Costume Picture/description -->
   <figure class='is-128x128'>
-    <%= render 'picture' %>
+    <%= render 'costumes/picture' %>
   </figure>
   <!-- if costume assignment(s) exist, render table -->
   <% if @assignments.exists? %>
-    <%= render 'costume_assignments/table' %>
+    <%= render 'table' %>
   <% else %>
     <h2 class='subtitle'>No Assignments</h2>
   <% end %>
