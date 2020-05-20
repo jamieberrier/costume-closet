@@ -5,7 +5,7 @@
 </div>
 <div class='box'>
   <!-- if previously assigned, display shared assignment info -->
-  <% if !@season.nil? %>
+  <% if @season.present? %>
     <div class='box'>
       <h2 class='subtitle is-size-4 has-text-centered'>Last Assigned in <%= @season %></h2>
       <%= render 'display_shared_assignment_info'%>
@@ -70,7 +70,7 @@
       <% end %>
     </div>
     <!-- if previously assigned, display previous assigned dancer info -->
-    <% if !@season.nil? %>
+    <% if @season.present? %>
       <div class='box'>
         <h2 class='subtitle is-4 has-text-centered'><%= @assignments.count %> Costumes Assigned in <%= @season %></h2>
         <div class='content has-text-centered'>
