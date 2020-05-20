@@ -15,7 +15,7 @@
             <div class='field'>
               <%= assignment_builder.label :song_name, 'Song Name', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :song_name, class:'input is-danger', value: @assignment_info.song_name %>
+                <%= assignment_builder.text_field :song_name, class:'input is-danger', value: @shared_info.song_name %>
                 <p class='help is-danger'>Required</p>
               </div>
             </div>
@@ -23,21 +23,21 @@
             <div class='field'>
               <%= assignment_builder.label :genre, class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :genre, class:'input', value: @assignment_info.genre, placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
+                <%= assignment_builder.text_field :genre, class:'input', value: @shared_info.genre, placeholder: 'e.g. tap, jazz, lyrical, etc.' %>
               </div>
             </div>
             <!-- hair accessory description -->
             <div class='field'>
               <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :hair_accessory, class:'input', value: @assignment_info.hair_accessory, placeholder: "Enter description or 'none'" %>
+                <%= assignment_builder.text_field :hair_accessory, class:'input', value: @shared_info.hair_accessory, placeholder: "Enter description or 'none'" %>
               </div>
             </div>
             <!-- Shoes -->
             <div class='field'>
               <%= assignment_builder.label :shoe, 'Shoes', class: 'label' %>
               <div class='control'>
-                <%= assignment_builder.text_field :shoe, class:'input', value: @assignment_info.shoe, placeholder: "If no shoes, enter 'none'" %>
+                <%= assignment_builder.text_field :shoe, class:'input', value: @shared_info.shoe, placeholder: "If no shoes, enter 'none'" %>
               </div>
             </div>
             <!-- Tights -->
@@ -45,7 +45,7 @@
               <%= assignment_builder.label :tight, 'Tights', class: 'label' %>
               <!--label class="label" for="costume_costume_assignments_attributes_0_tight">Tight</label-->
               <div class='control'>
-                <%= assignment_builder.text_field :tight, class:'input', value: @assignment_info.tight, placeholder: "If no tights, enter 'none'" %>
+                <%= assignment_builder.text_field :tight, class:'input', value: @shared_info.tight, placeholder: "If no tights, enter 'none'" %>
                 <!--input class="input" type="text" name="costume[costume_assignments_attributes][0][tight]" id="costume_costume_assignments_attributes_0_tight"-->
               </div>
             </div>
@@ -69,7 +69,7 @@
                   <!-- next dancer -->
                   <!--input name="costume[costume_assignments_attributes][8][dancer_id]" type="hidden" value="0"-->
                   <!--input class="checkbox" type="checkbox" value="2" name="costume[costume_assignments_attributes][8][dancer_id]" id="costume_costume_assignments_attributes_8_dancer_id"-->
-                  <%= assignment_builder.label assignment_builder.object.dancer.name,  assignment_builder.object.dancer.name, class: 'checkbox has-text-weight-bold' %>
+                  <%= assignment_builder.label full_name(assignment_builder.object.dancer),  full_name(assignment_builder.object.dancer), class: 'checkbox has-text-weight-bold' %>
                   <!--label class="checkbox" for="costume_costume_assignments_attributes_7_Madelyn Berrier">Madelyn Berrier</label-->              
                 </div>
               </div>
@@ -111,7 +111,7 @@
                   <%= assignment_builder.check_box :dancer_id, {:checked => false, class: 'checkbox'}, assignment_builder.object.dancer_id, "0" %>
                   <!--input name="costume[costume_assignments_attributes][27][dancer_id]" type="hidden" value="0"-->
                   <!--input class="checkbox" type="checkbox" value="4" name="costume[costume_assignments_attributes][27][dancer_id]" id="costume_costume_assignments_attributes_27_dancer_id"-->
-                  <%= assignment_builder.label assignment_builder.object.dancer.name,  assignment_builder.object.dancer.name, class: 'checkbox has-text-weight-bold' %>
+                  <%= assignment_builder.label full_name(assignment_builder.object.dancer),  full_name(assignment_builder.object.dancer), class: 'checkbox has-text-weight-bold' %>
                   <!--label class="checkbox has-text-weight-bold" for="costume_costume_assignments_attributes_27_Mia Tomiselli">Mia Tomiselli</label-->            
                 </div>
               </div>
@@ -162,4 +162,4 @@
   <% end %>
 </div>
 <!-- cancel button -->
-<%= link_to 'Cancel', season_assignments_path(@costume, season: @assignment_info.dance_season), class: 'button is-dark'%>
+<%= cancel_button(season_assignments_path(@costume, season: @shared_info.dance_season)) %>
