@@ -1,6 +1,6 @@
 module RegistrationsHelper
   # form_for validation errors
-  def any_validation_errors(user_type)
+  def any_validation_errors?(user_type)
     user_type.errors.any?
   end
 
@@ -8,7 +8,7 @@ module RegistrationsHelper
     pluralize(user_type.errors.count, 'error')
   end
 
-  def any_field_errors(user_type, field)
+  def any_field_errors?(user_type, field)
     user_type.errors[field].any?
   end
 
