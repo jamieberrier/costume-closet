@@ -21,7 +21,7 @@
           <p>
             <!-- Dance Season -->
             <div class='field'>
-              <%= assignment_builder.label :dance_season, 'Dance Season', class: 'label' %>
+              <%= assignment_builder.label :dance_season, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :dance_season, class:'input is-danger', placeholder: 'e.g. 2020' %>
                 <p class='help is-danger'>Required</p>
@@ -29,7 +29,7 @@
             </div>
             <!-- Song Name -->
             <div class='field'>
-              <%= assignment_builder.label :song_name, 'Song Name', class: 'label' %>
+              <%= assignment_builder.label :song_name, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :song_name, class:'input is-danger' %>
                  <p class='help is-danger'>Required</p>
@@ -44,7 +44,7 @@
             </div>
             <!-- Hair Accessory -->
             <div class='field'>
-              <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
+              <%= assignment_builder.label :hair_accessory, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :hair_accessory, class:'input', placeholder: "Enter description or 'none'" %>
               </div>
@@ -109,7 +109,7 @@
               </div>   
               <!-- Costume Size -->
               <div class='field'>
-                <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_size, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_size, options_for_select([['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L']]), {prompt: "Select Size"}) %>
@@ -118,7 +118,7 @@
               </div>
               <!-- Costume Condition -->
               <div class='field'>
-                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_condition, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_condition, options_for_select([['Select Condition', ""], ['New', 'New'], ['Used', 'Used']])) %>
