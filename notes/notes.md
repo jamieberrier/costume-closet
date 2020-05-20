@@ -209,15 +209,15 @@
     - _dancer_table
     - _display_shared_assignment_info
     - _display
-    - _picture
-    - edit
     - _error_notification
-    - index
-    - show
+    - _picture
     - _studio_controls
-    -
-    -
-    -
+    - assign_costume
+    - edit_season_assignments
+    - edit
+    - index
+    - 
+    - show
 
 # TODO 
 - put all flash/validatio messages at top?
