@@ -123,21 +123,27 @@
     - skip_before_action :require_logged_in, except: :destroy
   - Costume Assignments
     - before_action :require_dance_studio_owner, only: :index
+    - before_action :require_studio_costume, only: %i[costume_assignments season_assignments delete_season_assignments]
+    - before_action :set_costume, only: %i[costume_assignments season_assignments]
+    - before_action :set_season_costume_assignments, only: %i[season_assignments  delete_season_assignments]
+    - before_action :set_shared_info, only: %i[season_assignments]
   - Dancers
     - skip_before_action :require_logged_in, only: :create
     - before_action :require_dance_studio_owner, only: %i[new index current_dancers]
     - before_action :require_studio_dancer, except: %i[new create index current_dancers]
-    - before_action :find_dancer, except: %i[new create index current_dancers]
+    - before_action :set_dancer, except: %i[new create index current_dancers]
   - Dance Studios
     - skip_before_action :require_logged_in, only: :create
     - before_action :require_studio_ownership, except: :create
-    - before_action :find_dance_studio, only: %i[show edit update destroy]
+    - before_action :set_dance_studio, only: %i[show edit update destroy]
   - Costumes
     - before_action :require_dance_studio_owner, only: %i[new create index]
     - before_action :require_costume_ownership, only: %i[show]
     - before_action :require_studio_costume, except: %i[new create index show]
-    - before_action :find_costume, except: %i[new create index delete_season_assignments]
-    - before_action :find_season_costume_assignments, only: %i[season_assignments edit_season_assignments assign_costume]
+    - before_action :set_costume, except: %i[new create index]
+    - before_action :set_season_costume_assignments, only: %i[assign_costume edit_season_assignments]
+    - before_action :set_shared_info, only: %i[edit_season_assignments]
+    - before_action :fetch_shared_assignment_info, only: %i[create assign]
 
 16. DRY up
   - controllers
@@ -147,6 +153,7 @@
     - costume assignments
     - registrations
     - application
+    - sessions
   - models
     - dance studio
     - dancer
@@ -221,47 +228,18 @@
     - show
 
 # TODO
-- put all flash/validatio messages at top?
-- app/helpers
-  - add view helpers
-    - Whenever you have logic that produces bits of HTML.
-      - Usually, this falls into one of two categories, one is string formatting & the other is conditional page elements.
-        - # wrong way
-          def eat_healthy
-            @fruit.eat
-          end
-          # do this instead
-          def eat_healthy(fruit)
-            fruit.eat
-          end
-    - View helper methods are a way to take a particular bit of complex,
-      usually conditional, view logic and move it out of your eRb code,
-      replacing it with a single method call. While you can use it to
-      construct several lines of eRb code, doing so simply makes no sense
-      to me. Where I tend to use helpers is when I’ve got a form control,
-      usually a button, that only needs to display (or display in a certain
-      way) based on the logged in user, or some other programmatic setting.
 - fix select dancer(s) on:
   - assign costume - no of dancers previously assigned affects count
   - edit season assignments - no of dancers assigned affects count
-- add search
 - DRY up code
   - if ternary
     - test-expression ? if-true-expression : if-false-expression
-  - controllers
-    - sessions
-  - helpers
-    - sessions
 - using?
   - registrations helper
     def signing_up_as_dancer?
       params[:user_type] == 'dancer'
     end
-- costumes
-  - costume_assignments_attributes=(assignments_hashes)
-    - ABC too high / too many lines
-- costume assignments
-  - update URLs
+- update URLs
 
 # ?s
   - nested form
@@ -403,116 +381,3 @@ DELETE /costume_assignments/:id
 ### current_assignments
 GET /dancers/:id/current_costumes
 GET /dance_studios/:id/current_costumes
-
-
-
-
-
-
-<% if @costume_assignments.nil? %>
-  <!-- no current costumes -->
-  <h2 class='subtitle'>No Costume Assignments For This Season</h2>
-<% else %>
-  <% displayed = 0 %>
-  <% @costume_assignments.each do |assignment| %>
-    <article class='media'>
-      <% if displayed == 0 %>
-        <% costume = Costume.find(assignment.costume_id) %>
-        <!-- costume picture -->
-        <figure class='media-left'>
-          <p class='image is-64x64'>
-            <%= link_to image_tag(costume.picture, width: 100), costume_path(costume.id) %>
-          </p>
-        </figure>
-        <div class='media-content'>
-          <!-- song name (genre) -->
-          <div class='content'>
-            <p>
-              <strong><%= assignment.song_name.upcase %></strong> (<%= assignment.genre %>)
-            </p>
-            <!-- shoes and tights -->
-            <p style='margin-left:3%;'>
-              <strong>Shoes:</strong> <%= assignment.shoe %>
-              <br>
-              <strong>Tights:</strong> <%= assignment.tight %>
-            </p>
-            <table class='table is-narrow'>
-              <!-- table of dancer name, their costume's size, and its condition -->
-              <thead>
-                <tr>
-                  <th>Dancer</th>
-                  <th>Size</th>
-                  <th>Condition</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-          <% displayed = 1 %>
-      <% end %>
-        <!-- nested media object -->
-        <article class='media'>
-          <!-- empty pic to indent -->
-          <figure class='media-left'>
-            <p class='image is-48x48'>
-            </p>
-          </figure>
-          <!-- nested media content -->
-          <div class='media-content'>
-            <div class='content'>
-              <table class='table is-narrow'>
-                <tbody>
-                  <tr>
-                    <td><%= link_to Dancer.find(assignment.dancer_id).name, dancer_path(assignment.dancer_id) %></td>
-                    <td><%= assignment.costume_size %></td>
-                    <td><%= assignment.costume_condition %></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div><!-- end nested media content -->
-        </article><!-- end nested media object -->
-      </div><!-- end media content -->
-    </article>
-  <% end %>
-<% end %>
-
-## DOUBLE NESTED
-### models
-class Show < ApplicationRecord
-    has_many :seasons
-    accepts_nested_attributes_for :seasons
-end
-class Season < ApplicationRecord
-  belongs_to :show, optional: true
-  has_many :episodes
-  accepts_nested_attributes_for :episodes
-end
-class Episode < ApplicationRecord
-  belongs_to :season, optional: true
-end
-### shows_controller
-def show_params
-  params.require(:show).permit(:name, :seasons_attributes => [:number, :episodes_attributes => [:title]])
-end
-### _form
-<%= form_with(model: show, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <!-- Show name and label -->
-  <%= form.fields_for :seasons do |s| %>
-    <%= s.label :number %>
-    <%= s.number_field :number %>
-
-    <%= s.fields_for :episodes do |e| %>
-      <%= e.label :title %>
-      <%= e.text_field :title %>
-    <% end %>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
