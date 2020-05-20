@@ -207,9 +207,9 @@
     - show
   - costumes
     - _dancer_table
-    -
-    -
-    -
+    - _display_shared_assignment_info
+    - _display
+    - _picture
     -
     -
     -
