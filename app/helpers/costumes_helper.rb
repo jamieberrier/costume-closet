@@ -8,10 +8,18 @@ module CostumesHelper
     season ? costume_path(costume, season: season) : costume_path(costume)
   end
 
-  def show_costume(costume, path)
-    if !costume.picture.blank?
+  def costume_picture?(costume)
+    costume.picture.present?
+  end
+
+  def costume_onepiece_description?(costume)
+    costume.onepiece_description.present?
+  end
+
+  def show_costume_with_link(costume, path)
+    if costume_picture?(costume)
       link_to image_tag(costume.picture, width: 100), path
-    elsif !costume.onepiece_description.blank?
+    elsif costume_onepiece_description?(costume)
       link_to costume.onepiece_description, path
     else
       link_to costume.twopiece_description, path
