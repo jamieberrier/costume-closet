@@ -25,4 +25,23 @@ module CostumesHelper
       link_to costume.twopiece_description, path
     end
   end
+
+  def assign_costume_button(costume)
+    # if previously assigned, pass the last season the costume was assigned
+    link_to_if costume.seasons.empty?, 'Assign Costume', assign_costume_path(costume), class: 'button is-success is-light' do |name|
+      link_to name, assign_costume_path(costume, season: costume.seasons.to_a.pop[0]), class: 'button is-success is-light'
+    end
+  end
+
+  def view_costume_assignments_button(costume)
+    if params[:season]
+      link_to "View #{current_year} Costume Assignments", season_assignments_path(costume, season: current_year), class: 'button is-primary'
+    else
+      link_to 'View All Costume Assignments', assigned_costume_path(costume), class: 'button is-primary'
+    end
+  end
+
+  def costume_seasons(costume)
+    costume.seasons
+  end
 end
