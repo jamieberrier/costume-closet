@@ -206,6 +206,7 @@
     - new
     - show
   - costumes
+    - _create rows
     - _dancer_table
     - _display_shared_assignment_info
     - _display
@@ -216,10 +217,10 @@
     - edit_season_assignments
     - edit
     - index
-    - 
+    - new
     - show
 
-# TODO 
+# TODO
 - put all flash/validatio messages at top?
 - app/helpers
   - add view helpers
