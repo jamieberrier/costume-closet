@@ -214,7 +214,7 @@
     - _error_notification
     - index
     - show
-    - 
+    - _studio_controls
     -
     -
     -
