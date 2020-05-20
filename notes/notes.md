@@ -186,6 +186,8 @@
   - costume_assignments
     - index
     - _table
+    - costume_assignments
+    - season_assignments
   - dance_studios
     - _form
     - current_assignments
@@ -204,6 +206,16 @@
     - new
     - show
   - costumes
+    - _dancer_table
+    -
+    -
+    -
+    -
+    -
+    -
+    -
+    -
+    -
 
 # TODO 
 - app/helpers
