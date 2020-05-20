@@ -31,8 +31,8 @@
         <div class='control has-icons-left'>
           <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
         </div>
-        <% if @costume.errors[:top_description].any? %>
-          <p class='helper has-text-danger'><%= @costume.errors.full_messages_for(:top_description).to_sentence %></p>
+        <% if any_field_errors?(@costume, :top_description) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@costume, :top_description) %></p>
         <% end %>
       </div>
       <!-- Bottoms Description -->
@@ -41,8 +41,8 @@
         <div class='control has-icons-left'>
           <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
         </div>
-        <% if @costume.errors[:bottoms_description].any? %>
-          <p class='helper has-text-danger'><%= @costume.errors.full_messages_for(:bottoms_description).to_sentence %></p>
+        <% if any_field_errors?(@costume, :bottoms_description) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@costume, :bottoms_description) %></p>
         <% end %>
       </div>
     </div>
@@ -57,8 +57,8 @@
         <div class='control has-icons-left'>
           <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
         </div>
-        <% if @costume.errors[:onepiece_description].any? %>
-          <p class='helper has-text-danger'><%= @costume.errors.full_messages_for(:onepiece_description).to_sentence %></p>
+        <% if any_field_errors?(@costume, :onepiece_description) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@costume, :onepiece_description) %></p>
         <% end %>
       </div>
     </div>
@@ -70,8 +70,8 @@
         <div class='control has-icons-left'>
           <%= f.text_field :picture, class:'input', placeholder: 'If no picture, leave blank' %>
         </div>
-        <% if @costume.errors[:picture].any? %>
-          <p class='helper has-text-danger'><%= @costume.errors.full_messages_for(:picture).to_sentence %></p>
+        <% if any_field_errors?(@costume, :picture) %>
+          <p class='helper has-text-danger'><%= field_error_explaination(@costume, :picture) %></p>
         <% end %>
       </div>
     </div>
@@ -84,4 +84,4 @@
   <% end %>
 </div>
 <!-- Cancel Button -->
-<%= link_to 'Cancel', costume_path(@costume), class: 'button is-dark'%>
+<%= cancel_button(costume_path(@costume)) %>
