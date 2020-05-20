@@ -1,5 +1,5 @@
-<!-- No of dancers by season -->
-<% if !@costume.seasons.empty?%>
+<!-- If assigned, display no. of dancers by season -->
+<% if costume_seasons(@costume).present? %>
   <div class='columns'>
     <div class='column is-narrow'>
       <div class='box'>
@@ -12,7 +12,7 @@
           </thead>
           <tbody>
             <!-- {"2019"=>3, "2020"=>3} -->
-            <% @costume.seasons.each do |season| %>
+            <% costume_seasons(@costume).each do |season| %>
               <tr>
                 <td><%= season[0] %></td>
                 <td><%= season[1] %></td>
@@ -24,25 +24,17 @@
     </div>
   </div>
 <% end %>
-<!-- View All/Current Costume Assignments -->
+<!-- View Current / All Costume Assignments & Assign Costume -->
 <div class='buttons is-grouped'>
-  <% if params[:season] %>
-    <%= link_to "View #{Time.now.year} Costume Assignments", season_assignments_path(@costume, season: Time.now.year), class: 'button is-primary' %>
-  <% else%>
-    <%= link_to 'View All Costume Assignments', assigned_costume_path(@costume), class: 'button is-primary' %>
-  <% end %>
+  <!-- View Current Costume Assignments / View All Costume Assignments -->
+  <%= view_costume_assignments_button(@costume) %>
   <!-- Assign an Unassigned Costume -->
   <% if unassigned? %>
-    <!-- if previously assigned, pass last season costume was assigned -->
-    <%= 
-      link_to_if @costume.seasons.empty?, 'Assign Costume', assign_costume_path(@costume), class: 'button is-success is-light' do |name|
-        link_to name, assign_costume_path(@costume, season: @costume.seasons.to_a.pop[0]), class: 'button is-success is-light'
-      end
-    %>
+    <%= assign_costume_button(@costume) %>
   <% end %>
 </div>
 <!-- Edit / Delete Costume -->
 <div class='buttons is-grouped'>
-  <%= link_to 'Edit Costume', edit_costume_path(@costume), class: 'button is-success' %>
-  <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-info', method: :delete %>
+  <%= link_to 'Edit Costume', edit_costume_path(@costume), class: 'button is-warning' %>
+  <%= link_to 'Delete Costume', costume_path(@costume), class: 'button is-danger', method: :delete %>
 </div>
