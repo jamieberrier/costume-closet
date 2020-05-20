@@ -136,4 +136,20 @@ class ApplicationController < ActionController::Base
   def require_studio_costume
     redirect_to root_path(message: 'Only costume owner can access') unless owner? && current_user.costumes.include?(set_costume)
   end
+
+  # costumes & costume assignments before_action
+  def set_costume
+    @costume = Costume.find(params[:id])
+  end
+
+  # costumes & costume assignments before_action only: %i[season_assignments edit_season_assignments delete_season_assignments assign_costume]
+  def set_season_costume_assignments
+    @season = params[:season]
+    @assignments = CostumeAssignment.season_assignments(params)
+  end
+
+  # costumes & costume assignments before_action only: %i[season_assignments edit_season_assignments]
+  def set_shared_info
+    @shared_info = @costume.shared_assignment_info(@assignments.first)
+  end
 end
