@@ -1,5 +1,5 @@
 <!-- Validation Error(s) Notification -->
-<% if any_validation_errors(@dance_studio) %>
+<% if any_validation_errors?(@dance_studio) %>
   <section class='section'>
     <div class='container is-fluid has-text-centered'>
       <div id='error_explanation' class='notification is-danger'>
@@ -23,7 +23,7 @@
             <i class='fas fa-school'></i>
           </span>
       </div>
-      <% if any_field_errors(@dance_studio, :studio_name) %>
+      <% if any_field_errors?(@dance_studio, :studio_name) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :studio_name) %></p>
       <% end %>
     </div>
@@ -36,7 +36,7 @@
             <i class='fas fa-user'></i>
           </span>
       </div>
-      <% if any_field_errors(@dance_studio, :owner_name) %>
+      <% if any_field_errors?(@dance_studio, :owner_name) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :owner_name) %></p>
       <% end %>
     </div>
@@ -49,7 +49,7 @@
             <i class='fas fa-envelope'></i>
           </span>
       </div>
-      <% if any_field_errors(@dance_studio, :email) %>
+      <% if any_field_errors?(@dance_studio, :email) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :email) %></p>
       <% end %>
     </div>
@@ -62,7 +62,7 @@
             <i class='fas fa-lock'></i>
           </span>
       </div>
-      <% if any_field_errors(@dance_studio, :password) %>
+      <% if any_field_errors?(@dance_studio, :password) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :password) %></p>
       <% end %>
     </div>
@@ -75,7 +75,7 @@
             <i class='fas fa-lock'></i>
           </span>
       </div>
-      <% if any_field_errors(@dance_studio, :password_confirmation) %>
+      <% if any_field_errors?(@dance_studio, :password_confirmation) %>
         <p class='helper has-text-danger'><%= field_error_explaination(@dance_studio, :password_confirmation) %></p>
       <% end %>
     </div>
