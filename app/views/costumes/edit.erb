@@ -1,22 +1,11 @@
-<!-- Validation Error(s) Message -->
-<% if any_validation_errors?(@costume) %>
-  <section class='section'>
-    <div class='container is-fluid has-text-centered'>
-      <div id='error_explanation' class='notification is-danger'>
-        <h2>
-          <%= error_count(@costume) %>
-          prohibited this costume from being saved!
-        </h2>
-      </div>
-    </div>
-  </section>
-<% end %>
 <!-- Form Title -->
 <div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Edit Costume Form</h1>
   <!-- Costume Picture -->
   <%= render 'picture' %>
 </div>
+<!-- Validation Error(s) Notification -->
+<%= render 'error_notification' %>
 <!-- Edit Costume Form -->
 <div class='box'>
   <%= form_for @costume do |f| %>
