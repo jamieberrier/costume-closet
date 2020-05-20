@@ -82,17 +82,12 @@
         <p class='help is-danger'>Must select at least 1 dancer w/ costume size & costume condition</p>
       </h2>
       <div class='columns is-desktop'>
-        <% count = 0 %>
+        <% @count = 0 %>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if collecting_dancer_info?(assignment_builder) %>
             <div class='column is-narrow'>
               <!-- create rows -->
-              <% if count.multiple_of?(6) %>
-                </div>
-                </div>
-                <div class='columns is-desktop'>
-                <div class='column is-2 is-narrow-desktop'>
-              <% end %>
+              <%= render 'create_rows' %>
               <!-- Dancer -->
               <div class='field'>
                 <div class='control'>
@@ -126,7 +121,7 @@
               </div>
             </div>
           <% end %>
-          <% count += 1 %>
+          <% @count += 1 %>
         <% end %>
       </div>
     </div>
