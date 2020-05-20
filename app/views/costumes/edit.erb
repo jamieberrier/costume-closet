@@ -1,10 +1,10 @@
 <!-- Validation Error(s) Message -->
-<% if @costume.errors.any? %>
+<% if any_validation_errors?(@costume) %>
   <section class='section'>
     <div class='container is-fluid has-text-centered'>
       <div id='error_explanation' class='notification is-danger'>
         <h2>
-          <%= pluralize(@costume.errors.count, "error") %>
+          <%= error_count(@costume) %>
           prohibited this costume from being saved!
         </h2>
       </div>
