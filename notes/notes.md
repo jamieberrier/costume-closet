@@ -212,13 +212,15 @@
     - _picture
     - edit
     - _error_notification
-    -
-    -
+    - index
+    - show
+    - 
     -
     -
     -
 
 # TODO 
+- put all flash/validatio messages at top?
 - app/helpers
   - add view helpers
     - Whenever you have logic that produces bits of HTML.
