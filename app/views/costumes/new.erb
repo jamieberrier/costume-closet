@@ -17,14 +17,14 @@
         </h2>
         <!-- Top Description -->
         <div class='field'>
-          <%= f.label :top_description, 'Top Description', class: 'label' %>
+          <%= f.label :top_description, class: 'label is-capitalized' %>
           <div class='control'>
             <%= f.text_field :top_description, class:'input', placeholder: 'Enter description of top for a two-piece costume' %>
           </div>
         </div>
         <!-- Bottoms Description -->
         <div class='field'>
-          <%= f.label :bottoms_description, 'Bottoms Description', class: 'label' %>
+          <%= f.label :bottoms_description, class: 'label is-capitalized' %>
           <div class='control'>
             <%= f.text_field :bottoms_description, class:'input', placeholder: 'Enter description of bottoms for a two-piece costume' %>
           </div>
@@ -36,7 +36,7 @@
           <p class='help is-danger'>Must fill out for a one-piece costume</p>
         </h2>
         <div class='field'>
-          <%= f.label :onepiece_description, 'Description', class: 'label' %>
+          <%= f.label :onepiece_description, class: 'label is-capitalized' %>
           <div class='control'>
             <%= f.text_field :onepiece_description, class:'input', placeholder: 'Enter description for a one-piece costume' %>
           </div>
@@ -69,7 +69,7 @@
           <p>
             <!-- Dance Season -->
             <div class='field'>
-              <%= assignment_builder.label :dance_season, "Dance Season", class: 'label' %>
+              <%= assignment_builder.label :dance_season, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :dance_season, class:'input is-danger', placeholder: 'e.g. 2020' %>
                 <p class='help is-danger'>Required, if assigning costume</p>
@@ -77,7 +77,7 @@
             </div>
             <!-- Song Name -->
             <div class='field'>
-              <%= assignment_builder.label :song_name, "Song Name", class: 'label' %>
+              <%= assignment_builder.label :song_name, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :song_name, class:'input is-danger' %>
                 <p class='help is-danger'>Required, if assigning costume</p>
@@ -92,7 +92,7 @@
             </div>
             <!-- Hair Accessory Description -->
             <div class='field'>
-              <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
+              <%= assignment_builder.label :hair_accessory, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :hair_accessory, class:'input', placeholder: "Enter description or 'none'" %>
               </div>
@@ -148,7 +148,7 @@
               </div>
               <!-- Costume Size -->
               <div class='field'>
-                <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_size, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <!--%#= assignment_builder.text_field :costume_size, class:'input is-small' %-->
                   <div class='select is-small'>
@@ -158,7 +158,7 @@
               </div>
               <!-- Costume Condition -->
               <div class='field'>
-                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_condition, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <div class='select is-small'>
                     <%= assignment_builder.select(:costume_condition, options_for_select([['Select Condition', ""], ['New', 'New'], ['Used', 'Used']])) %>

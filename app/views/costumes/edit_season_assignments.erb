@@ -13,7 +13,7 @@
           <p>
             <!-- Song Name -->
             <div class='field'>
-              <%= assignment_builder.label :song_name, 'Song Name', class: 'label' %>
+              <%= assignment_builder.label :song_name, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :song_name, class:'input is-danger', value: @shared_info.song_name %>
                 <p class='help is-danger'>Required</p>
@@ -28,7 +28,7 @@
             </div>
             <!-- hair accessory description -->
             <div class='field'>
-              <%= assignment_builder.label :hair_accessory, 'Hair Accessory', class: 'label' %>
+              <%= assignment_builder.label :hair_accessory, class: 'label is-capitalized' %>
               <div class='control'>
                 <%= assignment_builder.text_field :hair_accessory, class:'input', value: @shared_info.hair_accessory, placeholder: "Enter description or 'none'" %>
               </div>
@@ -75,14 +75,14 @@
               </div>
               <!-- Costume Size -->
               <div class='field'>
-                <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_size, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <%= assignment_builder.text_field :costume_size, class:'input is-small' %>
                 </div>
               </div>
               <!-- Costume Condition -->
               <div class='field'>
-                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_condition, class: 'label is-size-7 is-capitalized' %>
                 <div class='control'>
                   <%= assignment_builder.text_field :costume_condition, class:'input is-small' %>
                 </div>
@@ -117,7 +117,7 @@
               </div>
               <!-- Costume Size -->
               <div class='field'>
-                <%= assignment_builder.label :costume_size, 'Costume Size', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_size, class: 'label is-size-7 is-capitalized' %>
                 <!--label class="label is-size-7" for="costume_costume_assignments_attributes_27_costume_size">Costume Size</label-->
                 <div class='control'>
                   <div class='select is-small'>
@@ -134,7 +134,7 @@
               </div>
               <!-- Costume Condition -->
               <div class='field'>
-                <%= assignment_builder.label :costume_condition, 'Costume Condition', class: 'label is-size-7' %>
+                <%= assignment_builder.label :costume_condition, class: 'label is-size-7 is-capitalized' %>
                 <!--label class="label is-size-7" for="costume_costume_assignments_attributes_27_costume_condition">Costume Condition</label-->
                 <div class='control'>
                   <div class='select is-small'>
