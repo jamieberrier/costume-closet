@@ -61,6 +61,7 @@ class Costume < ApplicationRecord
 
   # instanstiates an instance of costume assignment with shared assignment info to edit
   # edit_season_assignments action
+  # season_assignments
   def shared_assignment_info(assignment)
     costume_assignments.build(hair_accessory: assignment.hair_accessory, tight: assignment.tight, shoe: assignment.shoe, genre: assignment.genre, song_name: assignment.song_name, costume_id: id, dance_season: assignment.dance_season, id: nil, dancer_id: nil, costume_size: nil, costume_condition: nil)
   end
