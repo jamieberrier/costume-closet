@@ -65,7 +65,7 @@
         <p class='help is-danger'>If assigning costume, must enter the dance season & song name</p>
       </h2>
       <%= f.fields_for :costume_assignments do |assignment_builder| %>
-        <% if assignment_builder.object.dancer_id.nil? %>
+        <% if collecting_shared_info?(assignment_builder) %>
           <p>
             <!-- Dance Season -->
             <div class='field'>
@@ -125,7 +125,7 @@
       <div class='columns is-desktop'>
         <% count = 0 %>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
-          <% if !assignment_builder.object.dancer_id.nil? %>
+          <% if !collecting_shared_info?(assignment_builder) %>
             <div class='column is-narrow'>
               <% if count.multiple_of?(7) %>
                 </div>
