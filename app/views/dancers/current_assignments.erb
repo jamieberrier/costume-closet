@@ -23,7 +23,7 @@
         <% @assignments.each do |assignment| %>
           <% costume = assignment_costume(assignment) %>
           <tr>
-            <td><%= show_costume(costume, costume_path(costume)) %></td>
+            <td><%= show_costume_with_link(costume, costume_path(costume)) %></td>
             <td><%= assignment.song_name %></td>
             <td><%= assignment.genre %></td>
             <td><%= assignment.hair_accessory %></td>
