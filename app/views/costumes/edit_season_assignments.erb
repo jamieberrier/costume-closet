@@ -8,7 +8,7 @@
     <div class='box'>
       <h2 class='subtitle'>Costume Assignment Details</h2>
       <%= f.fields_for :costume_assignments do |assignment_builder| %>
-        <% if assignment_builder.object.dancer_id.nil? %>
+        <% if collecting_shared_info?(assignment_builder) %>
           <%= assignment_builder.hidden_field :dance_season %>
           <p>
             <!-- Song Name -->
@@ -58,7 +58,7 @@
       <h2 class='subtitle'>Dancer(s) Currently Assigned</h2>
       <div class='columns'>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
-          <% if !assignment_builder.object.dancer_id.nil? && assignment_builder.object.dance_season == @season %>
+          <% if displaying_assigned_dancers?(assignment_builder) %>
             <div class='column'>
             <!-- Dancer -->
               <div class='field'>
@@ -97,7 +97,7 @@
       <div class='columns is-desktop'>
         <% count = 0 %>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
-          <% if assignment_builder.object.dance_season.nil? %>
+          <% if adding_dancers?(assignment_builder) %>
             <div class='column is-narrow'>
               <% if count.multiple_of?(6) %>
                 </div>
