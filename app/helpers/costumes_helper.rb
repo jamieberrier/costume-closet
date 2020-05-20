@@ -52,4 +52,12 @@ module CostumesHelper
   def collecting_dancer_info?(assignment_builder)
     !assignment_builder.object.dancer_id.nil? && assignment_builder.object.dance_season.nil?
   end
+
+  def displaying_assigned_dancers?(assignment_builder)
+    !assignment_builder.object.dancer_id.nil? && assignment_builder.object.dance_season == @season
+  end
+
+  def adding_dancers?(assignment_builder)
+    assignment_builder.object.dance_season.nil?
+  end
 end
