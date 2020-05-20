@@ -20,7 +20,7 @@
               <i class='fas fa-user'></i>
             </span>
         </div>
-        <% if any_field_errors(@dancer, :first_name) %>
+        <% if any_field_errors?(@dancer, :first_name) %>
           <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :first_name) %></p>
         <% end %>
       </div>
@@ -33,7 +33,7 @@
               <i class='fas fa-user'></i>
             </span>
         </div>
-        <% if any_field_errors(@dancer, :last_name) %>
+        <% if any_field_errors?(@dancer, :last_name) %>
           <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :last_name) %></p>
         <% end %>
       </div>
@@ -46,7 +46,7 @@
               <i class='fas fa-envelope'></i>
             </span>
         </div>
-        <% if any_field_errors(@dancer, :email) %>
+        <% if any_field_errors?(@dancer, :email) %>
           <p class='helper has-text-danger'><%= field_error_explaination(@dancer, :email) %></p>
         <% end %>
       </div>
