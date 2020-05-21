@@ -95,8 +95,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, success: message
   end
 
-  ####### private
-
   # Studio
   # nested, params[:dance_studio_id] -> dance studio id
   # dancers -- new index current dancers
