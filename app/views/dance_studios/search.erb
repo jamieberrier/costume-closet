@@ -1,0 +1,9 @@
+<div class='content has-text-centered'>
+  <h1 class='title has-text-primary'>Search Results</h1>
+  <!-- if costume(s) found, render display -->
+  <% if @costumes.exists? %>
+    <%= render 'costumes/display' %>
+  <% else %>
+    <h2 class='subtitle'>No Costumes Found</h2>
+  <% end %>
+</div>
