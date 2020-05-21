@@ -3,10 +3,10 @@ class DanceStudiosController < ApplicationController
   before_action :require_studio_ownership, except: :create
   before_action :set_dance_studio, only: %i[show edit update destroy]
 
-  # url: /dance_studios/1
+  # url: /dance_studios/:id
   def show; end
 
-  # url: /dance_studios/1/edit
+  # url: /dance_studios/:id/edit
   def edit; end
 
   def create
@@ -29,7 +29,7 @@ class DanceStudiosController < ApplicationController
   end
 
   # Displays current costume assignments for a dance studio
-  # url: /dance_studios/1/current_assignments
+  # url: /dance_studios/:id/current_assignments
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = @assignments.find_costumes
@@ -37,18 +37,19 @@ class DanceStudiosController < ApplicationController
   end
 
   # Displays the current season costumes for a dance studio
-  # url: /dance_studios/1/current_costumes
+  # url: /dance_studios/:id/current_costumes
   def current_costumes
     @costumes = current_user.current_studio_costumes
     @season = Time.now.year
   end
 
   # Displays the current season's unassigned costumes for a dance studio
-  # url: /dance_studios/1/unassigned_costumes
+  # url: /dance_studios/:id/unassigned_costumes
   def unassigned_costumes
     @costumes = current_user.unassigned_studio_costumes
   end
 
+  # Displays the dance studio's costumes that contain the search term in their description
   def search
     @costumes = current_user.search(params[:search])
   end
