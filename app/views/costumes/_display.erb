@@ -1,20 +1,15 @@
 <div class='container is-fluid has-text-centered'>
   <div class='columns is-desktop'>
-    <% count = 0 %>
+    <% @count = 0 %>
     <% @costumes.each do |costume| %>
       <% costume_path = set_costume_path(costume, @season) %>
       <div class='column is-2 is-narrow-desktop'>
-        <% if count.multiple_of?(6) %>
-          </div>
-          </div>
-          <div class='columns is-desktop'>
-            <div class='column is-2 is-narrow-desktop'>
-        <% end %>
+        <%= render 'costumes/create_rows' %>
         <div class='box'>
           <%= show_costume_with_link(costume, costume_path) %>
         </div>
       </div>
-      <% count += 1 %>
+      <% @count += 1 %>
     <% end %>
   </div>
 </div>
