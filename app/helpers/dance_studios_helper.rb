@@ -4,7 +4,7 @@ module DanceStudiosHelper
   end
 
   def assignment_info(costume)
-    costume.costume_assignments.first
+    @assignments.where(costume_id: costume.id).first
   end
 
   def uppercase_song_name(info)
