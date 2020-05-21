@@ -228,18 +228,12 @@
     - show
 
 # TODO
-- fix select dancer(s) on:
-  - assign costume - no of dancers previously assigned affects count
-  - edit season assignments - no of dancers assigned affects count
 - DRY up code
   - if ternary
     - test-expression ? if-true-expression : if-false-expression
 - update URLs
 
 # ?s
-  - nested form
-    - can they be built off any model as long as it is associated to all other models in form?
-    - built off join model? creating new instances of it?
   - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
   - edit forms
     - password & password confirmation passing as blank
