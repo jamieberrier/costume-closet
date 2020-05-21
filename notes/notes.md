@@ -234,11 +234,6 @@
 - DRY up code
   - if ternary
     - test-expression ? if-true-expression : if-false-expression
-- using?
-  - registrations helper
-    def signing_up_as_dancer?
-      params[:user_type] == 'dancer'
-    end
 - update URLs
 
 # ?s
