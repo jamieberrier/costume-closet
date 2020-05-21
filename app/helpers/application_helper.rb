@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def link_to_current_costume_assignments
-    link_to_if owner?, 'Current Costume Assignments', studio_current_assignments_path(current_user), class: 'has-text-grey-dark' do |name|
+    link_to_if owner?, 'Current Season Costumes', studio_current_costumes_path(current_user), class: 'has-text-grey-dark' do |name|
       link_to name, dancer_current_assignments_path(current_user), class: 'has-text-grey-dark'
     end
   end
