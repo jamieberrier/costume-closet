@@ -3,5 +3,5 @@
   <h1 class='title has-text-primary'>Update <%= full_name(@dancer) %>'s Account Info</h1>
   <h3 class='subtitle is-size-6 has-text-danger'><u>Must enter password AND password confirmation to make changes</u></h3>
 </div>
-<%= render "form" %>
+<%= render 'form' %>
 <%= cancel_button(dancer_path(current_user)) %>
