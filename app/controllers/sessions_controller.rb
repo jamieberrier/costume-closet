@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
   skip_before_action :require_logged_in, except: :destroy
 
+  # GET /login
   def new
     redirect_if_logged_in('You are already logged in')
   end
 
+  # POST /login
   def create
     # if email is blank, redirect to /login
     return redirect_to_login('Enter Email') if params[:email].blank?
@@ -14,6 +16,7 @@ class SessionsController < ApplicationController
     @user ? try_to_authenticate(@user) : redirect_to_login('Invalid Email')
   end
 
+  # GET /auth/:provider/callback
   def google_auth
     # Get access tokens from the google server
     # Access_token is used to authenticate request made from the rails application to the google server
@@ -33,6 +36,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  # POST /logout
   def destroy
     logout('Successfully logged out!')
   end
