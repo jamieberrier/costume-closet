@@ -3,12 +3,13 @@ class DanceStudiosController < ApplicationController
   before_action :require_studio_ownership, except: :create
   before_action :set_dance_studio, only: %i[show edit update destroy]
 
-  # url: /dance_studios/:id
+  # GET /dance_studios/:id
   def show; end
 
-  # url: /dance_studios/:id/edit
+  # GET /dance_studios/:id/edit
   def edit; end
 
+  # POST /dance_studios
   def create
     @dance_studio = DanceStudio.new(dance_studio_params)
 
@@ -17,45 +18,54 @@ class DanceStudiosController < ApplicationController
     log_in(@dance_studio, 'Successfully Registered!')
   end
 
+  # PATCH/PUT /dance_studios/:id
   def update
     return render :edit unless @dance_studio.update(dance_studio_params)
 
-    redirect_to dance_studio_path(@dance_studio), success: 'Account Info Updated!'
+    redirect_to_dance_studio_page('Account Info Updated!')
   end
 
+  # DELETE /dance_studios/:id
   def destroy
     @dance_studio.destroy
     logout('Account Deleted!')
   end
 
-  # Displays current costume assignments for a dance studio
-  # url: /dance_studios/:id/current_assignments
+  # Displays a dance studio's current costume assignments
+  # GET /dance_studios/:id/current_assignments
   def current_assignments
     @assignments = current_user.current_studio_assignments
     @costumes = @assignments.find_costumes
     @season = @assignments.first.dance_season unless @assignments.empty?
   end
 
-  # Displays the current season costumes for a dance studio
-  # url: /dance_studios/:id/current_costumes
+  # Displays a dance studio's current season costumes
+  # GET /dance_studios/:id/current_costumes
   def current_costumes
     @costumes = current_user.current_studio_costumes
     @season = Time.now.year
   end
 
-  # Displays the current season's unassigned costumes for a dance studio
-  # url: /dance_studios/:id/unassigned_costumes
+  # Displays a dance studio's unassigned costumes for the current season
+  # GET /dance_studios/:id/unassigned_costumes
   def unassigned_costumes
     @costumes = current_user.unassigned_studio_costumes
   end
 
-  # Displays the dance studio's costumes that contain the search term in their description
+  # Displays a dance studio's costumes with the search term in their description
+  # GET /dance_studios/:id/search
   def search
     @costumes = current_user.search(params[:search])
   end
 
   private
 
+  # before_action except: :create
+  def require_studio_ownership
+    redirect_to root_path(message: 'Only dance studio owner can access') unless owner? && current_user.id == params[:id].to_i
+  end
+
+  # before_action only: %i[show edit update destroy]
   def set_dance_studio
     @dance_studio = DanceStudio.find(params[:id])
   end
