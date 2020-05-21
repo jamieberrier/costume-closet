@@ -5,6 +5,7 @@ class Dancer < ApplicationRecord
 
   has_secure_password
 
+  # Verifies the email is not already in use by a dance studio
   validate :email_not_taken, on: :create
   validate :email_not_taken, on: :update
 
