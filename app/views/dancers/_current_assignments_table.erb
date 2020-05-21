@@ -1,0 +1,29 @@
+<div class='table-container'>
+  <table class='table is-fullwidth is-striped is-hoverable'>
+    <thead class='has-text-weight-bold'>
+      <td>Costume</td>
+      <td>Song Name</td>
+      <td>Genre</td>
+      <td>Hair Accessory</td>
+      <td>Shoes</td>
+      <td>Tights</td>
+      <td>Size</td>
+      <td>Condition</td>
+    </thead>
+    <tbody>
+    <% @assignments.each do |assignment| %>
+      <% costume = assignment_costume(assignment) %>
+      <tr>
+        <td><%= show_costume_with_link(costume, costume_path(costume)) %></td>
+        <td><%= assignment.song_name %></td>
+        <td><%= assignment.genre %></td>
+        <td><%= assignment.hair_accessory %></td>
+        <td><%= assignment.shoe %></td>
+        <td><%= assignment.tight %></td>
+        <td><%= assignment.costume_size %></td>
+        <td><%= assignment.costume_condition %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
