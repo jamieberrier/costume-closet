@@ -5,26 +5,27 @@ class CostumeAssignmentsController < ApplicationController
   before_action :set_season_costume_assignments, only: %i[season_assignments delete_season_assignments]
   before_action :set_shared_info, only: %i[season_assignments]
 
+  # Displays all of a dance studio's costume assignments
   # nested --> params[:dance_studio_id]
-  # url: /dance_studios/1/costume_assignments
-  # owner viewing all of its dance studio's costume assignments
+  # GET /dance_studios/:dance_studio_id/costume_assignments
   def index
     @assignments = current_user.costume_assignments.order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 
-  # Studio viewing all of a costume's assignments
-  # url: /costumes/3/assignments
+  # Displays all of a costume's assignments
+  # GET /costumes/:id/assignments
   def costume_assignments
     @assignments = @costume.costume_assignments
   end
 
-  # Studio viewing a costume's assignments for a season
+  # Displays a costume's assignments for a season
   # params[:season]
-  # url: /costumes/1/season_assignments?season=2020
+  # GET /costumes/:id/season_assignments
   def season_assignments; end
 
   # Deletes a costume's assignments for a season
-  # params[:season], params[:id] -> costume id
+  # params[:season]
+  # DELETE /costumes/:id/season_assignments
   def delete_season_assignments
     @assignments.destroy_all
 
