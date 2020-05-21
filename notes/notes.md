@@ -228,9 +228,6 @@
     - show
 
 # TODO
-- DRY up code
-- forms
-  - method: :post
 - update URLs
 
 # ?s
