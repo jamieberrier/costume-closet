@@ -49,6 +49,10 @@ class DanceStudiosController < ApplicationController
     @costumes = current_user.unassigned_studio_costumes
   end
 
+  def search
+    @costumes = current_user.search(params[:search])
+  end
+
   private
 
   def set_dance_studio
