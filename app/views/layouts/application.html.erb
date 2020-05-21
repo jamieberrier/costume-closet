@@ -35,8 +35,12 @@
           <div class='navbar-start'>
             <div class='navbar-item'>
             </div>
-            <!-- Dance Studio Only: link to New Costume & Unassigned Costumes -->
+            <!-- Dance Studio Only: Search, New Costume & Unassigned Costumes -->
             <% if owner? %>
+              <!-- search -->
+              <div class="navbar-item">
+                <%= render 'dance_studios/search_form' %>
+              </div>
               <div class='navbar-item'>
                 <%= link_to_new_costume %>
               </div>
@@ -54,16 +58,6 @@
             </div>
           </div>
           <div class='navbar-end'>
-            <!--div class="navbar-item">
-              <div class="field has-addons">
-                <p class="control">
-                  <input class="input" type="text" placeholder="Find a costume">
-                </p>
-                <p class="control">
-                  <button class="button">Search</button>
-                </p>
-              </div>
-            </div-->
             <!-- link to Log Out -->
             <div class='navbar-item'>
               <%= link_to_log_out %>
