@@ -72,7 +72,7 @@ class CostumesController < ApplicationController
 
   # Receives data from costume assignment form
   def assign
-    @count = @costume.costume_assignments.count # gets no. of assignments before updating
+    @previous_assignment_count = @costume.costume_assignments.count # gets no. of assignments before updating
     # check if the dance_season or song_name value is empty
     redirect_to_assign_costume_form_if_required_fields_empty and return
     # try to persist to db
@@ -152,7 +152,7 @@ class CostumesController < ApplicationController
 
   # checks that if updates, @costume.costume_assignments.count is now greater than count
   def redirect_to_assign_costume_form_if_assignment_incomplete
-    redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @count == @costume.costume_assignments.count
+    redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must also select at least 1 dancer w/ costume size & costume condition' if @updated && @previous_assignment_count == @costume.costume_assignments.count
   end
 
   def costume_params
