@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   # Routes for a dance studio
   scope '/dance_studios/:id' do
+    # Route for dance studio to search for costume(s)
+    get '/search' => 'dance_studios#search', as: 'search'
     # Route for dance studio to view their current costume assignments
     get '/current_assignments' => 'dance_studios#current_assignments', as: 'studio_current_assignments'
     # Route for dance studio to view the costumes currently in use
