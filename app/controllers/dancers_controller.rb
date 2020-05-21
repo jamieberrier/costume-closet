@@ -6,31 +6,32 @@ class DancersController < ApplicationController
 
   # Studio
   # Displays all dancers for a dance studio
-  # url: /dance_studios/1/dancers
+  # GET /dance_studios/:dance_studio_id/dancers
   def index
     @dancers = current_user.dancers.order(:last_name, :first_name)
   end
 
   # Dancer & Studio
   # Display dancer's show page
-  # url: /dancers/1
+  # GET /dancers/:id
   def show; end
 
   # Studio
-  # Displays from for a Dance Studio to create a new dancer
-  # url: /dance_studios/1/dancers/new
+  # Displays form for a dance studio to create a new dancer
+  # GET /dance_studios/:dance_studio_id/dancers/new
   def new
     @dancer = Dancer.new(dance_studio_id: current_user.id, password: 'password', password_confirmation: 'password')
   end
 
   # Dancer
   # Displays form to edit dancer's account info
-  # url: /dancers/1/edit
+  # GET /dancers/:id/edit
   def edit; end
 
   # Dancer & Studio
   # Dancer: receives data from registrations/new (renders dancers/_form)
   # Dance Studio: receives data from dancers/new (renders _form)
+  # POST /dancers
   def create
     @dancer = Dancer.new(dancer_params)
     @saved = @dancer.save
@@ -46,6 +47,7 @@ class DancersController < ApplicationController
 
   # Dancer
   # Receives data from edit form
+  # PATCH/PUT /dancers/:id
   def update
     return render :edit unless @dancer.update(dancer_params)
 
@@ -54,6 +56,7 @@ class DancersController < ApplicationController
 
   # Dancer & Studio
   # Deactivates dancer's account to keep costume assignment data
+  # DELETE /dancers/:id
   def destroy
     # set current_dancer to false & password/confirmation to 'dancer'
     @dancer.update(current_dancer: false, password: 'dancer', password_confirmation: 'dancer')
@@ -65,36 +68,48 @@ class DancersController < ApplicationController
 
   # Dancer & Studio
   # Displays all of dancer's costume assignments
-  # url: /dancers/3/costume_assignments
+  # GET /dancers/:id/costume_assignments
   def dancer_assignments
     @assignments = CostumeAssignment.where(dancer_id: @dancer).order(dance_season: :desc, genre: :asc, song_name: :asc)
   end
 
   # Dancer & Studio
   # Displays dancer's current costume assignments with costume picture
-  # url: /dancers/1/current_assignments
+  # GET /dancers/:id/current_assignments
   def current_assignments
     @assignments = @dancer.costume_assignments.current_assignments
   end
 
   # Studio
   # Displays the current dancers for a dance studio
-  # url: /dance_studios/1/dancers/current_dancers
+  # GET /dance_studios/:dance_studio_id/dancers/current_dancers
   def current_dancers
     @dancers = current_user.dancers.current_dancers.order(:last_name, :first_name)
   end
 
   private
 
+  # before_action except: %i[new create index current_dancers]
   def set_dancer
     @dancer = Dancer.find(params[:id])
   end
 
+  # before_action except: %i[new create index current_dancers]
+  def require_studio_dancer
+    if owner? # check if dancer belongs to studio
+      redirect_to root_path(message: "Only the dancer's studio can access") unless current_user.dancers.include?(set_dancer)
+    else # check if dancer is current user
+      redirect_to root_path(message: 'Denied access') unless current_user.id == params[:id].to_i
+    end
+  end
+
   ## create action helpers
+  # Dance Studio successfully adding a dancer
   def redirect_studio_if_saved
     redirect_to_dance_studio_page('Dancer Added!') if @saved && owner?
   end
 
+  # Dancer successfully registering
   def log_in_dancer_if_saved
     log_in(@dancer, 'Successfully Registered!') if @saved
   end
