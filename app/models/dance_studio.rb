@@ -9,6 +9,7 @@ class DanceStudio < ApplicationRecord
 
   has_secure_password
 
+  # Verifies the email is not already in use by a dancer
   validate :email_not_taken, on: :create
   validate :email_not_taken, on: :update
 
@@ -47,6 +48,7 @@ class DanceStudio < ApplicationRecord
     costumes.to_a.delete_if { |costume| current_studio_costumes.include?(costume) }
   end
 
+  # Gets the dance studio's costumes that contain the search term in their description
   def search(search_term)
     costumes.where('top_description LIKE ? OR bottoms_description LIKE ? OR onepiece_description LIKE ?', "%#{search_term}%","%#{search_term}%","%#{search_term}%")
   end
