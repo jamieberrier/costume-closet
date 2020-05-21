@@ -231,7 +231,6 @@
 - record walkthrough
 
 # ?s
-  - how to nest form to post to /dance_studios/:id/dancers instead of /dancers
   - edit forms
     - password & password confirmation passing as blank
 
