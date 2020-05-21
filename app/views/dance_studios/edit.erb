@@ -1,7 +1,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<div class="content has-text-centered">
+<div class='content has-text-centered'>
   <h1 class='title has-text-primary'>Update <%= current_user.studio_name %>'s Account Info</h1>
   <h3 class='subtitle is-size-6 has-text-danger'><u>Must enter password AND password confirmation to make changes</u></h3>
 </div>
-<%= render "form" %>
+<%= render 'form' %>
 <%= cancel_button(dance_studio_path(current_user)) %>
