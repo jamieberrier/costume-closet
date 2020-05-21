@@ -37,7 +37,6 @@ Rails.application.routes.draw do
   scope '/costumes/:id' do
     # Routes for dance studio to assign a costume to dancers
     get '/assign' => 'costumes#assign_costume', as: 'assign_costume'
-    patch '/assign' => 'costumes#assign'
     post '/assign' => 'costumes#assign'
     # Route for a dance studio to view all of a costume's assignments
     get '/assignments' => 'costume_assignments#costume_assignments', as: 'assigned_costume'
