@@ -46,4 +46,8 @@ class DanceStudio < ApplicationRecord
   def unassigned_studio_costumes
     costumes.to_a.delete_if { |costume| current_studio_costumes.include?(costume) }
   end
+
+  def search(search_term)
+    costumes.where('top_description LIKE ? OR bottoms_description LIKE ? OR onepiece_description LIKE ?', "%#{search_term}%","%#{search_term}%","%#{search_term}%")
+  end
 end
