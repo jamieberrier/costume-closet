@@ -229,8 +229,8 @@
 
 # TODO
 - DRY up code
-  - if ternary
-    - test-expression ? if-true-expression : if-false-expression
+- forms
+  - method: :post
 - update URLs
 
 # ?s
