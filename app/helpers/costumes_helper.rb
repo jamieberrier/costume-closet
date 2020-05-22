@@ -60,4 +60,9 @@ module CostumesHelper
   def adding_dancers?(assignment_builder)
     assignment_builder.object.dance_season.nil?
   end
+
+  # only display ADD DANCER(S) if there are more dancers to assign
+  def any_dancers_to_assign?(assignments)
+    assignments.count != current_user.dancers.current_dancers.count
+  end
 end
