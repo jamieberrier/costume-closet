@@ -228,7 +228,7 @@
     - show
 
 # TODO
-- record walkthrough
+- prepare for assessment
 
 # ?s
   - edit forms
