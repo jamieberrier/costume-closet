@@ -85,7 +85,7 @@
         <% @count = 0 %>
         <%= f.fields_for :costume_assignments do |assignment_builder| %>
           <% if collecting_dancer_info?(assignment_builder) %>
-            <div class='column is-narrow'>
+            <div class='column is-2'>
               <!-- create rows -->
               <%= render 'create_rows' %>
               <!-- Dancer -->
