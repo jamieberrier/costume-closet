@@ -227,13 +227,6 @@
     - new
     - show
 
-# TODO
-- prepare for assessment
-
-# ?s
-  - edit forms
-    - password & password confirmation passing as blank
-
 # STRETCH GOALS
 - dancers#show
   - add total number of costumes by season and if new/used
