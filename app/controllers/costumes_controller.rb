@@ -124,9 +124,18 @@ class CostumesController < ApplicationController
   private
 
   # before_action only: %i[show]
+  # checks if costume belongs to studio or assigned to dancer
   def require_costume_ownership
-    # check if costume belongs to studio or assigned to dancer
     redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(set_costume)
+  end
+
+  # before_action only: %i[create assign]
+  # gets shared assignment info to check if assigning / validate assignments
+  def fetch_shared_assignment_info
+    @assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
+    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
+    @dance_season_empty = @assignment_info[:dance_season].empty?
+    @song_name_empty = @assignment_info[:song_name].empty?
   end
 
   # create & update helper
@@ -157,15 +166,6 @@ class CostumesController < ApplicationController
   # checks if dancer info empty
   def redirect_to_new_costume_form_if_assignment_incomplete
     redirect_to_new_costume_form(danger: 'Must select at least 1 dancer w/ costume size & costume condition') if @costume.costume_assignments.empty?
-  end
-
-  ## create & assign action helpers
-  # gets shared assignment info to check if assigning / validate assignments
-  def fetch_shared_assignment_info
-    @assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
-    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
-    @dance_season_empty = @assignment_info[:dance_season].empty?
-    @song_name_empty = @assignment_info[:song_name].empty?
   end
 
   ## assign action helper
