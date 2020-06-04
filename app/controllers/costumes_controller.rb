@@ -159,7 +159,7 @@ class CostumesController < ApplicationController
   # redirects to new costume form if assigning costume & has shared info errors
   # checks if either the dance_season or song_name value is empty
   def redirect_to_new_costume_form_if_required_fields_empty
-    redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Creation failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
+    redirect_to new_dance_studio_costume_path(current_user.id), danger: 'Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
   end
 
   # redirects to new costume form if assigning costume & has dancer info errors
