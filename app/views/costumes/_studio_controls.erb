@@ -29,7 +29,7 @@
   <!-- View Current Costume Assignments / View All Costume Assignments -->
   <%= view_costume_assignments_button(@costume) %>
   <!-- Assign an Unassigned Costume -->
-  <% if unassigned? %>
+  <% if unassigned? && current_user.dancers.current_dancers.present? %>
     <%= assign_costume_button(@costume) %>
   <% end %>
 </div>
