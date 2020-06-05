@@ -1,8 +1,8 @@
 class CostumesController < ApplicationController
   before_action :require_dance_studio_owner, only: %i[new create index]
+  before_action :set_costume, except: %i[new create index]
   before_action :require_costume_ownership, only: %i[show]
   before_action :require_studio_costume, except: %i[new create index show]
-  before_action :set_costume, except: %i[new create index]
   before_action :set_season_costume_assignments, only: %i[assign_costume edit_season_assignments]
   before_action :set_shared_info, only: %i[edit_season_assignments]
   before_action :fetch_shared_assignment_info, only: %i[create assign]
@@ -126,7 +126,7 @@ class CostumesController < ApplicationController
   # before_action only: %i[show]
   # checks if costume belongs to studio or assigned to dancer
   def require_costume_ownership
-    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(set_costume)
+    redirect_to root_path(message: 'Only can owner or assigned dancer can access') unless current_user.costumes.include?(@costume)
   end
 
   # before_action only: %i[create assign]
