@@ -45,6 +45,10 @@ module CostumesHelper
     costume.seasons
   end
 
+  def studio_has_current_dancers?
+    current_user.dancers.current_dancers.present? 
+  end
+
   def collecting_shared_info?(assignment_builder)
     assignment_builder.object.dancer_id.nil?
   end
