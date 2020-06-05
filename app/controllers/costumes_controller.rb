@@ -118,7 +118,7 @@ class CostumesController < ApplicationController
   def update_season_assignments
     @costume.update(costume_params)
 
-    redirect_to season_assignments_path(@costume, season: params[:costume][:costume_assignments_attributes].values[0].values[0])
+    redirect_to season_assignments_path(@costume, season: costume_assignments_attributes.values[0].values[0])
   end
 
   private
@@ -132,10 +132,19 @@ class CostumesController < ApplicationController
   # before_action only: %i[create assign]
   # gets shared assignment info to check if assigning / validate assignments
   def fetch_shared_assignment_info
-    @assignment_info = params[:costume][:costume_assignments_attributes].permit!.to_h.first.pop
-    # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
-    @dance_season_empty = @assignment_info[:dance_season].empty?
-    @song_name_empty = @assignment_info[:song_name].empty?
+    if costume_assignments_attributes.nil?
+      # studio doesn't have any current dancers
+      @assignment_info = {'dance_season'=>'', 'song_name'=>'', 'genre'=>'', 'hair_accessory'=>'', 'shoe'=>'', 'tight'=>''}
+    else
+      @assignment_info = costume_assignments_attributes.permit!.to_h.first.pop
+      # => {"dance_season"=>"", "song_name"=>"", "genre"=>"", "hair_accessory"=>"", "shoe"=>"", "tight"=>""}
+      @dance_season_empty = @assignment_info[:dance_season].empty?
+      @song_name_empty = @assignment_info[:song_name].empty?
+    end
+  end
+
+  def costume_assignments_attributes
+    params[:costume][:costume_assignments_attributes]
   end
 
   # create & update helper
