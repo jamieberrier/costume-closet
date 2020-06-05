@@ -1,8 +1,8 @@
 class DancersController < ApplicationController
   skip_before_action :require_logged_in, only: :create
   before_action :require_dance_studio_owner, only: %i[new index current_dancers]
-  before_action :require_studio_dancer, except: %i[new create index current_dancers]
   before_action :set_dancer, except: %i[new create index current_dancers]
+  before_action :require_studio_dancer, except: %i[new create index current_dancers]
 
   # Studio
   # Displays all dancers for a dance studio
@@ -97,7 +97,7 @@ class DancersController < ApplicationController
   # before_action except: %i[new create index current_dancers]
   def require_studio_dancer
     if owner? # check if dancer belongs to studio
-      redirect_to root_path(message: "Only the dancer's studio can access") unless current_user.dancers.include?(set_dancer)
+      redirect_to root_path(message: "Only the dancer's studio can access") unless current_user.dancers.include?(@dancer)
     else # check if dancer is current user
       redirect_to root_path(message: 'Denied access') unless current_user.id == params[:id].to_i
     end
