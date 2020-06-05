@@ -174,7 +174,7 @@ class CostumesController < ApplicationController
   def redirect_to_assign_costume_form_if_required_fields_empty
     if @costume.costume_assignments.empty?
       redirect_to assign_costume_path(@costume), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
-    else
+    else # if costume has been previously assigned
       redirect_to assign_costume_path(@costume, season: @costume.costume_assignments.last.dance_season), danger: 'Assignment failure: Must fill out Dance Season & Song Name AND select at least 1 dancer w/ costume size & costume condition' if @dance_season_empty || @song_name_empty
     end
   end
