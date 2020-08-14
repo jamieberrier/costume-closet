@@ -5,9 +5,10 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "^4.2.2",
     "acorn": "^7.2.0",
     "jquery": "^3.5.0",
+    "serialize-javascript": "^4.0.0",
     "turbolinks": "^5.2.0",
     "websocket-extensions": "^0.1.4"
   },
