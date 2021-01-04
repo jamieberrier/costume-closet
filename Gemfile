@@ -28,7 +28,6 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'image_processing', '~> 1.2'
 
 # Use Omniauth Google
-gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 
 # Reduces boot times through caching; required in config/boot.rb
