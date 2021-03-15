@@ -27,7 +27,7 @@ A web application designed for 2 types of users, Dance Studio Owners and their D
 
 :dancers:*Signup and login include Omniauth through Google*
 
-> A Flatiron School Rails Portfolio Project: created with Ruby 2.6.1, Rails 6.0.2.1, and sqlite3 1.4.
+> A Flatiron School Rails Portfolio Project: created with Ruby 2.6.1, Rails 6.0.3.5, and sqlite3 1.4.
 
 ## Installation & Set Up
 
