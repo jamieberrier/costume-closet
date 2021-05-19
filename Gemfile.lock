@@ -109,7 +109,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
-    mimemagic (0.3.5)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.4)
@@ -155,9 +157,9 @@ GEM
       method_source (~> 1.0)
       spoon (~> 0.0)
     public_suffix (4.0.5)
-    puma (4.3.5)
+    puma (4.3.8)
       nio4r (~> 2.0)
-    puma (4.3.5-java)
+    puma (4.3.8-java)
       nio4r (~> 2.0)
     racc (1.5.2)
     racc (1.5.2-java)
@@ -277,7 +279,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   omniauth-google-oauth2 (~> 0.8.0)
   pry
-  puma (~> 4.3.3)
+  puma (~> 4.3.8)
   rails (~> 6.0.3.5, >= 6.0.2.1)
   sass-rails (>= 6)
   selenium-webdriver
